@@ -39,7 +39,7 @@
 /.php-cs-fixer.cache
 
 # composer
-/vendor/
+#/vendor/
 
 # PhpStorm / IDEA
 .idea
