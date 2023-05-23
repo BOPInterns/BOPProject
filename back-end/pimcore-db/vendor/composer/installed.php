@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'pimcore/skeleton',
-        'pretty_version' => 'v11.0.0',
-        'version' => '11.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '3921bc37f0cab19140e84433f727b5bb85a2e1cb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -646,6 +646,24 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'pimcore/compatibility-bridge-v10' => array(
+            'pretty_version' => 'v1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => '598c018fc74f56e6580904db8c7b2ac17375a9af',
+            'type' => 'pimcore-bundle',
+            'install_path' => __DIR__ . '/../pimcore/compatibility-bridge-v10',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'pimcore/data-hub' => array(
+            'pretty_version' => 'v1.6.0',
+            'version' => '1.6.0.0',
+            'reference' => 'c74cf327aec7ea58d2f70d236cbb6360e8d280d5',
+            'type' => 'pimcore-bundle',
+            'install_path' => __DIR__ . '/../pimcore/data-hub',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'pimcore/pimcore' => array(
             'pretty_version' => 'v11.0.0',
             'version' => '11.0.0.0',
@@ -656,9 +674,9 @@
             'dev_requirement' => false,
         ),
         'pimcore/skeleton' => array(
-            'pretty_version' => 'v11.0.0',
-            'version' => '11.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '3921bc37f0cab19140e84433f727b5bb85a2e1cb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -776,8 +794,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1743,6 +1761,15 @@
             'reference' => '6dddae6983c1bc4d314b513c5decb7c8c6c879dc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../umpirsky/country-list',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'webonyx/graphql-php' => array(
+            'pretty_version' => 'v15.4.0',
+            'version' => '15.4.0.0',
+            'reference' => '99290f7945a5b39ad823f7600fa196de62597e9d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../webonyx/graphql-php',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
