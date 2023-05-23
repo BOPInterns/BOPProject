@@ -1,8 +1,0 @@
-actor: ModelTester
-modules:
-    enabled:
-        - \DataHubBundle\Tests\Helper\Model
-        - \Pimcore\Tests\Support\Helper\Pimcore:
-              connect_db: true
-              cache_router: false
-        - \Pimcore\Tests\Support\Helper\ClassManager

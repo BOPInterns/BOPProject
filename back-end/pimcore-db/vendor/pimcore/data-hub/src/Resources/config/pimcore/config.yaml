@@ -1,3 +1,0 @@
-pimcore_data_hub:
-    supported_types:
-        graphql: "Pimcore\\Bundle\\DataHubBundle"
