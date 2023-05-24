@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 
 export const Register = () => {
@@ -29,5 +30,10 @@ export const Register = () => {
             </form>
             <button>Already have an account? Sign in here!</button>
         </>
+=======
+export const Register = () => {
+    return (
+        <>Register</>
+>>>>>>> brianguida
     )
 }

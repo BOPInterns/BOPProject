@@ -10,4 +10,8 @@ const reportWebVitals = onPerfEntry => {
   }
 };
 
+<<<<<<< HEAD
 export default reportWebVitals;
+=======
+export default reportWebVitals;
+>>>>>>> brianguida
