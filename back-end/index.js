@@ -1,5 +1,5 @@
-const express = require('express');
-const mongoose = require('mongoose')
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 
 const mongoURL = "mongodb+srv://BoPInterns:Pratibimb123@db1.l4iyumt.mongodb.net/";
