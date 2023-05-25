@@ -1,4 +1,5 @@
 # Bop HUB intern project
+Project created by intern team for the BoP Hub website
 
 ## To run entire project locally
 1. cd into back-end
