@@ -8,11 +8,14 @@ import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 
 const App = () => {
+   const [ user, setUser ] = useState({});
    
    function handleCallbackResponse(response){
       console.log("Encoded JWT ID token: " + response.credential);
       var userObject = jwt_decode(response.credential);
       console.log(userObject);
+      setUser(userObject);
+      document.getElementById("signInGoogle").hidden = true;
    }
    
    useEffect(() => {
@@ -29,6 +32,10 @@ const App = () => {
       
       google.accounts.id.prompt();
    }, []);
+   
+   //No user, show sign in button.
+   
+   //Yes user, show sign out button
    
   return (
      <>

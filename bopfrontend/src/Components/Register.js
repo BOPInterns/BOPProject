@@ -12,7 +12,48 @@ import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
 
+
+
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+}
+
 export const Register = () => {
+    
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+const [email, setEmail] = useState('');
+const [phoneNumber, setPhoneNumber] = useState('');
+const [password, setPassword] = useState('');
+const [emailNotif, setEmailNotif] = useState(Boolean);
+const [textNotif, setTextNotif] = useState(Boolean);
+
+const handleInputChange = (e) => {
+    const {id, value} = e.target;
+    if(id === "firstName") {
+        setFirstName(value);
+    }
+    if(id === "lastName") {
+        setLastName(value);
+    }
+    if(id === "email") {
+        setEmail(value);
+    }
+    if(id === "phoneNumber") {
+        setPhoneNumber(value);
+    }
+    if(id === "password") {
+        setPassword(value);
+    }
+    if(id === "emailNotif") {
+        setEmailNotif(value);
+    }
+    if(id === "textNotif") {
+        setTextNotif(value);
+    }
+}
+
     return (
         <div>
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -49,6 +90,7 @@ export const Register = () => {
                     <Row>
                         <Column>
                         <FloatingLabel
+                            id="firstName"
                             controlId="floatingFirstName"
                             label="First Name"
                         >
@@ -57,6 +99,7 @@ export const Register = () => {
                         </Column>
                         <Column>
                         <FloatingLabel
+                            id="lastName"
                             controlId="floatingLastName"
                             label="Last Name"
                         >
@@ -65,41 +108,46 @@ export const Register = () => {
                         </Column>
                     </Row>
                     <FloatingLabel
+                        id="email"
                         controlId="floatingEmailInput"
                         label="Please enter your email"
                     >
                         <Form.Control type="email" placeholder="Please enter a valid email"/>
                     </FloatingLabel>
-                    <FloatingLabel
+                    {/* <FloatingLabel
                         controlId="floatingEmailInputCheck"
                         label="Please re-enter your email"
                     >
                         <Form.Control type="email" placeholder="Please enter a valid email"/>
-                    </FloatingLabel>
+                    </FloatingLabel> */}
                     <FloatingLabel
-                        controlId="phoneNumberInput"
+                        id="phoneNumber"
+                        controlId="phoneNumber"
                         label="Phone Number (Recommended)"
                     >
                         <Form.Control type="phoneNumber" placeholder="phoneNumber"/>
                     </FloatingLabel>
                     <FloatingLabel
+                        id="password"
                         controlId="floatingPasswordInput"
                         label="Password"
                     >
                         <Form.Control type="password" placeholder="password"/>
                     </FloatingLabel>
                     <Form.Check
+                        id="emailNotif"
                         type="checkbox"
                         label="I would like to receive email notifications from BOPHub."
                     >
                     </Form.Check>
                     <Form.Check
+                        id="textNotif"
                         type="checkbox"
                         label="I would like to receive text notifications from BOPHub.
                         (Standard sms data rates may apply)"
                     >
                     </Form.Check>
-                    <Button variant="primary">
+                    <Button onClick={() => handleSubmit()} type="submit" variant="primary">
                         Submit
                     </Button>
                 </Card.Body>
