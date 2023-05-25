@@ -3,10 +3,15 @@ const mongoose = require("mongoose");
 const UserInfoSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    userEmail: String,
+    phoneNumber: String, 
+    textNotif: Boolean,
+    emailNotif: Boolean, 
+    email: String,
     password: String,
 }, {
     collection: "UserInfo",
 });
 
-mongoose.model("UserInfo", UserInfoSchema);
+const UserInfo = mongoose.model("UserInfo", UserInfoSchema);
+
+module.exports = UserInfo;
