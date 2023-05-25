@@ -11,7 +11,35 @@ import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { useEffect } from 'react';
+import jwt_decode from 'jwt-decode';
+
 export const Login = () => {
+    const [ user, setUser ] = useState({});
+   
+   function handleCallbackResponse(response){
+      console.log("Encoded JWT ID token: " + response.credential);
+      var userObject = jwt_decode(response.credential);
+      console.log(userObject);
+      setUser(userObject);
+      document.getElementById("loginButton").hidden = true;
+      document.getElementById("registerButton").hidden = true;
+   }
+   
+   useEffect(() => {
+      /* global google */ 
+      google.accounts.id.initialize({
+         client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
+         callback: handleCallbackResponse
+      });
+      
+      google.accounts.id.renderButton(
+         document.getElementById('signInGoogle'),
+         {theme: "outline", size: "small"}
+      );
+      
+   }, []);
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
@@ -21,16 +49,14 @@ export const Login = () => {
         console.log(password);
     }
     
+    const handleSignout = (e) => {
+        setUser({});
+        document.getElementById("loginButton").hidden = false;
+        document.getElementById("registerButton").hidden = false;
+    }
+    
     return (
         <div>
-            {/* <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="email@domain.com" id="email" name = "email"/>
-                <br></br>
-                <label htmlFor="password">Password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)}type="password" placeholder="********" id="password" name = "password"/>
-                <br></br>
-            </form> */}
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
                     <Navbar.Brand href="/" >
@@ -48,8 +74,14 @@ export const Login = () => {
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-contents-end">
                         <Nav className='me-auto'>
-                            <Nav.Link href="/login">Login</Nav.Link>
-                            <Nav.Link href="/register">Register</Nav.Link>
+                            <Nav.Link id="loginButton" href="/login">Login</Nav.Link>
+                            <Nav.Link id="registerButton" href="/register">Register</Nav.Link>
+                            {   Object.keys(user).length !== 0 &&
+                            <Container>
+                                <Navbar.Text>Signed in as: {user.name} <img src={user.picture} alt=""></img></Navbar.Text>
+                                <Nav.Link id="logoutButton" onClick={(e) => handleSignout(e)}>Logout</Nav.Link>
+                            </Container>
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -64,7 +96,11 @@ export const Login = () => {
                         <Row className="justify-content-center">
                             Sign in with
                             <ButtonGroup size="sm">
-                            <Button id="signInGoogle" size="sm">Google</Button>
+                            <Button 
+                            id="signInGoogle"
+                            size="sm">
+                            Google
+                            </Button>
                             <Button size="sm">facebook</Button>
                             <Button size="sm">linkedin</Button>
                             <Button size="sm">other</Button>
