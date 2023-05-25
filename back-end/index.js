@@ -1,6 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
+
+app.use(express.json());
+app.use(cors());
 
 const mongoURL = "mongodb+srv://BoPInterns:Pratibimb123@db1.l4iyumt.mongodb.net/";
 
@@ -16,28 +20,22 @@ mongoose
 
 app.listen(9000, () => { console.log("Server started on port 9000") });
 
-require("./schemas/userInfo");
-
-const User = mongoose.model("UserInfo");
+const User = require("./schemas/userInfo");
 
 app.post("/register", async(req,res) => {
-    const {fname, lname, email, pword} = req.body;
-    
-    try{
-        await User.create({
-            firstName: fname,
-            lastName: lname,
-            userEmail: email,
-            password: pword,
+    const {firstName, lastName, email, password, phoneNumber, emailNotif, textNotif} = req.body;
+    console.log(firstName + " " + lastName);
+    async function sendData(){
+        var uI = await User.create({
+            firstName,
+            lastName,
+            phoneNumber,
+            textNotif,
+            emailNotif,
+            email,
+            password,
         });
-        res.send({status: "OK"});
-    } catch (error){
-        res.send({status: "error with register"})
     }
-})
-
-
-app.get("/api", (req, res) =>{
-    res.json({ "users": ["userOne", "userTwo", "userThree"] });
+    sendData();
+    res.send({status: "OK"});
 });
-

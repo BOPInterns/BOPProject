@@ -13,12 +13,6 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
 
 
-
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-}
-
 export const Register = () => {
     
 const [firstName, setFirstName] = useState('');
@@ -28,6 +22,31 @@ const [phoneNumber, setPhoneNumber] = useState('');
 const [password, setPassword] = useState('');
 const [emailNotif, setEmailNotif] = useState(Boolean);
 const [textNotif, setTextNotif] = useState(Boolean);
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:9000/register", {
+        method:"POST",
+        crossDomain:true,
+        headers:{
+            "Content-Type":"application/json",
+            Accept:"application/json",
+            "Access-Control-Allow-Origin":"*",
+        },
+        body:JSON.stringify({
+            firstName,
+            lastName,
+            email, 
+            phoneNumber,
+            password,
+            emailNotif, 
+            textNotif
+        }),
+    }).then((res) => res.json())
+    .then((data) => {
+        console.log(data, "userRegister");
+    });
+}
 
 const handleInputChange = (e) => {
     const {id, value} = e.target;
@@ -93,6 +112,8 @@ const handleInputChange = (e) => {
                             id="firstName"
                             controlId="floatingFirstName"
                             label="First Name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                         >
                             <Form.Control type="firstName" placeholder="firstName"/>
                         </FloatingLabel>
@@ -102,6 +123,8 @@ const handleInputChange = (e) => {
                             id="lastName"
                             controlId="floatingLastName"
                             label="Last Name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
                         >
                             <Form.Control type="lastName" placeholder="lastName"/>
                         </FloatingLabel>
@@ -111,6 +134,8 @@ const handleInputChange = (e) => {
                         id="email"
                         controlId="floatingEmailInput"
                         label="Please enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     >
                         <Form.Control type="email" placeholder="Please enter a valid email"/>
                     </FloatingLabel>
@@ -124,6 +149,8 @@ const handleInputChange = (e) => {
                         id="phoneNumber"
                         controlId="phoneNumber"
                         label="Phone Number (Recommended)"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                     >
                         <Form.Control type="phoneNumber" placeholder="phoneNumber"/>
                     </FloatingLabel>
@@ -131,6 +158,8 @@ const handleInputChange = (e) => {
                         id="password"
                         controlId="floatingPasswordInput"
                         label="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     >
                         <Form.Control type="password" placeholder="password"/>
                     </FloatingLabel>
@@ -138,6 +167,8 @@ const handleInputChange = (e) => {
                         id="emailNotif"
                         type="checkbox"
                         label="I would like to receive email notifications from BOPHub."
+                        value={emailNotif}
+                        onChange={(e) => setEmailNotif(e.target.value)}
                     >
                     </Form.Check>
                     <Form.Check
@@ -145,11 +176,13 @@ const handleInputChange = (e) => {
                         type="checkbox"
                         label="I would like to receive text notifications from BOPHub.
                         (Standard sms data rates may apply)"
+                        value={textNotif}
+                        onChange={(e) => setTextNotif(e.target.value)}
                     >
                     </Form.Check>
-                    <Button onClick={() => handleSubmit()} type="submit" variant="primary">
-                        Submit
-                    </Button>
+                        <Button onClick={handleSubmit} type="submit" variant="primary">
+                            Submit
+                        </Button>
                 </Card.Body>
             </Card>
             </Row>

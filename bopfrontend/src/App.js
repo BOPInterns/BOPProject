@@ -18,20 +18,20 @@ const App = () => {
       document.getElementById("signInGoogle").hidden = true;
    }
    
-   useEffect(() => {
-      /* global google */
-      google.accounts.id.initialize({
-         client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
-         callback: handleCallbackResponse
-      });
+   // useEffect(() => {
+   //    /* global google */
+   //    google.accounts.id.initialize({
+   //       client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
+   //       callback: handleCallbackResponse
+   //    });
       
-      google.accounts.id.renderButton(
-         document.getElementById('signInGoogle'),
-         {theme: "outline", size: "large"}
-      );
+   //    google.accounts.id.renderButton(
+   //       document.getElementById('signInGoogle'),
+   //       {theme: "outline", size: "large"}
+   //    );
       
-      google.accounts.id.prompt();
-   }, []);
+   //    google.accounts.id.prompt();
+   // }, []);
    
    //No user, show sign in button.
    
