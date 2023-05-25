@@ -10,6 +10,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -54,22 +55,22 @@ export const Login = () => {
                 </Container>
             </Navbar>
             <Container>
-                <Row className="rows">
+                <Row>
                     <Column md={6}>
                     <Image src={BOPLogo} className="img-fluid" height="650" width="650"></Image>
                     </Column>
                     <Column>
                     <Form>
-                        <Row>
-                            <h4>Sign in with</h4>
-                            <Column>
-                            <Button>Google</Button>
-                            <Button>facebook</Button>
-                            <Button>linkedin</Button>
-                            <Button>other</Button>
-                            </Column>
+                        <Row className="justify-content-center">
+                            Sign in with
+                            <ButtonGroup size="sm">
+                            <Button id="signInGoogle" size="sm">Google</Button>
+                            <Button size="sm">facebook</Button>
+                            <Button size="sm">linkedin</Button>
+                            <Button size="sm">other</Button>
+                            </ButtonGroup>
                         </Row>
-                        <Row>
+                        <Row className="justify-content-center">
                             or
                         </Row>
                         <FloatingLabel
@@ -87,7 +88,7 @@ export const Login = () => {
                             <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </FloatingLabel>
                         <Column md={{offset: 8}}>
-                            <Button variant="link">Forgot password?</Button>
+                            <Button href="/forgotpassword" variant="link">Forgot password?</Button>
                         </Column>
                         <Form.Check
                             type="switch"
@@ -100,76 +101,12 @@ export const Login = () => {
                         </Button>
                         <Column>
                             Don't have an account?
-                            <Button variant="link">Register</Button>
+                            <Button href="/register" variant="link">Register</Button>
                         </Column>
                     </Form>
                     </Column>
                 </Row>
             </Container>
-            {/* <div class="container h-custom">
-                <div class="row d-flex jusify-content-center align-items-center h-100">
-                    <div class="class-md-9 col-lg-6 col-xl-5">
-                        <img src={BOPLogo} class="img-fluid" alt="BOP Logo"/>
-                    </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form>
-                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <p class="lead fw-normal mb-0 me-3">Sign in with</p>
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-facebook-f"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-twitter-f"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-linkedin-f"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-google-f"></i>
-                                </button>
-                            </div>
-                            <div class="divider d-flex align-items-center my4">
-                                <p class="text-center fw-bold mx-3 mb-0">Or</p>
-                            </div>
-                            
-                            <div class="form-outline mb-4">
-                                <input type="email" id="emailInput" class="form-control form-control-lg" placeholder="Enter a valid email address"/>
-                                <label class="form-label" for="emailInput">Email Address</label>
-                            </div>
-                            
-                            <div class="form-outline mb-4">
-                                <input type="email" id="passwordInput" class="form-control form-control-lg" placeholder="Enter password"/>
-                                <label class="form-label" for="emailInput">Password</label>
-                            </div>
-                            
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="form-check mb-0">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                                <label class="form-check-label" for="form2Example3">
-                                    Remember me
-                                </label>
-                                </div>
-                                <a href="#!" class="text-body">Forgot password?</a>
-                            </div>
-                            
-                            <div class="text-center text-lg-start mt-4 pt-2">
-                                <button type="button" class="btn btn-primary btn-lg"
-                                >Login</button>
-                                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                                    class="link-danger">Register</a></p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <a href="#!" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-            </div> */}
             <Navbar bg="dark" expand="lg" variant="light">
                 <Container>
                 <Navbar.Brand href="/" >

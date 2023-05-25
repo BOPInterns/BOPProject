@@ -11,7 +11,6 @@ import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
-import InputGroup from 'react-bootstrap/InputGroup';
 
 export const Register = () => {
     return (
@@ -44,7 +43,7 @@ export const Register = () => {
             <Column md={6}>
                 <Image src={BOPLogo} className="img-fluid" height="10000" width="10000"></Image>
             </Column>
-            <Card style={{width: '18rem'}}>
+            <Card style={{width: '24rem'}}>
                 <Card.Body>
                     <Card.Title>Create an account</Card.Title>
                     <Row>
