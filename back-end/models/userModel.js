@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Please provide a password."],
-        minlength: [8, "Password must be at least 8 characters long."]
+        minlength: 8,
     },
     // TODO: parse phone number to make it only consist of digits, change type to number
     phoneNumber: String,
