@@ -39,3 +39,20 @@ app.post("/register", async(req,res) => {
     sendData();
     res.send({status: "OK"});
 });
+
+app.post("/login", async(req,res) => {
+    const {email, password} = req.body;
+    const user = await User.findOne({email});
+    if (!user) {
+        // 401 = Unauthorized
+        return res.status(401).json({error: "User not found"});
+    } else if (password != user.password) {
+        // 401 = Unauthorized
+        return res.status(401).json({error: "Incorrect password"});
+    } else {
+        res.status(200).json({
+            email,
+            password
+        });
+    }
+});
