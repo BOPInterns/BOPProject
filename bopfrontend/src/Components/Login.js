@@ -19,18 +19,19 @@ export const Login = () => {
         e.preventDefault();
         console.log("Email: ", email);
         fetch("http://localhost:9000/login", {
-        method:"POST",
-        crossDomain:true,
-        headers: {
-            "Content-Type":"application/json",
-            Accept:"application/json",
-            "Access-Control-Allow-Origin":"*",
-        },
-        body: JSON.stringify({
-            email,
-            password
-        }),
-        }).then((res) => res.json())
+            method:"POST",
+            crossDomain:true,
+            headers: {
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body: JSON.stringify({
+                email,
+                password
+            }),
+            })
+        .then((res) => res.json())
         .then((data) => {
             console.log(data, "userLogin");
         });
