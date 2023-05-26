@@ -26,21 +26,18 @@ export const Login = () => {
       document.getElementById("registerButton").hidden = true;
    }
    
-   // [start] comment useEffect() function out to avoid Google OAuth error
-   useEffect(() => {
-      /* global google */ 
-      google.accounts.id.initialize({
-         client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
-         callback: handleCallbackResponse
-      });
+//    useEffect(() => {
+//       /* global google */ 
+//       google.accounts.id.initialize({
+//          client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
+//          callback: handleCallbackResponse
+//       });
       
-      google.accounts.id.renderButton(
-         document.getElementById('signInGoogle'),
-         {theme: "outline", size: "small"}
-      );
-      
-   }, []);
-   // [end] comment useEffect() function out to avoid Google OAuth error
+//       google.accounts.id.renderButton(
+//          document.getElementById('signInGoogle'),
+//          {theme: "outline", size: "small"}
+//       );
+//    }, []);
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
