@@ -34,7 +34,8 @@ app.post("/register", async(req,res) => {
     try {
         const {firstName, lastName, email, password, phoneNumber, emailNotif, textNotif} = req.body;
 
-        if (!validator.isEmail(email)) { throw Error("Invalid email"); }
+        if (!firstName || !lastName || !email || !password) { throw Error("Please fill in all required fields."); }
+        else if (!validator.isEmail(email)) { throw Error("Invalid email"); }
         else if (!validator.isStrongPassword(password)) { throw Error("Password is not strong enough"); }
 
         const passwordEncr = await bcrypt.hash(password, 11);

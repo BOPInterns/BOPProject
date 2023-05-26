@@ -1,17 +1,29 @@
 const mongoose = require("mongoose");
 
-const UserInfoSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    phoneNumber: String, 
-    textNotif: Boolean,
-    emailNotif: Boolean, 
-    email: String,
-    password: String,
-}, {
-    collection: "UserInfo",
+const userSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: [true, "Please tell us your first name."]
+    },
+    lastName: {
+        type: String,
+        required: [true, "Please tell us your last name."]
+    },
+    email: {
+        type: String,
+        required: [true, "Please provide an email."],
+        unique: [true, "Email is already linked to an account!"]
+    },
+    password: {
+        type: String,
+        required: [true, "Please provide a password."],
+    },
+    // TODO: parse phone number to make it only consist of digits, change type to number
+    phoneNumber: String,
+    textNotifs: Boolean,
+    emailNotifs: Boolean,
 });
 
-const UserInfo = mongoose.model("UserInfo", UserInfoSchema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = UserInfo;
+module.exports = User;
