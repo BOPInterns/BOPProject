@@ -55,19 +55,7 @@ export const LandingPage = () => {
             </Navbar>
             <Container>
                 <Row>
-                    <Column md={1}>1 of 12</Column>
-                    <Column md={1}>2 of 12</Column>
-                    <Column md={1}>3 of 12</Column>
-                    <Column md={1}>4 of 12</Column>
-                    <Column md={1}>5 of 12</Column>
-                    <Column md={1}>5 of 12</Column>
-                    <Column md={1}>6 of 12</Column>
-                    <Column md={1}>7 of 12</Column>
-                    <Column md={1}>8 of 12</Column>
-                    <Column md={1}>9 of 12</Column>
-                    <Column md={1}>10 of 12</Column>
-                    <Column md={1}>11 of 12</Column>
-                    <Column md={1}>12 of 12</Column>
+                    <Column>This is the homepage</Column>
                 </Row>
             </Container>
             </div>

@@ -13,6 +13,29 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
 
 export const ForgotPassword = () => {
+    const [email, setEmail] = useState('');
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetch("http://localhost:9000/forgot-password", {
+            method:"POST",
+            crossDomain:true,
+            headers:{
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body:JSON.stringify({
+                email,
+            }),
+        }).then((res) => res.json())
+        .then((data) => {
+            console.log(data, "userRegister");
+            alert(data.status);
+        });
+    }
+
     return (
         <div>
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -40,6 +63,18 @@ export const ForgotPassword = () => {
             </Navbar>
             <Container>
                 This is the forgot password page
+                <FloatingLabel
+                        id="email"
+                        controlId="floatingEmailInput"
+                        label="Please enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                >
+                <Form.Control type="email" placeholder="Please enter a valid email"/>
+                </FloatingLabel>
+                <Button onClick={handleSubmit} type="submit" variant="primary">
+                    Submit
+                </Button>
             </Container>
             </div>
     )
