@@ -1,17 +1,20 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const validator = require("validator");
-
-const JWT_SECRET = "gh&ssdfm%fmv&fkj@sjP[9fvz.i*HTSV<SJDeouwoijcdj12350&){skdfs}dfh3$)asdflk1-sdf=sFHDMC+ut";
-
+const express = require('express');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
+var nodemailer = require('nodemailer');
+const validator = require('validator');
 const app = express();
+
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({extended: false}));
+
+app.set("view engine", "ejs");
 
 const mongoURL = "mongodb+srv://BoPInterns:Pratibimb123@db1.l4iyumt.mongodb.net/";
+const JWT_SECRET = "B14F70A18B2DBAB4D1B2D34CD7EBB943F78A86BB15E2D0E85810867B6254A1D0";
 
 mongoose
     .connect(mongoURL, { 
@@ -30,7 +33,6 @@ const User = require("./schemas/userInfo");
 app.post("/register", async(req,res) => {
     try {
         const {firstName, lastName, email, password, phoneNumber, emailNotif, textNotif} = req.body;
-        console.log(firstName + " " + lastName);
 
         if (!validator.isEmail(email)) { throw Error("Invalid email"); }
         else if (!validator.isStrongPassword(password)) { throw Error("Password is not strong enough"); }
@@ -79,4 +81,93 @@ app.post("/login", async(req,res) => {
             }
         } else { throw Error("Invalid password"); }
     } catch (err) { res.status(401).json({error: err.message}); }
+});
+
+app.post("/forgot-password", async(req, res) => {
+    const {email} = req.body;
+    try{
+        const existingUser = await User.findOne({ email });
+        if(!existingUser){
+            return res.json({status:"No account with this email address has been registered."});
+        }
+
+        const secret = JWT_SECRET + existingUser.password;
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id}, secret, {
+            expiresIn: "10m",
+        });
+        const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
+        
+        //copied code to sent email
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'bop.hub.interns@gmail.com',
+              pass: 'qskgqeunggcrjwbr'
+            }
+          });
+          
+          var mailOptions = {
+            from: 'bop.hub.interns@gmail.com',
+            to: email,
+            subject: 'BOP Hub Password Reset',
+            text: link
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+          /////////////////////////////////
+        
+        console.log(link);
+    }catch (error) {
+
+    }
+});
+
+app.get('/reset-password/:id/:token', async(req, res) => {
+    const {id, token} = req.params;
+    console.log(req.params);
+    const existingUser = await User.findOne({_id:id});
+    if(!existingUser){
+        return res.json({status:"No account with this email address has been registered."});
+    }
+    const secret = JWT_SECRET + existingUser.password;
+    try {
+        const verify = jwt.verify(token, secret);
+        res.render("index", {email:verify.email, status: "Not Verified"});
+    } catch (error) {
+        res.send("Not Verified");
+    }
+}); 
+
+app.post('/reset-password/:id/:token', async(req, res) => {
+    const {id, token} = req.params;
+    const {password}=req.body
+
+    const existingUser = await User.findOne({_id:id});
+    if(!existingUser){
+        return res.json({status:"No account with this email address has been registered."});
+    }
+    const secret = JWT_SECRET + existingUser.password;
+    try {
+        const verify = jwt.verify(token, secret);
+        const encryptedPassword = await bcrypt.hash(password, 10);
+        await User.updateOne({
+            _id: id
+        },{
+            $set: {
+                password: encryptedPassword,
+            }
+        });
+
+        // res.json({status: "Password Updated."});
+        res.render("index", {email: verify.email, status: "Verified"});
+    } catch (error) {
+        // res.send("Not Verified");
+        res.json({status: "Error Updating Password."})
+    }
 });
