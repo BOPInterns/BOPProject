@@ -31,19 +31,24 @@ const User = require("./schemas/userInfo");
 
 app.post("/register", async(req,res) => {
     const {firstName, lastName, email, password, phoneNumber, emailNotif, textNotif} = req.body;
-    console.log(firstName + " " + lastName);
-    async function sendData(){
-        var uI = await User.create({
-            firstName,
-            lastName,
-            phoneNumber,
-            textNotif,
-            emailNotif,
-            email,
-            password,
-        });
+
+    const passwordEncr = await bcrypt.hash(password, 9);
+
+    // check if email is already linked to an account
+    const oldUser = await User.findOne({email});
+    if (oldUser) {
+        return res.status(401).json({error: "Email is already linked to an account"});
     }
-    sendData();
+
+    var uI = await User.create({
+        firstName,
+        lastName,
+        phoneNumber,
+        textNotif,
+        emailNotif,
+        email,
+        password: passwordEncr,
+    });
     res.send({status: "OK"});
 });
 
@@ -51,18 +56,27 @@ app.post("/login", async(req,res) => {
     // check for empty email or password fields
     const {email, password} = req.body;
     if (!req.body.email) {
-        return res.status(400).json({error: "Email required"});
+        return res.status(401).json({error: "Email required"});
     } else if (!req.body.password) {
-        return res.status(400).json({error: "Password required"});
+        return res.status(401).json({error: "Password required"});
     }
 
     const user = await User.findOne({email});
     if (!user) {
         // 401 = Unauthorized
         return res.status(401).json({error: "User not found"});
-    } else if (password != user.password) {
-        // 401 = Unauthorized
-        return res.status(401).json({error: "Incorrect password"});
+    }
+
+    if (await bcrypt.compare(password, user.password)) {
+        // correct password entered
+        const token = jwt.sign({}, JWT_SECRET);
+
+        if (res.status(201)) {
+            console.log("Login successful");
+            return res.status(201).json({data: token});
+        } else {
+            return res.status(401).json({error: "Error"});
+        }
     } else {
         console.log("Login successful");
         res.status(200).json({

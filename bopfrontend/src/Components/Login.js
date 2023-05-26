@@ -26,6 +26,13 @@ export const Login = () => {
       document.getElementById("registerButton").hidden = true;
    }
    
+   // [start] comment useEffect() function out to avoid Google OAuth error
+   useEffect(() => {
+      /* global google */ 
+      google.accounts.id.initialize({
+         client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
+         callback: handleCallbackResponse
+      });
 //    useEffect(() => {
 //       /* global google */ 
 //       google.accounts.id.initialize({
@@ -38,6 +45,8 @@ export const Login = () => {
 //          {theme: "outline", size: "small"}
 //       );
       
+   }, []);
+   // [end] comment useEffect() function out to avoid Google OAuth error
 //    }, []);
     
     const [email, setEmail] = useState('');
