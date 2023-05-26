@@ -28,7 +28,7 @@ mongoose
 
 app.listen(9000, () => { console.log("Server started on port 9000") });
 
-const User = require("./schemas/userInfo");
+const User = require("./models/userModel");
 
 app.post("/register", async(req,res) => {
     try {
