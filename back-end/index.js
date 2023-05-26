@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
+const validator = require('validator');
 const app = express();
 
 app.use(express.json());
@@ -30,60 +31,56 @@ app.listen(9000, () => { console.log("Server started on port 9000") });
 const User = require("./schemas/userInfo");
 
 app.post("/register", async(req,res) => {
-    const {firstName, lastName, email, password, phoneNumber, emailNotif, textNotif} = req.body;
+    try {
+        const {firstName, lastName, email, password, phoneNumber, emailNotif, textNotif} = req.body;
 
-    const passwordEncr = await bcrypt.hash(password, 9);
+        if (!validator.isEmail(email)) { throw Error("Invalid email"); }
+        else if (!validator.isStrongPassword(password)) { throw Error("Password is not strong enough"); }
 
-    // check if email is already linked to an account
-    const oldUser = await User.findOne({email});
-    if (oldUser) {
-        return res.status(401).json({error: "Email is already linked to an account"});
-    }
+        const passwordEncr = await bcrypt.hash(password, 11);
 
-    var uI = await User.create({
-        firstName,
-        lastName,
-        phoneNumber,
-        textNotif,
-        emailNotif,
-        email,
-        password: passwordEncr,
-    });
-    res.send({status: "OK"});
+        // check if email is already linked to an account
+        const exists = await User.findOne({email});
+        if (exists) { throw Error("Email is already linked to an account"); }
+
+        var uI = await User.create({
+            firstName,
+            lastName,
+            phoneNumber,
+            textNotif,
+            emailNotif,
+            email,
+            password: passwordEncr,
+        });
+        res.send({status: "OK"});
+    } catch (err) { res.status(401).json({error: err.message}); }
 });
 
 app.post("/login", async(req,res) => {
-    // check for empty email or password fields
-    const {email, password} = req.body;
-    if (!req.body.email) {
-        return res.status(401).json({error: "Email required"});
-    } else if (!req.body.password) {
-        return res.status(401).json({error: "Password required"});
-    }
+    try {
+        // validation for empty email or password fields
+        const {email, password} = req.body;
+        if (!email) { throw Error("Email required"); } 
+        else if (!password) { throw Error("Password required"); }
 
-    const user = await User.findOne({email});
-    if (!user) {
-        // 401 = Unauthorized
-        return res.status(401).json({error: "User not found"});
-    }
+        // validation for valid email
+        if (!validator.isEmail(email)) { throw Error("Invalid email"); }
 
-    if (await bcrypt.compare(password, user.password)) {
-        // correct password entered
-        const token = jwt.sign({}, JWT_SECRET);
+        const user = await User.findOne({email});
+        if (!user) { throw Error("User not found"); }
 
-        if (res.status(201)) {
-            console.log("Login successful");
-            return res.status(201).json({data: token});
-        } else {
-            return res.status(401).json({error: "Error"});
-        }
-    } else {
-        console.log("Login successful");
-        res.status(200).json({
-            email,
-            password
-        });
-    }
+        if (await bcrypt.compare(password, user.password)) {
+            // correct password entered
+            const token = jwt.sign({}, JWT_SECRET);
+
+            if (res.status(201)) {
+                console.log("Login successful");
+                return res.status(201).json({data: token});
+            } else {
+                return res.status(401).json({error: "Error"});
+            }
+        } else { throw Error("Invalid password"); }
+    } catch (err) { res.status(401).json({error: err.message}); }
 });
 
 app.post("/forgot-password", async(req, res) => {
@@ -173,4 +170,4 @@ app.post('/reset-password/:id/:token', async(req, res) => {
         // res.send("Not Verified");
         res.json({status: "Error Updating Password."})
     }
-}); 
+});

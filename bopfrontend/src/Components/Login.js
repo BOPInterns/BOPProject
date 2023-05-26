@@ -37,9 +37,7 @@ export const Login = () => {
 //          document.getElementById('signInGoogle'),
 //          {theme: "outline", size: "small"}
 //       );
-      
-//   }, []);
-
+//    }, []);
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
