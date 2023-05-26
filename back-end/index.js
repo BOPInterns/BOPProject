@@ -16,11 +16,8 @@ app.use(express.urlencoded({extended: false}));
 
 app.set("view engine", "ejs");
 
-const mongoURL = "mongodb+srv://BoPInterns:Pratibimb123@db1.l4iyumt.mongodb.net/";
-const JWT_SECRET = "B14F70A18B2DBAB4D1B2D34CD7EBB943F78A86BB15E2D0E85810867B6254A1D0";
-
 mongoose
-    .connect(mongoURL, { 
+    .connect(process.env.MONGO_URL, { 
         useNewUrlParser: true 
     })
     .then(() => {
@@ -74,7 +71,7 @@ app.post("/login", async(req,res) => {
 
         if (await bcrypt.compare(password, user.password)) {
             // correct password entered
-            const token = jwt.sign({}, JWT_SECRET);
+            const token = jwt.sign({}, process.env.JWT_SECRET);
 
             if (res.status(201)) {
                 console.log("Login successful");
@@ -94,7 +91,7 @@ app.post("/forgot-password", async(req, res) => {
             return res.json({status:"No account with this email address has been registered."});
         }
 
-        const secret = JWT_SECRET + existingUser.password;
+        const secret = process.env.JWT_SECRET + existingUser.password;
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id}, secret, {
             expiresIn: "10m",
         });
@@ -138,7 +135,7 @@ app.get('/reset-password/:id/:token', async(req, res) => {
     if(!existingUser){
         return res.json({status:"No account with this email address has been registered."});
     }
-    const secret = JWT_SECRET + existingUser.password;
+    const secret = process.env.JWT_SECRET + existingUser.password;
     try {
         const verify = jwt.verify(token, secret);
         res.render("index", {email:verify.email, status: "Not Verified"});
@@ -155,7 +152,7 @@ app.post('/reset-password/:id/:token', async(req, res) => {
     if(!existingUser){
         return res.json({status:"No account with this email address has been registered."});
     }
-    const secret = JWT_SECRET + existingUser.password;
+    const secret = process.env.JWT_SECRET + existingUser.password;
     try {
         const verify = jwt.verify(token, secret);
         const encryptedPassword = await bcrypt.hash(password, 10);
