@@ -41,7 +41,14 @@ app.post("/register", async(req,res) => {
 });
 
 app.post("/login", async(req,res) => {
+    // check for empty email or password fields
     const {email, password} = req.body;
+    if (!req.body.email) {
+        return res.status(400).json({error: "Email required"});
+    } else if (!req.body.password) {
+        return res.status(400).json({error: "Password required"});
+    }
+
     const user = await User.findOne({email});
     if (!user) {
         // 401 = Unauthorized
@@ -50,6 +57,7 @@ app.post("/login", async(req,res) => {
         // 401 = Unauthorized
         return res.status(401).json({error: "Incorrect password"});
     } else {
+        console.log("Login successful");
         res.status(200).json({
             email,
             password
