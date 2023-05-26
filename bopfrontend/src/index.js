@@ -14,13 +14,13 @@ import { BrowserRouter } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // comment out the next 2 lines and the "</GoogleOAuthProvider>" to avoid Google OAuth errors
-  // <GoogleOAuthProvider
-  //   clientId="818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com">
+  <GoogleOAuthProvider
+    clientId="818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com">
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
-  // </GoogleOAuthProvider>
+  </GoogleOAuthProvider>
 );
 
