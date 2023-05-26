@@ -45,8 +45,25 @@ export const Login = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email);
-        console.log(password);
+        console.log("Email: ", email);
+        fetch("http://localhost:9000/login", {
+            method:"POST",
+            crossDomain:true,
+            headers: {
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body: JSON.stringify({
+                email,
+                password
+            }),
+            })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data, "userLogin");
+        });
+        console.log("Password: ", password);
     }
     
     const handleSignout = (e) => {
@@ -132,7 +149,7 @@ export const Login = () => {
                             label="Remember me"
                         >
                         </Form.Check>
-                        <Button>
+                        <Button onClick={handleSubmit} type="submit" variant="primary">
                             Submit
                         </Button>
                         <Column>
