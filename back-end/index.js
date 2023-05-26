@@ -5,7 +5,10 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 const validator = require('validator');
+const dotenv = require('dotenv');
 const app = express();
+
+dotenv.config();
 
 app.use(express.json());
 app.use(cors());
