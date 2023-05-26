@@ -26,6 +26,7 @@ export const Login = () => {
       document.getElementById("registerButton").hidden = true;
    }
    
+   // [start] comment useEffect() function out to avoid Google OAuth error
    useEffect(() => {
       /* global google */ 
       google.accounts.id.initialize({
@@ -39,6 +40,7 @@ export const Login = () => {
       );
       
    }, []);
+   // [end] comment useEffect() function out to avoid Google OAuth error
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
