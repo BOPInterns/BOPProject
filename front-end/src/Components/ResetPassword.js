@@ -16,10 +16,6 @@ export const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmation, setConfirmation] = useState('');
 
-    const formStyle = {
-        marginBottom: '20px'
-    }
-
     const handleSubmit = (e) => {
         // e.preventDefault();
         // fetch("http://localhost:9000/forgot-password", {
@@ -70,14 +66,14 @@ export const ResetPassword = () => {
             <Column md={6}>
                 <Image src={BOPLogo} className="img-fluid" height="10000" width="10000"></Image>
             </Column>
-            <Card style={{width: '24rem'}}>
+            <Card style={{width: '24rem', height: '26rem',marginTop: 70}}>
                 <Card.Body>
-                    <Card.Title>Reset your Password</Card.Title>
+                    <Card.Title>Reset Your Password</Card.Title>
                     <FloatingLabel
                         id="password"
                         controlId="floatingPasswordInput"
                         label="Enter New Password"
-                        className="reset-card"
+                        className="password-forms"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     >
@@ -94,7 +90,7 @@ export const ResetPassword = () => {
                         id="confirmation"
                         controlId="floatingConfirmationInput"
                         label="Confirm New Password"
-                        className="reset-card"
+                        className="password-forms"
                         value={confirmation}
                         onChange={(e) => setConfirmation(e.target.value)}
                     >
@@ -103,7 +99,7 @@ export const ResetPassword = () => {
 
                     <Card.Text className='form-subtext'>Please ensure the same password is entered into both fields</Card.Text>
 
-                    <Button onClick={handleSubmit} type="submit" variant="primary">
+                    <Button onClick={handleSubmit} type="submit" variant="primary" className='button'>
                         Submit
                     </Button>
                     
