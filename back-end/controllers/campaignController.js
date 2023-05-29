@@ -14,7 +14,7 @@ exports.createCampaign = async (req, res) => {
     } catch (err) {
         res.status(400).json({
             status: "fail",
-            message: "Unsuccessful campaign creation"
+            message: "Failed campaign creation"
         });
     }
 }
