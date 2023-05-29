@@ -2,9 +2,8 @@
 Project created by intern team for the BoP Hub website
 
 ## To run entire project locally
-0. if first time with repo go into front-end and do "npm install", then go into backend and do the same thing
-1. cd into back-end
-2. type and enter "npm run start"
+0. if first time with repo do "npm  run inst"
+1. type and enter "npm run start"
 
 ## Cans kicked down the road...
 * can't refresh on login page or google breaks it
