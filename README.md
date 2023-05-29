@@ -2,6 +2,7 @@
 Project created by intern team for the BoP Hub website
 
 ## To run entire project locally
+0. if first time with repo go into front-end and do "npm install", then go into backend and do the same thing
 1. cd into back-end
 2. type and enter "npm run start"
 
@@ -15,3 +16,4 @@ Project created by intern team for the BoP Hub website
 * password reset email is sent to spam folder in gmail
 * phone number validation
 * email validation to check for fake emails that have correct email format
+* make it so terminal commands can re run in BOPProject folder instead of front or backend
