@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "concurrently \"cd back-end && npm run dev\" \"cd front-end && npm start\"",
+    "inst": "concurrently \"cd back-end & npm i\" \"cd front-end && npm i\""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "validator": "^13.9.0"
+  }
+}
