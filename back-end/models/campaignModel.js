@@ -3,22 +3,22 @@ const mongoose = require("mongoose");
 const campaignSchema = new mongoose.Schema({
     name: String,
     owner: String,
-    // tags: String array,
+    tags: [String],
     description: String,
     challenge: String,
     reach: String,
     location: String,
-    // goals: String array,
-    // milestones: String array,
+    goals: [String],
+    milestones: [String],
     // status: enum options,
     numActors: Number,
-    // stakeholderLangs: String array,
-    // volunteerLangs: String array,
+    stakeholderLangs: [String],
+    volunteerLangs: [String],
     video: String, // YT link
-    // otherFiles: File object array,
+    otherFiles: [String],
     deadline: Date,
     caseStudy: Boolean,
-    // solutions: String array?? IDK
+    solutions: [String]
 })
 
 const Campaign = mongoose.model("Campaign", campaignSchema);
