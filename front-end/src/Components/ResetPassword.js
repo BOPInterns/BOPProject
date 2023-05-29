@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './Register.css'
+import './Reset.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
@@ -16,6 +16,9 @@ export const ResetPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmation, setConfirmation] = useState('');
 
+    const formStyle = {
+        marginBottom: '20px'
+    }
 
     const handleSubmit = (e) => {
         // e.preventDefault();
@@ -57,33 +60,57 @@ export const ResetPassword = () => {
                     <Navbar.Collapse className="justify-contents-end">
                         <Nav className='me-auto'>
                             <Nav.Link href="/login">Login</Nav.Link>
-                            <Nav.Link href="/">Register</Nav.Link>
+                            <Nav.Link href="/" disabled>Register</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
             <Container>
-                This is the Reset password page
-                <Column>
-                <FloatingLabel
-                    id="new-password"
-                    controlId="new-password-input"
-                    label="Please enter new password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                ></FloatingLabel>
-                <FloatingLabel
-                    id="confirmation"
-                    controlId="confirm-password-input"
-                    label="Please confirm your password"
-                    value={confirmation}
-                    onChange={(e) => setConfirmation(e.target.value)}
-                ></FloatingLabel>
-                <Button onClick={handleSubmit} type="submit" variant="primary">
-                    Submit
-                </Button>
-                </Column>
+            <Row>
+            <Column md={6}>
+                <Image src={BOPLogo} className="img-fluid" height="10000" width="10000"></Image>
+            </Column>
+            <Card style={{width: '24rem'}}>
+                <Card.Body>
+                    <Card.Title>Reset your Password</Card.Title>
+                    <FloatingLabel
+                        id="password"
+                        controlId="floatingPasswordInput"
+                        label="Enter New Password"
+                        className="reset-card"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    >
+                        <Form.Control type="password" placeholder="password"/>
+                    </FloatingLabel>
+
+                    <Card.Text className='form-subtext'>Please ensure your new password meets the following requirements:</Card.Text>
+                    <Card.Text className='form-subtext'>* Minimum 8 characters</Card.Text>
+                    <Card.Text className='form-subtext'>* At least 1 uppercase and 1 lowercase letter</Card.Text>
+                    <Card.Text className='form-subtext'>* At least 1 number</Card.Text>
+                    <Card.Text className='form-subtext'>* At least 1 special character</Card.Text>
+                    
+                    <FloatingLabel
+                        id="confirmation"
+                        controlId="floatingConfirmationInput"
+                        label="Confirm New Password"
+                        className="reset-card"
+                        value={confirmation}
+                        onChange={(e) => setConfirmation(e.target.value)}
+                    >
+                        <Form.Control type="password" placeholder="password"/>
+                    </FloatingLabel>
+
+                    <Card.Text className='form-subtext'>Please ensure the same password is entered into both fields</Card.Text>
+
+                    <Button onClick={handleSubmit} type="submit" variant="primary">
+                        Submit
+                    </Button>
+                    
+                </Card.Body>
+            </Card>
+            </Row>
             </Container>
-            </div>
+    </div>
     )
 }
