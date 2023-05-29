@@ -77,7 +77,7 @@ export const ForgotPassword = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     >
-                        <Form.Control type="password" placeholder="password"/>
+                        <Form.Control type="email" placeholder="email"/>
                     </FloatingLabel>
 
                     <Card.Text className='form-subtext'>A recovery link will be sent to the email that you provide.</Card.Text>
