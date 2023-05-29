@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start1": "node index",
-    "start": "concurrently \"npm run dev\" \"cd .. && cd front-end && npm start\"",
+    "start": "node index",
     "dev": "nodemon index"
   },
   "keywords": [],
