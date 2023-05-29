@@ -2,6 +2,7 @@
 Project created by intern team for the BoP Hub website
 
 ## To run entire project locally
+0. if first time with repo go into front-end and do "npm install", then go into backend and do the same thing
 1. cd into back-end
 2. type and enter "npm run start"
 
@@ -14,3 +15,4 @@ Project created by intern team for the BoP Hub website
 * email and text notif checkboxes enter in the database as 'false' even when they're checked off
 * phone number validation
 * email validation to check for fake emails that have correct email format
+* make it so terminal commands can re run in BOPProject folder instead of front or backend
