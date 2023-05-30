@@ -1,4 +1,5 @@
 import { NavigationBar } from '../NavigationBar';
+import { CreateCampaignNavbar } from './CreateCampaignNavbar';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
@@ -16,33 +17,70 @@ export const CreateCampaignS2 = () => {
     return(
         <div>
             <NavigationBar />
-            <Nav className="justify-content-left" sticky="top">
-                <DropdownButton
-                    title="Previous Steps"
-                >
-                    <Dropdown.Item href="create-campaign-step-1">
-                        Step 1
-                    </Dropdown.Item>
-                </DropdownButton>
-            </Nav>
-            <Nav className="justify-content-end" sticky="top">
-                <DropdownButton
-                    title="Next Steps"
-                >
-                    <Dropdown.Item href="create-campaign-step-2">
-                        Step 3
-                    </Dropdown.Item>
-                    <Dropdown.Item href="create-campaign-step-3">
-                        Step 4
-                    </Dropdown.Item>
-                    <Dropdown.Item href="create-campaign-step-4">
-                        Step 5
-                    </Dropdown.Item>
-                    <Dropdown.Item disabled>
-                        Step 6
-                    </Dropdown.Item>
-                </DropdownButton>
-            </Nav>
+            <CreateCampaignNavbar />
+            <Container>
+                <Row className="mt-5">
+                    <h2>Step 2: Provide detailed information about the campagin</h2>
+                </Row>
+                <Row>
+                    <Card className="mt-3">
+                        <Card.Title className="mt-3">
+                            Mandatory fields
+                        </Card.Title>
+                        <Card.Body>
+                            <Card.Text>
+                                These two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.
+                            </Card.Text>
+                            <br></br>
+                            <Form>
+                                <FormGroup>
+                                <Form.Label>Campaign description</Form.Label>
+                                <Form.Control as="textarea" rows={10} type="text" placeholder="Describe your campaign here..." />
+                                <Form.Text className="text-muted">Explainer text about the role of the campaign description</Form.Text>
+                                </FormGroup>
+                                <br></br>
+                                <FormGroup className="mt-4">
+                                    <Form.Label>Campaign challenge</Form.Label>
+                                    <Form.Control as="textarea" rows={2} type="text" placeholder="Describe the challenges your campaign faces here..." />
+                                    <Form.Text className="text-muted">Explainer text about the role of the campaign challenge</Form.Text>
+                                </FormGroup>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Row>
+                <Row>
+                    <Card>
+                        <Card.Title className="mt-3">
+                            Optional fields
+                        </Card.Title>
+                        <Card.Body>
+                            <Card.Text>
+                                Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform
+                            </Card.Text>
+                            <br></br>
+                            <Form>
+                                <FormGroup>
+                                    <Form.Label>Campaign mission</Form.Label>
+                                    <Form.Control as="textarea" rows={4} type="text" placeholder="Describe your campaign mission here..." />
+                                    <Form.Text className="text-muted">Explainer text about the role of the campaign challenge</Form.Text>
+                                </FormGroup>
+                                <br></br>
+                                <FormGroup>
+                                    <Form.Label>Campaign milestones</Form.Label>
+                                    <Form.Control type="text" placeholder="Type the milestones you would like to share..." />
+                                    <Form.Text className="text-italics">Added milestones: look at figma need to figure out how to add elements like this</Form.Text>
+                                </FormGroup>
+                                <br></br>
+                                <FormGroup>
+                                    <Form.Label>Predicted goals</Form.Label>
+                                    <Form.Control type="text" placeholder="Type the milestones you would like to share..." />
+                                    <Form.Text className="text-italics">Added milestones: look at figma need to figure out how to add elements like this</Form.Text>
+                                </FormGroup>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Row>
+            </Container>
         </div>
     )
 }
