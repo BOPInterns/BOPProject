@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Login } from './Components/Login.js';
 import { Register } from './Components/Register.js';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './Components/LandingPage.js';
 import { ForgotPassword } from './Components/ForgotPassword.js';
-import { CampaignCenter } from './Components/CampaignCenter.js'
+import { CampaignCenter } from './Components/Campaign Center/CampaignCenter.js'
 import { CreateCampaignS0 } from './Components/Create Campaign/CreateCampaignS0.js';
 import { CreateCampaignS1 } from './Components/Create Campaign/CreateCampaignS1.js';
 import { CreateCampaignS2 } from './Components/Create Campaign/CreateCampaignS2.js';
@@ -15,6 +15,7 @@ import { CreateCampaignS6 } from './Components/Create Campaign/CreateCampaignS6.
 import { ResetPassword } from './Components/ResetPassword.js';    //only added for testing and might want to remove later for security differences
 
 const App = () => {
+
   return (
      <>
         <Routes>
@@ -22,6 +23,7 @@ const App = () => {
            <Route path="/Login" element={<Login />} />
            <Route path="/Register" element={<Register />} />
            <Route path="/forgotpassword" element={<ForgotPassword />} />
+           <Route path="/get-reset-link" element={<ResetPassword />} />
            <Route path="/campaign-center" element={<CampaignCenter />} />
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
            <Route path="/create-campaign-step-1" element={<CreateCampaignS1 />} />

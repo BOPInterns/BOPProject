@@ -163,10 +163,18 @@ const handleInputChange = (e) => {
                     >
                         <Form.Control type="password" placeholder="password"/>
                     </FloatingLabel>
+
+                    <Card.Text className='form-subtext'>Please ensure your new password meets the following requirements:</Card.Text>
+                    <Card.Text className='form-subtext'>* Minimum 8 characters</Card.Text>
+                    <Card.Text className='form-subtext'>* At least 1 uppercase and 1 lowercase letter</Card.Text>
+                    <Card.Text className='form-subtext'>* At least 1 number</Card.Text>
+                    <Card.Text className='form-subtext'>* At least 1 special character</Card.Text>
+
                     <Form.Check
                         id="emailNotif"
                         type="checkbox"
                         label="I would like to receive email notifications from BOPHub."
+                        style={{marginTop: 10}}
                         value={emailNotif}
                         onChange={(e) => setEmailNotif(e.target.value)}
                     >
