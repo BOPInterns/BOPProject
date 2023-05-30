@@ -20,8 +20,8 @@ const [lastName, setLastName] = useState('');
 const [email, setEmail] = useState('');
 const [phoneNumber, setPhoneNumber] = useState('');
 const [password, setPassword] = useState('');
-const [emailNotif, setEmailNotif] = useState(Boolean);
-const [textNotif, setTextNotif] = useState(Boolean);
+const [emailNotif, setEmailNotif] = useState(false);
+const [textNotif, setTextNotif] = useState(false);
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -176,7 +176,7 @@ const handleInputChange = (e) => {
                         label="I would like to receive email notifications from BOPHub."
                         style={{marginTop: 10}}
                         value={emailNotif}
-                        onChange={(e) => setEmailNotif(e.target.value)}
+                        onChange={() => setEmailNotif(!emailNotif)}
                     >
                     </Form.Check>
                     <Form.Check
@@ -185,7 +185,7 @@ const handleInputChange = (e) => {
                         label="I would like to receive text notifications from BOPHub.
                         (Standard sms data rates may apply)"
                         value={textNotif}
-                        onChange={(e) => setTextNotif(e.target.value)}
+                        onChange={() => setTextNotif(!textNotif)}
                     >
                     </Form.Check>
                         <Button onClick={handleSubmit} type="submit" variant="primary">
