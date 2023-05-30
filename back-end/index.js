@@ -97,8 +97,8 @@ app.post("/forgot-password", async(req, res) => {
             expiresIn: "10m",
         });
         const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
-        
-        //copied code to sent email
+
+        //copied code to sent email ///////
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -111,7 +111,7 @@ app.post("/forgot-password", async(req, res) => {
             from: 'bop.hub.interns@gmail.com',
             to: email,
             subject: 'BOP Hub Password Reset',
-            text: link
+            text: "Please click on the following link to reset your password   " + link
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -139,7 +139,7 @@ app.get('/reset-password/:id/:token', async(req, res) => {
     const secret = process.env.JWT_SECRET + existingUser.password;
     try {
         const verify = jwt.verify(token, secret);
-        res.render("index", {email:verify.email, status: "Not Verified"});
+        res.send("index", {email:verify.email, status: "Not Verified"});
     } catch (error) {
         res.send("Not Verified");
     }
@@ -165,10 +165,8 @@ app.post('/reset-password/:id/:token', async(req, res) => {
             }
         });
 
-        // res.json({status: "Password Updated."});
-        res.render("index", {email: verify.email, status: "Verified"});
+        res.send("index", {email: verify.email, status: "Verified"});
     } catch (error) {
-        // res.send("Not Verified");
         res.json({status: "Error Updating Password."})
     }
 });
