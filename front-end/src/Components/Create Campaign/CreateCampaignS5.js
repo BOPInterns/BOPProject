@@ -72,7 +72,9 @@ export const CreateCampaignS5 = () => {
                     </ListGroup>
                 </Row>
                 <Row className="mt-3">
+                    <hr></hr>
                     <Button variant="link" href="/create-campaign-step-2">Suggestions for Step 2: Detailed information</Button>
+                    <hr></hr>
                     <Col>
                         <Card className="mt-3">
                             <Card.Body>
@@ -128,6 +130,7 @@ export const CreateCampaignS5 = () => {
                 </Row>
                 <Container className="mt-4 mb-5">
                     <Row className="justify-content-md-center">
+                        <hr></hr>
                         <Button size="lg" variant="success" href="create-campaign-step-6">Submit!</Button>
                     </Row>
                 </Container>

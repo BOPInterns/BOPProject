@@ -2,20 +2,18 @@ import { NavigationBar } from '../NavigationBar';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import Container from'react-bootstrap/Container';
 
 export const CreateCampaignS0 = () => {
     return (
-        <div>
+        <div class="mx-auto">
             <NavigationBar />
-            <Row className="justify-content-center">
-                <Card>
-                    <Card.Title>
-                        Create a Campaign
-                    </Card.Title>
-                </Card>
-                <Card>
-                    <Card.Title>
-                        What is a campaign?
+            <Container>
+            <Row class="mt-5">
+                <h2 class="text-center mt-3 mb-3">Create a campaign</h2>
+                <Card className="mb-3">
+                    <Card.Title className="mt-3">
+                        What is the campaign?
                     </Card.Title>
                     <Card.Body>
                     <Card.Text>
@@ -23,8 +21,8 @@ export const CreateCampaignS0 = () => {
                     </Card.Text>
                     </Card.Body>
                 </Card>
-                <Card>
-                    <Card.Title>
+                <Card className="mb-3">
+                    <Card.Title className="mt-3">
                         What information do I need in order to run the campagin?
                     </Card.Title>
                     <Card.Body>
@@ -40,7 +38,10 @@ export const CreateCampaignS0 = () => {
                     </Card.Body>
                 </Card>
             </Row>
+            <Row class="mx-auto">
                 <Button href="/create-campaign-step-1">Fill the campagin form</Button>
+            </Row>
+            </Container>
         </div>
     )
 }
