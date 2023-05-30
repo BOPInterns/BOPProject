@@ -79,7 +79,6 @@ export const ResetPassword = () => {
                     >
                         <Form.Control type="password" placeholder="password"/>
                     </FloatingLabel>
-
                     <Card.Text className='form-subtext'>Please ensure your new password meets the following requirements:</Card.Text>
                     <Card.Text className='form-subtext'>* Minimum 8 characters</Card.Text>
                     <Card.Text className='form-subtext'>* At least 1 uppercase and 1 lowercase letter</Card.Text>
