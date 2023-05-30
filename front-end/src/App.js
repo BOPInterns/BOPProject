@@ -4,7 +4,7 @@ import { Register } from './Components/Register.js';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './Components/LandingPage.js';
 import { ForgotPassword } from './Components/ForgotPassword.js';
-import { CampaignCenter } from './Components/CampaignCenter.js'
+import { CampaignCenter } from './Components/Campaign Center/CampaignCenter.js'
 import { CreateCampaignS0 } from './Components/Create Campaign/CreateCampaignS0.js';
 import { CreateCampaignS1 } from './Components/Create Campaign/CreateCampaignS1.js';
 import { CreateCampaignS2 } from './Components/Create Campaign/CreateCampaignS2.js';

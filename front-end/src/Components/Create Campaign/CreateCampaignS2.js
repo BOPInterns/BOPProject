@@ -1,17 +1,10 @@
 import { NavigationBar } from '../NavigationBar';
 import { CreateCampaignNavbar } from './CreateCampaignNavbar';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
-import Dropdown from'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Row from'react-bootstrap/Row';
 import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import React, { useState, useRef } from 'react';
-import Image from 'react-bootstrap/image'
 
 export const CreateCampaignS2 = () => {
     return(
