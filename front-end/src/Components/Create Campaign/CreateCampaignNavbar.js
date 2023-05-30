@@ -6,7 +6,7 @@ export const CreateCampaignNavbar = () => {
             <Nav
                 justify variant="tabs"
                 defaultActiveKey="/create-campagin-introduction"
-                
+                fixed="top"
             >
                 <Nav.Item>
                     <Nav.Link href="/create-campaign-step-1">
@@ -31,11 +31,6 @@ export const CreateCampaignNavbar = () => {
                 <Nav.Item>
                     <Nav.Link href="/create-campaign-step-5">
                         Step 5
-                    </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link href="/create-campaign-step-6">
-                        Step 6
                     </Nav.Link>
                 </Nav.Item>
             </Nav>

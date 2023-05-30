@@ -17,7 +17,7 @@ export const CreateCampaignS3 = () => {
                     <h2>Step 3: Location & Language</h2>
                     
                 </Row>
-                <Row className="mt-5">
+                <Row className="mt-3">
                     <Card>
                         <Card.Title className="mt-4">
                             Mandatory Fields

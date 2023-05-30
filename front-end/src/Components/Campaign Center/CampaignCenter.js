@@ -1,13 +1,13 @@
-import { NavigationBar } from './NavigationBar';
+import { NavigationBar } from '../NavigationBar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+import { CampaignCard } from './CampaignCard.js';
+import Col from 'react-bootstrap/Col';
 
 export const CampaignCenter = () => {
     return (
@@ -17,8 +17,8 @@ export const CampaignCenter = () => {
             <Container>
                 <Row className="justify-content-center">
                     You are currently browsing the marketplace as:
-                    <Button href="/create-campaign-introduction">Create a Campaign</Button>
                 </Row>
+                <Button href="/create-campaign-introduction">Create a Campaign</Button>
                 <Row className="">
                     <DropdownButton
                         title="Current Organizaiton"
@@ -59,67 +59,36 @@ export const CampaignCenter = () => {
                 </Row>
                 <Row>
                     <Column>
-                        <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campaign</Card.Title>
-                                <Card.Text>[no.%] match</Card.Text>
-                                <Badge bg="secondary">tags</Badge>
-                                <Badge bg="secondary">tags</Badge>
-                                <Badge bg="secondary">tags</Badge>
-                            </Card.Body>
-                        </Card>
+                        <CampaignCard/>
                     </Column>
                     <Column>
-                        <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campagin</Card.Title>
-                            </Card.Body>
-                        </Card>
+                        <CampaignCard/>
                     </Column>
                     <Column>
-                            <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campagin</Card.Title>
-                            </Card.Body>
-                        </Card>
+                        <CampaignCard/>
                     </Column>
                     <Column>
-                        <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campagin</Card.Title>
-                            </Card.Body>
-                        </Card>
+                        <CampaignCard/>
                     </Column>
                 </Row>
                 <Row>
                 <Column>
-                        <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campaign</Card.Title>
-                            </Card.Body>
-                        </Card>
+                    <CampaignCard/>
                     </Column>
                     <Column>
-                        <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campagin</Card.Title>
-                            </Card.Body>
-                        </Card>
+                    <CampaignCard/>
                     </Column>
                     <Column>
-                            <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campagin</Card.Title>
-                            </Card.Body>
-                        </Card>
+                    <CampaignCard/>
                     </Column>
                     <Column>
-                        <Card style={{width: '12rem'}}>
-                            <Card.Body>
-                                <Card.Title>Name of the Campagin</Card.Title>
-                            </Card.Body>
-                        </Card>
+                    <CampaignCard/>
                     </Column>
+                </Row>
+                <Row>
+                    <Col>
+                    <Button variant="outline-secondary" size="sm">Load more Campaigns</Button>
+                    </Col>
                 </Row>
             </Container>
         </>

@@ -19,7 +19,7 @@ export const CreateCampaignS5 = () => {
                 <Row className="mt-5">
                     <h2>Step 5: Suggestions to filled form</h2>
                 </Row>
-                <Row>
+                <Row className="mt-3">
                     <ListGroup>
                     <ListGroup.Item
                         as="li"
@@ -71,10 +71,10 @@ export const CreateCampaignS5 = () => {
                     </ListGroup.Item>
                     </ListGroup>
                 </Row>
-                <Row>
-                    <Button variant="link">Suggestions for Step 2: Detailed information</Button>
+                <Row className="mt-3">
+                    <Button variant="link" href="/create-campaign-step-2">Suggestions for Step 2: Detailed information</Button>
                     <Col>
-                        <Card>
+                        <Card className="mt-3">
                             <Card.Body>
                                 <Form>
                                     <FormGroup>
@@ -87,7 +87,7 @@ export const CreateCampaignS5 = () => {
                         </Card>
                     </Col>
                     <Col>
-                        <Card>
+                        <Card className="mt-3">
                             <Card.Body>
                                 <Card.Text>
                                     Hint 1: This is a hint
@@ -126,6 +126,11 @@ export const CreateCampaignS5 = () => {
                         </Card>
                     </Col>
                 </Row>
+                <Container className="mt-4 mb-5">
+                    <Row className="justify-content-md-center">
+                        <Button size="lg" variant="success" href="create-campaign-step-6">Submit!</Button>
+                    </Row>
+                </Container>
             </Container>
         </div>
     )

@@ -1,12 +1,10 @@
 import { NavigationBar } from '../NavigationBar';
 import { CreateCampaignNavbar  } from './CreateCampaignNavbar';
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Image from 'react-bootstrap/image'
 
 export const CreateCampaignS1 = () => {
     return (
@@ -19,9 +17,10 @@ export const CreateCampaignS1 = () => {
                 </Row>
                 <Row>
                     <Card className="mt-3">
+                        <Card.Title className="mt-4">Mandatory fields</Card.Title>
                         <Card.Body>
                             <Form>
-                                <FormGroup className="mt-3">
+                                <FormGroup className="mb-3">
                                     <Form.Label>Campaign name</Form.Label>
                                     <Form.Control type="text" placeholder="Campaign name" />
                                     <Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>
@@ -35,15 +34,21 @@ export const CreateCampaignS1 = () => {
                     </Card.Body>
                     </Card>
                 </Row>
-                <Row>
+                <Row className="mt-5">
                     <Card>
                         <Card.Title className="mt-3">Optional Fields</Card.Title>
                         <Card.Body>
-                            <Card.Text>Fields below arenot necessary to fill, but they surely improve your campaigns recognition on the platform</Card.Text>
+                            <Card.Text>Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform</Card.Text>
                             <Card.Text>
-                                <Button>
-                                    <Image src="./uploadPromoVideo.png" fluid></Image>
-                                </Button>
+                                <Form>
+                                    <FormGroup>
+                                        <Form.Label>Upload promotional video</Form.Label>
+                                        <Form.Control type="file" />
+                                        <Form.Text className="text-muted">
+                                            You can upload a video to promote your campaign
+                                        </Form.Text>
+                                    </FormGroup>
+                                </Form>
                             </Card.Text>
                         </Card.Body>
                         
