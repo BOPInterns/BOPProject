@@ -16,8 +16,9 @@ export const CreateCampaignS4 = () => {
                 </Row>
                 <Row>
                     <Card className="mt-3">
-                        <Card.Title className="mt-4">
+                        <Card.Title className="mt-3">
                             Add attachments
+                            <hr></hr>
                         </Card.Title>
                         <Card.Body>
                             <Card.Text>

@@ -17,7 +17,10 @@ export const CreateCampaignS1 = () => {
                 </Row>
                 <Row>
                     <Card className="mt-3">
-                        <Card.Title className="mt-4">Mandatory fields</Card.Title>
+                        <Card.Title className="mt-3">
+                            Mandatory fields
+                            <hr></hr>
+                        </Card.Title>
                         <Card.Body>
                             <Form>
                                 <FormGroup className="mb-3">
@@ -36,7 +39,10 @@ export const CreateCampaignS1 = () => {
                 </Row>
                 <Row className="mt-5">
                     <Card>
-                        <Card.Title className="mt-3">Optional Fields</Card.Title>
+                        <Card.Title className="mt-3">
+                            Optional Fields
+                            <hr></hr>
+                        </Card.Title>
                         <Card.Body>
                             <Card.Text>Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform</Card.Text>
                             <Card.Text>

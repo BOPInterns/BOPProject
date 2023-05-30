@@ -19,13 +19,12 @@ export const CreateCampaignS3 = () => {
                 </Row>
                 <Row className="mt-3">
                     <Card>
-                        <Card.Title className="mt-4">
-                            Mandatory Fields
+                        <Card.Title className="mt-3">
+                            Mandatory fields
+                            <hr></hr>
                         </Card.Title>
                         <Card.Body>
                             <Card.Text>The two fields below are essential to make your campaign recognizable at our platform. Prividing detailed information will also result in better matching with future campaign partners.</Card.Text>    
-                        </Card.Body>
-                        <br></br>
                         <Form>
                             <FormGroup>
                                 <Form.Label>Your location</Form.Label>
@@ -44,16 +43,17 @@ export const CreateCampaignS3 = () => {
                                 <Form.Text className="text-muted">You can select the country or make the reach of the campaign using the map above</Form.Text>
                             </FormGroup>
                         </Form>
+                        </Card.Body>
                     </Card>
                 </Row>
                 <Row className="mt-5">
                     <Card>
                         <Card.Title className="mt-4">
                             Optional Fields
+                            <hr></hr>
                         </Card.Title>
                         <Card.Body>
                             <Card.Text>Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform.</Card.Text>
-                            <br></br>
                             <Form>
                                 <FormGroup>
                                     <Form.Label>Preferred languages</Form.Label>

@@ -19,6 +19,7 @@ export const CreateCampaignS2 = () => {
                     <Card className="mt-3">
                         <Card.Title className="mt-3">
                             Mandatory fields
+                            <hr></hr>
                         </Card.Title>
                         <Card.Body>
                             <Card.Text>
@@ -45,6 +46,7 @@ export const CreateCampaignS2 = () => {
                     <Card>
                         <Card.Title className="mt-3">
                             Optional fields
+                            <hr></hr>
                         </Card.Title>
                         <Card.Body>
                             <Card.Text>
