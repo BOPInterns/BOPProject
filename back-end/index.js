@@ -10,6 +10,8 @@ const app = express();
 
 dotenv.config();
 
+//dotenv.config({ path: "./config.env" });
+
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
@@ -111,7 +113,7 @@ app.post("/forgot-password", async(req, res) => {
             from: 'bop.hub.interns@gmail.com',
             to: email,
             subject: 'BOP Hub Password Reset',
-            text: "Please click on the following link to reset your password   " + link
+            text: "Please click on the following link to reset your password   " + link,
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -139,7 +141,7 @@ app.get('/reset-password/:id/:token', async(req, res) => {
     const secret = process.env.JWT_SECRET + existingUser.password;
     try {
         const verify = jwt.verify(token, secret);
-        res.send("index", {email:verify.email, status: "Not Verified"});
+        res.render("index", {email:verify.email, status: "Not Verified"});
     } catch (error) {
         res.send("Not Verified");
     }
@@ -165,7 +167,7 @@ app.post('/reset-password/:id/:token', async(req, res) => {
             }
         });
 
-        res.send("index", {email: verify.email, status: "Verified"});
+        res.render("index", {email: verify.email, status: "Verified"});
     } catch (error) {
         res.json({status: "Error Updating Password."})
     }
