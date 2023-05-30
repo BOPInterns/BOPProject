@@ -10,6 +10,8 @@ const app = express();
 
 dotenv.config();
 
+//dotenv.config({ path: "./config.env" });
+
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
@@ -97,8 +99,8 @@ app.post("/forgot-password", async(req, res) => {
             expiresIn: "10m",
         });
         const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
-        
-        //copied code to sent email
+
+        //copied code to sent email ///////
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -111,7 +113,7 @@ app.post("/forgot-password", async(req, res) => {
             from: 'bop.hub.interns@gmail.com',
             to: email,
             subject: 'BOP Hub Password Reset',
-            text: link
+            text: "Please click on the following link to reset your password   " + link,
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -165,10 +167,8 @@ app.post('/reset-password/:id/:token', async(req, res) => {
             }
         });
 
-        // res.json({status: "Password Updated."});
         res.render("index", {email: verify.email, status: "Verified"});
     } catch (error) {
-        // res.send("Not Verified");
         res.json({status: "Error Updating Password."})
     }
 });

@@ -2,3 +2,9 @@
     justify-content: center;
 }
 
+.form-subtext{
+    margin-bottom: 3px;
+    display: block;
+    font-size: small;
+    color:gray;
+}  

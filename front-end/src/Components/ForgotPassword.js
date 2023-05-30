@@ -11,6 +11,7 @@ import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
+import Col from 'react-bootstrap/Col';
 
 export const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -62,19 +63,37 @@ export const ForgotPassword = () => {
                 </Container>
             </Navbar>
             <Container>
-                This is the forgot password page
-                <FloatingLabel
-                        id="email"
-                        controlId="floatingEmailInput"
-                        label="Please enter your email"
+            <Row>
+            <Column md={6}>
+                <Image src={BOPLogo} className="img-fluid" height="10000" width="10000"></Image>
+            </Column>
+            <Card style={{width: '24rem', height: '20rem',marginTop: 100}}>
+                <Card.Body>
+                    <Card.Title>Enter Recovery E-mail</Card.Title>
+                    <FloatingLabel
+                        id="password"
+                        controlId="floatingPasswordInput"
+                        className="password-forms"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                >
-                <Form.Control type="email" placeholder="Please enter a valid email"/>
-                </FloatingLabel>
-                <Button onClick={handleSubmit} type="submit" variant="primary">
-                    Submit
-                </Button>
+                    >
+                        <Form.Control type="email" placeholder="email"/>
+                    </FloatingLabel>
+
+                    <Card.Text className='form-subtext'>A recovery link will be sent to the email that you provide.</Card.Text>
+                    <Row>
+                        <Column>
+                            <Button onClick={handleSubmit} type="submit" variant="primary" className='button'>
+                                Submit
+                            </Button>
+                        </Column>
+                        <Column md={{offset: 6}}>
+                            <Button href="/login" variant="link">Back to Login</Button>
+                        </Column>
+                    </Row>
+                </Card.Body>
+            </Card>
+            </Row>
             </Container>
             </div>
     )
