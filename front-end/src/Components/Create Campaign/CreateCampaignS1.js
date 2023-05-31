@@ -5,53 +5,17 @@ import Row from 'react-bootstrap/Row';
 import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import { Button, FormLabel } from 'react-bootstrap';
 import { useState } from 'react';
-import AutoSuggest, { ItemAdapter }from 'react-bootstrap-autosuggest';
+import React from 'react';
+import { WithContext as ReactTags } from 'react-tag-input';
+
+
+
 
 export const CreateCampaignS1 = () => {
     const [campaignName, setCampaignName] = useState('');
     const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
     const [videoLink, setVideoLink] = useState(''); //decide if doing file or link
-
-    const predefinedTags = [
-        { value: 'Toilets' },
-        { value: 'Labor' },
-        { value: 'Immigration' },
-        { value: 'Electricity' }
-    ];
-
-    class TagAdapter extends ItemAdapter {
-        newFromValue(value) {
-          return { value }
-        }
-        renderSelected(item) {
-          return <div className="tag">
-            {item.value} {item.img && <img src={item.img}/>}
-          </div>
-        }
-        renderSuggested(item) {
-          return <div className="tag-item">
-            {item.img && <img src={item.img}/>} {item.value}
-          </div>
-        }
-    }
-    TagAdapter.instance = new TagAdapter();
-
-    function render({tags, bsSize, onChange, onClear }) {
-      return <FormGroup id="tagInput" controlId="tagInput" bsSize={bsSize}>
-        <FormLabel>Campaign Tags</FormLabel>
-        <AutoSuggest
-          bsSize={bsSize}
-          datalist={predefinedTags}
-          multiple
-          placeholder="Pick some tags..."
-          value={tags}
-          itemAdapter={TagAdapter.instance}
-          buttonAfter={ <Button onClick={onClear}>&times;</Button>}
-          onChange={onChange} />
-      </FormGroup>
-    }
 
     return (
         <div>
@@ -86,7 +50,8 @@ export const CreateCampaignS1 = () => {
                                     <Form.Text className="text-muted">Add tags down here that you can click to select</Form.Text>
                                 </FormGroup>
 
-                                {render({predefinedTags: predefinedTags, bsSize:'medium', })}
+
+                                {/*place working tags here*/ }
 
                             </Form>
                     </Card.Body>
@@ -115,6 +80,7 @@ export const CreateCampaignS1 = () => {
                         
                     </Card>
                 </Row>
+
             </Container>
         </div>
     )
