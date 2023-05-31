@@ -3,6 +3,8 @@ import Nav from'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 
 export const NavigationBar = () => {
+    const loginState = window.localStorage.getItem('loginState');
+    
     return(
         <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
                 <Container>
@@ -21,8 +23,8 @@ export const NavigationBar = () => {
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-contents-end">
                         <Nav className='me-auto'>
-                            <Nav.Link href="/login" disabled>Login</Nav.Link>
-                            <Nav.Link href="/register">Register</Nav.Link>
+                            <Nav.Link className="loginButton" href="/login">Login</Nav.Link>
+                            <Nav.Link className="registerButton" href="/register">Register</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
