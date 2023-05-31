@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 const validator = require('validator');
 const dotenv = require('dotenv');
+const User = require("./models/userModel");
+const Campaign = require("./models/campaignModel");
+
 const app = express();
 
 dotenv.config();
@@ -18,6 +21,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.set("view engine", "ejs");
 
+// CONNECT TO DB
 mongoose
     .connect(process.env.MONGO_URL, { 
         useNewUrlParser: true 
@@ -27,10 +31,8 @@ mongoose
     })
     .catch((e) => console.log(e));
 
-
+// START SERVER
 app.listen(9000, () => { console.log("Server started on port 9000") });
-
-const User = require("./models/userModel");
 
 app.post("/register", async(req,res) => {
     try {
@@ -55,7 +57,10 @@ app.post("/register", async(req,res) => {
             email,
             password: passwordEncr,
         });
-        res.send({status: "OK"});
+        res.status(201).json({
+            status: "success",
+            data: uI
+        });
     } catch (err) { res.status(401).json({error: err.message}); }
 });
 
@@ -80,9 +85,7 @@ app.post("/login", async(req,res) => {
                 console.log("Login successful");
                 return res.status(201).json({userId: user._id})
                 // return res.status(201).json({data: token});
-            } else {
-                return res.status(401).json({error: "Error"});
-            }
+            } else { throw Error("Unknown login error"); }
         } else { throw Error("Invalid password"); }
     } catch (err) { res.status(401).json({error: err.message}); }
 });
@@ -150,7 +153,7 @@ app.get('/reset-password/:id/:token', async(req, res) => {
 
 app.post('/reset-password/:id/:token', async(req, res) => {
     const {id, token} = req.params;
-    const {password}=req.body
+    const {password}=req.body;
 
     const existingUser = await User.findOne({_id:id});
     if(!existingUser){
@@ -172,4 +175,31 @@ app.post('/reset-password/:id/:token', async(req, res) => {
     } catch (error) {
         res.json({status: "Error Updating Password."})
     }
+});
+
+// TODO: will the URL contain the org's unique ID?
+//       how will we know which org is logged in?
+app.post('/create-campaign-step-5', async (req, res) => {
+    try {
+        const {
+            organization, status, numActors, deadline, caseStudy, solutions,
+            name, tags, video, // STEP 1
+            description, challenge, mission, milestones, goals, // STEP 2
+            location, reach, stakeholderLangs, volunteerLangs, // STEP 3
+            otherFiles // STEP 4
+        } = req.body;
+    
+        var newCampaign = await Campaign.create({
+            organization, status, numActors, deadline, caseStudy, solutions,
+            name, tags, video, // STEP 1
+            description, challenge, mission, milestones, goals, // STEP 2
+            location, reach, stakeholderLangs, volunteerLangs, // STEP 3
+            otherFiles // STEP 4
+        });
+
+        res.status(201).json({
+            status: "success",
+            data: newCampaign
+        });
+    } catch (err) { res.status(401).json({error: err.message}); }
 });

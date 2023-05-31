@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const campaignSchema = new mongoose.Schema({
-    owner: String,
+    organization: String,
     status: {
         type: String,
         enum: ["Challenge"],
@@ -44,6 +44,7 @@ const campaignSchema = new mongoose.Schema({
     },
     mission: String,
     milestones: [String],
+    goals: String,
     //*** STEP 3
     location: {
         type: String,
@@ -58,12 +59,7 @@ const campaignSchema = new mongoose.Schema({
     //*** STEP 4
     // TODO: use manual document references for this?
     //       make a separate model to store all files
-    otherFiles: [String],
-    //*** STEP 5
-    goals: {
-        type: String,
-        required: [true, "Please tell us your goals."]
-    }
+    otherFiles: [String]
 })
 
 const Campaign = mongoose.model("Campaign", campaignSchema);
