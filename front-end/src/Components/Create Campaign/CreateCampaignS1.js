@@ -47,7 +47,6 @@ export const CreateCampaignS1 = () => {
                                     <Form.Text className="text-muted">Add tags down here that you can click to select</Form.Text>
                                 </FormGroup>
 
-
                             </Form>
                     </Card.Body>
                     </Card>
