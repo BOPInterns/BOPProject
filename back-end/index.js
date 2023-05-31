@@ -43,8 +43,8 @@ app.post("/register", async(req,res) => {
         const passwordEncr = await bcrypt.hash(password, 11);
 
         // check if email is already linked to an account
-        const exists = await User.findOne({email});
-        if (exists) { throw Error("Email is already linked to an account"); }
+        // const exists = await User.findOne({email});
+        // if (exists) { throw Error("Email is already linked to an account"); }
 
         var uI = await User.create({
             firstName,
@@ -78,7 +78,8 @@ app.post("/login", async(req,res) => {
 
             if (res.status(201)) {
                 console.log("Login successful");
-                return res.status(201).json({data: token});
+                return res.status(201).json({userId: user._id})
+                // return res.status(201).json({data: token});
             } else {
                 return res.status(401).json({error: "Error"});
             }
