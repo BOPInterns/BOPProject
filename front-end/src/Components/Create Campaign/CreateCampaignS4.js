@@ -4,8 +4,11 @@ import Container from 'react-bootstrap/Container';
 import Row from'react-bootstrap/Row';
 import Card from'react-bootstrap/Card';
 import Form from'react-bootstrap/Form';
+import { useState } from 'react';
 
 export const CreateCampaignS4 = () => {
+    const [files, setFiles] = useState(''); //i have no clue how to do this lol
+
     return(
         <div>
             <NavigationBar />

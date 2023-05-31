@@ -6,8 +6,14 @@ import Card from'react-bootstrap/Card';
 import FormGroup from'react-bootstrap/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Image from'react-bootstrap/Image';
+import { useState } from 'react';
 
 export const CreateCampaignS3 = () => {
+    const [location, setLocation] = useState('');
+    const [reach, setReach] = useState([]);
+    const [langs, setLangs] = useState([]);
+
+
     return(
         <div>
             <NavigationBar />
@@ -28,8 +34,12 @@ export const CreateCampaignS3 = () => {
                         <Form>
                             <FormGroup>
                                 <Form.Label>Your location</Form.Label>
-                                <Form.Control type="text" placeholder="eg.: Poland, Wroclaw" />
-                                <Form.Text className="text-muted">Where is this campaign taking place?</Form.Text>
+                                <Form.Control 
+                                    type="text" 
+                                    placeholder="eg.: Poland, Wroclaw" 
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                /><Form.Text className="text-muted">Where is this campaign taking place?</Form.Text>
                             </FormGroup>
                             <br></br>
                             <FormGroup>

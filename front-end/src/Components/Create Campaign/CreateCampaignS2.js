@@ -5,8 +5,15 @@ import Row from'react-bootstrap/Row';
 import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import { useState } from 'react';
 
 export const CreateCampaignS2 = () => {
+    const [description, setDescription] = useState('');
+    const [challenge, setChallenge] = useState('');
+    const [mission, setMission] = useState('');
+    const [milestones, setMilestones] = useState([]);   //figure out how to do this one
+    const [predictedGoals, setPredictedGoals] = useState([]);   //and this one
+
     return(
         <div>
             <NavigationBar />
@@ -29,14 +36,26 @@ export const CreateCampaignS2 = () => {
                             <Form>
                                 <FormGroup>
                                 <Form.Label>Campaign description</Form.Label>
-                                <Form.Control as="textarea" rows={10} type="text" placeholder="Describe your campaign here..." />
-                                <Form.Text className="text-muted">Explainer text about the role of the campaign description</Form.Text>
+                                <Form.Control 
+                                    as="textarea" 
+                                    rows={10} 
+                                    type="text" 
+                                    placeholder="Describe your campaign here..." 
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                /><Form.Text className="text-muted">Explainer text about the role of the campaign description</Form.Text>
                                 </FormGroup>
                                 <br></br>
                                 <FormGroup className="mt-4">
                                     <Form.Label>Campaign challenge</Form.Label>
-                                    <Form.Control as="textarea" rows={2} type="text" placeholder="Describe the challenges your campaign faces here..." />
-                                    <Form.Text className="text-muted">Explainer text about the role of the campaign challenge</Form.Text>
+                                    <Form.Control 
+                                        as="textarea" 
+                                        rows={2} 
+                                        type="text" 
+                                        placeholder="Describe the challenges your campaign faces here..." 
+                                        value={challenge}
+                                        onChange={(e) => setChallenge(e.target.value)}
+                                    /><Form.Text className="text-muted">Explainer text about the role of the campaign challenge</Form.Text>
                                 </FormGroup>
                             </Form>
                         </Card.Body>
@@ -56,8 +75,14 @@ export const CreateCampaignS2 = () => {
                             <Form>
                                 <FormGroup>
                                     <Form.Label>Campaign mission</Form.Label>
-                                    <Form.Control as="textarea" rows={4} type="text" placeholder="Describe your campaign mission here..." />
-                                    <Form.Text className="text-muted">Explainer text about the role of the campaign challenge</Form.Text>
+                                    <Form.Control 
+                                        as="textarea" 
+                                        rows={4} 
+                                        type="text" 
+                                        placeholder="Describe your campaign mission here..." 
+                                        value={mission}
+                                        onChange={(e) => setMission(e.target.value)}
+                                    /><Form.Text className="text-muted">Explainer text about the role of the campaign challenge</Form.Text>
                                 </FormGroup>
                                 <br></br>
                                 <FormGroup>

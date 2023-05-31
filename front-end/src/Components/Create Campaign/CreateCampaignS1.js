@@ -5,8 +5,15 @@ import Row from 'react-bootstrap/Row';
 import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import { useState } from 'react';
+import React from 'react';
+
 
 export const CreateCampaignS1 = () => {
+    const [campaignName, setCampaignName] = useState('');
+    const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
+    const [videoLink, setVideoLink] = useState(''); //decide if doing file or link
+
     return (
         <div>
             <NavigationBar />
@@ -25,14 +32,22 @@ export const CreateCampaignS1 = () => {
                             <Form>
                                 <FormGroup className="mb-3">
                                     <Form.Label>Campaign name</Form.Label>
-                                    <Form.Control type="text" placeholder="Campaign name" />
-                                    <Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="Campaign name" 
+                                        value={campaignName}
+                                        onChange={(e) => setCampaignName(e.target.value)}
+                                    /><Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>
                                 </FormGroup>
+                                
                                 <FormGroup className="mb-3">
-                                <Form.Label>Campaign tags</Form.Label>
+                                    
+                                    <Form.Label>Campaign tags</Form.Label>
                                     <Form.Control type="text" placeholder="tags" />
                                     <Form.Text className="text-muted">Add tags down here that you can click to select</Form.Text>
                                 </FormGroup>
+
+
                             </Form>
                     </Card.Body>
                     </Card>
@@ -60,6 +75,7 @@ export const CreateCampaignS1 = () => {
                         
                     </Card>
                 </Row>
+
             </Container>
         </div>
     )
