@@ -7,9 +7,6 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
 import React from 'react';
-import { WithContext as ReactTags } from 'react-tag-input';
-
-
 
 
 export const CreateCampaignS1 = () => {
@@ -50,8 +47,6 @@ export const CreateCampaignS1 = () => {
                                     <Form.Text className="text-muted">Add tags down here that you can click to select</Form.Text>
                                 </FormGroup>
 
-
-                                {/*place working tags here*/ }
 
                             </Form>
                     </Card.Body>
