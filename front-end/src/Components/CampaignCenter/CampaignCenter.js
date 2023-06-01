@@ -26,7 +26,57 @@ export const CampaignCenter = () => {
     }, []);
 
     const loadData = (i) => {
-        return campaignData[i]
+        return campaignData[i];
+    }
+
+    const loadCards = () => {
+        var rows = [];
+        var fulls = Math.floor(campaignData.length / 4); 
+        var remains = campaignData.length % 4;
+
+        var num = 0;
+        for(let i = 0; i < fulls; i++){
+            rows.push(
+                <Row>
+                    <Column><CampaignCard campData={loadData(num)}/></Column>
+                    <Column><CampaignCard campData={loadData(num+1)}/></Column>
+                    <Column><CampaignCard campData={loadData(num+2)}/></Column>
+                    <Column><CampaignCard campData={loadData(num+3)}/></Column>
+                </Row>
+            );
+            num += 4;
+        }
+        if(remains == 3){
+            rows.push(
+                <Row>
+                    <Column><CampaignCard campData={loadData(num)}/></Column>
+                    <Column><CampaignCard campData={loadData(num+1)}/></Column>
+                    <Column><CampaignCard campData={loadData(num+2)}/></Column>
+                    <Column></Column>
+                </Row>
+            );
+        }
+        else if(remains == 2){
+            rows.push(
+                <Row>
+                    <Column><CampaignCard campData={loadData(num)}/></Column>
+                    <Column><CampaignCard campData={loadData(num+1)}/></Column>
+                    <Column></Column>
+                    <Column></Column>
+                </Row>
+            );
+        }
+        else if(remains == 1){
+            rows.push(
+                <Row>
+                    <Column><CampaignCard campData={loadData(num)}/></Column>
+                    <Column></Column>
+                    <Column></Column>
+                    <Column></Column>
+                </Row>
+            );
+        }
+        return rows;   
     }
 
     return (
@@ -85,34 +135,7 @@ export const CampaignCenter = () => {
                 <Row className="justify-content-left">
                     Campaigns
                 </Row>
-                <Row>
-                    <Column>
-                        <CampaignCard campData={loadData(0)}/>
-                    </Column>
-                    <Column>
-                        <CampaignCard campData={loadData(1)}/>
-                    </Column>
-                    <Column>
-                        <CampaignCard/>
-                    </Column>
-                    <Column>
-                        <CampaignCard/>
-                    </Column>
-                </Row>
-                <Row>
-                <Column>
-                    <CampaignCard/>
-                    </Column>
-                    <Column>
-                    <CampaignCard/>
-                    </Column>
-                    <Column>
-                    <CampaignCard/>
-                    </Column>
-                    <Column>
-                    <CampaignCard/>
-                    </Column>
-                </Row>
+                {loadCards()}
                 <Row>
                     <Col>
                     <Button variant="outline-secondary" size="sm">Load more Campaigns</Button>
