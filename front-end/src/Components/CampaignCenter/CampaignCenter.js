@@ -83,10 +83,10 @@ export const CampaignCenter = () => {
                         <CampaignCard campData={loadData(1)}/>
                     </Column>
                     <Column>
-                        <CampaignCard/>
+                        <CampaignCard campData={loadData(2)}/>
                     </Column>
                     <Column>
-                        <CampaignCard/>
+                        <CampaignCard campData={loadData(3)}/>
                     </Column>
                 </Row>
                 <Row>
