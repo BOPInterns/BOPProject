@@ -43,7 +43,7 @@ export const CampaignCard = ({campData}) => {
                     
                     <Card.Text>Campaign status: <Badge bg="warning">{status}</Badge></Card.Text>
                     <br></br>
-                    <Card.Text>Campaign Challenge: {challenge}</Card.Text>
+                    <Card.Text className='text-muted'>Campaign Challenge: {challenge}</Card.Text>
                     <Card.Text>Owner
                         <br></br>
                         <Image src="../BOPHub.MainLogo.png"roundedCircle>
