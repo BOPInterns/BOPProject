@@ -8,15 +8,33 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { CampaignCard } from './CampaignCard.js';
 import Col from 'react-bootstrap/Col';
+import { useEffect, useState } from 'react';
 
 export const CampaignCenter = () => {
+    const [campaignData, setCampaignData] = useState([]);
+
+
+    useEffect(() => {
+        fetch("http://localhost:9000/get-campaign-data", {
+            method: "GET",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setCampaignData(data.data);
+            });
+    }, []);
+
+    const loadData = (i) => {
+        return campaignData[i]
+    }
+
     return (
         <>
             <NavigationBar></NavigationBar>
             
             <Container>
                 <Row className="justify-content-center">
-                    You are currently browsing the marketplace as:
+                    You are currently browsing the marketplace as: 
                 </Row>
                 <Button href="/create-campaign-introduction">Create a Campaign</Button>
                 <Row className="">
@@ -59,10 +77,10 @@ export const CampaignCenter = () => {
                 </Row>
                 <Row>
                     <Column>
-                        <CampaignCard/>
+                        <CampaignCard campData={loadData(0)}/>
                     </Column>
                     <Column>
-                        <CampaignCard/>
+                        <CampaignCard campData={loadData(1)}/>
                     </Column>
                     <Column>
                         <CampaignCard/>
