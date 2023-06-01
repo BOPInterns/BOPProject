@@ -49,30 +49,30 @@ const handleSubmit = (e) => {
     window.location.href="/register-success";
 }
 
-const handleInputChange = (e) => {
-    const {id, value} = e.target;
-    if(id === "firstName") {
-        setFirstName(value);
-    }
-    if(id === "lastName") {
-        setLastName(value);
-    }
-    if(id === "email") {
-        setEmail(value);
-    }
-    if(id === "phoneNumber") {
-        setPhoneNumber(value);
-    }
-    if(id === "password") {
-        setPassword(value);
-    }
-    if(id === "emailNotif") {
-        setEmailNotif(value);
-    }
-    if(id === "textNotif") {
-        setTextNotif(value);
-    }
-}
+// const handleInputChange = (e) => {
+//     const {id, value} = e.target;
+//     if(id === "firstName") {
+//         setFirstName(value);
+//     }
+//     if(id === "lastName") {
+//         setLastName(value);
+//     }
+//     if(id === "email") {
+//         setEmail(value);
+//     }
+//     if(id === "phoneNumber") {
+//         setPhoneNumber(value);
+//     }
+//     if(id === "password") {
+//         setPassword(value);
+//     }
+//     if(id === "emailNotif") {
+//         setEmailNotif(value);
+//     }
+//     if(id === "textNotif") {
+//         setTextNotif(value);
+//     }
+// }
 
     return (
         <div>

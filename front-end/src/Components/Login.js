@@ -69,7 +69,7 @@ export const Login = () => {
             setUser(data, "userId");
         });
         console.log("Password: ", password);
-        //window.localStorage.setItem('variable', true);
+        window.localStorage.setItem('tester', true);
 
         window.location.href="/my-account";
     }

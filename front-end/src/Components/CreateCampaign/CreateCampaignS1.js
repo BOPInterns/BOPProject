@@ -6,33 +6,39 @@ import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import React from 'react';
 import { InputTags } from 'react-bootstrap-tagsinput';
 import "react-bootstrap-tagsinput/dist/index.css";
 
 
 export const CreateCampaignS1 = () => {
-    const [campaignName, setCampaignName] = useState('');
+    const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
     const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
-    const [videoLink, setVideoLink] = useState(''); //decide if doing file or link
+    //const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
+    const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
 
-<<<<<<< HEAD
-    const handleInputChange = (e) => {
-        const {id, value} = e.target;
-        if (id === "name") { setCampaignName(value); }
-        if (id === "tags") { setCampaignTags(value); }
-        if (id === "videoLink") { setVideoLink(value); }
-=======
+    useEffect(() => {
+        localStorage.setItem('campaignName', campaignName);
+    }, [campaignName]);
+
+    useEffect(() => {
+        localStorage.setItem('campaignTags', JSON.stringify(campaignTags));
+    }, [campaignTags]);
+
+    useEffect(() => {
+        localStorage.setItem('videoLink', videoLink);
+    }, [videoLink]);
+
     const displayTags = () => {
         var list = "Tags: ";
-        for (let i = 0; i < campaignTags.length; i++){
-            list += campaignTags[i] 
-            if(i != campaignTags.length -1){
-                list += ", "
+        for (let i = 0; i < campaignTags.length; i++) {
+            list += campaignTags[i];
+            if (i != campaignTags.length - 1) {
+                list += ", ";
             }
         }
         return list;
->>>>>>> 566e3675d61af5104b22a5d301590785030a7ddd
     }
 
     return (
@@ -90,7 +96,12 @@ export const CreateCampaignS1 = () => {
                                 <Form>
                                     <FormGroup>
                                         <Form.Label>Upload promotional video</Form.Label>
-                                        <Form.Control type="file" />
+                                        <Form.Control 
+                                            type="text" 
+                                            placeholder="Video link" 
+                                            value={videoLink}
+                                            onChange={(e) => setVideoLink(e.target.value)}
+                                        />
                                         <Form.Text className="text-muted">
                                             You can upload a video to promote your campaign
                                         </Form.Text>
