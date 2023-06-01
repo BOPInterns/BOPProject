@@ -16,6 +16,17 @@ export const CreateCampaignS1 = () => {
     const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
     const [videoLink, setVideoLink] = useState(''); //decide if doing file or link
 
+    const displayTags = () => {
+        var list = "Tags: ";
+        for (let i = 0; i < campaignTags.length; i++){
+            list += campaignTags[i] 
+            if(i != campaignTags.length -1){
+                list += ", "
+            }
+        }
+        return list;
+    }
+
     return (
         <div>
             <NavigationBar />
@@ -53,12 +64,8 @@ export const CreateCampaignS1 = () => {
                                     >Delete all</button>
                                 </div>
                                 <hr />
-                                <ol>
-                                    {campaignTags.map((item, index) => (
-                                        <li key={item + index}>{item}</li>
-                                    ))}
-                                </ol>
-                                <Form.Text className="text-muted">Added Tags</Form.Text>
+                                {displayTags()}
+
                             </Form>
                     </Card.Body>
                     </Card>
