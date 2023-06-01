@@ -6,6 +6,8 @@ import Card from'react-bootstrap/Card';
 import FormGroup from'react-bootstrap/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Image from'react-bootstrap/Image';
+import { InputTags } from 'react-bootstrap-tagsinput';
+import "react-bootstrap-tagsinput/dist/index.css";
 import { useState } from 'react';
 
 export const CreateCampaignS3 = () => {
@@ -13,6 +15,16 @@ export const CreateCampaignS3 = () => {
     const [reach, setReach] = useState([]);
     const [langs, setLangs] = useState([]);
 
+    const displayLangs = () => {
+        var list = "Prefferred Languages: ";
+        for (let i = 0; i < langs.length; i++){
+            list += langs[i] 
+            if(i != langs.length -1){
+                list += ", "
+            }
+        }
+        return list;
+    }
 
     return(
         <div>
@@ -67,10 +79,17 @@ export const CreateCampaignS3 = () => {
                             <Form>
                                 <FormGroup>
                                     <Form.Label>Preferred languages</Form.Label>
-                                    <Form.Control type="text" placeholder="eg.: English" />
-                                    <Form.Text>
-                                        Added languages: look at figma again
-                                    </Form.Text>
+                                    <div className="input-group">
+                                    <InputTags values={langs} placeholder='New Tag' onTags={(value) => {setLangs(value.values)}} />
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        data-testid="button-clearAll"
+                                        onClick={(e) => {e.preventDefault();setLangs([]);}}
+                                    >Delete all</button>
+                                    </div>
+                                    <hr />
+                                    {displayLangs()}
                                 </FormGroup>
                             </Form>
                         </Card.Body>
