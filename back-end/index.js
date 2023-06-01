@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer');
 const validator = require('validator');
 const dotenv = require('dotenv');
@@ -33,10 +33,6 @@ mongoose
 
 // START SERVER
 app.listen(9000, () => { console.log("Server started on port 9000") });
-
-// different schemas in use
-const User = require("./models/userModel");
-const Campaign = require("./models/campaignModel");
 
 app.get("/get-campaign-data", async(req, res) => {
     try{
