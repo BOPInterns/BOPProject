@@ -3,8 +3,16 @@ import Badge from'react-bootstrap/Badge';
 import Image from'react-bootstrap/Image';
 import Row from'react-bootstrap/Row';
 import Button from'react-bootstrap/Button';
+import { useState } from 'react';
 
 export const CampaignCard = () => {
+    const [name, setName] = useState('');
+    const [tags, setTags] = useState([]);
+    const [status, setStatus] = useState('');
+    const [orgName, setOrgName] = useState('');
+
+    
+
     return (
         <div>
             <Card style={{width: '12rem'}}>
