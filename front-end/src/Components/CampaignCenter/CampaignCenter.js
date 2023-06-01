@@ -25,7 +25,7 @@ export const CampaignCenter = () => {
     }, []);
 
     const loadData = (i) => {
-        return campaignData[i]
+        return campaignData[i];
     }
 
     return (

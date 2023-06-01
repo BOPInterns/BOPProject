@@ -41,8 +41,9 @@ export const CampaignCard = ({campData}) => {
                     {loadTags()}
                     <footer><cite>+3 more tags</cite></footer>
                     
-                    <Card.Text>Campaign status: <Badge bg="warning">{challenge}</Badge></Card.Text>
+                    <Card.Text>Campaign status: <Badge bg="warning">{status}</Badge></Card.Text>
                     <br></br>
+                    <Card.Text>Campaign Challenge: {challenge}</Card.Text>
                     <Card.Text>Owner
                         <br></br>
                         <Image src="../BOPHub.MainLogo.png"roundedCircle>
