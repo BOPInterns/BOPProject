@@ -9,18 +9,54 @@ import Image from'react-bootstrap/Image';
 import { InputTags } from 'react-bootstrap-tagsinput';
 import "react-bootstrap-tagsinput/dist/index.css";
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export const CreateCampaignS3 = () => {
-    const [location, setLocation] = useState('');
-    const [reach, setReach] = useState([]);
-    const [langs, setLangs] = useState([]);
+    if (localStorage.getItem('location') === 'null') 
+        localStorage.setItem('location', '');
+    if (localStorage.getItem('reach') === 'null')
+        localStorage.setItem('reach', '');
 
-    const displayLangs = () => {
-        var list = "Prefferred Languages: ";
-        for (let i = 0; i < langs.length; i++){
-            list += langs[i] 
-            if(i != langs.length -1){
-                list += ", "
+    const [location, setLocation] = useState(localStorage.getItem('location'));
+    const [reach, setReach] = useState(localStorage.getItem('reach'));
+    const [stakeholderLangs, setStakeholderLangs] = useState([]);
+    const [volunteerLangs, setVolunteerLangs] = useState([]);
+    // const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
+    // const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
+
+    useEffect(() => {
+        localStorage.setItem('location', location);
+    }, [location]);
+
+    useEffect(() => {
+        localStorage.setItem('reach', reach);
+    }, [reach]);
+
+    useEffect(() => {
+        localStorage.setItem('stakeholderLangs', JSON.stringify(stakeholderLangs));
+    }, [stakeholderLangs]);
+
+    useEffect(() => {
+        localStorage.setItem('volunteerLangs', JSON.stringify(volunteerLangs));
+    }, [volunteerLangs]);
+
+    const displayStakeholderLangs = () => {
+        var list = "Preferred Stakeholder Languages: ";
+        for (let i = 0; i < stakeholderLangs.length; i++) {
+            list += stakeholderLangs[i] ;
+            if(i != stakeholderLangs.length - 1) {
+                list += ", ";
+            }
+        }
+        return list;
+    }
+
+    const displayVolunteerLangs = () => {
+        var list = `Preferred Volunteer Languages: `;
+        for (let i = 0; i < volunteerLangs.length; i++) {
+            list += volunteerLangs[i];
+            if(i != volunteerLangs.length - 1) {
+                list += ", ";
             }
         }
         return list;
@@ -42,7 +78,7 @@ export const CreateCampaignS3 = () => {
                             <hr></hr>
                         </Card.Title>
                         <Card.Body>
-                            <Card.Text>The two fields below are essential to make your campaign recognizable at our platform. Prividing detailed information will also result in better matching with future campaign partners.</Card.Text>    
+                            <Card.Text>The two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.</Card.Text>    
                         <Form>
                             <FormGroup>
                                 <Form.Label>Your location</Form.Label>
@@ -56,7 +92,12 @@ export const CreateCampaignS3 = () => {
                             <br></br>
                             <FormGroup>
                                 <Form.Label>Reach</Form.Label>
-                                <Form.Control type="text" placeholder="eg.: India" />
+                                <Form.Control 
+                                    type="text"
+                                    placeholder="eg.: India"
+                                    value={reach}
+                                    onChange={(e) => setReach(e.target.value)}
+                                />
                                 <Form.Text>
                                     <Image src="holder.js/100px180">
                                         
@@ -78,18 +119,33 @@ export const CreateCampaignS3 = () => {
                             <Card.Text>Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform.</Card.Text>
                             <Form>
                                 <FormGroup>
-                                    <Form.Label>Preferred languages</Form.Label>
+                                    <Form.Label>Preferred stakeholder languages</Form.Label>
                                     <div className="input-group">
-                                    <InputTags values={langs} placeholder='New Tag' onTags={(value) => {setLangs(value.values)}} />
+                                    <InputTags values={stakeholderLangs} placeholder='New Tag' onTags={(value) => {setStakeholderLangs(value.values)}} />
                                     <button
                                         className="btn btn-outline-secondary"
                                         type="button"
                                         data-testid="button-clearAll"
-                                        onClick={(e) => {e.preventDefault();setLangs([]);}}
+                                        onClick={(e) => {e.preventDefault();setStakeholderLangs([]);}}
                                     >Delete all</button>
                                     </div>
                                     <hr />
-                                    {displayLangs()}
+                                    {displayStakeholderLangs()}
+                                </FormGroup>
+                                <br></br>
+                                <FormGroup>
+                                    <Form.Label>Preferred volunteer languages</Form.Label>
+                                    <div className="input-group">
+                                    <InputTags values={volunteerLangs} placeholder='New Tag' onTags={(value) => {setVolunteerLangs(value.values)}} />
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        data-testid="button-clearAll"
+                                        onClick={(e) => {e.preventDefault();setVolunteerLangs([]);}}
+                                    >Delete all</button>
+                                    </div>
+                                    <hr />
+                                    {displayVolunteerLangs()}
                                 </FormGroup>
                             </Form>
                         </Card.Body>

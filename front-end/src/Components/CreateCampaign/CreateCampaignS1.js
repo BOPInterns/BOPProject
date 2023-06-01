@@ -13,6 +13,13 @@ import "react-bootstrap-tagsinput/dist/index.css";
 
 
 export const CreateCampaignS1 = () => {
+    if (localStorage.getItem('campaignName') === 'null') 
+        localStorage.setItem('campaignName', '');
+    if (localStorage.getItem('videoLink') === 'null')
+        localStorage.setItem('videoLink', '');
+    // if (localStorage.getItem('campaignTags') === 'null')
+    //     localStorage.setItem('campaignTags', []);
+
     const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
     const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
     //const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
