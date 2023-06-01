@@ -6,25 +6,47 @@ import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { InputTags } from 'react-bootstrap-tagsinput';
 import "react-bootstrap-tagsinput/dist/index.css";
 
 
 export const CreateCampaignS2 = () => {
-    const [description, setDescription] = useState('');
-    const [challenge, setChallenge] = useState('');
-    const [mission, setMission] = useState('');
-    const [milestones, setMilestones] = useState([]);   //figure out how to do this one
-    const [predictedGoals, setPredictedGoals] = useState([]);   //and this one
+    if (localStorage.getItem('description') === 'null') 
+        localStorage.setItem('description', '');
+    if (localStorage.getItem('challenge') === 'null') 
+        localStorage.setItem('challenge', '');  
+    if (localStorage.getItem('mission') === 'null') 
+        localStorage.setItem('mission', '');  
 
-    const handleInputChange = (e) => {
-        const {id, value} = e.target;
-        if (id === "description") { setDescription(value); }
-        if (id === "challenge") { setChallenge(value); }
-        if (id === "mission") { setMission(value); }
-        if (id === "milestones") { setMilestones(value); }
-        if (id === "predictedGoals") { setPredictedGoals(value); }
-    }
+
+    const [description, setDescription] = useState(localStorage.getItem('description'));
+    const [challenge, setChallenge] = useState(localStorage.getItem('challenge'));
+    const [mission, setMission] = useState(localStorage.getItem('mission'));
+    const [milestones, setMilestones] = useState([]);
+    const [predictedGoals, setPredictedGoals] = useState([]);
+    // const [milestones, setMilestones] = useState(JSON.parse(localStorage.getItem('milestones')));
+    // const [predictedGoals, setPredictedGoals] = useState(JSON.parse(localStorage.getItem('predictedGoals')));
+
+    useEffect(() => {
+        localStorage.setItem('description', description);
+    }, [description]);
+
+    useEffect(() => {
+        localStorage.setItem('challenge', challenge);
+    }, [challenge]);
+
+    useEffect(() => {
+        localStorage.setItem('mission', mission);
+    }, [mission]);
+
+    useEffect(() => {
+        localStorage.setItem('milestones', JSON.stringify(milestones));
+    }, [milestones]);
+
+    useEffect(() => {
+        localStorage.setItem('predictedGoals', JSON.stringify(predictedGoals));
+    }, [predictedGoals]);
 
     return(
         <div>
