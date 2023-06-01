@@ -30,7 +30,18 @@ mongoose
 
 app.listen(9000, () => { console.log("Server started on port 9000") });
 
+// different schemas in use
 const User = require("./models/userModel");
+const Campaign = require("./models/campaignModel");
+
+app.get("/get-campaign-data", async(req, res) => {
+    try{
+        const allCampaigns = await Campaign.find({});
+        res.send({status: "ok", data: allCampaigns});
+    }catch (err){
+        console.log("error retrieving campaign data")
+    }
+});
 
 app.post("/register", async(req,res) => {
     try {
