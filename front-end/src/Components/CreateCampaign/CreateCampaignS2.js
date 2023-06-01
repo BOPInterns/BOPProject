@@ -6,6 +6,9 @@ import FormGroup from 'react-bootstrap/esm/FormGroup';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
+import { InputTags } from 'react-bootstrap-tagsinput';
+import "react-bootstrap-tagsinput/dist/index.css";
+
 
 export const CreateCampaignS2 = () => {
     const [description, setDescription] = useState('');
@@ -96,14 +99,40 @@ export const CreateCampaignS2 = () => {
                                 <br></br>
                                 <FormGroup>
                                     <Form.Label>Campaign milestones</Form.Label>
-                                    <Form.Control type="text" placeholder="Type the milestones you would like to share..." />
-                                    <Form.Text className="text-italics">Added milestones: look at figma need to figure out how to add elements like this</Form.Text>
+                                    <div className="input-group">
+                                    <InputTags values={milestones} placeholder='New Tag' onTags={(value) => {setMilestones(value.values)}} />
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        data-testid="button-clearAll"
+                                        onClick={(e) => {e.preventDefault();setMilestones([]);}}
+                                    >Delete all</button>
+                                    </div>
+                                    <hr />
+                                    <ol>
+                                        {milestones.map((item, index) => (
+                                            <li key={item + index}>{item}</li>
+                                        ))}
+                                    </ol>
                                 </FormGroup>
                                 <br></br>
                                 <FormGroup>
                                     <Form.Label>Predicted goals</Form.Label>
-                                    <Form.Control type="text" placeholder="Type the milestones you would like to share..." />
-                                    <Form.Text className="text-italics">Added milestones: look at figma need to figure out how to add elements like this</Form.Text>
+                                    <div className="input-group">
+                                    <InputTags values={predictedGoals} placeholder='New Tag' onTags={(value) => {setPredictedGoals(value.values)}} />
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        data-testid="button-clearAll"
+                                        onClick={(e) => {e.preventDefault();setPredictedGoals([]);}}
+                                    >Delete all</button>
+                                    </div>
+                                    <hr />
+                                    <ol>
+                                        {predictedGoals.map((item, index) => (
+                                            <li key={item + index}>{item}</li>
+                                        ))}
+                                    </ol>
                                 </FormGroup>
                             </Form>
                         </Card.Body>

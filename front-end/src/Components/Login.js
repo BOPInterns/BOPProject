@@ -13,6 +13,11 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
+import axios from 'axios';
+import { NavigationBar } from './NavigationBar';
+import { LoginAlertSuccess } from './LoginAlertSuccess';
+
+
 
 export const Login = () => {
     const [ user, setUser ] = useState({});
@@ -61,10 +66,12 @@ export const Login = () => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data, "userLogin");
+            setUser(data, "userId");
         });
         console.log("Password: ", password);
-        window.localStorage.setItem('variable', true);
+        //window.localStorage.setItem('variable', true);
 
+        window.location.href="/my-account";
     }
     
     const handleSignout = (e) => {
@@ -75,35 +82,7 @@ export const Login = () => {
     
     return (
         <div>
-            <Navbar bg="dark" variant="dark" expand="lg">
-                <Container>
-                    <Navbar.Brand href="/" >
-                            <img height="65" width="115" src="https://images.squarespace-cdn.com/content/v1/60e57a13579c8f0509ce7237/03227bce-9951-411b-9f7d-42875ddb8933/New+header+logo.png?format=1500w" alt=""/>
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href="/">Campaign Center</Nav.Link>
-                        <Nav.Link href="/">Explore</Nav.Link>
-                        <Nav.Link href="/">Learn</Nav.Link>
-                        <Nav.Link href="/">Become</Nav.Link>
-                        <Nav.Link href="/">About us</Nav.Link>
-                    </Nav>
-                    </Navbar.Collapse>
-                    <Navbar.Collapse className="justify-contents-end">
-                        <Nav className='me-auto'>
-                            <Nav.Link id="loginButton" href="/login">Login</Nav.Link>
-                            <Nav.Link id="registerButton" href="/register">Register</Nav.Link>
-                            {   Object.keys(user).length !== 0 &&
-                            <Container>
-                                <Navbar.Text>Signed in as: {user.name} <img src={user.picture} alt=""></img></Navbar.Text>
-                                <Nav.Link id="logoutButton" onClick={(e) => handleSignout(e)}>Logout</Nav.Link>
-                            </Container>
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <NavigationBar />
             <Container>
                 <Row>
                     <Column md={6}>

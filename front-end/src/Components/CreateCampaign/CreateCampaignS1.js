@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
 import React from 'react';
+import { InputTags } from 'react-bootstrap-tagsinput';
+import "react-bootstrap-tagsinput/dist/index.css";
 
 
 export const CreateCampaignS1 = () => {
@@ -14,11 +16,23 @@ export const CreateCampaignS1 = () => {
     const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
     const [videoLink, setVideoLink] = useState(''); //decide if doing file or link
 
+<<<<<<< HEAD
     const handleInputChange = (e) => {
         const {id, value} = e.target;
         if (id === "name") { setCampaignName(value); }
         if (id === "tags") { setCampaignTags(value); }
         if (id === "videoLink") { setVideoLink(value); }
+=======
+    const displayTags = () => {
+        var list = "Tags: ";
+        for (let i = 0; i < campaignTags.length; i++){
+            list += campaignTags[i] 
+            if(i != campaignTags.length -1){
+                list += ", "
+            }
+        }
+        return list;
+>>>>>>> 566e3675d61af5104b22a5d301590785030a7ddd
     }
 
     return (
@@ -47,13 +61,18 @@ export const CreateCampaignS1 = () => {
                                     /><Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>
                                 </FormGroup>
                                 
-                                <FormGroup className="mb-3">
-                                    
-                                    <Form.Label>Campaign tags</Form.Label>
-                                    <Form.Control type="text" placeholder="tags" />
-                                    <Form.Text className="text-muted">Add tags down here that you can click to select</Form.Text>
-                                </FormGroup>
-
+                                <Form.Label>Campaign tags</Form.Label>
+                                <div className="input-group">
+                                    <InputTags values={campaignTags} placeholder='New Tag' onTags={(value) => {setCampaignTags(value.values)}} />
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        type="button"
+                                        data-testid="button-clearAll"
+                                        onClick={(e) => {e.preventDefault();setCampaignTags([]);}}
+                                    >Delete all</button>
+                                </div>
+                                <hr />
+                                {displayTags()}
 
                             </Form>
                     </Card.Body>
