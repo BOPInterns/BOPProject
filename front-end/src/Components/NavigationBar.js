@@ -2,9 +2,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 
+
 export const NavigationBar = () => {
-    const loginState = window.localStorage.getItem('loginState');
+    const auth = localStorage.getItem('loginState');
+    const user = localStorage.getItem('user');
     
+    const handleSignout = () => {
+        console.log(user.firstName)
+        localStorage.removeItem('loginState');
+        localStorage.removeItem('user');
+        localStorage.removeItem('loginState');
+        localStorage.removeItem('tempFirstName');
+        localStorage.removeItem('tempLastName');
+        window.location.href='/login';
+    }
     return(
         <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
                 <Container>
@@ -21,11 +32,18 @@ export const NavigationBar = () => {
                         <Nav.Link href="/">About us</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
-                    <Navbar.Collapse className="justify-contents-end">
+                    <Navbar.Collapse className="justify-contents-end"> 
+                    { auth ? <>                        
                         <Nav className='me-auto'>
-                            <Nav.Link className="loginButton" href="/login">Login</Nav.Link>
-                            <Nav.Link className="registerButton" href="/register">Register</Nav.Link>
+                            <Nav.Link href="/my-account">Welcome: { }</Nav.Link>
+                            <Nav.Link onClick={handleSignout}>Logout</Nav.Link>
                         </Nav>
+                        </> : 
+                        <Nav className='me-auto'>
+                        <Nav.Link className="loginButton" href="/login">Login</Nav.Link>
+                        <Nav.Link className="registerButton" href="/register">Register</Nav.Link>
+                        </Nav>
+                    }
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

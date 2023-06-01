@@ -11,17 +11,26 @@ import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
-
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const Register = () => {
+    const navigate = useNavigate();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [password, setPassword] = useState('');
+    const [emailNotif, setEmailNotif] = useState(false);
+    const [textNotif, setTextNotif] = useState(false);
     
-const [firstName, setFirstName] = useState('');
-const [lastName, setLastName] = useState('');
-const [email, setEmail] = useState('');
-const [phoneNumber, setPhoneNumber] = useState('');
-const [password, setPassword] = useState('');
-const [emailNotif, setEmailNotif] = useState(false);
-const [textNotif, setTextNotif] = useState(false);
+    useEffect(() => {
+        const auth = localStorage.getItem('loginState');
+        if(auth)
+        {
+            navigate('/')
+        }
+    },[])
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,30 +58,30 @@ const handleSubmit = (e) => {
     window.location.href="/register-success";
 }
 
-const handleInputChange = (e) => {
-    const {id, value} = e.target;
-    if(id === "firstName") {
-        setFirstName(value);
-    }
-    if(id === "lastName") {
-        setLastName(value);
-    }
-    if(id === "email") {
-        setEmail(value);
-    }
-    if(id === "phoneNumber") {
-        setPhoneNumber(value);
-    }
-    if(id === "password") {
-        setPassword(value);
-    }
-    if(id === "emailNotif") {
-        setEmailNotif(value);
-    }
-    if(id === "textNotif") {
-        setTextNotif(value);
-    }
-}
+// const handleInputChange = (e) => {
+//     const {id, value} = e.target;
+//     if(id === "firstName") {
+//         setFirstName(value);
+//     }
+//     if(id === "lastName") {
+//         setLastName(value);
+//     }
+//     if(id === "email") {
+//         setEmail(value);
+//     }
+//     if(id === "phoneNumber") {
+//         setPhoneNumber(value);
+//     }
+//     if(id === "password") {
+//         setPassword(value);
+//     }
+//     if(id === "emailNotif") {
+//         setEmailNotif(value);
+//     }
+//     if(id === "textNotif") {
+//         setTextNotif(value);
+//     }
+// }
 
     return (
         <div>
