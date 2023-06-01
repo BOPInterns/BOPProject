@@ -13,6 +13,12 @@ export const CreateCampaignS3 = () => {
     const [reach, setReach] = useState([]);
     const [langs, setLangs] = useState([]);
 
+    const handleInputChange = (e) => {
+        const {id, value} = e.target;
+        if (id === "location") { setLocation(value); }
+        if (id === "reach") { setReach(value); }
+        if (id === "langs") { setLangs(value); }
+    }
 
     return(
         <div>
