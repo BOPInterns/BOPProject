@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer');
 const validator = require('validator');
 const dotenv = require('dotenv');
@@ -33,6 +33,15 @@ mongoose
 
 // START SERVER
 app.listen(9000, () => { console.log("Server started on port 9000") });
+
+app.get("/get-campaign-data", async(req, res) => {
+    try{
+        const allCampaigns = await Campaign.find({});
+        res.send({status: "ok", data: allCampaigns});
+    }catch (err){
+        console.log("error retrieving campaign data")
+    }
+});
 
 app.post("/register", async(req,res) => {
     try {
