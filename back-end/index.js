@@ -92,7 +92,7 @@ app.post("/login", async(req,res) => {
 
             if (res.status(201)) {
                 console.log("Login successful");
-                return res.status(201).json({userId: user._id})
+                return res.status(201).json({user})
                 // return res.status(201).json({data: token});
             } else { throw Error("Unknown login error"); }
         } else { throw Error("Invalid password"); }
