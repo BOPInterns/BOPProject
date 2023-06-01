@@ -14,6 +14,13 @@ export const CreateCampaignS1 = () => {
     const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
     const [videoLink, setVideoLink] = useState(''); //decide if doing file or link
 
+    const handleInputChange = (e) => {
+        const {id, value} = e.target;
+        if (id === "name") { setCampaignName(value); }
+        if (id === "tags") { setCampaignTags(value); }
+        if (id === "videoLink") { setVideoLink(value); }
+    }
+
     return (
         <div>
             <NavigationBar />

@@ -63,6 +63,8 @@ export const Login = () => {
             console.log(data, "userLogin");
         });
         console.log("Password: ", password);
+        window.localStorage.setItem('variable', true);
+
     }
     
     const handleSignout = (e) => {

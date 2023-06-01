@@ -14,6 +14,15 @@ export const CreateCampaignS2 = () => {
     const [milestones, setMilestones] = useState([]);   //figure out how to do this one
     const [predictedGoals, setPredictedGoals] = useState([]);   //and this one
 
+    const handleInputChange = (e) => {
+        const {id, value} = e.target;
+        if (id === "description") { setDescription(value); }
+        if (id === "challenge") { setChallenge(value); }
+        if (id === "mission") { setMission(value); }
+        if (id === "milestones") { setMilestones(value); }
+        if (id === "predictedGoals") { setPredictedGoals(value); }
+    }
+
     return(
         <div>
             <NavigationBar />

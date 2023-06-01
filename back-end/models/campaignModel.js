@@ -32,7 +32,7 @@ const campaignSchema = new mongoose.Schema({
         type: [String],
         required: [true, "Must choose at least 1 tag"]
     },
-    video: String, // YT link
+    videoLink: String, // YT link
     //*** STEP 2
     description: {
         type: String,

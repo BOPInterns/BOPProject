@@ -183,7 +183,7 @@ app.post('/create-campaign-step-5', async (req, res) => {
     try {
         const {
             organization, status, numActors, deadline, caseStudy, solutions,
-            name, tags, video, // STEP 1
+            name, tags, videoLink, // STEP 1
             description, challenge, mission, milestones, goals, // STEP 2
             location, reach, stakeholderLangs, volunteerLangs, // STEP 3
             otherFiles // STEP 4
@@ -191,7 +191,7 @@ app.post('/create-campaign-step-5', async (req, res) => {
     
         var newCampaign = await Campaign.create({
             organization, status, numActors, deadline, caseStudy, solutions,
-            name, tags, video, // STEP 1
+            name, tags, videoLink, // STEP 1
             description, challenge, mission, milestones, goals, // STEP 2
             location, reach, stakeholderLangs, volunteerLangs, // STEP 3
             otherFiles // STEP 4
