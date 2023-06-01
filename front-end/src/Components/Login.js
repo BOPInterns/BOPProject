@@ -16,11 +16,14 @@ import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import { NavigationBar } from './NavigationBar';
 import { LoginAlertSuccess } from './LoginAlertSuccess';
+import { useNavigate } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 
 
 
 export const Login = () => {
     const [ user, setUser ] = useState({});
+    const navigate = useNavigate();
    
    function handleCallbackResponse(response){
       console.log("Encoded JWT ID token: " + response.credential);
@@ -42,7 +45,7 @@ export const Login = () => {
 //          document.getElementById('signInGoogle'),
 //          {theme: "outline", size: "small"}
 //       );
-//    }, []);
+//    },[]);
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -67,11 +70,14 @@ export const Login = () => {
         .then((data) => {
             console.log(data, "userLogin");
             setUser(data, "userId");
+            localStorage.setItem('tempFirstName', JSON.stringify(data.firstName));
+            localStorage.setItem('tempLastName', data.lastName);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('loginState', true);
+            navigate('/');
         });
         console.log("Password: ", password);
-        //window.localStorage.setItem('variable', true);
-
-        window.location.href="/my-account";
+        //window.location.href="/my-account";
     }
     
     const handleSignout = (e) => {

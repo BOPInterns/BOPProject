@@ -10,6 +10,7 @@ import { CampaignCard } from './CampaignCard.js';
 import Col from 'react-bootstrap/Col';
 
 export const CampaignCenter = () => {
+    const auth = window.localStorage.getItem('loginState');
     return (
         <>
             <NavigationBar></NavigationBar>
@@ -20,11 +21,13 @@ export const CampaignCenter = () => {
                 </Row>
                 <Button href="/create-campaign-introduction">Create a Campaign</Button>
                 <Row className="">
+                    
                     <DropdownButton
                         title="Current Organizaiton"
                         id="CurrentOrganizationDropdown"
                         className="text-center"
                     >
+                    { auth ? <>
                     <Form.Control 
                         autoFocus
                         className="mx-3 my-2 w-auto"
@@ -52,6 +55,13 @@ export const CampaignCenter = () => {
                     <Dropdown.Item>
                         Name of Campaign #2
                     </Dropdown.Item>
+                    </> : 
+                    <>
+                    <Dropdown.Divider/>
+                    <Dropdown.Item className='text-center' href="/login">No user found<br></br>Sign in here!</Dropdown.Item>
+                    <Dropdown.Divider/>
+                    </>
+                    }
                     </DropdownButton>
                 </Row>
                 <Row className="justify-content-left">
