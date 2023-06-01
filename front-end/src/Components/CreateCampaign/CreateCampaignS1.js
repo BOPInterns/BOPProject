@@ -16,13 +16,6 @@ export const CreateCampaignS1 = () => {
     const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
     const [videoLink, setVideoLink] = useState(''); //decide if doing file or link
 
-<<<<<<< HEAD
-    const handleInputChange = (e) => {
-        const {id, value} = e.target;
-        if (id === "name") { setCampaignName(value); }
-        if (id === "tags") { setCampaignTags(value); }
-        if (id === "videoLink") { setVideoLink(value); }
-=======
     const displayTags = () => {
         var list = "Tags: ";
         for (let i = 0; i < campaignTags.length; i++){
@@ -32,7 +25,6 @@ export const CreateCampaignS1 = () => {
             }
         }
         return list;
->>>>>>> 566e3675d61af5104b22a5d301590785030a7ddd
     }
 
     return (
