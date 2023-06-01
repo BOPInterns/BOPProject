@@ -13,9 +13,9 @@ import { CreateCampaignS3 } from './Components/CreateCampaign/CreateCampaignS3.j
 import { CreateCampaignS4 } from './Components/CreateCampaign/CreateCampaignS4.js';
 import { CreateCampaignS5 } from './Components/CreateCampaign/CreateCampaignS5.js';
 import { CreateCampaignS6 } from './Components/CreateCampaign/CreateCampaignS6.js';
-import { KYCVerificationAbout } from './Components/KYC Verification/KYCVerificationAbout.js';
-import { KYCVerificationForm } from './Components/KYC Verification/KYCVerificationForm.js';
-import { KYCVerificationSubmit } from './Components/KYC Verification/KYCVerificationSubmit.js';
+import { KYCVerificationAbout } from './Components/KYCVerification/KYCVerificationAbout.js';
+import { KYCVerificationForm } from './Components/KYCVerification/KYCVerificationForm.js';
+import { KYCVerificationSubmit } from './Components/KYCVerification/KYCVerificationSubmit.js';
 import { RegisterSuccess  } from './Components/RegisterSuccess.js';
 import { ResetPassword } from './Components/ResetPassword.js';    //only added for testing and might want to remove later for security differences
 
