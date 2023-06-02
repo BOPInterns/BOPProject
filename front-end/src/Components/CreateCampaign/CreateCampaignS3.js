@@ -20,6 +20,8 @@ export const CreateCampaignS3 = () => {
         localStorage.setItem('stakeholderLangs', '[]');
     if (localStorage.getItem('volunteerLangs') === null)
         localStorage.setItem('volunteerLangs', '[]');
+    if (localStorage.getItem('step3') === 'null')
+        localStorage.setItem('step3', 'false');
 
     const [location, setLocation] = useState(localStorage.getItem('location'));
     const [reach, setReach] = useState(localStorage.getItem('reach'));
@@ -41,6 +43,13 @@ export const CreateCampaignS3 = () => {
     useEffect(() => {
         localStorage.setItem('volunteerLangs', JSON.stringify(volunteerLangs));
     }, [volunteerLangs]);
+
+    useEffect(() => {
+        if ((location.length == 0) || (reach.length == 0))
+            localStorage.setItem('step3', false);
+        else 
+            localStorage.setItem('step3', true);
+    }, [location, reach]);
 
     const displayStakeholderLangs = () => {
         var list = "Preferred Stakeholder Languages: ";
