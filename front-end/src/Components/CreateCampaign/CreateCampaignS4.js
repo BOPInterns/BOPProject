@@ -7,8 +7,12 @@ import Form from'react-bootstrap/Form';
 import { useState } from 'react';
 
 export const CreateCampaignS4 = () => {
-    const [files, setFiles] = useState(''); // I have no clue how to do this lol
-                                            // maybe try GridFS? https://www.mongodb.com/docs/manual/core/gridfs/                      
+    const [files, setFiles] = useState(); // I have no clue how to do this lol
+                                            // maybe try GridFS? https://www.mongodb.com/docs/manual/core/gridfs/ 
+                                            
+    const handleFiles = (e) => {
+        setFiles(e.target.files);
+    }
 
     return(
         <div>
@@ -34,7 +38,7 @@ export const CreateCampaignS4 = () => {
                                     <Form.Label>
                                         Upload files
                                     </Form.Label>
-                                    <Form.Control type="file" multiple />
+                                    <Form.Control type="file" multiple onChange={handleFiles}/>
                                 </Form.Group>
                             </Form>
                         </Card.Body>
@@ -42,5 +46,5 @@ export const CreateCampaignS4 = () => {
                 </Row>
             </Container>
         </div>
-    )
-}
+    );
+};
