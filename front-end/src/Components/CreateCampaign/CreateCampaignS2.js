@@ -17,16 +17,17 @@ export const CreateCampaignS2 = () => {
     if (localStorage.getItem('challenge') === 'null') 
         localStorage.setItem('challenge', '');  
     if (localStorage.getItem('mission') === 'null') 
-        localStorage.setItem('mission', '');  
-
+        localStorage.setItem('mission', '');
+    if (localStorage.getItem('milestones') === null)
+        localStorage.setItem('milestones', '[]');
+    if (localStorage.getItem('predictedGoals') === null)
+        localStorage.setItem('predictedGoals', '[]');
 
     const [description, setDescription] = useState(localStorage.getItem('description'));
     const [challenge, setChallenge] = useState(localStorage.getItem('challenge'));
     const [mission, setMission] = useState(localStorage.getItem('mission'));
-    const [milestones, setMilestones] = useState([]);
-    const [predictedGoals, setPredictedGoals] = useState([]);
-    // const [milestones, setMilestones] = useState(JSON.parse(localStorage.getItem('milestones')));
-    // const [predictedGoals, setPredictedGoals] = useState(JSON.parse(localStorage.getItem('predictedGoals')));
+    const [milestones, setMilestones] = useState(JSON.parse(localStorage.getItem('milestones')));
+    const [predictedGoals, setPredictedGoals] = useState(JSON.parse(localStorage.getItem('predictedGoals')));
 
     useEffect(() => {
         localStorage.setItem('description', description);

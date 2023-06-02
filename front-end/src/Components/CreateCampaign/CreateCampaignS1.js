@@ -11,18 +11,16 @@ import React from 'react';
 import { InputTags } from 'react-bootstrap-tagsinput';
 import "react-bootstrap-tagsinput/dist/index.css";
 
-
 export const CreateCampaignS1 = () => {
     if (localStorage.getItem('campaignName') === 'null') 
         localStorage.setItem('campaignName', '');
+    if (localStorage.getItem('campaignTags') === null)
+        localStorage.setItem('campaignTags', '[]');
     if (localStorage.getItem('videoLink') === 'null')
         localStorage.setItem('videoLink', '');
-    // if (localStorage.getItem('campaignTags') === 'null')
-    //     localStorage.setItem('campaignTags', []);
 
     const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
-    const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
-    //const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
+    const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
     const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
 
     useEffect(() => {
@@ -98,7 +96,7 @@ export const CreateCampaignS1 = () => {
                             <hr></hr>
                         </Card.Title>
                         <Card.Body>
-                            <Card.Text>Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform</Card.Text>
+                            <Card.Text>Fields below are not necessary to fill, but they surely improve your campaign's recognition on the platform.</Card.Text>
                             <Card.Text>
                                 <Form>
                                     <FormGroup>
