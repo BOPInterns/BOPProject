@@ -99,6 +99,10 @@ app.post("/login", async(req,res) => {
     } catch (err) { res.status(401).json({error: err.message}); }
 });
 
+app.get('/', (req, res) => {
+    
+})
+
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
     try{
