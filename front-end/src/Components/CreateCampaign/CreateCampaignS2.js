@@ -22,6 +22,8 @@ export const CreateCampaignS2 = () => {
         localStorage.setItem('milestones', '[]');
     if (localStorage.getItem('predictedGoals') === null)
         localStorage.setItem('predictedGoals', '[]');
+    if (localStorage.getItem('step2') === 'null')
+        localStorage.setItem('step2', 'false');    
 
     const [description, setDescription] = useState(localStorage.getItem('description'));
     const [challenge, setChallenge] = useState(localStorage.getItem('challenge'));
@@ -48,6 +50,13 @@ export const CreateCampaignS2 = () => {
     useEffect(() => {
         localStorage.setItem('predictedGoals', JSON.stringify(predictedGoals));
     }, [predictedGoals]);
+
+    useEffect(() => {
+        if ((description.length == 0) || (challenge.length == 0))
+            localStorage.setItem('step2', false);
+        else 
+            localStorage.setItem('step2', true);
+    }, [description, challenge]);
 
     return(
         <div>

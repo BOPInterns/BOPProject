@@ -18,11 +18,13 @@ export const CreateCampaignS1 = () => {
         localStorage.setItem('campaignTags', '[]');
     if (localStorage.getItem('videoLink') === 'null')
         localStorage.setItem('videoLink', '');
+    if (localStorage.getItem('step1') === 'null')
+        localStorage.setItem('step1', 'false');
 
     const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
     const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
     const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
-
+    
     useEffect(() => {
         localStorage.setItem('campaignName', campaignName);
     }, [campaignName]);
@@ -34,6 +36,13 @@ export const CreateCampaignS1 = () => {
     useEffect(() => {
         localStorage.setItem('videoLink', videoLink);
     }, [videoLink]);
+
+    useEffect(() => {
+        if ((campaignName.length == 0) || (campaignTags.length == 0))
+            localStorage.setItem('step1', false);
+        else 
+            localStorage.setItem('step1', true);
+    }, [campaignName, campaignTags]);
 
     const displayTags = () => {
         var list = "Tags: ";

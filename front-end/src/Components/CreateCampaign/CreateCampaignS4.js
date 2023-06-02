@@ -7,7 +7,7 @@ import Form from'react-bootstrap/Form';
 import { useState } from 'react';
 
 export const CreateCampaignS4 = () => {
-    const [files, setFiles] = useState(''); // I have no clue how to do this lol
+    const [files, setFiles] = useState([]); // I have no clue how to do this lol
                                             // maybe try GridFS? https://www.mongodb.com/docs/manual/core/gridfs/                      
 
     return(
