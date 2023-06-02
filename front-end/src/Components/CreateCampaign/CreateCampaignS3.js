@@ -16,13 +16,15 @@ export const CreateCampaignS3 = () => {
         localStorage.setItem('location', '');
     if (localStorage.getItem('reach') === 'null')
         localStorage.setItem('reach', '');
+    if (localStorage.getItem('stakeholderLangs') === null)
+        localStorage.setItem('stakeholderLangs', '[]');
+    if (localStorage.getItem('volunteerLangs') === null)
+        localStorage.setItem('volunteerLangs', '[]');
 
     const [location, setLocation] = useState(localStorage.getItem('location'));
     const [reach, setReach] = useState(localStorage.getItem('reach'));
-    const [stakeholderLangs, setStakeholderLangs] = useState([]);
-    const [volunteerLangs, setVolunteerLangs] = useState([]);
-    // const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
-    // const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
+    const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
+    const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
 
     useEffect(() => {
         localStorage.setItem('location', location);

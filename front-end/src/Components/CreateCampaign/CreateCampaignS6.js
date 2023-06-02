@@ -6,6 +6,28 @@ import Image from'react-bootstrap/Image';
 import Button from'react-bootstrap/Button';
 
 export const CreateCampaignS6 = () => {
+
+    // TODO: reset the state variables
+    // step 1:
+    localStorage.setItem('campaignName', '');
+    localStorage.setItem('campaignTags', '[]');
+    localStorage.setItem('videoLink', '');
+    // step 2:
+    localStorage.setItem('description', '');
+    localStorage.setItem('challenge', '');
+    localStorage.setItem('mission', '');
+    localStorage.setItem('milestones', '[]');
+    localStorage.setItem('predictedGoals', '[]');
+    // step 3:
+    localStorage.setItem('location', '');
+    localStorage.setItem('reach', '');
+    localStorage.setItem('stakeholderLangs', '[]');
+    localStorage.setItem('volunteerLangs', '[]');
+    // step 4:
+    // FILES
+    // step 5:
+    
+
     return(
         <div>
             <NavigationBar />
