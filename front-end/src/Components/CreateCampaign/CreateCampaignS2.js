@@ -12,17 +12,17 @@ import "react-bootstrap-tagsinput/dist/index.css";
 
 
 export const CreateCampaignS2 = () => {
-    if (localStorage.getItem('description') === 'null') 
+    if (localStorage.getItem('description') === null) 
         localStorage.setItem('description', '');
-    if (localStorage.getItem('challenge') === 'null') 
+    if (localStorage.getItem('challenge') === null) 
         localStorage.setItem('challenge', '');  
-    if (localStorage.getItem('mission') === 'null') 
+    if (localStorage.getItem('mission') === null) 
         localStorage.setItem('mission', '');
     if (localStorage.getItem('milestones') === null)
         localStorage.setItem('milestones', '[]');
     if (localStorage.getItem('predictedGoals') === null)
         localStorage.setItem('predictedGoals', '[]');
-    if (localStorage.getItem('step2') === 'null')
+    if (localStorage.getItem('step2') === null)
         localStorage.setItem('step2', 'false');    
 
     const [description, setDescription] = useState(localStorage.getItem('description'));
@@ -53,9 +53,8 @@ export const CreateCampaignS2 = () => {
 
     useEffect(() => {
         if ((description.length == 0) || (challenge.length == 0))
-            localStorage.setItem('step2', false);
-        else 
-            localStorage.setItem('step2', true);
+            return localStorage.setItem('step2', false);
+        localStorage.setItem('step2', true);
     }, [description, challenge]);
 
     return(

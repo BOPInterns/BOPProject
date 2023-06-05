@@ -12,15 +12,15 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 export const CreateCampaignS3 = () => {
-    if (localStorage.getItem('location') === 'null') 
+    if (localStorage.getItem('location') === null) 
         localStorage.setItem('location', '');
-    if (localStorage.getItem('reach') === 'null')
+    if (localStorage.getItem('reach') === null)
         localStorage.setItem('reach', '');
     if (localStorage.getItem('stakeholderLangs') === null)
         localStorage.setItem('stakeholderLangs', '[]');
     if (localStorage.getItem('volunteerLangs') === null)
         localStorage.setItem('volunteerLangs', '[]');
-    if (localStorage.getItem('step3') === 'null')
+    if (localStorage.getItem('step3') === null)
         localStorage.setItem('step3', 'false');
 
     const [location, setLocation] = useState(localStorage.getItem('location'));
@@ -46,9 +46,8 @@ export const CreateCampaignS3 = () => {
 
     useEffect(() => {
         if ((location.length == 0) || (reach.length == 0))
-            localStorage.setItem('step3', false);
-        else 
-            localStorage.setItem('step3', true);
+            return localStorage.setItem('step3', false);
+        localStorage.setItem('step3', true);
     }, [location, reach]);
 
     const displayStakeholderLangs = () => {

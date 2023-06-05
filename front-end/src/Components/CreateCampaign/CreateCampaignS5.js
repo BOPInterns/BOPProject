@@ -9,14 +9,9 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
 import Card from 'react-bootstrap/Card';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export const CreateCampaignS5 = () => {
-    // const [step1, setStep1] = useState(false);
-    // const [step2, setStep2] = useState(false);
-    // const [step3, setStep3] = useState(false);
-    // const [step4, setStep4] = useState(false);
-
     return(
         <div>
             <NavigationBar />
