@@ -8,6 +8,7 @@ const validator = require('validator');
 const dotenv = require('dotenv');
 const User = require("./models/userModel");
 const Campaign = require("./models/campaignModel");
+const File = require("./models/fileModel");
 
 const app = express();
 
@@ -15,9 +16,12 @@ dotenv.config();
 
 //dotenv.config({ path: "./config.env" });
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
+
+
 
 app.set("view engine", "ejs");
 
@@ -34,12 +38,27 @@ mongoose
 // START SERVER
 app.listen(9000, () => { console.log("Server started on port 9000") });
 
+//gets campaign data for campiagn center page
 app.get("/get-campaign-data", async(req, res) => {
     try{
-        const allCampaigns = await Campaign.find({});
+        const allCampaigns = await Campaign.find({data: req.data});
         res.send({status: "ok", data: allCampaigns});
     }catch (err){
         console.log("error retrieving campaign data")
+    }
+});
+
+//adds file to db from creat campaign process
+app.post("/upload-file", async(req, res) => {
+    const {fileData} = req.body;
+    console.log(req.body);
+    try{
+        await File.create({
+            fileData
+        });
+        res.send({status: "ok", data: fileData})
+    }catch(err){
+        res.send({status: "error uploading file", data: err});
     }
 });
 
