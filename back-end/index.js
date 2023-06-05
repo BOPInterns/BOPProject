@@ -214,3 +214,8 @@ app.post('/create-campaign-step-5', async (req, res) => {
         });
     } catch (err) { res.status(401).json({error: err.message}); }
 });
+
+
+app.get('/my-account', async (req, res) => {
+    
+});

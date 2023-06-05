@@ -46,7 +46,7 @@ export const CampaignCard = ({campData}) => {
                     <Card.Text className='text-muted'>Campaign Challenge: {challenge}</Card.Text>
                     <Card.Text>Owner
                         <br></br>
-                        <Image src="../BOPHub.MainLogo.png"roundedCircle>
+                        <Image height="5" width="40" src={require("../placeholderProfilePicture.png")} alt="" roundedCircle fluid>
                         </Image>
                         <footer>{orgName}</footer>
                     </Card.Text>
