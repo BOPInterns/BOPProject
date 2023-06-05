@@ -51,7 +51,6 @@ app.get("/get-campaign-data", async(req, res) => {
 //adds file to db from creat campaign process
 app.post("/upload-file", async(req, res) => {
     const {fileData} = req.body;
-    console.log(req.body);
     try{
         await File.create({
             fileData
@@ -218,7 +217,6 @@ app.post('/create-campaign-step-5', async (req, res) => {
             name, tags, videoLink, // STEP 1
             description, challenge, mission, milestones, goals, // STEP 2
             location, reach, stakeholderLangs, volunteerLangs, // STEP 3
-            otherFiles // STEP 4
         } = req.body;
     
         var newCampaign = await Campaign.create({
@@ -226,7 +224,6 @@ app.post('/create-campaign-step-5', async (req, res) => {
             name, tags, videoLink, // STEP 1
             description, challenge, mission, milestones, goals, // STEP 2
             location, reach, stakeholderLangs, volunteerLangs, // STEP 3
-            otherFiles // STEP 4
         });
 
         res.status(201).json({
