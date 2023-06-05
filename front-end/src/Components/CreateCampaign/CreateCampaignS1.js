@@ -12,11 +12,11 @@ import { InputTags } from 'react-bootstrap-tagsinput';
 import "react-bootstrap-tagsinput/dist/index.css";
 
 export const CreateCampaignS1 = () => {
-    if (localStorage.getItem('campaignName') === 'null') 
+    if (localStorage.getItem('campaignName') === null) 
         localStorage.setItem('campaignName', '');
     if (localStorage.getItem('campaignTags') === null)
         localStorage.setItem('campaignTags', '[]');
-    if (localStorage.getItem('videoLink') === 'null')
+    if (localStorage.getItem('videoLink') === null)
         localStorage.setItem('videoLink', '');
     if (localStorage.getItem('step1') === 'null')
         localStorage.setItem('step1', 'false');
@@ -39,9 +39,8 @@ export const CreateCampaignS1 = () => {
 
     useEffect(() => {
         if ((campaignName.length == 0) || (campaignTags.length == 0))
-            localStorage.setItem('step1', false);
-        else 
-            localStorage.setItem('step1', true);
+            return localStorage.setItem('step1', false);
+        localStorage.setItem('step1', true);
     }, [campaignName, campaignTags]);
 
     const displayTags = () => {
