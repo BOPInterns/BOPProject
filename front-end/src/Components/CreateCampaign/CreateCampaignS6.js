@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from'react-bootstrap/Row';
 import Image from'react-bootstrap/Image';
 import Button from'react-bootstrap/Button';
+import './campaignSuccessTemp.png';
 
 export const CreateCampaignS6 = () => {
 
@@ -31,23 +32,22 @@ export const CreateCampaignS6 = () => {
     return(
         <div>
             <NavigationBar />
-            <CreateCampaignNavbar />
-            <Container>
-                <Row className="mt-5">
-                    <h1>Congratulations!</h1>
+            <Container className="text-center">
+                <Row className="mt-3">
+                    <h2>Congratulations!</h2>
                 </Row>
                 <Row>
-                    <h4>You have successfully submitted your campaign application</h4>
+                    <h3>You have successfully submitted your campaign application</h3>
                 </Row>
                 <Row>
-                    <h5>Now our staff will take a look and validate your form. Expect a reply pretty soon!</h5>
+                    <h4>Now our staff will take a look and validate your form. Expect a reply pretty soon!</h4>
                 </Row>
                 <Row>
-                    <Image src="./campaignSuccessTemp.png"></Image>
+                    <Image width="50" height="400" src={require("./campaignSuccessTemp.png")} alt=""></Image>
                 </Row>
                     <Button variant="secondary">Go back to your organization page</Button>
                 <Row>
-                    <h5>or</h5>
+                    <h4>or</h4>
                 </Row>
                 <Button variant="link">Open campaign listing</Button>
             </Container>
