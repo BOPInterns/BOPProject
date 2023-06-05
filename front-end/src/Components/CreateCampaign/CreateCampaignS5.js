@@ -22,6 +22,89 @@ import { CreateCampaignS4 } from './CreateCampaignS4';
 // import { useState } from 'react';
 
 export const CreateCampaignS5 = () => {
+
+    const campaignName = localStorage.getItem('campaignName');
+    const campaignTags = localStorage.getItem('campaignTags');
+    const videoLink = localStorage.getItem('videoLink');
+    const description = localStorage.getItem('description');
+    const challenge = localStorage.getItem('challenge');
+    const mission = localStorage.getItem('mission');
+    const milestones = localStorage.getItem('milestones');
+    const predictedGoals = localStorage.getItem('predictedGoals');
+    const location = localStorage.getItem('location');
+    const reach = localStorage.getItem('reach');
+    const stakeholderLangs = localStorage.getItem('stakeholderLangs');
+    const volunteerLangs = localStorage.getItem('volunteerLangs');
+    const files = localStorage.getItem('files');
+
+
+    const handleSubmit = () => {
+
+        //post request for the campaign
+        fetch("http://localhost:9000/create-campaign-step-5", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body: JSON.stringify({
+                name: campaignName,
+                tags: campaignTags,
+                videoLink,
+                description,
+                challenge,
+                mission,
+                milestones,
+                goals: predictedGoals,
+                location,
+                reach,
+                stakeholderLangs,
+                volunteerLangs
+            }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        });
+
+        //post request for the additional files
+        // fetch("http://localhost:9000/upload-file",{
+        //     method: "POST",
+        //     crossDomain: true,
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         Accept: "application/json",
+        //         "Access-Control-Allow-Origin": "*",
+        //     },
+        //     body: JSON.stringify({
+        //         owningCampagin: campaignName, // this is the name of whatever campaign is being added
+        //         fileData: files //change this to whatever files u get from localstorage
+        //     })
+        // })
+        // .then((res) => res.json())
+        // .then((data) => {
+        //     console.log(data)
+        // });
+
+
+        // clear variables from localstorage
+        localStorage.removeItem('campaignName');
+        localStorage.removeItem('campaignTags');
+        localStorage.removeItem('videoLink');
+        localStorage.removeItem('description');
+        localStorage.removeItem('challenge');
+        localStorage.removeItem('mission');
+        localStorage.removeItem('milestones');
+        localStorage.removeItem('predictedGoals');
+        localStorage.removeItem('location');
+        localStorage.removeItem('reach');
+        localStorage.removeItem('stakeholderLangs');
+        localStorage.removeItem('volunteerLangs');
+        localStorage.removeItem('files');
+    }
+
     const [show, setShow] = useState(false);
     const step1 = JSON.parse(localStorage.getItem('step1'));
     const step2 = JSON.parse(localStorage.getItem('step2'));
@@ -29,8 +112,10 @@ export const CreateCampaignS5 = () => {
     const step4 = JSON.parse(localStorage.getItem('step4'));
     
     const checkSteps = () => {
-        if(step1 === true && step2 === true && step3 === true && step4 === true) {
-            Navigate('/create-campaign-step-6')
+        if(step1 === true && step2 === true && step3 === true) {
+            handleSubmit()
+            window.location('/create-campaign-step-6')
+            //Navigate('/create-campaign-step-6')
         }   else {
             setShow(true);
         }

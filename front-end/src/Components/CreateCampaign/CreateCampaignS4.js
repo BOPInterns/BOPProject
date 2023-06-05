@@ -7,13 +7,21 @@ import Form from'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
 
 export const CreateCampaignS4 = () => {
+    if (localStorage.getItem('files') === null) 
+    localStorage.setItem('files', '');
+
     const [files, setFiles] = useState(); 
 
-    useEffect(() => {
-        if(files != ''){
-            //uplaodFile(); uncomment this line for it to work
-        }
+    //also for testing
+    // useEffect(() => {
+    //     if(files != ''){
+    //         //uplaodFile(); uncomment this line for it to work
+    //     }
 
+    // }, [files]);
+
+    useEffect(() => {
+        localStorage.setItem('files', files);
     }, [files]);
 
     const convertBase64 = (e) => {
@@ -21,7 +29,6 @@ export const CreateCampaignS4 = () => {
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = () => {
             setFiles(reader.result);
-            //uplaodFile(reader.result);
         };
         reader.onerror = () => {
             console.log("Error: ", error);
@@ -29,20 +36,20 @@ export const CreateCampaignS4 = () => {
     }
 
     //temporary function to test if file upload works right
-    const uplaodFile = () => {
-        fetch("http://localhost:9000/upload-file",{
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                fileData: files
-            })
-        }).then((res) => res.json()).then((data) => console.log(data))
-    }
+    // const uplaodFile = () => {
+    //     fetch("http://localhost:9000/upload-file",{
+    //         method: "POST",
+    //         crossDomain: true,
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             Accept: "application/json",
+    //             "Access-Control-Allow-Origin": "*",
+    //         },
+    //         body: JSON.stringify({
+    //             fileData: files
+    //         })
+    //     }).then((res) => res.json()).then((data) => console.log(data))
+    // }
 
     return(
         <div>

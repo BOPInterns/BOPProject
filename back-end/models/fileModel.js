@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const fileSchema = new mongoose.Schema({
-    // owningCampaign: {
-    //     type: String,
-    // },
+    owningCampaign: {
+        type: String,
+    },
     fileData: {
         type: String,
     }
