@@ -21,7 +21,7 @@ export const CreateCampaignS3 = () => {
     if (localStorage.getItem('volunteerLangs') === null)
         localStorage.setItem('volunteerLangs', '[]');
     if (localStorage.getItem('step3') === null)
-        localStorage.setItem('step3', 'false');
+        localStorage.setItem('step3', false);
 
     const [location, setLocation] = useState(localStorage.getItem('location'));
     const [reach, setReach] = useState(localStorage.getItem('reach'));
