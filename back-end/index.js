@@ -8,6 +8,7 @@ const validator = require('validator');
 const dotenv = require('dotenv');
 const User = require("./models/userModel");
 const Campaign = require("./models/campaignModel");
+const urlValidator = require("youtube-validate");
 
 const app = express();
 
@@ -190,8 +191,6 @@ app.post('/reset-password/:id/:token', async(req, res) => {
     }
 });
 
-// TODO: will the URL contain the org's unique ID?
-//       how will we know which org is logged in?
 app.post('/create-campaign-step-5', async (req, res) => {
     try {
         const {
