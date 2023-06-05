@@ -8,7 +8,6 @@ const validator = require('validator');
 const dotenv = require('dotenv');
 const User = require("./models/userModel");
 const Campaign = require("./models/campaignModel");
-const urlValidator = require("youtube-validate");
 
 const app = express();
 
