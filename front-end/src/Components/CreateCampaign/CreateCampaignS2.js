@@ -12,21 +12,24 @@ import "react-bootstrap-tagsinput/dist/index.css";
 
 
 export const CreateCampaignS2 = () => {
-    if (localStorage.getItem('description') === 'null') 
+    if (localStorage.getItem('description') === null) 
         localStorage.setItem('description', '');
-    if (localStorage.getItem('challenge') === 'null') 
+    if (localStorage.getItem('challenge') === null) 
         localStorage.setItem('challenge', '');  
-    if (localStorage.getItem('mission') === 'null') 
-        localStorage.setItem('mission', '');  
-
+    if (localStorage.getItem('mission') === null) 
+        localStorage.setItem('mission', '');
+    if (localStorage.getItem('milestones') === null)
+        localStorage.setItem('milestones', '[]');
+    if (localStorage.getItem('predictedGoals') === null)
+        localStorage.setItem('predictedGoals', '[]');
+    if (localStorage.getItem('step2') === null)
+        localStorage.setItem('step2', 'false');    
 
     const [description, setDescription] = useState(localStorage.getItem('description'));
     const [challenge, setChallenge] = useState(localStorage.getItem('challenge'));
     const [mission, setMission] = useState(localStorage.getItem('mission'));
-    const [milestones, setMilestones] = useState([]);
-    const [predictedGoals, setPredictedGoals] = useState([]);
-    // const [milestones, setMilestones] = useState(JSON.parse(localStorage.getItem('milestones')));
-    // const [predictedGoals, setPredictedGoals] = useState(JSON.parse(localStorage.getItem('predictedGoals')));
+    const [milestones, setMilestones] = useState(JSON.parse(localStorage.getItem('milestones')));
+    const [predictedGoals, setPredictedGoals] = useState(JSON.parse(localStorage.getItem('predictedGoals')));
 
     useEffect(() => {
         localStorage.setItem('description', description);
@@ -47,6 +50,12 @@ export const CreateCampaignS2 = () => {
     useEffect(() => {
         localStorage.setItem('predictedGoals', JSON.stringify(predictedGoals));
     }, [predictedGoals]);
+
+    useEffect(() => {
+        if ((description.length == 0) || (challenge.length == 0))
+            return localStorage.setItem('step2', false);
+        localStorage.setItem('step2', true);
+    }, [description, challenge]);
 
     return(
         <div>

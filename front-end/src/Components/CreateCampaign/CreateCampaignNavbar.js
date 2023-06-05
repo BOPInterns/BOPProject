@@ -7,6 +7,7 @@ export const CreateCampaignNavbar = () => {
                 justify variant="tabs"
                 defaultActiveKey="/create-campagin-introduction"
                 fixed="top"
+                sitcky="top"
             >
                 <Nav.Item>
                     <Nav.Link href="/create-campaign-step-1">

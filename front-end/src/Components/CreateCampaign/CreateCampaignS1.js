@@ -11,20 +11,20 @@ import React from 'react';
 import { InputTags } from 'react-bootstrap-tagsinput';
 import "react-bootstrap-tagsinput/dist/index.css";
 
-
 export const CreateCampaignS1 = () => {
-    if (localStorage.getItem('campaignName') === 'null') 
+    if (localStorage.getItem('campaignName') === null) 
         localStorage.setItem('campaignName', '');
-    if (localStorage.getItem('videoLink') === 'null')
+    if (localStorage.getItem('campaignTags') === null)
+        localStorage.setItem('campaignTags', '[]');
+    if (localStorage.getItem('videoLink') === null)
         localStorage.setItem('videoLink', '');
-    // if (localStorage.getItem('campaignTags') === 'null')
-    //     localStorage.setItem('campaignTags', []);
+    if (localStorage.getItem('step1') === 'null')
+        localStorage.setItem('step1', 'false');
 
     const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
-    const [campaignTags, setCampaignTags] = useState([]); // figure out how to do this
-    //const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
+    const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
     const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
-
+    
     useEffect(() => {
         localStorage.setItem('campaignName', campaignName);
     }, [campaignName]);
@@ -36,6 +36,12 @@ export const CreateCampaignS1 = () => {
     useEffect(() => {
         localStorage.setItem('videoLink', videoLink);
     }, [videoLink]);
+
+    useEffect(() => {
+        if ((campaignName.length == 0) || (campaignTags.length == 0))
+            return localStorage.setItem('step1', false);
+        localStorage.setItem('step1', true);
+    }, [campaignName, campaignTags]);
 
     const displayTags = () => {
         var list = "Tags: ";
@@ -98,7 +104,7 @@ export const CreateCampaignS1 = () => {
                             <hr></hr>
                         </Card.Title>
                         <Card.Body>
-                            <Card.Text>Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform</Card.Text>
+                            <Card.Text>Fields below are not necessary to fill, but they surely improve your campaign's recognition on the platform.</Card.Text>
                             <Card.Text>
                                 <Form>
                                     <FormGroup>

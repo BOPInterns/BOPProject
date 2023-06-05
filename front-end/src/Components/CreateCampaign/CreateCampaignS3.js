@@ -12,17 +12,21 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 export const CreateCampaignS3 = () => {
-    if (localStorage.getItem('location') === 'null') 
+    if (localStorage.getItem('location') === null) 
         localStorage.setItem('location', '');
-    if (localStorage.getItem('reach') === 'null')
+    if (localStorage.getItem('reach') === null)
         localStorage.setItem('reach', '');
+    if (localStorage.getItem('stakeholderLangs') === null)
+        localStorage.setItem('stakeholderLangs', '[]');
+    if (localStorage.getItem('volunteerLangs') === null)
+        localStorage.setItem('volunteerLangs', '[]');
+    if (localStorage.getItem('step3') === null)
+        localStorage.setItem('step3', 'false');
 
     const [location, setLocation] = useState(localStorage.getItem('location'));
     const [reach, setReach] = useState(localStorage.getItem('reach'));
-    const [stakeholderLangs, setStakeholderLangs] = useState([]);
-    const [volunteerLangs, setVolunteerLangs] = useState([]);
-    // const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
-    // const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
+    const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
+    const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
 
     useEffect(() => {
         localStorage.setItem('location', location);
@@ -39,6 +43,12 @@ export const CreateCampaignS3 = () => {
     useEffect(() => {
         localStorage.setItem('volunteerLangs', JSON.stringify(volunteerLangs));
     }, [volunteerLangs]);
+
+    useEffect(() => {
+        if ((location.length == 0) || (reach.length == 0))
+            return localStorage.setItem('step3', false);
+        localStorage.setItem('step3', true);
+    }, [location, reach]);
 
     const displayStakeholderLangs = () => {
         var list = "Preferred Stakeholder Languages: ";

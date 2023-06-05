@@ -118,6 +118,10 @@ app.post("/login", async(req,res) => {
     } catch (err) { res.status(401).json({error: err.message}); }
 });
 
+app.get('/', (req, res) => {
+    
+})
+
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
     try{
@@ -230,4 +234,9 @@ app.post('/create-campaign-step-5', async (req, res) => {
             data: newCampaign
         });
     } catch (err) { res.status(401).json({error: err.message}); }
+});
+
+
+app.get('/my-account', async (req, res) => {
+    
 });

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './Login.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Column from 'react-bootstrap/Col';
+import Col from 'react-bootstrap/Col';
 import BOPLogo from './BOPHub.MainLogo.png'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
@@ -91,31 +90,35 @@ export const Login = () => {
             <NavigationBar />
             <Container>
                 <Row>
-                    <Column md={6}>
+                    <Col md={6}>
                     <Image src={BOPLogo} className="img-fluid" height="650" width="650"></Image>
-                    </Column>
-                    <Column>
+                    </Col>
+                    <Col className="mt-4">
                     <Form>
-                        <Row className="justify-content-center">
-                            Sign in with
+                        <Row className="text-center">
+                            <h4>Sign in with</h4>
+                            <hr></hr>
                             <ButtonGroup size="sm">
                             <Button 
+                            variant="outline-secondary"
                             id="signInGoogle"
                             size="sm">
                             Google
                             </Button>
-                            <Button size="sm">facebook</Button>
-                            <Button size="sm">linkedin</Button>
-                            <Button size="sm">other</Button>
+                            <Button variant="outline-secondary" size="sm">facebook</Button>
+                            <Button variant="outline-secondary" size="sm">linkedin</Button>
+                            <Button variant="outline-secondary" size="sm">other</Button>
                             </ButtonGroup>
+                            <hr className="mt-3"></hr>
                         </Row>
-                        <Row className="justify-content-center">
-                            or
+                        <Row className="text-center">
+                            <h4>or</h4>
+                            <hr className="mt-3"></hr>
                         </Row>
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Email Address"
-                            className="mb-3"
+                            className="mb-3 mt-3"
                         >
                             <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </FloatingLabel>
@@ -126,39 +129,31 @@ export const Login = () => {
                         >
                             <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </FloatingLabel>
-                        <Column md={{offset: 8}}>
+                        <Col className="text-end">
                             <Button href="/forgotpassword" variant="link">Forgot password?</Button>
-                        </Column>
+                        </Col>
+                        <div>
                         <Form.Check
                             type="switch"
                             id="rememberMe"
                             label="Remember me"
                         >
                         </Form.Check>
-                        <Button onClick={handleSubmit} type="submit" variant="primary">
-                            Submit
+                        </div>
+                        <div className="text-end">
+                        <Button className="mt-2 mb-2" variant="outline-secondary" onClick={handleSubmit} type="submit">
+                            Login
                         </Button>
-                        <Column>
-                            Don't have an account?
-                            <Button href="/register" variant="link">Register</Button>
-                        </Column>
+                        </div>
+                        <Col>
+                            <h6>Don't have an account?
+                                <Button href="/register" variant="link">Register</Button>
+                            </h6>
+                        </Col>
                     </Form>
-                    </Column>
+                    </Col>
                 </Row>
             </Container>
-            <Navbar bg="dark" expand="lg" variant="light">
-                <Container>
-                <Navbar.Brand href="/" >
-                            <img height="65" width="115" src="https://images.squarespace-cdn.com/content/v1/60e57a13579c8f0509ce7237/03227bce-9951-411b-9f7d-42875ddb8933/New+header+logo.png?format=1500w" alt=""/>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Navbar.Text>
-                        Copyright &copy 2021 BOP Hub Limited - All Rights Reserved
-                    </Navbar.Text>
-                </Navbar.Collapse>
-                </Container>
-            </Navbar>
         </div>
     )
 }
