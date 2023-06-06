@@ -11,7 +11,7 @@ export const Step1OptionalFields = () => {
     
     return(
         <Card>
-                        <Card.Title className="mt-3">
+                        <Card.Title className="mx-3 mt-3">
                             Optional Fields
                             <hr></hr>
                         </Card.Title>
