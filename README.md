@@ -12,6 +12,7 @@ Project created by intern team for the BoP Hub website
 * password reset email is sent to spam folder in gmail
 * phone number validation
 * email validation to check for fake emails that have correct email format
+* file upload works but there is a limit to the size and type of file, also no security checking on this file
 
 ## Successful can kicks:
 * restructure the folders for consistency

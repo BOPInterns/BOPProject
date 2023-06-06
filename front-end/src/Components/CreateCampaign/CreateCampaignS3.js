@@ -21,12 +21,14 @@ export const CreateCampaignS3 = () => {
     if (localStorage.getItem('volunteerLangs') === null)
         localStorage.setItem('volunteerLangs', '[]');
     if (localStorage.getItem('step3') === null)
-        localStorage.setItem('step3', 'false');
+        localStorage.setItem('step3', false);
 
     const [location, setLocation] = useState(localStorage.getItem('location'));
     const [reach, setReach] = useState(localStorage.getItem('reach'));
     const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
     const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
+    const [url, setUrl] = useState('https://www.openstreetmap.org/export/embed.html?bbox=-252.42187500000003%2C-64.16810689799152%2C191.25000000000003%2C85.80595815715571&amp;layer=mapnik;&amp;marker=-81%2c29%2c');
+
 
     useEffect(() => {
         localStorage.setItem('location', location);
@@ -72,6 +74,21 @@ export const CreateCampaignS3 = () => {
         return list;
     }
 
+    const handleChange = async (e) => {
+        setReach(e.target.value);
+        const field = document.getElementById('location');
+
+        try {
+            let response = await fetch('https://geocode.maps.co/search?q=' + e.target.value);
+            let data = await response.json();
+            let lat = data[0].lat;
+            let lon = data[0].lon;
+            setUrl('https://www.openstreetmap.org/export/embed.html?bbox=' + (parseFloat(lon)-0.5) + '%2C' + (parseFloat(lat)-0.5) + '%2C' + (parseFloat(lon)+0.5) + '%2C' + (parseFloat(lat)+0.5) + '&amp;layer=mapnik&amp;marker=' + lon + '%2C' + lat);
+        } catch {
+            console.log('Error: could not find location.');
+        }
+    }
+
     return(
         <div>
             <NavigationBar />
@@ -106,12 +123,10 @@ export const CreateCampaignS3 = () => {
                                     type="text"
                                     placeholder="eg.: India"
                                     value={reach}
-                                    onChange={(e) => setReach(e.target.value)}
+                                    onChange={handleChange}
                                 />
                                 <Form.Text>
-                                    <Image src="holder.js/100px180">
-                                        
-                                    </Image>
+                                    <iframe width="425" height="350" frameBorder="0" scrolling="no" marginHeight="2px" marginWidth="2px" src={url}></iframe><br/>
                                 </Form.Text>
                                 <Form.Text className="text-muted">You can select the country or make the reach of the campaign using the map above</Form.Text>
                             </FormGroup>
