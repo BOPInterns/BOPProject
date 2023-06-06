@@ -44,7 +44,7 @@ const campaignSchema = new mongoose.Schema({
     },
     mission: String,
     milestones: [String],
-    goals: String,
+    goals: [String],
     //*** STEP 3
     location: {
         type: String,
