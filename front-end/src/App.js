@@ -18,7 +18,6 @@ import { KYCVerificationForm } from './Components/KYCVerification/KYCVerificatio
 import { KYCVerificationSubmit } from './Components/KYCVerification/KYCVerificationSubmit.js';
 import { RegisterSuccess  } from './Components/RegisterSuccess.js';
 import Private from './Components/Private.js';
-import { ResetPassword } from './Components/ResetPassword.js';    //only added for testing and might want to remove later for security differences
 
 const App = () => {
    const loginState = window.localStorage.getItem('loginState');
@@ -42,9 +41,7 @@ const App = () => {
            <Route path="/campaign-center" element={<CampaignCenter />} />
            <Route path="/Login" element={<Login />} />
            <Route path="/Register" element={<Register />} />
-           <Route path="/forgotpassword" element={<ForgotPassword />} />
-           <Route path="/get-reset-link" element={<ResetPassword />} />
-           <Route path="/resetpassword" element={<ResetPassword />} />
+           <Route path="/forgot-password" element={<ForgotPassword />} />
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
         </Routes>
      </>
