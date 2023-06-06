@@ -7,17 +7,48 @@ import Figure from 'react-bootstrap/Figure';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import React from 'react';
 
 export const MyAccount = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [password, setPassword] = useState('');
-    const [verificationStatus, setVerificationStatus] = useState('');
-    const [ userEdit, setUserEdit ] = useState(false);
+    const [firstName, setFirstName] = useState(JSON.parse(localStorage.getItem('user')).firstName);
+    const [lastName, setLastName] = useState(JSON.parse(localStorage.getItem('user')).lastName);
+    const [email, setEmail] = useState(JSON.parse(localStorage.getItem('user')).email);
+    const [phoneNumber, setPhoneNumber] = useState(JSON.parse(localStorage.getItem('user')).phoneNumber);
+    // const [password, setPassword] = useState(JSON.parse(localStorage.getItem('user')).password);
+    const [verificationStatus, setVerificationStatus] = useState(JSON.parse(localStorage.getItem('user')).KYC.verified);
+    const [userEdit, setUserEdit] = useState(false);
+
+    // TODO: connect verification status stuff to backend
+    const handleSubmit = (e) => {
+        console.log("Verification status:", verificationStatus);
+        e.preventDefault();
+        fetch("http://localhost:9000/my-account", {
+            method:"POST",
+            crossDomain:true,
+            headers: {
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body: JSON.stringify({
+                firstName,
+                lastName,
+                email,
+                phoneNumber,
+                verificationStatus
+            })
+        })
+        .then((res) => res.json())
+        .then(data => {
+            console.log(data, "userUpdate");
+            localStorage.setItem('tempFirstName', data.firstName);
+            localStorage.setItem('tempLastName', data.lastName);
+            localStorage.setItem('user', JSON.stringify(data.updatedUser));
+            // navigate('/');
+        });
+        setUserEdit(!userEdit);
+    }
     
     return (
         <div>
@@ -35,6 +66,8 @@ export const MyAccount = () => {
                         <Button href='/kyc-verification-about' variant="link">Get Verified!</Button>
                         <br></br>
                         <Button variant="link">Privacy</Button>
+                        <br></br>
+                        <Button href='/forgot-password' variant="link">Forgot Password</Button>
                     </Col>
                     <Col md={6}>
                         <h3>General Information</h3>
@@ -48,8 +81,6 @@ export const MyAccount = () => {
                                 <br></br>
                                 Email address: {email}
                                 <br></br>
-                                Password: {password}
-                                <br></br>
                                 Phone Number: {phoneNumber}
                                 <br></br>
                                 Verification Status: {verificationStatus}
@@ -62,28 +93,32 @@ export const MyAccount = () => {
                                  <InputGroup.Text>First name:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={firstName}
+                                     onChange={(e) => { if (!userEdit) setFirstName(e.target.value) }}
                                  ></Form.Control>
                                  <InputGroup.Text>Last name:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={lastName}
+                                     onChange={(e) => { if (!userEdit) setLastName(e.target.value) }}
                                  ></Form.Control>
                              </InputGroup>
                              <InputGroup>
                                  <InputGroup.Text>Email:</InputGroup.Text>
                                  <Form.Control
+                                    disabled
                                      placeholder={email}
                                  ></Form.Control>
                              </InputGroup>
-                             <InputGroup>
+                             {/* <InputGroup>
                                  <InputGroup.Text>Password:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={password}
                                  ></Form.Control>
-                             </InputGroup>
+                             </InputGroup> */}
                              <InputGroup>
                                  <InputGroup.Text>Phone number:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={phoneNumber}
+                                     onChange={(e) => { if (!userEdit) setPhoneNumber(e.target.value) }}
                                  ></Form.Control>
                              </InputGroup>
                              <InputGroup>
@@ -93,7 +128,7 @@ export const MyAccount = () => {
                                      disabled
                                  ></Form.Control>
                              </InputGroup>
-                             <Button onClick={() => setUserEdit(!userEdit)} variant="outline-secondary">Submit</Button>
+                             <Button onClick={handleSubmit} variant="outline-secondary">Submit</Button>
                          </Card.Body>
                             }
                         </Card>

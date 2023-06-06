@@ -77,7 +77,7 @@ export const KYCVerificationForm = () => {
                                 <Form.Group className="mb-3">
                                 <Form.Label>Gender</Form.Label>
                                 <Form.Select>
-                                    <option>Pleaes select a gender</option>
+                                    <option>Please select a gender</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
                                     <option value="3">Prefer not to say...</option>

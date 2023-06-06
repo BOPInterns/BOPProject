@@ -14,9 +14,6 @@ import "react-bootstrap-tagsinput/dist/index.css";
 import { Step1OptionalFields } from './Step1Optional';
 
 export const CreateCampaignS1 = () => {
-
-
-
     return (
         <div>
             <NavigationBar />
