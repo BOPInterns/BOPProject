@@ -22,13 +22,12 @@ export const CreateCampaignS1 = () => {
                 <Row className="mt-5">
                     <h2>Step 1: Provide basic information about the campaign</h2>
                 </Row>
-                <Row>
+                <Row className="mt-3">
                     <Step1MandatoryFields/>
                 </Row>
                 <Row className="mt-5">
                     <Step1OptionalFields/>
                 </Row>
-
             </Container>
         </div>
     )

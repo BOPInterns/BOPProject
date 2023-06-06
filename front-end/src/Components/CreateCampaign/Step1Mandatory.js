@@ -50,14 +50,14 @@ const displayTags = () => {
 }
     return (
         <div>
-            <Card className="mt-3">
-                        <Card.Title className="mt-3">
+            <Card className="">
+                        <Card.Title className="mx-3 mt-3">
                             Mandatory fields
                             <hr></hr>
                         </Card.Title>
                         <Card.Body>
                             <Form>
-                                <FormGroup className="mb-3">
+                                <FormGroup className="mb-2">
                                     <Form.Label>Campaign name</Form.Label>
                                     <Form.Control 
                                         type="text" 
