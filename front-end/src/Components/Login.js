@@ -23,18 +23,20 @@ import Alert from 'react-bootstrap/Alert';
 export const Login = () => {
     const [ user, setUser ] = useState({});
     const navigate = useNavigate();
+    const [ emailErrorShow, setEmailErrorShow ] = useState(false);
+    const [ passwordErrorShow, setPasswordErrorShow ] = useState(false);
    
    function handleCallbackResponse(response){
       console.log("Encoded JWT ID token: " + response.credential);
       var userObject = jwt_decode(response.credential);
       console.log(userObject);
       setUser(userObject);
-      document.getElementById("loginButton").hidden = true;
-      document.getElementById("registerButton").hidden = true;
+      localStorage.setItem('loginState', true);
+      //localStorage.setItem('userObj', JSON.stringify(response.credential));
    }
    
 //    useEffect(() => {
-//       /* global google */ 
+//       /*global google*/ 
 //       google.accounts.id.initialize({
 //          client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
 //          callback: handleCallbackResponse
@@ -45,7 +47,7 @@ export const Login = () => {
 //          {theme: "outline", size: "small"}
 //       );
 //    },[]);
-    
+   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
@@ -69,11 +71,19 @@ export const Login = () => {
         .then((data) => {
             console.log(data, "userLogin");
             setUser(data, "userId");
-            localStorage.setItem('tempFirstName', JSON.stringify(data.firstName));
-            localStorage.setItem('tempLastName', data.lastName);
-            localStorage.setItem('user', JSON.stringify(data.user));
-            localStorage.setItem('loginState', true);
-            navigate('/');
+            localStorage.setItem('userObj', JSON.stringify(data.user));
+            console.log(JSON.stringify(user));
+            if(JSON.stringify(user).includes("email")){
+                setEmailErrorShow(true);
+                window.scrollTo(0, 0);
+            }   else if(JSON.stringify(user).includes("password")) {
+                setPasswordErrorShow(true);
+                window.scrollTo(0, 0);
+            }   else {
+                localStorage.setItem('loginState', true);
+                navigate('/campaign-center');
+            }
+            
         });
         console.log("Password: ", password);
         //window.location.href="/my-account";
@@ -88,6 +98,24 @@ export const Login = () => {
     return (
         <div>
             <NavigationBar />
+            <Alert
+                show={passwordErrorShow}
+                variant="danger"
+                dismissible
+                onClose={() => setPasswordErrorShow(false)}
+            >
+                <Alert.Heading>Error!</Alert.Heading>
+                <p>Invalid password.</p>
+            </Alert>
+            <Alert
+                show={emailErrorShow}
+                variant="danger"
+                dismissible
+                onClose={() => setEmailErrorShow(false)}
+            >
+                <Alert.Heading>Error!</Alert.Heading>
+                <p>Invalid email.</p>
+            </Alert>
             <Container>
                 <Row>
                     <Col md={6}>
