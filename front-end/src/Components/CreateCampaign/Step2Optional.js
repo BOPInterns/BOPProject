@@ -37,7 +37,7 @@ useEffect(() => {
     return (
         <div>
             <Card>
-                        <Card.Title className="mt-3">
+                        <Card.Title className="mt-3 mx-3">
                             Optional fields
                             <hr></hr>
                         </Card.Title>

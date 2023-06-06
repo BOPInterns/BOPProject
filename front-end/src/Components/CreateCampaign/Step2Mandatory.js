@@ -33,8 +33,8 @@ export const Step2MandatoryFields = () => {
     
     return (
         <Container>
-        <Card className="mt-3">
-        <Card.Title className="mt-3">
+        <Card className="">
+        <Card.Title className="mx-3 mt-3">
             Mandatory fields
             <hr></hr>
         </Card.Title>
