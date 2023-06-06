@@ -26,6 +26,28 @@ const userSchema = new mongoose.Schema({
     phoneNumber: String,
     textNotifs: Boolean,
     emailNotifs: Boolean,
+    KYC: {
+        type: {
+            verified: {
+                type: Boolean,
+                default: false
+            },
+            address: {
+                type: String,
+                trim: true
+            },
+            gender: {
+                type: String,
+                trim: true
+            },
+            nationality: {
+                type: String,
+                trim: true
+            },
+            image: String, // file
+        },
+        required: [true, "KYC verification field is missing :("]
+    }
 });
 
 const User = mongoose.model("User", userSchema);

@@ -39,9 +39,11 @@ const App = () => {
            <Route path="/register-success" element={<RegisterSuccess />} />
            </Route>
            <Route path="/campaign-center" element={<CampaignCenter />} />
-           <Route path="/Login" element={<Login />} />
-           <Route path="/Register" element={<Register />} />
+           <Route path="/login" element={<Login />} />
+           <Route path="/register" element={<Register />} />
            <Route path="/forgot-password" element={<ForgotPassword />} />
+           <Route path="/get-reset-link" element={<ResetPassword />} />
+           <Route path="/reset-password" element={<ResetPassword />} />
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
         </Routes>
      </>
