@@ -18,7 +18,6 @@ import { KYCVerificationForm } from './Components/KYCVerification/KYCVerificatio
 import { KYCVerificationSubmit } from './Components/KYCVerification/KYCVerificationSubmit.js';
 import { RegisterSuccess  } from './Components/RegisterSuccess.js';
 import Private from './Components/Private.js';
-import { ResetPassword } from './Components/ResetPassword.js';    //only added for testing and might want to remove later for security differences
 
 const App = () => {
    const loginState = window.localStorage.getItem('loginState');
