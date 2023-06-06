@@ -1,13 +1,19 @@
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import './CreateCampaignNavbar.css';
+import { navigation , route } from 'react';
+import Button from 'react-bootstrap/Button';
 
 export const CreateCampaignNavbar = () => {
+    const handleNext = () => {
+        
+    }
     return (
         <div>
             <Nav
                 justify variant="tabs"
                 defaultActiveKey="/create-campagin-introduction"
-                fixed="top"
-                sitcky="top"
+                id="CreateCampaignTabs"
             >
                 <Nav.Item>
                     <Nav.Link href="/create-campaign-step-1">
@@ -35,6 +41,18 @@ export const CreateCampaignNavbar = () => {
                     </Nav.Link>
                 </Nav.Item>
             </Nav>
+            <Navbar
+                fixed="bottom"
+            >
+                <Nav className="">
+                    <Button
+                        variant='outline-secondary'
+                    >Back</Button>
+                </Nav>
+                <Nav className='ms-auto'>
+                    <Button variant='outline-secondary' onClick={() => handleNext}>Next</Button>
+                </Nav>
+            </Navbar>
         </div>
     )
 }

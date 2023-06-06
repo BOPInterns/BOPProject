@@ -1,19 +1,16 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 
 export const NavigationBar = () => {
     const auth = localStorage.getItem('loginState');
-    const user = localStorage.getItem('user');
+    const user = JSON.parse(localStorage.getItem('userObj'));
     
     const handleSignout = () => {
-        console.log(user.firstName)
         localStorage.removeItem('loginState');
-        localStorage.removeItem('user');
-        localStorage.removeItem('loginState');
-        localStorage.removeItem('tempFirstName');
-        localStorage.removeItem('tempLastName');
+        localStorage.removeItem('userObj');
         window.location.href='/login';
     }
     return(
@@ -35,7 +32,7 @@ export const NavigationBar = () => {
                     <Navbar.Collapse className="justify-contents-end"> 
                     { auth ? <>                        
                         <Nav className='me-auto'>
-                            <Nav.Link href="/my-account">Welcome: { }</Nav.Link>
+                            <Nav.Link href="/my-account">Welcome: { user.firstName + " " + user.lastName }</Nav.Link>
                             <Nav.Link onClick={handleSignout}>Logout</Nav.Link>
                         </Nav>
                         </> : 
