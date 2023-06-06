@@ -20,7 +20,7 @@ export const Step1Suggestions = () => {
                         <Step1MandatoryFields/>
                     </Col>
                     <Col>
-                        <Card className="mt-3">
+                        <Card className="">
                             <Card.Body>
                                 <Card.Text>
                                     You will not be able to continue until ALL mandatory fields are completed.

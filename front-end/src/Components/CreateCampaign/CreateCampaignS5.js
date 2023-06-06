@@ -19,10 +19,14 @@ import { useState } from 'react';
 import { Step2Suggestions } from './Step2Suggestions';
 import { CreateCampaignS3 } from './CreateCampaignS3';
 import { CreateCampaignS4 } from './CreateCampaignS4';
+import { Step3Suggestions } from './Step3Suggestions';
+import { Step4Suggestions } from './Step4Suggestions';
 // import { useState } from 'react';
 
 export const CreateCampaignS5 = () => {
-
+    
+    const navigate = useNavigate();
+    
     const campaignName = localStorage.getItem('campaignName');
     const campaignTags = JSON.parse(localStorage.getItem('campaignTags').replace(/'/g, "\""));
     const videoLink = localStorage.getItem('videoLink');
@@ -105,6 +109,10 @@ export const CreateCampaignS5 = () => {
         localStorage.removeItem('stakeholderLangs');
         localStorage.removeItem('volunteerLangs');
         localStorage.removeItem('files');
+        localStorage.removeItem('step1');
+        localStorage.removeItem('step2');
+        localStorage.removeItem('step3');
+        localStorage.removeItem('step4');
     }
 
     const [show, setShow] = useState(false);
@@ -116,10 +124,10 @@ export const CreateCampaignS5 = () => {
     const checkSteps = () => {
         if(step1 === true && step2 === true && step3 === true) {
             handleSubmit()
-            window.location('/create-campaign-step-6')
-            //Navigate('/create-campaign-step-6')
+            navigate('/create-campaign-step-6')
         }   else {
             setShow(true);
+            window.scrollTo(0,0);
         }
     }
     
@@ -215,8 +223,8 @@ export const CreateCampaignS5 = () => {
                 <Container>
                     { step1 ? <></> : <Step1Suggestions/>}
                     { step2 ? <></> : <Step2Suggestions/>}
-                    {/* { step3 ? <></> : <CreateCampaignS3/>}
-                    { step4 ? <></> : <CreateCampaignS4/>} */}
+                    { step3 ? <></> : <Step3Suggestions/>}
+                    { step4 ? <></> : <Step4Suggestions/>}
                 </Container>
                 <Container className="mt-4 mb-5">
                     <Row className="justify-content-md-center">

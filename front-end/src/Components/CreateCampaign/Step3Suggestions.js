@@ -3,19 +3,19 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { Step2MandatoryFields } from './Step2Mandatory';
-import { Step2OptionalFields } from './Step2Optional';
+import { Step3MandatoryFields } from './Step3Mandatory';
+import { Step3OptionalFields } from './Step3Optional';
 
-export const Step2Suggestions = () => {
+export const Step3Suggestions = () => {
     return (
         <div>
             <Container>
         <Row className="mt-3">
                     <hr></hr>
-                    <Button variant="link" href="/create-campaign-step-2">Suggestions for Step 2: Provide basic information about the campaign</Button>
+                    <Button variant="link" href="/create-campaign-step-3">Suggestions for Step 3: Location & Language</Button>
                     <hr className="mt-3"></hr>
                     <Col>
-                        <Step2MandatoryFields/>
+                        <Step3MandatoryFields/>
                     </Col>
                     <Col>
                         <Card className="">
@@ -29,7 +29,7 @@ export const Step2Suggestions = () => {
                 </Row>
                 <Row className="mt-5">
                     <Col>
-                        <Step2OptionalFields/>
+                        <Step3OptionalFields/>
                     </Col>
                     <Col>
                         <Card>

@@ -5,12 +5,10 @@ import Row from'react-bootstrap/Row';
 import Card from'react-bootstrap/Card';
 import Form from'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
+import { Step4MandatoryFields } from './Step4Mandatory';
 
 export const CreateCampaignS4 = () => {
-    if (localStorage.getItem('files') === null) 
-    localStorage.setItem('files', '');
 
-    const [files, setFiles] = useState(); 
 
     //also for testing
     // useEffect(() => {
@@ -20,20 +18,6 @@ export const CreateCampaignS4 = () => {
 
     // }, [files]);
 
-    useEffect(() => {
-        localStorage.setItem('files', files);
-    }, [files]);
-
-    const convertBase64 = (e) => {
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = () => {
-            setFiles(reader.result);
-        };
-        reader.onerror = () => {
-            console.log("Error: ", error);
-        };
-    }
 
     //temporary function to test if file upload works right
     // const uplaodFile = () => {
@@ -59,27 +43,8 @@ export const CreateCampaignS4 = () => {
                 <Row className="mt-5">
                     <h2>Step 4: Additional materials and attachments</h2>
                 </Row>
-                <Row>
-                    <Card className="mt-3">
-                        <Card.Title className="mt-3">
-                            Add attachments
-                            <hr></hr>
-                        </Card.Title>
-                        <Card.Body>
-                            <Card.Text>
-                                Share withfuture stakeholders materials and attachments you find important or useful to broaden the knowledge about the create campaign. You can decide whether particular elements should be visible for all or after joining the campaign's team
-                            </Card.Text>
-                            <br></br>
-                            <Form>
-                                <Form.Group controlId="campaignAttachments">
-                                    <Form.Label>
-                                        Upload files
-                                    </Form.Label>
-                                    <Form.Control type="file" multiple onChange={convertBase64}/>
-                                </Form.Group>
-                            </Form>
-                        </Card.Body>
-                    </Card>
+                <Row className="mt-3">
+                    <Step4MandatoryFields/>
                 </Row>
             </Container>
         </div>
