@@ -92,7 +92,7 @@ app.post("/login", async(req,res) => {
 
             if (res.status(201)) {
                 console.log("Login successful");
-                return res.status(201).json({user})
+                return res.status(201).json({user});
                 // return res.status(201).json({data: token});
             } else { throw Error("Unknown login error"); }
         } else { throw Error("Invalid password"); }
@@ -215,7 +215,27 @@ app.post('/create-campaign-step-5', async (req, res) => {
     } catch (err) { res.status(401).json({error: err.message}); }
 });
 
+// update the user's info in the DB
+app.post('/my-account', async (req, res) => {
+    try {
+        //const user = User.findOne(email);
+        const {firstName, lastName, email, phoneNumber, password} = req.body;
 
-app.get('/my-account', async (req, res) => {
-    
+        // if (!validator.isStrongPassword(password)) { throw Error("Password is not strong enough"); }
+        // const passwordEncr = await bcrypt.hash(password, 11);
+
+        // update user info in the DB
+        const filter = {email: email};
+        const update = {
+            $set: {
+                firstName: firstName,
+                lastName: lastName,
+                phoneNumber: phoneNumber
+            }
+        };
+        
+        const updatedUser = await User.findOneAndUpdate(filter, update, {new: true});
+        console.log(updatedUser.email);
+        res.status(201).json({updatedUser});
+    } catch (err) { res.status(401).json({error: err.message}); }
 });

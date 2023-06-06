@@ -18,7 +18,7 @@ export const CreateCampaignS1 = () => {
         localStorage.setItem('campaignTags', '[]');
     if (localStorage.getItem('videoLink') === null)
         localStorage.setItem('videoLink', '');
-    if (localStorage.getItem('step1') === 'null')
+    if (localStorage.getItem('step1') === null)
         localStorage.setItem('step1', 'false');
 
     const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
