@@ -58,7 +58,7 @@ const handleSubmit = (e) => {
     .then((data) => {
         console.log(data, "userRegister");
     });
-    window.location.href="/register-success";
+
 }
 
 // const handleInputChange = (e) => {
@@ -173,6 +173,29 @@ const handleSubmit = (e) => {
                     <Card.Text className='form-subtext'>* At least 1 uppercase and 1 lowercase letter</Card.Text>
                     <Card.Text className='form-subtext'>* At least 1 number</Card.Text>
                     <Card.Text className='form-subtext'>* At least 1 special character</Card.Text>
+
+                    <Form.Check
+                        id="emailNotif"
+                        type="checkbox"
+                        label="I would like to receive email notifications from BOPHub."
+                        style={{marginTop: 10}}
+                        value={emailNotif}
+                        onChange={() => setEmailNotif(!emailNotif)}
+                    >
+                    </Form.Check>
+                    <Form.Check
+                        id="textNotif"
+                        type="checkbox"
+                        label="I would like to receive text notifications from BOPHub.
+                        (Standard sms data rates may apply)"
+                        value={textNotif}
+                        onChange={() => setTextNotif(!textNotif)}
+                    >
+                    </Form.Check>
+                        <Button onClick={handleSubmit} href='/my-account'  type="submit" variant="primary">
+                            Submit
+                        </Button>
+                        <Button href='/register-success'>/register-success</Button>
                     <Row>
                     <Button className="mt-2 mb-2 btn-custom-class" variant="outline-secondary" onClick={handleSubmit} type="submit">
                         Register
