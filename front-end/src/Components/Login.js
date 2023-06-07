@@ -17,10 +17,12 @@ import { NavigationBar } from './NavigationBar';
 import { LoginAlertSuccess } from './LoginAlertSuccess';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import { hrStyle, buttonStyle, hoverStyle, inputStyle } from './styles';
 
 
 
 export const Login = () => {
+    
     const [ user, setUser ] = useState({});
     const navigate = useNavigate();
     const [ emailErrorShow, setEmailErrorShow ] = useState(false);
@@ -125,7 +127,7 @@ export const Login = () => {
                     <Form>
                         <Row className="text-center">
                             <h4>Sign in with</h4>
-                            <hr></hr>
+                            <hr style={hrStyle}></hr>
                             <ButtonGroup size="sm">
                             <Button 
                             variant="outline-secondary"
@@ -137,26 +139,54 @@ export const Login = () => {
                             <Button variant="outline-secondary" size="sm">linkedin</Button>
                             <Button variant="outline-secondary" size="sm">other</Button>
                             </ButtonGroup>
-                            <hr className="mt-3"></hr>
+                            <hr className="mt-3" style={hrStyle}></hr>
                         </Row>
                         <Row className="text-center">
                             <h4>or</h4>
-                            <hr className="mt-3"></hr>
+                            <hr style={hrStyle} className="mt-3"></hr>
                         </Row>
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Email Address"
-                            className="mb-3 mt-3"
+                            className="mb-3"
+                            style={{colr: 'orange'}}
                         >
-                            <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control 
+                            type="email" 
+                            placeholder="Enter email" 
+                            name="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            style={inputStyle}
+                            onFocus={(e) => {
+                                e.target.style.border = highlightStyle.border;
+                              }}
+                            onBlur={(e) => {
+                                e.target.style.border = inputStyle.border;
+                            }}
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Password"
                             className="mb-3"
                         >
-                            <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Form.Control 
+                            type="password" 
+                            placeholder="Password" 
+                            name="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            style={inputStyle}
+                            onFocus={(e) => {
+                                e.target.style.border = highlightStyle.border;
+                              }}
+                            onBlur={(e) => {
+                                e.target.style.border = inputStyle.border;
+                            }}
+                            />
                         </FloatingLabel>
+                        <hr style={hrStyle} className="mt-2"/>
                         <Col className="text-end">
                             <Button href="/forgotpassword" variant="link">Forgot password?</Button>
                         </Col>
@@ -169,7 +199,22 @@ export const Login = () => {
                         </Form.Check>
                         </div>
                         <div className="text-end">
-                        <Button className="mt-2 mb-2" variant="outline-secondary" onClick={handleSubmit} type="submit">
+                        <Button 
+                        className="mt-2 mb-2"  
+                        onClick={handleSubmit} 
+                        type="submit"
+                        style={buttonStyle}
+                        onMouseEnter={(e) => {
+                            e.target.style.backgroundColor = hoverStyle.backgroundColor;
+                            e.target.style.color = hoverStyle.color;
+                            e.target.style.borderColor = hoverStyle.borderColor;
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.backgroundColor = buttonStyle.backgroundColor;
+                            e.target.style.color = buttonStyle.color;
+                            e.target.style.borderColor = buttonStyle.borderColor;
+                          }}
+                        >
                             Login
                         </Button>
                         </div>

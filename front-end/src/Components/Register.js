@@ -56,7 +56,7 @@ const handleSubmit = (e) => {
     .then((data) => {
         console.log(data, "userRegister");
     });
-    window.location.href="/register-success";
+
 }
 
 // const handleInputChange = (e) => {
@@ -177,7 +177,7 @@ const handleSubmit = (e) => {
                         onChange={() => setTextNotif(!textNotif)}
                     >
                     </Form.Check>
-                        <Button onClick={handleSubmit}href='/my-account'  type="submit" variant="primary">
+                        <Button onClick={handleSubmit} href='/my-account'  type="submit" variant="primary">
                             Submit
                         </Button>
                         <Button href='/register-success'>/register-success</Button>
