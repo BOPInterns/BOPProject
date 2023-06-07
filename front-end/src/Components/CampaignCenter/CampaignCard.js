@@ -3,7 +3,7 @@ import Badge from'react-bootstrap/Badge';
 import Image from'react-bootstrap/Image';
 import Row from'react-bootstrap/Row';
 import Button from'react-bootstrap/Button';
-import { useDebugValue, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const CampaignCard = ({campData}) => {
     const [name, setName] = useState('');
@@ -23,9 +23,15 @@ export const CampaignCard = ({campData}) => {
     });
 
     const loadTags = () => {
+        var MAXCHARS = 15;
+        var currChars = 0;
+        var i = 0;
+
         var list = [];
-        for(let i = 0; i < tags.length; i++){
+        while(currChars < MAXCHARS && list.length != tags.length){
+            currChars += tags[i].length;
             list.push(<Badge bg="secondary">{tags[i]}</Badge>);
+            i++;
         }
         return list;
     }
@@ -39,7 +45,7 @@ export const CampaignCard = ({campData}) => {
                 <Card.Text>[no.%] match</Card.Text>
                     
                     {loadTags()}
-                    <footer><cite>+3 more tags</cite></footer>
+                    {tags.length - loadTags().length > 0 ? <footer><cite>+{tags.length - loadTags().length} more tags</cite></footer> : <></>}
                     
                     <Card.Text>Campaign status: <Badge bg="warning">{status}</Badge></Card.Text>
                     <br></br>

@@ -45,8 +45,8 @@ export const MyAccount = () => {
             localStorage.setItem('tempFirstName', data.firstName);
             localStorage.setItem('tempLastName', data.lastName);
             localStorage.setItem('userObj', JSON.stringify(data.updatedUser));
-            window.location.reload();
             setUserEdit(!userEdit);
+            // navigate('/');
         });
     }
     
@@ -73,7 +73,7 @@ export const MyAccount = () => {
                         <h3>General Information</h3>
                         <hr></hr>
                         <Card style={{width: '28rem'}}>
-                            { userEdit ? <>
+                            { !userEdit ? <>
                             <Card.Body>
                                 First Name: {firstName}
                                 <br></br>
@@ -93,12 +93,12 @@ export const MyAccount = () => {
                                  <InputGroup.Text>First name:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={firstName}
-                                     onChange={(e) => { if (!userEdit) setFirstName(e.target.value) }}
+                                     onChange={(e) => {setFirstName(e.target.value) }}
                                  ></Form.Control>
                                  <InputGroup.Text>Last name:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={lastName}
-                                     onChange={(e) => { if (!userEdit) setLastName(e.target.value) }}
+                                     onChange={(e) => {setLastName(e.target.value) }}
                                  ></Form.Control>
                              </InputGroup>
                              <InputGroup>
@@ -117,8 +117,8 @@ export const MyAccount = () => {
                              <InputGroup>
                                  <InputGroup.Text>Phone number:</InputGroup.Text>
                                  <Form.Control
-                                    placeholder={phoneNumber}
-                                    onChange={(e) => { if (!userEdit) setPhoneNumber(e.target.value) }}
+                                     placeholder={phoneNumber}
+                                     onChange={(e) => {setPhoneNumber(e.target.value) }}
                                  ></Form.Control>
                              </InputGroup>
                              <InputGroup>

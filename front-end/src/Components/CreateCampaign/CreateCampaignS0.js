@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Container from'react-bootstrap/Container';
+import { buttonStyle, hoverStyle } from '../styles';
 
 export const CreateCampaignS0 = () => {
     return (
@@ -39,7 +40,20 @@ export const CreateCampaignS0 = () => {
                 </Card>
             </Row>
             <Row class="mx-auto">
-                <Button href="/create-campaign-step-1">Fill the campagin form</Button>
+                <Button 
+                href="/create-campaign-step-1"
+                style={buttonStyle}
+                onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = hoverStyle.backgroundColor;
+                    e.target.style.color = hoverStyle.color;
+                    e.target.style.borderColor = hoverStyle.borderColor;
+                }}
+                onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = buttonStyle.backgroundColor;
+                    e.target.style.color = buttonStyle.color;
+                    e.target.style.borderColor = buttonStyle.borderColor;
+                }}
+                >Fill the campaign form</Button>
             </Row>
             </Container>
         </div>

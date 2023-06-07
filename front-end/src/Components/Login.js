@@ -17,10 +17,12 @@ import { NavigationBar } from './NavigationBar';
 import { LoginAlertSuccess } from './LoginAlertSuccess';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import './Account.css';
 
 
 
 export const Login = () => {
+    
     const [ user, setUser ] = useState({});
     const navigate = useNavigate();
     const [ emailErrorShow, setEmailErrorShow ] = useState(false);
@@ -71,17 +73,19 @@ export const Login = () => {
         .then((data) => {
             console.log(data, "userLogin");
             setUser(data, "userId");
-            localStorage.setItem('userObj', JSON.stringify(data.user));
-            console.log(JSON.stringify(user));
-            if(JSON.stringify(user).includes("email")) {
+            console.log(JSON.stringify(data));
+            if(JSON.stringify(data).includes("email")){
                 setEmailErrorShow(true);
                 window.scrollTo(0, 0);
-            }   else if(JSON.stringify(user).includes("password")) {
+            }
+            if(JSON.stringify(data).includes("password")) {
                 setPasswordErrorShow(true);
                 window.scrollTo(0, 0);
-            }   else {
+            }
+            if(JSON.stringify(data).includes("success")){
                 localStorage.setItem('loginState', true);
                 navigate('/campaign-center');
+                localStorage.setItem('userObj', JSON.stringify(data.user));
             }
             
         });
@@ -124,7 +128,7 @@ export const Login = () => {
                     <Col className="mt-4">
                     <Form>
                         <Row className="text-center">
-                            <h4>Sign in with</h4>
+                            <h4>Login with</h4>
                             <hr></hr>
                             <ButtonGroup size="sm">
                             <Button 
@@ -133,9 +137,9 @@ export const Login = () => {
                             size="sm">
                             Google
                             </Button>
-                            <Button variant="outline-secondary" size="sm">facebook</Button>
-                            <Button variant="outline-secondary" size="sm">linkedin</Button>
-                            <Button variant="outline-secondary" size="sm">other</Button>
+                            <Button variant="outline-secondary" size="sm">Facebook</Button>
+                            <Button variant="outline-secondary" size="sm">Linkedin</Button>
+                            <Button variant="outline-secondary" size="sm">Other</Button>
                             </ButtonGroup>
                             <hr className="mt-3"></hr>
                         </Row>
@@ -146,17 +150,31 @@ export const Login = () => {
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Email Address"
-                            className="mb-3 mt-3"
+                            className="mb-3"
+                            style={{colr: 'orange'}}
                         >
-                            <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control 
+                            type="email" 
+                            placeholder="Enter email" 
+                            name="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Password"
                             className="mb-3"
                         >
-                            <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Form.Control 
+                            type="password" 
+                            placeholder="Password" 
+                            name="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)}
+                            />
                         </FloatingLabel>
+                        <hr className="mt-2"/>
                         <Col className="text-end">
                             <Button href="/forgotpassword" variant="link">Forgot password?</Button>
                         </Col>
@@ -168,16 +186,14 @@ export const Login = () => {
                         >
                         </Form.Check>
                         </div>
-                        <div className="text-end">
-                        <Button className="mt-2 mb-2" variant="outline-secondary" onClick={handleSubmit} type="submit">
-                            Login
-                        </Button>
-                        </div>
-                        <Col>
+                        <Row>
+                            <Button className="mt-2 mb-2 btn-custom-class" variant="outline-secondary" onClick={handleSubmit} type="submit">
+                                Login
+                            </Button>
                             <h6>Don't have an account?
                                 <Button href="/register" variant="link">Register</Button>
                             </h6>
-                        </Col>
+                        </Row>
                     </Form>
                     </Col>
                 </Row>
