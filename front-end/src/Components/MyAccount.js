@@ -11,12 +11,12 @@ import { useState } from 'react';
 import React from 'react';
 
 export const MyAccount = () => {
-    const [firstName, setFirstName] = useState(JSON.parse(localStorage.getItem('user')).firstName);
-    const [lastName, setLastName] = useState(JSON.parse(localStorage.getItem('user')).lastName);
-    const [email, setEmail] = useState(JSON.parse(localStorage.getItem('user')).email);
-    const [phoneNumber, setPhoneNumber] = useState(JSON.parse(localStorage.getItem('user')).phoneNumber);
-    // const [password, setPassword] = useState(JSON.parse(localStorage.getItem('user')).password);
-    const [verificationStatus, setVerificationStatus] = useState(JSON.parse(localStorage.getItem('user')).KYC.verified);
+    const [firstName, setFirstName] = useState(JSON.parse(localStorage.getItem('userObj')).firstName);
+    const [lastName, setLastName] = useState(JSON.parse(localStorage.getItem('userObj')).lastName);
+    const [email, setEmail] = useState(JSON.parse(localStorage.getItem('userObj')).email);
+    const [phoneNumber, setPhoneNumber] = useState(JSON.parse(localStorage.getItem('userObj')).phoneNumber);
+    // const [password, setPassword] = useState(JSON.parse(localStorage.getItem('userObj')).password);
+    const [verificationStatus, setVerificationStatus] = useState(JSON.parse(localStorage.getItem('userObj')).KYC.verified);
     const [userEdit, setUserEdit] = useState(false);
 
     // TODO: connect verification status stuff to backend
@@ -44,7 +44,8 @@ export const MyAccount = () => {
             console.log(data, "userUpdate");
             localStorage.setItem('tempFirstName', data.firstName);
             localStorage.setItem('tempLastName', data.lastName);
-            localStorage.setItem('user', JSON.stringify(data.updatedUser));
+            localStorage.setItem('userObj', JSON.stringify(data.updatedUser));
+            window.location.reload();
             // navigate('/');
         });
         setUserEdit(!userEdit);

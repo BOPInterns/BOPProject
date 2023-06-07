@@ -39,7 +39,7 @@ export const CampaignCard = ({campData}) => {
 
     return (
         <div>
-            <Card style={{width: '12rem'}}>
+            <Card style={{width: '14rem'}}>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>[no.%] match</Card.Text>
