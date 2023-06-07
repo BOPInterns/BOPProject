@@ -27,17 +27,17 @@ export const CreateCampaignS5 = () => {
     const navigate = useNavigate();
     
     const campaignName = localStorage.getItem('campaignName');
-    const campaignTags = localStorage.getItem('campaignTags');
+    const campaignTags = JSON.parse(localStorage.getItem('campaignTags').replace(/'/g, "\""));
     const videoLink = localStorage.getItem('videoLink');
     const description = localStorage.getItem('description');
     const challenge = localStorage.getItem('challenge');
     const mission = localStorage.getItem('mission');
-    const milestones = localStorage.getItem('milestones');
-    const predictedGoals = localStorage.getItem('predictedGoals');
+    const milestones = JSON.parse(localStorage.getItem('milestones').replace(/'/g, "\""));
+    const predictedGoals = JSON.parse(localStorage.getItem('predictedGoals').replace(/'/g, "\""));
     const location = localStorage.getItem('location');
     const reach = localStorage.getItem('reach');
-    const stakeholderLangs = localStorage.getItem('stakeholderLangs');
-    const volunteerLangs = localStorage.getItem('volunteerLangs');
+    const stakeholderLangs = JSON.parse(localStorage.getItem('stakeholderLangs').replace(/'/g, "\""));
+    const volunteerLangs = JSON.parse(localStorage.getItem('volunteerLangs').replace(/'/g, "\""));
     const files = localStorage.getItem('files');
 
 
@@ -73,23 +73,25 @@ export const CreateCampaignS5 = () => {
         });
 
         //post request for the additional files
-        // fetch("http://localhost:9000/upload-file",{
-        //     method: "POST",
-        //     crossDomain: true,
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         Accept: "application/json",
-        //         "Access-Control-Allow-Origin": "*",
-        //     },
-        //     body: JSON.stringify({
-        //         owningCampagin: campaignName, // this is the name of whatever campaign is being added
-        //         fileData: files //change this to whatever files u get from localstorage
-        //     })
-        // })
-        // .then((res) => res.json())
-        // .then((data) => {
-        //     console.log(data)
-        // });
+        if(files != null){
+            fetch("http://localhost:9000/upload-file",{
+                method: "POST",
+                crossDomain: true,
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+                body: JSON.stringify({
+                    owningCampagin: campaignName, 
+                    fileData: files 
+                })
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            });
+        }
 
 
         // clear variables from localstorage

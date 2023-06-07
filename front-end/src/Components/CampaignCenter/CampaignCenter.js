@@ -12,9 +12,9 @@ import { useEffect, useState } from 'react';
 
 export const CampaignCenter = () => {
     const auth = window.localStorage.getItem('loginState');
-    const [campaignData, setCampaignData] = useState([]);
-
-
+    const [ campaignData, setCampaignData ] = useState([]);
+    
+    
     useEffect(() => {
         fetch("http://localhost:9000/get-campaign-data", {
             method: "GET",
@@ -84,10 +84,10 @@ export const CampaignCenter = () => {
             <NavigationBar></NavigationBar>
             
             <Container>
+                <hr></hr>
                 <Row className="justify-content-center">
                     You are currently browsing the marketplace as: 
                 </Row>
-                <Button href="/create-campaign-introduction">Create a Campaign</Button>
                 <Row className="">
                     
                     <DropdownButton
@@ -131,9 +131,18 @@ export const CampaignCenter = () => {
                     </>
                     }
                     </DropdownButton>
+                    <hr className="mt-4"></hr>
                 </Row>
-                <Row className="justify-content-left">
-                    Campaigns
+                <Row className="">
+                    <Col>
+                        <h3>Campaigns</h3>
+                    </Col>
+                    <Col>
+                    <div className="text-end">
+                <Button href="/create-campaign-introduction">Create a Campaign</Button>
+                </div>                     
+                    </Col>
+                    <hr className="mt-3"></hr>
                 </Row>
                 {loadCards()}
                 <Row>
