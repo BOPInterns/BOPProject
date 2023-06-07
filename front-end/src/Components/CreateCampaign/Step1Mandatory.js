@@ -16,38 +16,51 @@ export const Step1MandatoryFields = () => {
     if (localStorage.getItem('step1') === null)
     localStorage.setItem('step1', false);
 
-const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
-const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
-const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
+    const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
+    const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
+    //const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
 
-useEffect(() => {
-    localStorage.setItem('campaignName', campaignName);
-}, [campaignName]);
+    useEffect(() => {
+        localStorage.setItem('campaignName', campaignName);
+    }, [campaignName]);
 
-useEffect(() => {
-    localStorage.setItem('campaignTags', JSON.stringify(campaignTags));
-}, [campaignTags]);
+    useEffect(() => {
+        localStorage.setItem('campaignTags', JSON.stringify(campaignTags));
+    }, [campaignTags]);
 
-useEffect(() => {
-    localStorage.setItem('videoLink', videoLink);
-}, [videoLink]);
+    useEffect(() => {
+        if ((campaignName.length < 4) || (campaignName.length > 100) || 
+            (campaignTags.length < 3) || (campaignTags.length > 5) ||
+            (!validateYouTubeUrl(localStorage.getItem('videoLink'))))
+            return localStorage.setItem('step1', false);
+        localStorage.setItem('step1', true);
+    }, [campaignName, campaignTags]);
 
-useEffect(() => {
-    if ((campaignName.length == 0) || (campaignTags.length == 0))
-        return localStorage.setItem('step1', false);
-    localStorage.setItem('step1', true);
-}, [campaignName, campaignTags]);
-
-const displayTags = () => {
-    var list = "Tags: ";
-    for (let i = 0; i < campaignTags.length; i++) {
-        list += campaignTags[i];
-        if (i != campaignTags.length - 1) {
-            list += ", ";
+    const displayTags = () => {
+        var list = "Tags: ";
+        for (let i = 0; i < campaignTags.length; i++) {
+            list += campaignTags[i];
+            if (i != campaignTags.length - 1) {
+                list += ", ";
+            }
         }
+        return list;
     }
-    return list;
-}
+
+    function validateYouTubeUrl(link) {
+        if (link != '') {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+            var match = link.match(regExp);
+            if (match && match[2].length == 11) {
+                return true;
+                // if need to change the url to embed url then use below line
+                // $('#ytplayerSide').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0');
+            }
+            else return false;
+        }
+        return true;
+    }
+
     return (
         <div>
             <Card className="">
