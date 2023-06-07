@@ -57,8 +57,8 @@ const handleSubmit = (e) => {
     }).then((res) => res.json())
     .then((data) => {
         console.log(data, "userRegister");
+        
     });
-
 }
 
 // const handleInputChange = (e) => {
@@ -192,9 +192,6 @@ const handleSubmit = (e) => {
                         onChange={() => setTextNotif(!textNotif)}
                     >
                     </Form.Check>
-                        <Button onClick={handleSubmit} href='/my-account'  type="submit" variant="primary">
-                            Submit
-                        </Button>
                         <Button href='/register-success'>/register-success</Button>
                     <Row>
                     <Button className="mt-2 mb-2 btn-custom-class" variant="outline-secondary" onClick={handleSubmit} type="submit">

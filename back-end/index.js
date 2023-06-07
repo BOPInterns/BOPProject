@@ -83,6 +83,9 @@ app.post("/register", async(req,res) => {
             emailNotif,
             email,
             password: passwordEncr,
+            KYC: {
+                verified: false,
+            }
         });
         res.status(201).json({
             status: "success",

@@ -73,17 +73,19 @@ export const Login = () => {
         .then((data) => {
             console.log(data, "userLogin");
             setUser(data, "userId");
-            localStorage.setItem('userObj', JSON.stringify(data.user));
             console.log(JSON.stringify(user));
-            if(JSON.stringify(user).includes("email")){
+            if(JSON.stringify(data).includes("email")){
                 setEmailErrorShow(true);
                 window.scrollTo(0, 0);
-            }   else if(JSON.stringify(user).includes("password")) {
+            }
+            if(JSON.stringify(data).includes("password")) {
                 setPasswordErrorShow(true);
                 window.scrollTo(0, 0);
-            }   else {
+            }
+            if(JSON.stringify(data).includes("success")){
                 localStorage.setItem('loginState', true);
                 navigate('/campaign-center');
+                localStorage.setItem('userObj', JSON.stringify(data.user));
             }
             
         });
