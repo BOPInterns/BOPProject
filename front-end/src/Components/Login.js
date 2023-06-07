@@ -15,7 +15,7 @@ import jwt_decode from 'jwt-decode';
 //import axios from 'axios';
 import { NavigationBar } from './NavigationBar';
 import { LoginAlertSuccess } from './LoginAlertSuccess';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useRouteError } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import './Account.css';
 
@@ -73,16 +73,14 @@ export const Login = () => {
         .then((data) => {
             console.log(data, "userLogin");
             setUser(data, "userId");
-            console.log(JSON.stringify(data));
-            if(JSON.stringify(data).includes("email")){
+            console.log(JSON.stringify(user));
+            if(JSON.stringify(data).includes("Invalid email") || JSON.stringify(data).includes("Email required")){
                 setEmailErrorShow(true);
                 window.scrollTo(0, 0);
-            }
-            if(JSON.stringify(data).includes("password")) {
+            } else if(JSON.stringify(data).includes("Invalid password") || JSON.stringify(data).includes("Password required")) {
                 setPasswordErrorShow(true);
                 window.scrollTo(0, 0);
-            }
-            if(JSON.stringify(data).includes("success")){
+            } else {
                 localStorage.setItem('loginState', true);
                 navigate('/campaign-center');
                 localStorage.setItem('userObj', JSON.stringify(data.user));
