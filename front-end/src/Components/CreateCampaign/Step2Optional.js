@@ -1,9 +1,9 @@
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
+import TagInput from '../TagInput';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { InputTags } from 'react-bootstrap-tagsinput';
 
 export const Step2OptionalFields = () => {
     
@@ -60,41 +60,21 @@ export const Step2OptionalFields = () => {
                         </FormGroup>
                         <br></br>
                         <FormGroup>
-                            <Form.Label>Campaign milestones</Form.Label>
-                            <div className="input-group">
-                            <InputTags values={milestones} placeholder='New Tag' onTags={(value) => {setMilestones(value.values)}} />
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                data-testid="button-clearAll"
-                                onClick={(e) => {e.preventDefault();setMilestones([]);}}
-                            >Delete all</button>
-                            </div>
-                            <hr />
-                            <ol>
-                                {milestones.map((item, index) => (
-                                    <li key={item + index}>{item}</li>
-                                ))}
-                            </ol>
+                            <TagInput 
+                                header="Enter Campaign Milestone:"
+                                placeholder="Enter a Milestones"
+                                data="Milestone"
+                                func={setMilestones}
+                            />
                         </FormGroup>
                         <br></br>
                         <FormGroup>
-                            <Form.Label>Predicted goals</Form.Label>
-                            <div className="input-group">
-                            <InputTags values={predictedGoals} placeholder='New Tag' tabIndex={-1} onTags={(value) =>{setPredictedGoals(value.values)}} />
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                data-testid="button-clearAll"
-                                onClick={(e) => {e.preventDefault();setPredictedGoals([]);}}
-                            >Delete all</button>
-                            </div>
-                            <hr />
-                            <ol>
-                                {predictedGoals.map((item, index) => (
-                                    <li key={item + index}>{item}</li>
-                                ))}
-                            </ol>
+                            <TagInput 
+                                header="Enter Predicted Goals:"
+                                placeholder="Enter a Goal"
+                                data="Predicted Goal"
+                                func={setPredictedGoals}
+                            />
                         </FormGroup>
                     </Form>
                 </Card.Body>

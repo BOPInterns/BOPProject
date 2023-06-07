@@ -1,7 +1,5 @@
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import Badge from 'react-bootstrap/Badge';
-import Button from 'react-bootstrap/Button';
 import FormGroup from 'react-bootstrap/FormGroup';
 import TagInput from '../TagInput';
 import { useState } from 'react';
@@ -38,17 +36,6 @@ export const Step1MandatoryFields = () => {
             return localStorage.setItem('step1', false);
         localStorage.setItem('step1', true);
     }, [campaignName, campaignTags]);
-
-    const displayTags = () => {
-        var list = "Tags: ";
-        for (let i = 0; i < campaignTags.length; i++) {
-            list += campaignTags[i];
-            if (i != campaignTags.length - 1) {
-                list += ", ";
-            }
-        }
-        return list;
-    }
 
     return (
         <div>
