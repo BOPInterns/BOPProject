@@ -17,6 +17,7 @@ import { NavigationBar } from './NavigationBar';
 import { LoginAlertSuccess } from './LoginAlertSuccess';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import './Account.css';
 
 
 
@@ -125,7 +126,7 @@ export const Login = () => {
                     <Col className="mt-4">
                     <Form>
                         <Row className="text-center">
-                            <h4>Sign in with</h4>
+                            <h4>Login with</h4>
                             <hr></hr>
                             <ButtonGroup size="sm">
                             <Button 
@@ -138,11 +139,11 @@ export const Login = () => {
                             <Button variant="outline-secondary" size="sm">Linkedin</Button>
                             <Button variant="outline-secondary" size="sm">Other</Button>
                             </ButtonGroup>
-                            <hr className="mt-3" style={hrStyle}></hr>
+                            <hr className="mt-3"></hr>
                         </Row>
                         <Row className="text-center">
                             <h4>or</h4>
-                            <hr style={hrStyle} className="mt-3"></hr>
+                            <hr className="mt-3"></hr>
                         </Row>
                         <FloatingLabel
                             controlId="floatingEmailInput"
@@ -155,14 +156,7 @@ export const Login = () => {
                             placeholder="Enter email" 
                             name="email" 
                             value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            style={inputStyle}
-                            onFocus={(e) => {
-                                e.target.style.border = highlightStyle.border;
-                              }}
-                            onBlur={(e) => {
-                                e.target.style.border = inputStyle.border;
-                            }}
+                            onChange={(e) => setEmail(e.target.value)}
                             />
                         </FloatingLabel>
                         <FloatingLabel
@@ -175,17 +169,10 @@ export const Login = () => {
                             placeholder="Password" 
                             name="password" 
                             value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            style={inputStyle}
-                            onFocus={(e) => {
-                                e.target.style.border = highlightStyle.border;
-                              }}
-                            onBlur={(e) => {
-                                e.target.style.border = inputStyle.border;
-                            }}
+                            onChange={(e) => setPassword(e.target.value)}
                             />
                         </FloatingLabel>
-                        <hr style={hrStyle} className="mt-2"/>
+                        <hr className="mt-2"/>
                         <Col className="text-end">
                             <Button href="/forgotpassword" variant="link">Forgot password?</Button>
                         </Col>
@@ -197,12 +184,10 @@ export const Login = () => {
                         >
                         </Form.Check>
                         </div>
-                        <div className="text-end">
-                        <Button className="mt-2 mb-2" variant="outline-secondary" onClick={handleSubmit} type="submit">
-                            Login
-                        </Button>
-                        </div>
-                        <Col>
+                        <Row>
+                            <Button className="mt-2 mb-2 btn-custom-class" variant="outline-secondary" onClick={handleSubmit} type="submit">
+                                Login
+                            </Button>
                             <h6>Don't have an account?
                                 <Button href="/register" variant="link">Register</Button>
                             </h6>
