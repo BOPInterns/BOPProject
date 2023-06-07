@@ -1,0 +1,18 @@
+.emailHeader {
+    color: blue;
+}
+.containerCSS{
+    background-color: blue;
+}
+
+.btn-primary, .btn, .btn-floating{
+    background-color: orange !important;
+}
+
+.rows {
+    border: 2px solid red;
+}
+
+.cols {
+    border: 2px solid black;
+}
