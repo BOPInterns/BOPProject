@@ -22,6 +22,7 @@ import './Account.css';
 
 
 export const Login = () => {
+    
     const [ user, setUser ] = useState({});
     const navigate = useNavigate();
     const [ emailErrorShow, setEmailErrorShow ] = useState(false);
@@ -147,17 +148,31 @@ export const Login = () => {
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Email Address"
-                            className="mb-3 mt-3"
+                            className="mb-3"
+                            style={{colr: 'orange'}}
                         >
-                            <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control 
+                            type="email" 
+                            placeholder="Enter email" 
+                            name="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Password"
                             className="mb-3"
                         >
-                            <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Form.Control 
+                            type="password" 
+                            placeholder="Password" 
+                            name="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)}
+                            />
                         </FloatingLabel>
+                        <hr className="mt-2"/>
                         <Col className="text-end">
                             <Button href="/forgotpassword" variant="link">Forgot password?</Button>
                         </Col>

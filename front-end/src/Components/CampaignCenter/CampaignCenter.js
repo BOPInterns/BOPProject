@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { CampaignCard } from './CampaignCard.js';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from 'react';
+import { buttonStyle, hoverStyle } from '../styles'
 
 export const CampaignCenter = () => {
     const auth = window.localStorage.getItem('loginState');
@@ -147,7 +148,10 @@ export const CampaignCenter = () => {
                 {loadCards()}
                 <Row>
                     <Col>
-                    <Button variant="outline-secondary" size="sm">Load more Campaigns</Button>
+                    <Button 
+                    variant="outline-secondary" 
+                    size="sm"
+                    >Load more Campaigns</Button>
                     </Col>
                 </Row>
             </Container>
