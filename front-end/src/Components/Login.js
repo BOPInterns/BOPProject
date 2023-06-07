@@ -73,7 +73,7 @@ export const Login = () => {
             setUser(data, "userId");
             localStorage.setItem('userObj', JSON.stringify(data.user));
             console.log(JSON.stringify(user));
-            if(JSON.stringify(user).includes("email")){
+            if(JSON.stringify(user).includes("email")) {
                 setEmailErrorShow(true);
                 window.scrollTo(0, 0);
             }   else if(JSON.stringify(user).includes("password")) {

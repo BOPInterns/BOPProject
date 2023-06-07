@@ -46,9 +46,8 @@ export const MyAccount = () => {
             localStorage.setItem('tempLastName', data.lastName);
             localStorage.setItem('userObj', JSON.stringify(data.updatedUser));
             window.location.reload();
-            // navigate('/');
+            setUserEdit(!userEdit);
         });
-        setUserEdit(!userEdit);
     }
     
     return (
@@ -106,7 +105,7 @@ export const MyAccount = () => {
                                  <InputGroup.Text>Email:</InputGroup.Text>
                                  <Form.Control
                                     disabled
-                                     placeholder={email}
+                                    placeholder={email}
                                  ></Form.Control>
                              </InputGroup>
                              {/* <InputGroup>
@@ -118,15 +117,15 @@ export const MyAccount = () => {
                              <InputGroup>
                                  <InputGroup.Text>Phone number:</InputGroup.Text>
                                  <Form.Control
-                                     placeholder={phoneNumber}
-                                     onChange={(e) => { if (!userEdit) setPhoneNumber(e.target.value) }}
+                                    placeholder={phoneNumber}
+                                    onChange={(e) => { if (!userEdit) setPhoneNumber(e.target.value) }}
                                  ></Form.Control>
                              </InputGroup>
                              <InputGroup>
                                  <InputGroup.Text>Verification Status:</InputGroup.Text>
                                  <Form.Control
-                                     placeholder={verificationStatus}
-                                     disabled
+                                    disabled
+                                    placeholder={verificationStatus}
                                  ></Form.Control>
                              </InputGroup>
                              <Button onClick={handleSubmit} variant="outline-secondary">Submit</Button>

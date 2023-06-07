@@ -33,8 +33,8 @@ export const Register = () => {
         }
     },[])
 
-const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = () => {
+    //e.preventDefault();
     fetch("http://localhost:9000/register", {
         method:"POST",
         crossDomain:true,
@@ -46,17 +46,17 @@ const handleSubmit = (e) => {
         body:JSON.stringify({
             firstName,
             lastName,
-            email, 
-            phoneNumber,
+            email,
             password,
-            emailNotif, 
-            textNotif
+            phoneNumber, 
+            textNotif,
+            emailNotif
         }),
-    }).then((res) => res.json())
-    .then((data) => {
-        console.log(data, "userRegister");
-    });
-    window.location.href="/register-success";
+    })
+    .then((res) => res.json())
+    .then((data) => { console.log(data, "userRegister"); 
+});
+    //window.location.href="/register-success";
 }
 
 // const handleInputChange = (e) => {
@@ -177,7 +177,7 @@ const handleSubmit = (e) => {
                         onChange={() => setTextNotif(!textNotif)}
                     >
                     </Form.Check>
-                        <Button onClick={handleSubmit}href='/my-account'  type="submit" variant="primary">
+                        <Button onClick={handleSubmit} type="submit" variant="primary">
                             Submit
                         </Button>
                         <Button href='/register-success'>/register-success</Button>

@@ -42,7 +42,6 @@ export const CreateCampaignS5 = () => {
 
 
     const handleSubmit = () => {
-
         //post request for the campaign
         fetch("http://localhost:9000/create-campaign-step-5", {
             method: "POST",
@@ -68,9 +67,7 @@ export const CreateCampaignS5 = () => {
             }),
         })
         .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-        });
+        .then((data) => { console.log(data); });
 
         //post request for the additional files
         if(files != null){
