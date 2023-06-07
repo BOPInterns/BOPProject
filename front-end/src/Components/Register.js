@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './Register.css'
+import './Account.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
@@ -14,6 +14,8 @@ import Card from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { NavigationBar } from './NavigationBar';
+import Col from 'react-bootstrap/Col';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -86,15 +88,34 @@ const handleSubmit = (e) => {
 
     return (
         <div>
-            <NavigationBar/>
-            <Container className="registrationCard">
+        <NavigationBar />
+        <Container>
             <Row>
-            <Column md={6}>
-                <Image src={BOPLogo} className="img-fluid" height="10000" width="10000"></Image>
-            </Column>
-            <Card style={{width: '24rem'}}>
-                <Card.Body>
-                    <Card.Title>Create an account</Card.Title>
+                <Col md={6}>
+                <Image src={BOPLogo} className="img-fluid" height="650" width="650"></Image>
+                </Col>
+                <Col className="mt-4">
+                <Form>
+                    <Row className="text-center">
+                        <h4>Register with</h4>
+                        <hr></hr>
+                        <ButtonGroup size="sm">
+                        <Button 
+                        variant="outline-secondary"
+                        id="signInGoogle"
+                        size="sm">
+                        Google
+                        </Button>
+                        <Button variant="outline-secondary" size="sm">Facebook</Button>
+                        <Button variant="outline-secondary" size="sm">LinkedIn</Button>
+                        <Button variant="outline-secondary" size="sm">Other</Button>
+                        </ButtonGroup>
+                        <hr className="mt-3"></hr>
+                    </Row>
+                    <Row className="text-center">
+                        <h4>or</h4>
+                        <hr className="mt-3"></hr>
+                    </Row>
                     <Row>
                         <Column>
                         <FloatingLabel
@@ -104,7 +125,7 @@ const handleSubmit = (e) => {
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         >
-                            <Form.Control type="firstName" placeholder="firstName"/>
+                            <Form.Control className="name-field" type="firstName" placeholder="firstName"/>
                         </FloatingLabel>
                         </Column>
                         <Column>
@@ -115,42 +136,36 @@ const handleSubmit = (e) => {
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                         >
-                            <Form.Control type="lastName" placeholder="lastName"/>
+                            <Form.Control className="name-field" nametype="lastName" placeholder="lastName"/>
                         </FloatingLabel>
                         </Column>
                     </Row>
+                    
                     <FloatingLabel
-                        id="email"
                         controlId="floatingEmailInput"
-                        label="Please enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        label="Email Address"
+                        className="mb-3 mt-3"
                     >
-                        <Form.Control type="email" placeholder="Please enter a valid email"/>
+                        <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </FloatingLabel>
-                    {/* <FloatingLabel
-                        controlId="floatingEmailInputCheck"
-                        label="Please re-enter your email"
-                    >
-                        <Form.Control type="email" placeholder="Please enter a valid email"/>
-                    </FloatingLabel> */}
+
                     <FloatingLabel
                         id="phoneNumber"
                         controlId="phoneNumber"
                         label="Phone Number (Recommended)"
+                        className="mb-3 mt-3"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                     >
-                        <Form.Control type="phoneNumber" placeholder="phoneNumber"/>
+                        <Form.Control className="field" type="phoneNumber" placeholder="phoneNumber"/>
                     </FloatingLabel>
+                    
                     <FloatingLabel
-                        id="password"
-                        controlId="floatingPasswordInput"
+                        controlId="floatingEmailInput"
                         label="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        className="mb-3 mt-3"
                     >
-                        <Form.Control type="password" placeholder="password"/>
+                        <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </FloatingLabel>
 
                     <Card.Text className='form-subtext'>Please ensure your new password meets the following requirements:</Card.Text>
@@ -181,10 +196,18 @@ const handleSubmit = (e) => {
                             Submit
                         </Button>
                         <Button href='/register-success'>/register-success</Button>
-                </Card.Body>
-            </Card>
+                    <Row>
+                    <Button className="mt-2 mb-2 btn-custom-class" variant="outline-secondary" onClick={handleSubmit} type="submit">
+                        Register
+                    </Button>
+                    <h6>Already have an account?
+                        <Button href="/login" variant="link">Login</Button>
+                    </h6>
+                    </Row>
+                </Form>
+                </Col>
             </Row>
-            </Container>
+        </Container>
     </div>
     )
 }

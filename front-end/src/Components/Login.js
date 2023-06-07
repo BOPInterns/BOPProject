@@ -17,7 +17,6 @@ import { NavigationBar } from './NavigationBar';
 import { LoginAlertSuccess } from './LoginAlertSuccess';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
-import { hrStyle, buttonStyle, hoverStyle, inputStyle } from './styles';
 
 
 
@@ -127,7 +126,7 @@ export const Login = () => {
                     <Form>
                         <Row className="text-center">
                             <h4>Sign in with</h4>
-                            <hr style={hrStyle}></hr>
+                            <hr></hr>
                             <ButtonGroup size="sm">
                             <Button 
                             variant="outline-secondary"
@@ -135,9 +134,9 @@ export const Login = () => {
                             size="sm">
                             Google
                             </Button>
-                            <Button variant="outline-secondary" size="sm">facebook</Button>
-                            <Button variant="outline-secondary" size="sm">linkedin</Button>
-                            <Button variant="outline-secondary" size="sm">other</Button>
+                            <Button variant="outline-secondary" size="sm">Facebook</Button>
+                            <Button variant="outline-secondary" size="sm">Linkedin</Button>
+                            <Button variant="outline-secondary" size="sm">Other</Button>
                             </ButtonGroup>
                             <hr className="mt-3" style={hrStyle}></hr>
                         </Row>
@@ -199,22 +198,7 @@ export const Login = () => {
                         </Form.Check>
                         </div>
                         <div className="text-end">
-                        <Button 
-                        className="mt-2 mb-2"  
-                        onClick={handleSubmit} 
-                        type="submit"
-                        style={buttonStyle}
-                        onMouseEnter={(e) => {
-                            e.target.style.backgroundColor = hoverStyle.backgroundColor;
-                            e.target.style.color = hoverStyle.color;
-                            e.target.style.borderColor = hoverStyle.borderColor;
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.backgroundColor = buttonStyle.backgroundColor;
-                            e.target.style.color = buttonStyle.color;
-                            e.target.style.borderColor = buttonStyle.borderColor;
-                          }}
-                        >
+                        <Button className="mt-2 mb-2" variant="outline-secondary" onClick={handleSubmit} type="submit">
                             Login
                         </Button>
                         </div>
@@ -222,7 +206,7 @@ export const Login = () => {
                             <h6>Don't have an account?
                                 <Button href="/register" variant="link">Register</Button>
                             </h6>
-                        </Col>
+                        </Row>
                     </Form>
                     </Col>
                 </Row>

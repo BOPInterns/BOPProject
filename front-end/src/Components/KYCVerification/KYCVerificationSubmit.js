@@ -19,8 +19,8 @@ export const KYCVerificationSubmit = () => {
                             </Card.Title>
                             <hr></hr>
                             <Card.Body>
-                                <p>Congratulations! You'll hear back from us when we've fully verified your identity. In the mean time be sure to browse the sight for organizations to join!</p>
-                                <Button href="/campaign-center" variant="outline-secondary">Back to Campagin Center</Button>
+                                <p>Congratulations! You'll hear back from us when we've fully verified your identity. In the meantime be sure to browse the sight for organizations to join!</p>
+                                <Button href="/campaign-center" variant="outline-secondary">Back to Campaign Center</Button>
                             </Card.Body>
                         </Card>
                     </Col>

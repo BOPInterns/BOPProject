@@ -255,3 +255,25 @@ app.post('/my-account', async (req, res) => {
         res.status(201).json({updatedUser});
     } catch (err) { res.status(401).json({error: err.message}); }
 });
+
+app.post('/kyc-verification-form', async (req, res) => {
+    try {
+        const {userId, address, city, state, zipcode, country, gender, nationality, selfie} = req.body;
+        const filter = {_id: userId};
+        const update = {
+            $set: {
+                address,
+                city,
+                state,
+                zipcode,
+                country,
+                gender,
+                nationality,
+                selfie
+            }
+        };
+
+        const kycUser = await User.findOneAndUpdate(filter, update, {new: true});
+        res.status(201).json({kycUser});
+    } catch (err) { res.status(401).json({err: err.message}); }
+});

@@ -11,6 +11,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "bootstrap5-tags": "^1.5.22",
+    "fsevents": "^2.3.2",
     "googleapis": "^118.0.0",
     "install": "^0.13.0",
     "jwt-decode": "^3.1.2",
@@ -24,6 +25,7 @@
     "react-scripts": "^5.0.1",
     "react-tag-input": "^6.8.1",
     "react-token-autocomplete": "^0.5.3",
+    "swaelos-youtube-validator": "^1.1.0",
     "web-vitals": "^2.1.4",
     "youtube-validate": "^1.2.4"
   },

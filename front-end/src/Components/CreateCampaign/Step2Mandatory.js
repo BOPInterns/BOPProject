@@ -24,8 +24,9 @@ export const Step2MandatoryFields = () => {
         localStorage.setItem('challenge', challenge);
     }, [challenge]);
     
+    // validation
     useEffect(() => {
-        if ((description.length == 0) || (challenge.length == 0))
+        if ((description.length < 20) || (description.length > 500) || (challenge.length < 10) || (challenge.length > 500))
             return localStorage.setItem('step2', false);
         localStorage.setItem('step2', true);
     }, [description, challenge]);
@@ -50,7 +51,7 @@ export const Step2MandatoryFields = () => {
                     as="textarea" 
                     rows={10} 
                     type="text" 
-                    placeholder="Describe your campaign here..." 
+                    placeholder="Describe your campaign here..."
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 /><Form.Text className="text-muted">Explainer text about the role of the campaign description</Form.Text>
