@@ -50,7 +50,7 @@ export const Step2MandatoryFields = () => {
                     as="textarea" 
                     rows={10} 
                     type="text" 
-                    placeholder="Describe your campaign here..." 
+                    placeholder="Describe your campaign here..."
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 /><Form.Text className="text-muted">Explainer text about the role of the campaign description</Form.Text>
