@@ -1,10 +1,9 @@
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
+import TagInput from '../TagInput';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { InputTags } from 'react-bootstrap-tagsinput';
-
 
 export const Step1MandatoryFields = () => {
     if (localStorage.getItem('campaignName') === null) 
@@ -75,27 +74,22 @@ export const Step1MandatoryFields = () => {
                                     <Form.Control 
                                         type="text" 
                                         placeholder="Campaign name" 
+                                        autoFocus="autofocus"
                                         value={campaignName}
                                         onChange={(e) => setCampaignName(e.target.value)}
                                     /><Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>
                                 </FormGroup>
                                 
-                                <Form.Label>Campaign tags</Form.Label>
-                                <div className="input-group">
-                                    <InputTags values={campaignTags} placeholder='New Tag' onTags={(value) => {setCampaignTags(value.values)}} />
-                                    <button
-                                        className="btn btn-outline-secondary"
-                                        type="button"
-                                        data-testid="button-clearAll"
-                                        onClick={(e) => {e.preventDefault();setCampaignTags([]);}}
-                                    >Delete all</button>
-                                </div>
-                                <hr />
-                                {displayTags()}
+                                <TagInput 
+                                    header="Enter Campaign Tags:"
+                                    placeholder="Enter a Tag"
+                                    data="Tag"
+                                    func={setCampaignTags}
+                                />
 
                             </Form>
                     </Card.Body>
-                    </Card>
+            </Card>
         </div>    
     )
 }
