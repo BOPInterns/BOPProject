@@ -87,7 +87,6 @@ export const Login = () => {
                 navigate('/campaign-center');
                 localStorage.setItem('userObj', JSON.stringify(data.user));
             }
-            
         });
         console.log("Password: ", password);
         //window.location.href="/my-account";
