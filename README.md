@@ -14,6 +14,7 @@ Project created by intern team for the BoP Hub website
 * phone number validation
 * email validation to check for fake emails that have correct email format
 * file upload works but there is a limit to the size and type of file, also no security checking on this file
+* find a less jank way to display errors on login page -B
 
 ## Successful can kicks:
 * store things like db link in ENV file
