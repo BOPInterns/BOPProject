@@ -60,12 +60,13 @@ const TagInput = (props) => {
                     <Badge
                         key={index}
                         variant="secondary"
-                        className="mr-2 mb-2"
+                        className="mr-2 mb-2 bg-secondary"
+                        style={{marginRight: 2}}
                         onClick={() => deleteTag(index)}
                     >{tag}</Badge>
                     ))}
                 </div>
-                <Button variant="danger" onClick={deleteAllTags}>Remove All {props.data}s</Button>
+                <Button variant="warning" style={{backgroundColor: "orange"}} onClick={deleteAllTags}>Remove All {props.data}s</Button>
             </div>
         )}
         </div>
