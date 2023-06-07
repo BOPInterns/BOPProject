@@ -12,16 +12,15 @@ import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import React from 'react';
 import { Step1Suggestions } from './Step1Suggestions';
-import { CreateCampaignS1 } from './CreateCampaignS1';
+// import { CreateCampaignS1 } from './CreateCampaignS1';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Step2Suggestions } from './Step2Suggestions';
-import { CreateCampaignS3 } from './CreateCampaignS3';
-import { CreateCampaignS4 } from './CreateCampaignS4';
+// import { CreateCampaignS3 } from './CreateCampaignS3';
+// import { CreateCampaignS4 } from './CreateCampaignS4';
 import { Step3Suggestions } from './Step3Suggestions';
 import { Step4Suggestions } from './Step4Suggestions';
-// import { useState } from 'react';
 
 export const CreateCampaignS5 = () => {
     
@@ -121,8 +120,8 @@ export const CreateCampaignS5 = () => {
     
     const checkSteps = () => {
         if(step1 === true && step2 === true && step3 === true) {
-            handleSubmit()
-            navigate('/create-campaign-step-6')
+            handleSubmit();
+            navigate('/create-campaign-step-6');
         }   else {
             setShow(true);
             window.scrollTo(0,0);
