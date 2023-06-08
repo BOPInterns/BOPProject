@@ -5,6 +5,7 @@ import './Account.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
+import { Alert } from 'react-bootstrap';
 import BOPLogo from './BOPHub.MainLogo.png'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
@@ -15,6 +16,10 @@ import Col from 'react-bootstrap/Col';
 
 export const ForgotPassword = () => {
     const [email, setEmail] = useState('');
+    const [sent, setSent ] = useState(false);
+    const [ errorShow, setErrorShow ] = useState(false);
+    const [ succShow, setSuccShow ] = useState(false);
+
 
 
     const handleSubmit = (e) => {
@@ -32,36 +37,65 @@ export const ForgotPassword = () => {
             }),
         }).then((res) => res.json())
         .then((data) => {
-            console.log(data, "userRegister");
-            alert(data.status);
+            console.log(data)
+            if(data.error){
+                setSuccShow(false);
+                setErrorShow(true);
+                window.scrollTo(0, 0);
+            } else {
+                console.log("fnjdsinfini9nei")
+                setErrorShow(false);
+                setSuccShow(true);
+                window.scrollTo(0, 0);
+            }
         });
     }
 
     return (
         <div>
         <Navbar bg="dark" variant="dark" expand="lg">
-                <Container>
-                    <Navbar.Brand href="/" >
-                            <img height="65" width="115" src="https://images.squarespace-cdn.com/content/v1/60e57a13579c8f0509ce7237/03227bce-9951-411b-9f7d-42875ddb8933/New+header+logo.png?format=1500w" alt=""/>
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href="/">Campaign Center</Nav.Link>
-                        <Nav.Link href="/">Explore</Nav.Link>
-                        <Nav.Link href="/">Learn</Nav.Link>
-                        <Nav.Link href="/">Become</Nav.Link>
-                        <Nav.Link href="/">About us</Nav.Link>
+            <Container>
+                <Navbar.Brand href="/" >
+                        <img height="65" width="115" src="https://images.squarespace-cdn.com/content/v1/60e57a13579c8f0509ce7237/03227bce-9951-411b-9f7d-42875ddb8933/New+header+logo.png?format=1500w" alt=""/>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                    <Nav.Link href="/">Campaign Center</Nav.Link>
+                    <Nav.Link href="/">Explore</Nav.Link>
+                    <Nav.Link href="/">Learn</Nav.Link>
+                    <Nav.Link href="/">Become</Nav.Link>
+                    <Nav.Link href="/">About us</Nav.Link>
+                </Nav>
+                </Navbar.Collapse>
+                <Navbar.Collapse className="justify-contents-end">
+                    <Nav className='me-auto'>
+                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/">Register</Nav.Link>
                     </Nav>
-                    </Navbar.Collapse>
-                    <Navbar.Collapse className="justify-contents-end">
-                        <Nav className='me-auto'>
-                            <Nav.Link href="/login">Login</Nav.Link>
-                            <Nav.Link href="/">Register</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
+                </Navbar.Collapse>
+            </Container>
             </Navbar>
+
+            <Alert
+                show={errorShow}
+                variant="danger"
+                dismissible
+                onClose={() => setErrorShow(false)}
+            >
+                <Alert.Heading>Error!</Alert.Heading>
+                <p>Please enter a valid email!</p>
+            </Alert>
+            <Alert
+                show={succShow}
+                variant="success"
+                dismissible
+                onClose={() => setSuccShow(false)}
+            >
+                <Alert.Heading>Success!</Alert.Heading>
+                <p>Email has been sent to {email}</p>
+            </Alert>
+
             <Container>
             <Row>
             <Column md={6}>

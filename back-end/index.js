@@ -128,6 +128,8 @@ app.get('/', (req, res) => {
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
     try{
+        if (!validator.isEmail(email)) {return res.json({error: "this shit aint a valid email"})};
+
         const existingUser = await User.findOne({ email });
         if(!existingUser){
             return res.json({status:"No account with this email address has been registered."});
@@ -162,11 +164,13 @@ app.post("/forgot-password", async(req, res) => {
               console.log('Email sent: ' + info.response);
             }
           });
-          /////////////////////////////////
+          ////////////////////////////////////
         
         console.log(link);
+        return res.json({status: 'ok'});
     }catch (error) {
-
+        console.log(error);
+        res.send(error);
     }
 });
 
