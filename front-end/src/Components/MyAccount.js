@@ -7,7 +7,7 @@ import Figure from 'react-bootstrap/Figure';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 
 export const MyAccount = () => {
@@ -18,6 +18,10 @@ export const MyAccount = () => {
     // const [password, setPassword] = useState(JSON.parse(localStorage.getItem('userObj')).password);
     const [verificationStatus, setVerificationStatus] = useState(JSON.parse(localStorage.getItem('userObj')).KYC.verified);
     const [userEdit, setUserEdit] = useState(false);
+    
+    useEffect(() => {
+        setVerificationStatus(JSON.parse(localStorage.getItem('userObj')).KYC.verified);
+    },[])
 
     // TODO: connect verification status stuff to backend
     const handleSubmit = (e) => {
@@ -72,24 +76,47 @@ export const MyAccount = () => {
                     <Col md={6}>
                         <h3>General Information</h3>
                         <hr></hr>
-                        <Card style={{width: '28rem'}}>
+                        <Card style={{width: '700px', height: '300px'}}>
                             { !userEdit ? <>
                             <Card.Body>
-                                First Name: {firstName}
-                                <br></br>
-                                Last Name: {lastName}
-                                <br></br>
-                                Email address: {email}
-                                <br></br>
-                                Phone Number: {phoneNumber}
-                                <br></br>
-                                Verification Status: {verificationStatus}
-                                <br></br>
+                            <InputGroup className="mb-3">
+                                 <InputGroup.Text>First name:</InputGroup.Text>
+                                 <Form.Control
+                                     placeholder={firstName}
+                                     disabled
+                                 ></Form.Control>
+                                 <InputGroup.Text>Last name:</InputGroup.Text>
+                                 <Form.Control
+                                     placeholder={lastName}
+                                     disabled
+                                 ></Form.Control>
+                             </InputGroup>
+                             <InputGroup className="mb-3">
+                                 <InputGroup.Text>Email:</InputGroup.Text>
+                                 <Form.Control
+                                    disabled
+                                    placeholder={email}
+                                 ></Form.Control>
+                             </InputGroup>
+                             <InputGroup className="mb-3">
+                                 <InputGroup.Text>Phone number:</InputGroup.Text>
+                                 <Form.Control
+                                     placeholder={phoneNumber}
+                                     disabled
+                                 ></Form.Control>
+                             </InputGroup>
+                             <InputGroup className="mb-3">
+                                 <InputGroup.Text>Verification Status:</InputGroup.Text>
+                                 <Form.Control
+                                    disabled
+                                    placeholder={verificationStatus ? 'Verified!' : 'Not verified'} 
+                                 ></Form.Control>
+                             </InputGroup>
                                 <Button onClick={() => setUserEdit(!userEdit)} variant="outline-secondary">Edit</Button>
                             </Card.Body>
                             </> :
                              <Card.Body>
-                             <InputGroup>
+                             <InputGroup className="mb-3">
                                  <InputGroup.Text>First name:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={firstName}
@@ -101,7 +128,7 @@ export const MyAccount = () => {
                                      onChange={(e) => {setLastName(e.target.value) }}
                                  ></Form.Control>
                              </InputGroup>
-                             <InputGroup>
+                             <InputGroup className="mb-3">
                                  <InputGroup.Text>Email:</InputGroup.Text>
                                  <Form.Control
                                     disabled
@@ -114,18 +141,18 @@ export const MyAccount = () => {
                                      placeholder={password}
                                  ></Form.Control>
                              </InputGroup> */}
-                             <InputGroup>
+                             <InputGroup className="mb-3">
                                  <InputGroup.Text>Phone number:</InputGroup.Text>
                                  <Form.Control
                                      placeholder={phoneNumber}
                                      onChange={(e) => {setPhoneNumber(e.target.value) }}
                                  ></Form.Control>
                              </InputGroup>
-                             <InputGroup>
+                             <InputGroup className="mb-3">
                                  <InputGroup.Text>Verification Status:</InputGroup.Text>
                                  <Form.Control
                                     disabled
-                                    placeholder={verificationStatus}
+                                    placeholder={verificationStatus ? 'Verified!' : 'Not verified'} 
                                  ></Form.Control>
                              </InputGroup>
                              <Button onClick={handleSubmit} variant="outline-secondary">Submit</Button>
@@ -133,7 +160,7 @@ export const MyAccount = () => {
                             }
                         </Card>
                         </Col>
-                    <Col md={4}>
+                    <Col md={4} className="text-center">
                     <Figure>
                             <Figure.Image 
                                 width={300}

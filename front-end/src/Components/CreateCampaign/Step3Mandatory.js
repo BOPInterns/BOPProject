@@ -25,6 +25,7 @@ export const Step3MandatoryFields = () => {
         localStorage.setItem('reach', reach);
     }, [reach]);
     
+    // validation
     useEffect(() => {
         if ((location.length == 0) || (reach.length == 0))
             return localStorage.setItem('step3', false);
@@ -54,7 +55,11 @@ export const Step3MandatoryFields = () => {
                             <hr></hr>
                         </Card.Title>
                         <Card.Body>
-                            <Card.Text>The two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.</Card.Text>    
+                            <Card.Text>
+                                <strong>
+                                    The two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.
+                                </strong>
+                                </Card.Text>    
                         <Form>
                             <FormGroup>
                                 <Form.Label>Your location</Form.Label>
