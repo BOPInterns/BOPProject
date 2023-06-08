@@ -36,7 +36,11 @@ useEffect(() => {
                 <hr></hr>
             </Card.Title>
             <Card.Body>
-                <Card.Text>Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform.</Card.Text>
+                <Card.Text>
+                    <strong>
+                    Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform.
+                    </strong>
+                    </Card.Text>
                 <hr></hr>
                 <Form>
                     <FormGroup>

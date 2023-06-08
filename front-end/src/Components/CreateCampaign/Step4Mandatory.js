@@ -38,7 +38,9 @@ export const Step4MandatoryFields = () => {
                         </Card.Title>
                         <Card.Body>
                             <Card.Text>
-                                Share withfuture stakeholders materials and attachments you find important or useful to broaden the knowledge about the create campaign. You can decide whether particular elements should be visible for all or after joining the campaign's team
+                                <strong>
+                                Share with future stakeholders materials and attachments you find important or useful to broaden the knowledge about the create campaign. You can decide whether particular elements should be visible for all or after joining the campaign's team
+                                </strong>
                             </Card.Text>
                             <br></br>
                             <Form>

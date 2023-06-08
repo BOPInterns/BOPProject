@@ -135,6 +135,7 @@ export const Login = () => {
                             <h4>or</h4>
                             <hr className="mt-3"></hr>
                         </Row>
+                        <Form>
                         <FloatingLabel
                             controlId="floatingEmailInput"
                             label="Email Address"
@@ -162,18 +163,21 @@ export const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             />
                         </FloatingLabel>
+                        </Form>
                         <hr className="mt-2"/>
-                        <Col className="text-end">
-                            <Button href="/forgotpassword" variant="link">Forgot password?</Button>
-                        </Col>
-                        <div>
+                        <Row className="">
+                        <Col>
                         <Form.Check
                             type="switch"
                             id="rememberMe"
                             label="Remember me"
                         >
                         </Form.Check>
-                        </div>
+                        </Col>
+                        <Col className="text-end">
+                            <Button href="/forgotpassword" variant="link">Forgot password?</Button>
+                        </Col>
+                        </Row>
                         <Row>
                             <Button className="mt-2 mb-2 btn-custom-class" variant="outline-secondary" onClick={handleSubmit} type="submit">
                                 Login
