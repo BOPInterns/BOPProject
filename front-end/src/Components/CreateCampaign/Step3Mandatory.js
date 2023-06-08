@@ -25,6 +25,7 @@ export const Step3MandatoryFields = () => {
         localStorage.setItem('reach', reach);
     }, [reach]);
     
+    // validation
     useEffect(() => {
         if ((location.length == 0) || (reach.length == 0))
             return localStorage.setItem('step3', false);
