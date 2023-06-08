@@ -6,19 +6,15 @@ import { useState, useEffect } from 'react';
 
 export const Step3OptionalFields = () => {
     
-    if (localStorage.getItem('stakeholderLangs') === null)
-    localStorage.setItem('stakeholderLangs', '[]');
-if (localStorage.getItem('volunteerLangs') === null)
-    localStorage.setItem('volunteerLangs', '[]');
+    // if (localStorage.getItem('stakeholderLangs') === null)
+    //     localStorage.setItem('stakeholderLangs', '[]');
+    // if (localStorage.getItem('volunteerLangs') === null)
+    //     localStorage.setItem('volunteerLangs', '[]');
 
 
 
 const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
 const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
-
-
-
-
 
 useEffect(() => {
     localStorage.setItem('stakeholderLangs', JSON.stringify(stakeholderLangs));

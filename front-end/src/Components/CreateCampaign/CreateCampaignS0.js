@@ -6,6 +6,45 @@ import Container from'react-bootstrap/Container';
 import { buttonStyle, hoverStyle } from '../styles';
 
 export const CreateCampaignS0 = () => {
+    // step 1
+    if (localStorage.getItem('campaignName') === null) 
+    localStorage.setItem('campaignName', '');
+    if (localStorage.getItem('campaignTags') === null)
+    localStorage.setItem('campaignTags', '[]');
+    if (localStorage.getItem('videoLink') === null)
+    localStorage.setItem('videoLink', '');
+    if (localStorage.getItem('step1') === null)
+    localStorage.setItem('step1', false);
+    // step 2
+    if (localStorage.getItem('description') === null) 
+        localStorage.setItem('description', '');
+    if (localStorage.getItem('challenge') === null) 
+        localStorage.setItem('challenge', ''); 
+    if (localStorage.getItem('mission') === null) 
+        localStorage.setItem('mission', '');
+    if (localStorage.getItem('milestones') === null)
+        localStorage.setItem('milestones', '[]');
+    if (localStorage.getItem('predictedGoals') === null)
+        localStorage.setItem('predictedGoals', '[]');
+    if (localStorage.getItem('step2') === null)
+        localStorage.setItem('step2', false); 
+    // step 3
+    if (localStorage.getItem('step3') === null)
+        localStorage.setItem('step3', false);
+    if (localStorage.getItem('location') === null) 
+        localStorage.setItem('location', '');
+    if (localStorage.getItem('reach') === null)
+        localStorage.setItem('reach', '');
+    if (localStorage.getItem('stakeholderLangs') === null)
+        localStorage.setItem('stakeholderLangs', '[]');
+    if (localStorage.getItem('volunteerLangs') === null)
+        localStorage.setItem('volunteerLangs', '[]');
+    // step 4
+    if (localStorage.getItem('files') === null) 
+        localStorage.setItem('files', '');
+    if (localStorage.getItem('step4') === null)
+        localStorage.setItem('step4', false);
+
     return (
         <div class="mx-auto">
             <NavigationBar />

@@ -10,12 +10,12 @@ export const Step3MandatoryFields = () => {
     const [reach, setReach] = useState(localStorage.getItem('reach'));
     const [url, setUrl] = useState('https://www.openstreetmap.org/export/embed.html?bbox=-252.42187500000003%2C-64.16810689799152%2C191.25000000000003%2C85.80595815715571&amp;layer=mapnik;&amp;marker=-81%2c29%2c');
     
-    if (localStorage.getItem('step3') === null)
-    localStorage.setItem('step3', false);
-    if (localStorage.getItem('location') === null) 
-    localStorage.setItem('location', '');
-    if (localStorage.getItem('reach') === null)
-    localStorage.setItem('reach', '');
+    // if (localStorage.getItem('step3') === null)
+    // localStorage.setItem('step3', false);
+    // if (localStorage.getItem('location') === null) 
+    // localStorage.setItem('location', '');
+    // if (localStorage.getItem('reach') === null)
+    // localStorage.setItem('reach', '');
     
     useEffect(() => {
         localStorage.setItem('location', location);
