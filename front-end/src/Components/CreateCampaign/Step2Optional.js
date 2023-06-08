@@ -64,6 +64,7 @@ export const Step2OptionalFields = () => {
                                 header="Enter Campaign Milestone:"
                                 placeholder="Enter a Milestones"
                                 data="Milestone"
+                                value={milestones}
                                 func={setMilestones}
                             />
                         </FormGroup>
@@ -73,6 +74,7 @@ export const Step2OptionalFields = () => {
                                 header="Enter Predicted Goals:"
                                 placeholder="Enter a Goal"
                                 data="Predicted Goal"
+                                value={predictedGoals}
                                 func={setPredictedGoals}
                             />
                         </FormGroup>
