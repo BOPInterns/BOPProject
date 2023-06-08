@@ -4,7 +4,6 @@ import { Register } from './Components/Register.js';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './Components/LandingPage.js';
 import { ForgotPassword } from './Components/ForgotPassword.js';
-import { ResetPassword } from './Components/ResetPassword.js'
 import { CampaignCenter } from './Components/CampaignCenter/CampaignCenter.js';
 import { MyAccount } from './Components/MyAccount.js';
 import { CreateCampaignS0 } from './Components/CreateCampaign/CreateCampaignS0.js';
@@ -42,12 +41,7 @@ const App = () => {
            <Route path="/login" element={<Login />} />
            <Route path="/register" element={<Register />} />
            <Route path="/register-success" element={<RegisterSuccess />} />
-<<<<<<< HEAD
-           <Route path="/forgot-password" element={<ForgotPassword />} />
-           <Route path="/reset-password" element={<ForgotPassword />} />
-=======
            <Route path="/forgotpassword" element={<ForgotPassword />} />
->>>>>>> c6bc9b5eceb4f38c6f7fea1ffacb2176d96ab450
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
         </Routes>
      </>
