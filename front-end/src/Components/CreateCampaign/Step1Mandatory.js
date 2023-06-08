@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 export const Step1MandatoryFields = () => {
     if (localStorage.getItem('campaignName') === null) 
     localStorage.setItem('campaignName', '');
-    if (localStorage.getItem('campaignTags') === null)
+    if (localStorage.getItem('campaignTags') === [])
     localStorage.setItem('campaignTags', '[]');
     if (localStorage.getItem('videoLink') === null)
     localStorage.setItem('videoLink', '');
@@ -86,6 +86,7 @@ export const Step1MandatoryFields = () => {
                                     header="Enter Campaign Tags:"
                                     placeholder="Enter a Tag"
                                     data="Tag"
+                                    
                                     func={setCampaignTags}
                                 />
 
