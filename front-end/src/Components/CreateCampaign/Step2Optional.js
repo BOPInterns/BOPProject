@@ -43,7 +43,9 @@ export const Step2OptionalFields = () => {
                 </Card.Title>
                 <Card.Body>
                     <Card.Text>
-                        Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform
+                        <strong>
+                        Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform.
+                        </strong>
                     </Card.Text>
                     <br></br>
                     <Form>

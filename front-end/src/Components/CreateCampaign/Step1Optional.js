@@ -39,7 +39,11 @@ export const Step1OptionalFields = () => {
                 <hr></hr>
             </Card.Title>
             <Card.Body>
-                <Card.Text>Fields below are not necessary to fill, but they surely improve your campaign's recognition on the platform.</Card.Text>
+                <Card.Text>
+                    <strong>
+                        Fields below are not necessary to fill, but they surely improve your campaign's recognition on the platform.
+                    </strong>
+                        </Card.Text>
                 <Card.Text>
                     <Form>
                         <FormGroup>

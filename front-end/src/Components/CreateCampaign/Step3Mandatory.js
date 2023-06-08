@@ -55,7 +55,11 @@ export const Step3MandatoryFields = () => {
                             <hr></hr>
                         </Card.Title>
                         <Card.Body>
-                            <Card.Text>The two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.</Card.Text>    
+                            <Card.Text>
+                                <strong>
+                                    The two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.
+                                </strong>
+                                </Card.Text>    
                         <Form>
                             <FormGroup>
                                 <Form.Label>Your location</Form.Label>
@@ -76,7 +80,8 @@ export const Step3MandatoryFields = () => {
                                     onChange={handleChange}
                                 />
                                 <Form.Text>
-                                    <iframe width="425" height="350" frameBorder="0" scrolling="no" marginHeight="2px" marginWidth="2px" src={url}></iframe><br/>
+                                    <br></br>
+                                    <iframe width="897" height="350" frameBorder="0" scrolling="no" marginHeight="2px" marginWidth="2px" src={url}></iframe><br/>
                                 </Form.Text>
                                 <Form.Text className="text-muted">You can select the country or make the reach of the campaign using the map above</Form.Text>
                             </FormGroup>

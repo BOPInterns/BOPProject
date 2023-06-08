@@ -44,7 +44,7 @@ export const Step2MandatoryFields = () => {
         </Card.Title>
         <Card.Body>
             <Card.Text>
-                These two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.
+                <strong>These two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.</strong>
             </Card.Text>
             <br></br>
             <Form>

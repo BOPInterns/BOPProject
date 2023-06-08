@@ -1,0 +1,12 @@
+.nav-link.active {
+    color: #fa6e13 !important;
+    border-bottom: #fa6e13 !important;
+    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-color: #fa6e13 !important;
+    padding-bottom: 7.5% !important;
+    
+}
+.nav-link {
+    color: #919495  !important;
+}
