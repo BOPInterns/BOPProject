@@ -10,6 +10,8 @@ import { CampaignCard } from './CampaignCard.js';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from 'react';
 import { buttonStyle, hoverStyle } from '../styles'
+import '../Account.css'
+
 
 export const CampaignCenter = () => {
     const auth = window.localStorage.getItem('loginState');
@@ -95,6 +97,7 @@ export const CampaignCenter = () => {
                         title="Current Organizaiton"
                         id="CurrentOrganizationDropdown"
                         className="text-center"
+                        variant='outline-secondary'
                     >
                     { auth ? <>
                     <Form.Control 
@@ -138,9 +141,13 @@ export const CampaignCenter = () => {
                     <Col>
                         <h3>Campaigns</h3>
                     </Col>
-                    <Col>
-                    <div className="text-end">
-                <Button href="/create-campaign-introduction">Create a Campaign</Button>
+                    <Col className="text-end">
+                <div className="">
+                <Button 
+                href="/create-campaign-introduction"
+                className="btn-custom-class"
+                variant="outline-secondary"
+                >Create a Campaign</Button>
                 </div>                     
                     </Col>
                     <hr className="mt-3"></hr>
