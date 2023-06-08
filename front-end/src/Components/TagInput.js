@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Badge } from 'react-bootstrap';
+import './Account.css';
 
 const TagInput = (props) => {
     const [tags, setTags] = useState([]);
@@ -52,9 +53,9 @@ const TagInput = (props) => {
             />
         </Form.Group>
 
-        {tags.length == 0 ? <strong>None entered</strong>:(
+        {tags.length == 0 ? <strong>No tags</strong>:(
             <div>
-                <strong>Entered {props.data}s: (Click on a {props.data} to Delete it)</strong>
+                <strong>Entered {props.data}s: (Click on a {props.data} to delete it)</strong>
                 <div>
                     {tags.map((tag, index) => (
                     <Badge
@@ -66,7 +67,9 @@ const TagInput = (props) => {
                     >{tag}</Badge>
                     ))}
                 </div>
-                <Button variant="warning" style={{backgroundColor: "orange"}} onClick={deleteAllTags}>Remove All {props.data}s</Button>
+                <Button 
+                className="btn-custom-class"
+                variant="outline-secondary"onClick={deleteAllTags}>Remove All {props.data}s</Button>
             </div>
         )}
         </div>

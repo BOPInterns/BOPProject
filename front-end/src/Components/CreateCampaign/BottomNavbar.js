@@ -21,7 +21,9 @@ const BottomNavbar = ({ currentPage }) => {
         <Nav className="ms-auto">
         <Nav.Item>
             {nextPage < 6 && (
-          <Nav.Link as={Link} to={`/create-campaign-step-${nextPage}`}>
+          <Nav.Link 
+          as={Link} 
+          to={`/create-campaign-step-${nextPage}`}>
             <p>Forward</p>
           </Nav.Link>
             )}
