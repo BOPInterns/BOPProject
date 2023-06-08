@@ -74,7 +74,6 @@ export const Step1MandatoryFields = () => {
                                     <Form.Control 
                                         type="text" 
                                         placeholder="Campaign name" 
-                                        autoFocus="autofocus"
                                         value={campaignName}
                                         onChange={(e) => setCampaignName(e.target.value)}
                                     /><Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>

@@ -12,7 +12,6 @@ import Row from 'react-bootstrap/Row';
 import { Step1MandatoryFields } from './Step1Mandatory';
 import "react-bootstrap-tagsinput/dist/index.css";
 import { Step1OptionalFields } from './Step1Optional';
-import { BottomNavbar } from './BottomNavbar';
 
 export const CreateCampaignS1 = () => {
     return (

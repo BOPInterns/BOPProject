@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import BottomNavbar from './BottomNavbar';
 import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import './customNavLink.css';
 
 export const CreateCampaignNavbar = () => {
         
@@ -22,10 +23,14 @@ export const CreateCampaignNavbar = () => {
                     as={NavLink}
                     exact
                     to="/create-campaign-step-1"
-                    activeStyle={{
-                      backgroundColor: '#f8f9fa',
-                      color: '#212529',
+                    style={{
+                        color: 'rgb(145,148,149)',
+                        backgroundColor: 'rgb(33,37,41)',
+                        transition: 'background-color 0.3s ease',
+                        borderRadius: 0,    
                     }}
+                    className="nav-link"
+                    activeClassname="active"
                     href="/create-campaign-step-1">
                         Step 1
                     </Nav.Link>
@@ -35,9 +40,11 @@ export const CreateCampaignNavbar = () => {
                     as={NavLink}
                     exact
                     to="/create-campaign-step-2"
-                    activeStyle={{
-                      backgroundColor: '#f8f9fa',
-                      color: '#212529',
+                    style={{
+                        color: '#fff',
+                        backgroundColor: 'rgb(33,37,41)',
+                        transition: 'background-color 0.3s ease',
+                        borderRadius: 0,
                     }}
                     href="/create-campaign-step-2">
                         Step 2
@@ -48,9 +55,11 @@ export const CreateCampaignNavbar = () => {
                     as={NavLink}
                     exact
                     to="/create-campaign-step-3"
-                    activeStyle={{
-                      backgroundColor: '#f8f9fa',
-                      color: '#212529',
+                    style={{
+                        color: '#fff',
+                        backgroundColor: 'rgb(33,37,41)',
+                        transition: 'background-color 0.3s ease',
+                        borderRadius: 0,
                     }}
                     href="/create-campaign-step-3">
                         Step 3
@@ -61,9 +70,11 @@ export const CreateCampaignNavbar = () => {
                     as={NavLink}
                     exact
                     to="/create-campaign-step-4"
-                    activeStyle={{
-                      backgroundColor: '#f8f9fa',
-                      color: '#212529',
+                    style={{
+                        color: '#fff',
+                        backgroundColor: 'rgb(33,37,41)',
+                        transition: 'background-color 0.3s ease',
+                        borderRadius: 0,
                     }}
                     href="/create-campaign-step-4">
                         Step 4
@@ -74,9 +85,11 @@ export const CreateCampaignNavbar = () => {
                     as={NavLink}
                     exact
                     to="/create-campaign-step-5"
-                    activeStyle={{
-                      backgroundColor: '#f8f9fa',
-                      color: '#212529',
+                    style={{
+                        color: '#fff',
+                        backgroundColor: 'rgb(33,37,41)',
+                        transition: 'background-color 0.3s ease',
+                        borderRadius: 0,
                     }}
                     href="/create-campaign-step-5">
                         Step 5
