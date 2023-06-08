@@ -72,8 +72,8 @@ app.post("/register", async(req,res) => {
         const passwordEncr = await bcrypt.hash(password, 11);
 
         // check if email is already linked to an account
-        // const exists = await User.findOne({email});
-        // if (exists) { throw Error("Email is already linked to an account"); }
+        const exists = await User.findOne({email});
+        if (exists) { throw Error("Email is already linked to an account"); }
 
         var newUser = await User.create({
             firstName,
@@ -102,7 +102,7 @@ app.post("/login", async(req,res) => {
         else if (!password) { throw Error("Password required"); }
 
         // validation for valid email
-        if (!validator.isEmail(email)) { throw Error("Invalid email"); }
+        if (!validator.isEmail(email)) { throw Error("Invalid or Unregistered email"); }
 
         const user = await User.findOne({email});
         if (!user) { throw Error("User not found"); }

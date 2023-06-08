@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
 import BOPLogo from './BOPHub.MainLogo.png'
+import { Alert } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
@@ -19,6 +20,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 export const Register = () => {
     const navigate = useNavigate();
+
+    // for the input fields
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -26,6 +29,10 @@ export const Register = () => {
     const [password, setPassword] = useState('');
     const [emailNotif, setEmailNotif] = useState(false);
     const [textNotif, setTextNotif] = useState(false);
+
+    // for the error messages
+    const [ errorShow, setErrorShow ] = useState(false);
+    const [ errorMsg, setErrorMsg ] = useState('');
     
     useEffect(() => {
         const auth = localStorage.getItem('loginState');
@@ -35,30 +42,41 @@ export const Register = () => {
         }
     },[])
 
-const handleSubmit = () => {
-    //e.preventDefault();
-    fetch("http://localhost:9000/register", {
-        method:"POST",
-        crossDomain:true,
-        headers:{
-            "Content-Type":"application/json",
-            Accept:"application/json",
-            "Access-Control-Allow-Origin":"*",
-        },
-        body:JSON.stringify({
-            firstName,
-            lastName,
-            email,
-            password,
-            phoneNumber, 
-            textNotif,
-            emailNotif
-        }),
-    }).then((res) => res.json())
-    .then((data) => {
-        console.log(data, "userRegister");
-    });
-}
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetch("http://localhost:9000/register", {
+            method:"POST",
+            crossDomain:true,
+            headers:{
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body:JSON.stringify({
+                firstName,
+                lastName,
+                email, 
+                phoneNumber,
+                password,
+                emailNotif, 
+                textNotif
+            }),
+        }).then((res) => res.json())
+        .then((data) => {
+            console.log(data, "userRegister");
+            if(data.error){
+                console.log(data.error);
+                setErrorShow(true);
+                setErrorMsg(data.error);
+                window.scrollTo(0, 0);
+            } else {
+                navigate('/register-success');
+            }
+            
+        });
+    }
+
+   
 
 // const handleInputChange = (e) => {
 //     const {id, value} = e.target;
@@ -88,6 +106,17 @@ const handleSubmit = () => {
     return (
         <div>
         <NavigationBar />
+
+        <Alert
+            show={errorShow}
+            variant="danger"
+            dismissible
+            onClose={() => setErrorShow(false)}
+        >
+            <Alert.Heading>Error!</Alert.Heading>
+            <p>{errorMsg}</p>
+        </Alert>
+
         <Container>
             <Row>
                 <Col md={6}>
@@ -191,10 +220,6 @@ const handleSubmit = () => {
                         onChange={() => setTextNotif(!textNotif)}
                     >
                     </Form.Check>
-                        <Button onClick={handleSubmit} type="submit" variant="primary">
-                            Submit
-                        </Button>
-                        <Button href='/register-success'>/register-success</Button>
                     <Row>
                     <Button className="mt-2 mb-2 btn-custom-class" variant="outline-secondary" onClick={handleSubmit} type="submit">
                         Register
