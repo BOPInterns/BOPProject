@@ -16,10 +16,6 @@ export const Step3OptionalFields = () => {
 const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
 const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
 
-
-
-
-
 useEffect(() => {
     localStorage.setItem('stakeholderLangs', JSON.stringify(stakeholderLangs));
 }, [stakeholderLangs]);
@@ -48,6 +44,7 @@ useEffect(() => {
                             header="Enter Stakeholder Languages:"
                             placeholder="Enter a Language"
                             data="Language"
+                            value={stakeholderLangs}
                             func={setStakeholderLangs}
                         />
                     </FormGroup>
@@ -57,6 +54,7 @@ useEffect(() => {
                             header="Enter Volunteer Languages:"
                             placeholder="Enter a Language"
                             data="Language"
+                            value={volunteerLangs}
                             func={setVolunteerLangs}
                         />
                     </FormGroup>

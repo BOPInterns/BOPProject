@@ -39,19 +39,20 @@ export const CampaignCard = ({campData}) => {
 
     return (
         <div>
-            <Card style={{width: '14rem'}}>
+            <Card style={{width: '275px', height: '500px'}}>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
+                <hr></hr>
                 <Card.Text>[no.%] match</Card.Text>
                     
                     {loadTags()}
                     {tags.length - loadTags().length > 0 ? <footer><cite>+{tags.length - loadTags().length} more tags</cite></footer> : <></>}
                     
                     <Card.Text>Campaign status: <Badge bg="warning">{status}</Badge></Card.Text>
-                    <br></br>
+                    <hr></hr>
                     <Card.Text className='text-muted'>Campaign Challenge: {challenge}</Card.Text>
                     <Card.Text>Owner
-                        <br></br>
+                        <hr></hr>
                         <Image height="5" width="40" src={require("../placeholderProfilePicture.png")} alt="" roundedCircle fluid>
                         </Image>
                         <footer>{orgName}</footer>

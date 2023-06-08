@@ -84,6 +84,7 @@ export const Step1MandatoryFields = () => {
                                     header="Enter Campaign Tags:"
                                     placeholder="Enter a Tag"
                                     data="Tag"
+                                    value={campaignTags}
                                     func={setCampaignTags}
                                 />
 
