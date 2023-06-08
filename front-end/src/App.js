@@ -36,11 +36,11 @@ const App = () => {
            <Route path="/kyc-verification-about" element={<KYCVerificationAbout />} />
            <Route path="/kyc-verification-form" element={<KYCVerificationForm />} />
            <Route path="/kyc-verification-submitted" element={<KYCVerificationSubmit />} />
-           <Route path="/register-success" element={<RegisterSuccess />} />
-           </Route>
+         </Route>
            <Route path="/campaign-center" element={<CampaignCenter />} />
            <Route path="/login" element={<Login />} />
            <Route path="/register" element={<Register />} />
+           <Route path="/register-success" element={<RegisterSuccess />} />
            <Route path="/forgot-password" element={<ForgotPassword />} />
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
         </Routes>

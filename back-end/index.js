@@ -72,8 +72,8 @@ app.post("/register", async(req,res) => {
         const passwordEncr = await bcrypt.hash(password, 11);
 
         // check if email is already linked to an account
-        // const exists = await User.findOne({email});
-        // if (exists) { throw Error("Email is already linked to an account"); }
+        const exists = await User.findOne({email});
+        if (exists) { throw Error("Email is already linked to an account"); }
 
         var uI = await User.create({
             firstName,
