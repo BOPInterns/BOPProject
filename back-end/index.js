@@ -128,7 +128,7 @@ app.get('/', (req, res) => {
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
     try{
-        if (!validator.isEmail(email)) {return res.json({error: "this shit aint a valid email"})};
+        if (!validator.isEmail(email)) {return res.json({error: "This is not a valid email"})};
 
         const existingUser = await User.findOne({ email });
         if(!existingUser){
@@ -184,7 +184,7 @@ app.get('/reset-password/:id/:token', async(req, res) => {
     const secret = process.env.JWT_SECRET + existingUser.password;
     try {
         const verify = jwt.verify(token, secret);
-        res.render("index", {email:verify.email, status: "Not Verified"});
+        res.render("../front-end/Components/reset-password", {email:verify.email, status: "Not Verified"});
     } catch (error) {
         res.send("Not Verified");
     }
@@ -192,14 +192,11 @@ app.get('/reset-password/:id/:token', async(req, res) => {
 
 app.post('/reset-password/:id/:token', async(req, res) => {
     const {id, token} = req.params;
+    const password = req.body.password;
+    const confirmation = req.body.confirmation;
 
-    console.log(req.body.password);
-    console.log(req.body.confirmation);
-
-    const {password} = req.body.password;
-    const {confirmation} = req.body.confirmation;
-
-    console.log(password + " " + confirmation);
+    if(password != confirmation){return res.json({error: "Please enter the same password in both fields."})}
+    if (!(validator.isStrongPassword(password))) {return res.json("Password is not strong enough")}
 
     const existingUser = await User.findOne({_id:id});
     if(!existingUser){
@@ -217,7 +214,7 @@ app.post('/reset-password/:id/:token', async(req, res) => {
             }
         });
 
-        res.render("index", {email: verify.email, status: "Verified"});
+        res.render("../front-end/Components/reset-password", {email: verify.email, status: "Verified"});
     } catch (error) {
         res.json({status: "Error Updating Password."})
     }
