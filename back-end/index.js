@@ -192,7 +192,14 @@ app.get('/reset-password/:id/:token', async(req, res) => {
 
 app.post('/reset-password/:id/:token', async(req, res) => {
     const {id, token} = req.params;
-    const {password}=req.body;
+
+    console.log(req.body.password);
+    console.log(req.body.confirmation);
+
+    const {password} = req.body.password;
+    const {confirmation} = req.body.confirmation;
+
+    console.log(password + " " + confirmation);
 
     const existingUser = await User.findOne({_id:id});
     if(!existingUser){
