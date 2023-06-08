@@ -16,10 +16,6 @@ if (localStorage.getItem('volunteerLangs') === null)
 const [stakeholderLangs, setStakeholderLangs] = useState(JSON.parse(localStorage.getItem('stakeholderLangs')));
 const [volunteerLangs, setVolunteerLangs] = useState(JSON.parse(localStorage.getItem('volunteerLangs')));
 
-
-
-
-
 useEffect(() => {
     localStorage.setItem('stakeholderLangs', JSON.stringify(stakeholderLangs));
 }, [stakeholderLangs]);
