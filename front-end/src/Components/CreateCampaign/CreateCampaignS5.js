@@ -135,9 +135,9 @@ export const CreateCampaignS5 = () => {
                 <Alert.Heading>Looks like you're missing something!</Alert.Heading>
                 <p>It looks like you're missing some important information. Be sure to fill out all mandatory fields while creating a campaign. You won't be able to continue until all mandatory fields are filled out.</p>
                 <hr></hr>
-                <div className="d-flex justify-content-end">
+                {/* <div className="d-flex justify-content-end">
                     <Button href="/create-campaign-step-6">Dev cheats</Button>
-                </div>
+                </div> */}
             </Alert>
             <Container>
                 <Row className="mt-5">
