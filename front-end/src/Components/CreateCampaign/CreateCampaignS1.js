@@ -25,7 +25,7 @@ export const CreateCampaignS1 = () => {
                 <Row className="mt-3">
                     <Step1MandatoryFields/>
                 </Row>
-                <Row className="mt-5">
+                <Row className="mt-5 mb-5">
                     <Step1OptionalFields/>
                 </Row>
             </Container>
