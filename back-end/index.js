@@ -184,7 +184,7 @@ app.get('/reset-password/:id/:token', async(req, res) => {
     const secret = process.env.JWT_SECRET + existingUser.password;
     try {
         const verify = jwt.verify(token, secret);
-        res.render("../front-end/Components/reset-password", {email:verify.email, status: "Not Verified"});
+        res.render("index", {email:verify.email, status: "Not Verified"});
     } catch (error) {
         res.send("Not Verified");
     }
@@ -214,7 +214,7 @@ app.post('/reset-password/:id/:token', async(req, res) => {
             }
         });
 
-        res.render("../front-end/Components/reset-password", {email: verify.email, status: "Verified"});
+        res.render("index", {email: verify.email, status: "Verified"});
     } catch (error) {
         res.json({status: "Error Updating Password."})
     }
