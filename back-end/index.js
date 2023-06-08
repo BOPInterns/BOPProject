@@ -74,6 +74,7 @@ app.post("/register", async(req,res) => {
         // check if email is already linked to an account
         const exists = await User.findOne({email});
         if (exists) { throw Error("Email is already linked to an account"); }
+        if (firstName == '' || lastName == '') { throw Error("Please provide a valid full name"); }
 
         var newUser = await User.create({
             firstName,
@@ -127,6 +128,8 @@ app.get('/', (req, res) => {
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
     try{
+        if (!validator.isEmail(email)) {return res.json({error: "this shit aint a valid email"})};
+
         const existingUser = await User.findOne({ email });
         if(!existingUser){
             return res.json({status:"No account with this email address has been registered."});
@@ -161,11 +164,13 @@ app.post("/forgot-password", async(req, res) => {
               console.log('Email sent: ' + info.response);
             }
           });
-          /////////////////////////////////
+          ////////////////////////////////////
         
         console.log(link);
+        return res.json({status: 'ok'});
     }catch (error) {
-
+        console.log(error);
+        res.send(error);
     }
 });
 
@@ -187,7 +192,14 @@ app.get('/reset-password/:id/:token', async(req, res) => {
 
 app.post('/reset-password/:id/:token', async(req, res) => {
     const {id, token} = req.params;
-    const {password}=req.body;
+
+    console.log(req.body.password);
+    console.log(req.body.confirmation);
+
+    const {password} = req.body.password;
+    const {confirmation} = req.body.confirmation;
+
+    console.log(password + " " + confirmation);
 
     const existingUser = await User.findOne({_id:id});
     if(!existingUser){
