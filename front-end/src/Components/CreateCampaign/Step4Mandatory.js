@@ -6,10 +6,10 @@ import { useState, useEffect } from 'react';
 
 export const Step4MandatoryFields = () => {
     
-    if (localStorage.getItem('files') === null) 
-        localStorage.setItem('files', '');
-    if (localStorage.getItem('step4') === null)
-        localStorage.setItem('step4', false);
+    // if (localStorage.getItem('files') === null) 
+    //     localStorage.setItem('files', '');
+    // if (localStorage.getItem('step4') === null)
+    //     localStorage.setItem('step4', false);
 
     const [files, setFiles] = useState(); 
     

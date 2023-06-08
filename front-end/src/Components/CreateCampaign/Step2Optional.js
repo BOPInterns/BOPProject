@@ -7,14 +7,14 @@ import { useEffect } from 'react';
 
 export const Step2OptionalFields = () => {
     
-    if (localStorage.getItem('mission') === null) 
-        localStorage.setItem('mission', '');
-    if (localStorage.getItem('milestones') === null)
-        localStorage.setItem('milestones', '[]');
-    if (localStorage.getItem('predictedGoals') === null)
-        localStorage.setItem('predictedGoals', '[]');
-    if (localStorage.getItem('step2') === null)
-        localStorage.setItem('step2', false);    
+    // if (localStorage.getItem('mission') === null) 
+    //     localStorage.setItem('mission', '');
+    // if (localStorage.getItem('milestones') === null)
+    //     localStorage.setItem('milestones', '[]');
+    // if (localStorage.getItem('predictedGoals') === null)
+    //     localStorage.setItem('predictedGoals', '[]');
+    // if (localStorage.getItem('step2') === null)
+    //     localStorage.setItem('step2', false);    
 
 
     const [mission, setMission] = useState(localStorage.getItem('mission'));
