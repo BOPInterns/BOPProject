@@ -19,6 +19,7 @@ export const ForgotPassword = () => {
     const [sent, setSent ] = useState(false);
     const [ errorShow, setErrorShow ] = useState(false);
     const [ succShow, setSuccShow ] = useState(false);
+    const [temp, setTemp ] = useState('')
 
 
 
@@ -43,7 +44,7 @@ export const ForgotPassword = () => {
                 setErrorShow(true);
                 window.scrollTo(0, 0);
             } else {
-                console.log("fnjdsinfini9nei")
+                setTemp(email);
                 setErrorShow(false);
                 setSuccShow(true);
                 window.scrollTo(0, 0);
@@ -93,7 +94,7 @@ export const ForgotPassword = () => {
                 onClose={() => setSuccShow(false)}
             >
                 <Alert.Heading>Success!</Alert.Heading>
-                <p>Email has been sent to {email}</p>
+                <p>Email has been sent to {temp}</p>
             </Alert>
 
             <Container>
