@@ -74,6 +74,7 @@ app.post("/register", async(req,res) => {
         // check if email is already linked to an account
         const exists = await User.findOne({email});
         if (exists) { throw Error("Email is already linked to an account"); }
+        if (firstName == '' || lastName == '') { throw Error("Please provide a valid full name"); }
 
         var newUser = await User.create({
             firstName,
