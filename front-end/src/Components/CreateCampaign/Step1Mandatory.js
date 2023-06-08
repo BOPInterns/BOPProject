@@ -68,6 +68,9 @@ export const Step1MandatoryFields = () => {
                             <hr></hr>
                         </Card.Title>
                         <Card.Body>
+                            <Card.Text className="mb-4">
+                                <strong>Please provide a campaign name and tags you would like associated with your campaign</strong>
+                            </Card.Text>
                             <Form>
                                 <FormGroup className="mb-2">
                                     <Form.Label>Campaign name</Form.Label>
