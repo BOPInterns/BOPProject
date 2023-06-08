@@ -102,7 +102,7 @@ app.post("/login", async(req,res) => {
         else if (!password) { throw Error("Password required"); }
 
         // validation for valid email
-        if (!validator.isEmail(email)) { throw Error("Invalid email"); }
+        if (!validator.isEmail(email)) { throw Error("Invalid or Unregistered email"); }
 
         const user = await User.findOne({email});
         if (!user) { throw Error("User not found"); }

@@ -25,8 +25,8 @@ export const Login = () => {
     
     const [ user, setUser ] = useState({});
     const navigate = useNavigate();
-    const [ emailErrorShow, setEmailErrorShow ] = useState(false);
-    const [ passwordErrorShow, setPasswordErrorShow ] = useState(false);
+    const [ errorShow, setErrorShow ] = useState(false);
+    const [ errorMsg, setErrorMsg ] = useState('');
    
    function handleCallbackResponse(response){
       console.log("Encoded JWT ID token: " + response.credential);
@@ -73,12 +73,11 @@ export const Login = () => {
         .then((data) => {
             console.log(data, "userLogin");
             setUser(data, "userId");
-            console.log(JSON.stringify(user));
-            if(JSON.stringify(data).includes("Invalid email") || JSON.stringify(data).includes("Email required")){
-                setEmailErrorShow(true);
-                window.scrollTo(0, 0);
-            } else if(JSON.stringify(data).includes("Invalid password") || JSON.stringify(data).includes("Password required")) {
-                setPasswordErrorShow(true);
+            console.log(data, "userRegister");
+            if(data.error){
+                console.log(data.error);
+                setErrorShow(true);
+                setErrorMsg(data.error);
                 window.scrollTo(0, 0);
             } else {
                 localStorage.setItem('loginState', true);
@@ -100,23 +99,15 @@ export const Login = () => {
         <div>
             <NavigationBar />
             <Alert
-                show={passwordErrorShow}
+                show={errorShow}
                 variant="danger"
                 dismissible
-                onClose={() => setPasswordErrorShow(false)}
+                onClose={() => setErrorShow(false)}
             >
                 <Alert.Heading>Error!</Alert.Heading>
-                <p>Invalid password.</p>
+                <p>{errorMsg}</p>
             </Alert>
-            <Alert
-                show={emailErrorShow}
-                variant="danger"
-                dismissible
-                onClose={() => setEmailErrorShow(false)}
-            >
-                <Alert.Heading>Error!</Alert.Heading>
-                <p>Invalid email.</p>
-            </Alert>
+            
             <Container>
                 <Row>
                     <Col md={6}>
