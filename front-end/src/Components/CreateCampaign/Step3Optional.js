@@ -48,6 +48,7 @@ useEffect(() => {
                             header="Enter Stakeholder Languages:"
                             placeholder="Enter a Language"
                             data="Language"
+                            value={stakeholderLangs}
                             func={setStakeholderLangs}
                         />
                     </FormGroup>
@@ -57,6 +58,7 @@ useEffect(() => {
                             header="Enter Volunteer Languages:"
                             placeholder="Enter a Language"
                             data="Language"
+                            value={volunteerLangs}
                             func={setVolunteerLangs}
                         />
                     </FormGroup>
