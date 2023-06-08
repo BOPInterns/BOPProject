@@ -17,9 +17,9 @@ dotenv.config();
 //dotenv.config({ path: "./config.env" });
 
 app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
-app.use(express.urlencoded({extended: true}));
+//app.use(express.urlencoded({}));
 
 
 
@@ -63,11 +63,11 @@ app.post("/upload-file", async(req, res) => {
 
 app.post("/register", async(req,res) => {
     try {
-        const {firstName, lastName, email, password, phoneNumber, emailNotif, textNotif} = req.body;
+        const {firstName, lastName, email, password, phoneNumber, textNotif, emailNotif} = req.body;
 
         //if (!firstName || !lastName || !email || !password) { throw Error("Please fill in all required fields."); }
-        if (!validator.isEmail(email)) { throw Error("Invalid email"); }
-        else if (!validator.isStrongPassword(password)) { throw Error("Password is not strong enough"); }
+        if (!validator.isEmail(email)) throw Error("Invalid email");
+        else if (!(validator.isStrongPassword(password))) throw Error("Password is not strong enough");
 
         const passwordEncr = await bcrypt.hash(password, 11);
 
@@ -75,21 +75,21 @@ app.post("/register", async(req,res) => {
         const exists = await User.findOne({email});
         if (exists) { throw Error("Email is already linked to an account"); }
 
-        var uI = await User.create({
+        var newUser = await User.create({
             firstName,
             lastName,
+            email,
+            password: passwordEncr,
             phoneNumber,
             textNotif,
             emailNotif,
-            email,
-            password: passwordEncr,
             KYC: {
-                verified: false,
+                verified: false
             }
         });
         res.status(201).json({
             status: "success",
-            data: uI
+            data: newUser
         });
     } catch (err) { res.status(401).json({error: err.message}); }
 });
@@ -262,17 +262,25 @@ app.post('/my-account', async (req, res) => {
 app.post('/kyc-verification-form', async (req, res) => {
     try {
         const {userId, address, city, state, zipcode, country, gender, nationality, selfie} = req.body;
+
+        // validate that all fields are filled out
+        if ((address === ' ') || (city === '') || (state === '') || 
+            (zipcode === '') || (country === '') || (gender === '') || 
+            (nationality === '') || (selfie === undefined))
+            throw Error("Please fill out all fields");
+
         const filter = {_id: userId};
         const update = {
             $set: {
-                address,
-                city,
-                state,
-                zipcode,
-                country,
-                gender,
-                nationality,
-                selfie
+                'KYC.verified': true,
+                'KYC.address': address,
+                'KYC.city': city,
+                'KYC.state': state,
+                'KYC.zipcode': zipcode,
+                'KYC.country': country,
+                'KYC.gender': gender,
+                'KYC.nationality': nationality,
+                'KYC.selfie': selfie
             }
         };
 

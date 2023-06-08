@@ -105,7 +105,7 @@ export const MyAccount = () => {
                                  <InputGroup.Text>Email:</InputGroup.Text>
                                  <Form.Control
                                     disabled
-                                     placeholder={email}
+                                    placeholder={email}
                                  ></Form.Control>
                              </InputGroup>
                              {/* <InputGroup>
@@ -124,8 +124,8 @@ export const MyAccount = () => {
                              <InputGroup>
                                  <InputGroup.Text>Verification Status:</InputGroup.Text>
                                  <Form.Control
-                                     placeholder={verificationStatus}
-                                     disabled
+                                    disabled
+                                    placeholder={verificationStatus}
                                  ></Form.Control>
                              </InputGroup>
                              <Button onClick={handleSubmit} variant="outline-secondary">Submit</Button>

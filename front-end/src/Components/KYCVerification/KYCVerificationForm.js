@@ -12,7 +12,8 @@ import { useNavigate } from 'react-router-dom';
 export const KYCVerificationForm = () => {
     
     const navigate = useNavigate();
-    const [ address, setAddress ] = useState('');
+    const [ address1, setAddress1 ] = useState('');
+    const [ address2, setAddress2 ] = useState('');
     const [ city, setCity ] = useState('');
     const [ state, setState ] = useState('');
     const [ country, setCountry ] = useState('');
@@ -46,21 +47,24 @@ export const KYCVerificationForm = () => {
                 "Allow-Control-Allow-Origin":"*",
             },
             body:JSON.stringify({
-                address,
+                userId,
+                address: address1 + ' ' + address2,
                 city,
                 state,
                 zipCode,
                 country,
                 gender,
                 nationality,
-                selfie,
-                userId
+                selfie
             }),
         }).then((res) => res.json())
         .then((data) => {
-            console.log(data, "kyc");
+            if (data.err) console.log("Please fill out all fields");
+            else {
+                console.log(data, "kyc");
+                navigate('/kyc-verification-submitted');
+            }
         });
-        navigate('/kyc-verification-submitted')
     }
     
     
@@ -80,12 +84,14 @@ export const KYCVerificationForm = () => {
                                 <FormGroup className="mb-3">
                                     <Form.Label>Address Line 1</Form.Label>
                                     <Form.Control   type="text"   placeholder=""
-                                    onChange={(e) => setAddress(e.target.value)}
+                                    onChange={(e) => setAddress1(e.target.value)}
                                     />
                                 </FormGroup>
                                 <FormGroup className="mb-3">
                                     <Form.Label>Address Line 2</Form.Label>
-                                    <Form.Control type="text" placeholder="" />
+                                    <Form.Control type="text" placeholder="" 
+                                    onChange={(e) => setAddress2(e.target.value)}
+                                    />
                                 </FormGroup>
                                 <FormGroup className="mb-3">
                                     <Form.Label>City</Form.Label>
@@ -147,14 +153,14 @@ export const KYCVerificationForm = () => {
                             <Card.Body>
                             <Form>
                                 <Form.Group className="mb-3"
-                                onChange={(e) => setGender}
+                                onChange={(e) => setGender(e.target.value)}
                                 >
                                 <Form.Label>Gender</Form.Label>
                                 <Form.Select>
                                     <option>Please select a gender</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                    <option value="3">Prefer not to say...</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer not to say...">Prefer not to say...</option>
                                 </Form.Select>
                                 </Form.Group>
                                 <FormGroup className="mb-3">
