@@ -4,8 +4,8 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import { useEffect, useState, } from 'react';
 
 export const Step1OptionalFields = () => {
-    if (localStorage.getItem('videoLink') === null)
-    localStorage.setItem('videoLink', '');
+    // if (localStorage.getItem('videoLink') === null)
+    // localStorage.setItem('videoLink', '');
 
     const [videoLink, setVideoLink] = useState('');
 

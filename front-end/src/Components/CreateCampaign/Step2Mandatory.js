@@ -8,10 +8,10 @@ import Container from 'react-bootstrap/Container';
 
 
 export const Step2MandatoryFields = () => {
-    if (localStorage.getItem('description') === null) 
-    localStorage.setItem('description', '');
-    if (localStorage.getItem('challenge') === null) 
-    localStorage.setItem('challenge', '');  
+    // if (localStorage.getItem('description') === null) 
+    // localStorage.setItem('description', '');
+    // if (localStorage.getItem('challenge') === null) 
+    // localStorage.setItem('challenge', '');  
     
     const [description, setDescription] = useState(localStorage.getItem('description'));
     const [challenge, setChallenge] = useState(localStorage.getItem('challenge'));
