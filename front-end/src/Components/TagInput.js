@@ -9,6 +9,10 @@ const TagInput = (props) => {
     const [currentTag, setCurrentTag] = useState('');
 
     useEffect(() => {
+        setTags(props.value)
+    }, [])
+
+    useEffect(() => {
         props.func(tags);
     }, [tags]);
 

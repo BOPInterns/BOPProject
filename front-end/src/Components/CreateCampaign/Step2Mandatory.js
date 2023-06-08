@@ -15,6 +15,9 @@ export const Step2MandatoryFields = () => {
     
     const [description, setDescription] = useState(localStorage.getItem('description'));
     const [challenge, setChallenge] = useState(localStorage.getItem('challenge'));
+    // const [mission, setMission] = useState(localStorage.getItem('mission'));
+    // const [milestones, setMilestones] = useState(JSON.parse(localStorage.getItem('milestones')));
+    // const [predictedGoals, setPredictedGoals] = useState(JSON.parse(localStorage.getItem('predictedGoals')));
     
     useEffect(() => {
         localStorage.setItem('description', description);
@@ -26,7 +29,7 @@ export const Step2MandatoryFields = () => {
     
     // validation
     useEffect(() => {
-        if ((description.length < 20) || (description.length > 500) || (challenge.length < 10) || (challenge.length > 500))
+        if ((description.length < 10) || (description.length > 500) || (challenge.length < 10) || (challenge.length > 500))
             return localStorage.setItem('step2', false);
         localStorage.setItem('step2', true);
     }, [description, challenge]);

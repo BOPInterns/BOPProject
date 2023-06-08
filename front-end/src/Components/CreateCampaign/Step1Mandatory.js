@@ -7,13 +7,13 @@ import { useEffect } from 'react';
 
 export const Step1MandatoryFields = () => {
     if (localStorage.getItem('campaignName') === null) 
-    localStorage.setItem('campaignName', '');
-    if (localStorage.getItem('campaignTags') === [])
-    localStorage.setItem('campaignTags', '[]');
+        localStorage.setItem('campaignName', '');
+    if (localStorage.getItem('campaignTags') === null)
+        localStorage.setItem('campaignTags', '[]');
     if (localStorage.getItem('videoLink') === null)
-    localStorage.setItem('videoLink', '');
+        localStorage.setItem('videoLink', '');
     if (localStorage.getItem('step1') === null)
-    localStorage.setItem('step1', false);
+        localStorage.setItem('step1', false);
 
     const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
     const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
@@ -27,10 +27,11 @@ export const Step1MandatoryFields = () => {
         localStorage.setItem('campaignTags', JSON.stringify(campaignTags));
     }, [campaignTags]);
 
+    // validation
     useEffect(() => {
         if ((campaignName.length < 4) || (campaignName.length > 100) || 
-            (campaignTags.length < 3) || (campaignTags.length > 5) ||
-            (!validateYouTubeUrl(localStorage.getItem('videoLink'))))
+            (campaignTags.length < 3) || (campaignTags.length > 5) || 
+            !validateYouTubeUrl(localStorage.getItem('videoLink')))
             return localStorage.setItem('step1', false);
         localStorage.setItem('step1', true);
     }, [campaignName, campaignTags]);
@@ -46,14 +47,11 @@ export const Step1MandatoryFields = () => {
         return list;
     }
 
-    function validateYouTubeUrl(link) {
-        if (link != '') {
-            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-            var match = link.match(regExp);
-            if (match && match[2].length == 11) {
+    function validateYouTubeUrl(url){
+        if (url != '') {
+            var regExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+            if (url.match(regExp)) {
                 return true;
-                // if need to change the url to embed url then use below line
-                // $('#ytplayerSide').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0');
             }
             else return false;
         }
@@ -86,7 +84,7 @@ export const Step1MandatoryFields = () => {
                                     header="Enter Campaign Tags:"
                                     placeholder="Enter a Tag"
                                     data="Tag"
-                                    
+                                    value={campaignTags}
                                     func={setCampaignTags}
                                 />
 
