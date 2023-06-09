@@ -7,7 +7,7 @@ export const Step1OptionalFields = () => {
     // if (localStorage.getItem('videoLink') === null)
     // localStorage.setItem('videoLink', '');
 
-    const [videoLink, setVideoLink] = useState('');
+    const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
 
     useEffect(() => {
         localStorage.setItem('videoLink', videoLink);
