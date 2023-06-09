@@ -1,0 +1,31 @@
+.marketPlaceNav{
+    align-items: baseline !important;
+    border-bottom-width: 2px !important;
+    border-bottom-color: red !important;
+}
+
+.browse-more-btn {
+    height: 45px !important;
+    width: 200px !important;
+    color: #fa6e13 !important;
+    background-color: transparent !important;
+    border-color: #fa6e13 !important;
+}
+
+.browse-more-btn:hover {
+    background-color: #fa6e13 !important;
+    color: white !important;
+}
+
+.filters-btn {
+    height: 40px !important;
+    width: 200px !important;
+    color: gray !important;
+    background-color: transparent !important;
+    border-color: gray !important;
+}
+
+.filters-btn:hover {
+    background-color: gray !important;
+    color: white !important;
+}
