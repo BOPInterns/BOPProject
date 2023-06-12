@@ -8,6 +8,8 @@ const validator = require('validator');
 const dotenv = require('dotenv');
 const User = require("./models/userModel");
 const Campaign = require("./models/campaignModel");
+const Solution = require("./models/solutionModel");
+const Service = require("./models/serviceModel");
 const File = require("./models/fileModel");
 
 const app = express();
@@ -38,13 +40,33 @@ mongoose
 // START SERVER
 app.listen(9000, () => { console.log("Server started on port 9000") });
 
-//gets campaign data for campiagn center page
+//gets campaign data for campiagn center page / marketplace
 app.get("/get-campaign-data", async(req, res) => {
     try{
         const allCampaigns = await Campaign.find({data: req.data});
         res.send({status: "ok", data: allCampaigns});
     }catch (err){
         console.log("error retrieving campaign data")
+    }
+});
+
+//gets solution data for the marketplace
+app.get("/get-solution-data", async(req, res) => {
+    try{
+        const allSolutions = await Solution.find({data: req.data});
+        res.send({status: "ok", data: allSolutions});
+    }catch (err){
+        console.log("error retrieving solution data")
+    }
+});
+
+//gets service for marketplace
+app.get("/get-service-data", async(req, res) => {
+    try{
+        const allServices = await Service.find({data: req.data});
+        res.send({status: "ok", data: allServices});
+    }catch (err){
+        console.log("error retrieving service data")
     }
 });
 

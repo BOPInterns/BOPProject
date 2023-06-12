@@ -11,6 +11,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import { CampaignCard } from '../CampaignCenter/CampaignCard';
+import { SolutionCard } from "./SolutionCard";
+import { ServiceCard } from './ServiceCard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useNavigate } from 'react-router-dom';
@@ -19,15 +21,33 @@ import { useNavigate } from 'react-router-dom';
 export const MarketPlace = () => {
     
     const [ campaignData, setCampaignData ] = useState([]);
+    const [ solutionData, setSolutionData ] = useState([]);
+    const [ serviceData, setServiceData ] = useState([]);
     
     useEffect(() => {
+        //for campaigns
         fetch("http://localhost:9000/get-campaign-data", {
             method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setCampaignData(data.data);
-            });
+        }).then((res) => res.json())
+        .then((data) => {
+            setCampaignData(data.data);
+        });
+
+        //for solutions
+        fetch("http://localhost:9000/get-solution-data", {
+            method: "GET",
+        }).then((res) => res.json())
+        .then((data) => {
+            setSolutionData(data.data);
+        });
+
+        //for services
+        fetch("http://localhost:9000/get-service-data", {
+            method: "GET",
+        }).then((res) => res.json())
+        .then((data) => {
+            setServiceData(data.data);
+        });
     }, []);
 
     const loadData = (i) => {
@@ -84,6 +104,114 @@ export const MarketPlace = () => {
         return rows;   
     }
     
+    const loadSolutionData = (i) => {
+        return solutionData[i];
+    }
+
+    const loadSolutionCards = () => {
+        var rows = [];
+        var fulls = Math.floor(solutionData.length / 4); 
+        var remains = solutionData.length % 4;
+
+        var num = 0;
+        for(let i = 0; i < fulls; i++){
+            rows.push(
+                <Row>
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+3)}/></Col>
+                </Row>
+            );
+            num += 4;
+        }
+        if(remains == 3){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 2){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 1){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        return rows;   
+    }
+
+    const loadServiceData = (i) => {
+        return serviceData[i];
+    }
+
+    const loadServiceCards = () => {
+        var rows = [];
+        var fulls = Math.floor(serviceData.length / 4); 
+        var remains = serviceData.length % 4;
+
+        var num = 0;
+        for(let i = 0; i < fulls; i++){
+            rows.push(
+                <Row>
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+3)}/></Col>
+                </Row>
+            );
+            num += 4;
+        }
+        if(remains == 3){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 2){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 1){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        return rows;   
+    }
+
     return (
         <div>
             <NavigationBar/>
@@ -196,7 +324,7 @@ export const MarketPlace = () => {
                     </Col>
                 </Row>
                 <Row className="mt-3">
-                    {loadCards()}
+                    {loadSolutionCards()}
                 </Row>
                 <Row className="mt-3 text-center">
                     <Col text-center>
@@ -223,7 +351,7 @@ export const MarketPlace = () => {
                     </Col>
                 </Row>
                 <Row className="mt-3">
-                    {loadCards()}
+                    {loadServiceCards()}
                 </Row>
                 <Row className="mt-3 text-center">
                     <Col text-center>
