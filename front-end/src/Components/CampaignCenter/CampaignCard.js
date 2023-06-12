@@ -30,7 +30,7 @@ export const CampaignCard = ({campData}) => {
         var list = [];
         while(currChars < MAXCHARS && list.length != tags.length){
             currChars += tags[i].length;
-            list.push(<Badge bg="secondary">{tags[i]}</Badge>);
+            list.push(<Badge style={{marginRight: 2}}bg="secondary">{tags[i]}</Badge>);
             i++;
         }
         return list;

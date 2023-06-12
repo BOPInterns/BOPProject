@@ -154,7 +154,7 @@ app.post("/forgot-password", async(req, res) => {
             from: 'bop.hub.interns@gmail.com',
             to: email,
             subject: 'BOP Hub Password Reset',
-            text: "Please click on the following link to reset your password   " + link,
+            text: "Please use the following code to reset your password   " + link,
           };
           
           transporter.sendMail(mailOptions, function(error, info){
