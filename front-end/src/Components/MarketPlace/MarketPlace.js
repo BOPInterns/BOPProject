@@ -13,10 +13,18 @@ import { useState, useEffect } from 'react';
 import { CampaignCard } from '../CampaignCenter/CampaignCard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useNavigate } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
 
 
 export const MarketPlace = () => {
+    
+    const [ allToggle, setAllToggle ] = useState(null);
+    const [ campaignToggle, setCampaignToggle ] = useState(false);
+    const [ solutionsToggle, setSolutionsToggle ] = useState(false);
+    const [ servicesToggle, setServicesToggle ] = useState(false);
+    
     
     const [ campaignData, setCampaignData ] = useState([]);
     
@@ -93,13 +101,13 @@ export const MarketPlace = () => {
                 </Row>
                 <Row className="justify-content-center">
                 <Card
-                    style={{height: '75px', width: '500px'}}
+                    style={{height: '85px', width: '500px'}}
                 >
                     <Card.Title
                         className=""
                     >
                         <Row>
-                            <Col xs={2} className="mt-1">
+                            <Col xs={2} className="mt-2">
                             <Image
                             roundedCircle
                             src={require("../placeholderProfilePicture.png")}
@@ -107,22 +115,41 @@ export const MarketPlace = () => {
                             
                             />
                             </Col>
-                            <Col className="mt-2">
+                            <Col lg={8} className="mt-3">
                                 <strong>Name of Organization</strong>
                                 <br></br>
                                 <p>Name of Campaign</p>
+                            </Col>
+                            <Col className="text-end mt-3">
+                            <DropdownButton
+                                variant="outline-secondary"
+                            >
+                                <Dropdown.Item>I show functionality :D</Dropdown.Item>
+                            </DropdownButton>
                             </Col>
                         </Row>
                     </Card.Title>
                 </Card>
                 </Row>
-                <Navbar className="marketPlaceNav">
+                <Navbar className="market-place-navbar">
                     <Navbar.Collapse>
                         <Nav className="mx-auto">
-                            <Nav.Link>All</Nav.Link>
-                            <Nav.Link>Campaigns</Nav.Link>
-                            <Nav.Link>Solutions</Nav.Link>
-                            <Nav.Link>Services</Nav.Link>
+                            <Button
+                                className="custom-navbar-btn"
+                            >
+                                All</Button>
+                                <Button
+                                className="custom-navbar-btn"
+                            >
+                                Campaigns</Button>
+                                <Button
+                                className="custom-navbar-btn"
+                            >
+                                Solutions</Button>
+                                <Button
+                                className="custom-navbar-btn"
+                            >
+                                Services</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
