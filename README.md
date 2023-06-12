@@ -12,6 +12,7 @@ Project created by intern team for the BoP Hub website
 * file upload works but there is a limit to the size and type of file, also no security checking on this file
 * enable users to upload several files when creating a campaign
 * when uploading a file, if you click "cancel" when there's already a file there, it throws a runtime error
+* when user creates campaign, it adds their organization as the organization that owns the campaign
 
 ## Successful can kicks:
 * store things like db link in ENV file

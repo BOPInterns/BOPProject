@@ -2,23 +2,20 @@ import Card from 'react-bootstrap/Card';
 import Badge from'react-bootstrap/Badge';
 import Image from'react-bootstrap/Image';
 import Row from'react-bootstrap/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Button from'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 
-export const CampaignCard = ({campData}) => {
+export const ServiceCard = ({servData}) => {
     const [name, setName] = useState('');
     const [tags, setTags] = useState([]);
-    const [challenge, setChallenge] = useState('');
-    const [status, setStatus] = useState('');
-    const [orgName, setOrgName] = useState('');
+    const [price, setPrice] = useState('');
 
     useEffect(() => {
-        if(campData){
-            setName(campData['name']);
-            setTags(campData['tags']);
-            setChallenge(campData['challenge']);
-            setStatus(campData['status']);
-            setOrgName(campData['organization']);
+        if(servData){
+            setName(servData['name']);
+            setTags(servData['tags']);
+            setPrice(servData['price']);
         }
     });
 
@@ -39,7 +36,7 @@ export const CampaignCard = ({campData}) => {
 
     return (
         <div>
-            <Card style={{width: '275px', height: '490px'}}>
+            <Card style={{width: '275px', height: '305px'}}>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <hr></hr>
@@ -48,17 +45,15 @@ export const CampaignCard = ({campData}) => {
                     {loadTags()}
                     {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> : <footer style={{marginBottom:16}}></footer>}
                     
-                    <Card.Text>Campaign status: <Badge bg="warning">{status}</Badge></Card.Text>
                     <hr></hr>
-                    <Card.Text className='text-muted' style={{height: 70}}>Campaign Challenge: {challenge}</Card.Text>
-                    <Card.Text>Owner
-                        <hr></hr>
-                        <Image height="5" width="40" src={require("../placeholderProfilePicture.png")} alt="" roundedCircle fluid>
-                        </Image>
-                        <footer>{orgName}</footer>
+                    <Image height="5" width="40" src={require("../placeholderProfilePicture.png")} alt="" roundedCircle fluid></Image>
+                    <Card.Text> 
+                        <Row>
+                            <body><strong>Price: </strong><em>{price}</em></body>
+                        </Row>
                     </Card.Text>
                     <Row>
-                        <Button variant="secondary" size="sm">Show campaign details</Button>
+                        <Button variant="secondary" size="sm">Show service details</Button>
                     </Row>
                 </Card.Body>
             </Card>

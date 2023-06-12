@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const campaignSchema = new mongoose.Schema({
+const serviceSchema = new mongoose.Schema({
     organization: String,
 
     name: {
@@ -16,7 +16,7 @@ const campaignSchema = new mongoose.Schema({
         type: [String],
         required: [true, "Must choose at least 1 tag"]
     },
-    price: Number
+    price: String
 })
 
 const Service = mongoose.model("Service", serviceSchema);
