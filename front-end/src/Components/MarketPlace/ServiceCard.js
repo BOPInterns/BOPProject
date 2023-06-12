@@ -36,7 +36,7 @@ export const ServiceCard = ({servData}) => {
 
     return (
         <div>
-            <Card style={{width: '275px', height: '305px'}}>
+            <Card style={{display: 'flex'}}>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <hr></hr>

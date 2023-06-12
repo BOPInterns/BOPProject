@@ -36,7 +36,7 @@ export const SolutionCard = ({solData}) => {
 
     return (
         <div>
-            <Card style={{width: '275px', height: '340px'}}>
+            <Card style={{display: 'flex'}}>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <hr></hr>
