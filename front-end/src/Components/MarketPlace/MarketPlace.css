@@ -50,3 +50,41 @@
 .clear-filters-btn:hover {
     color: #fa6e13 !important;
 }
+
+.market-place-navbar {
+    border: 2px black !important;
+}
+
+.custom-navbar-btn {
+    width: 150px !important;
+    color: gray !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+    border-top-width: 0 !important;
+    border-bottom-color: transparent !important;
+    border-bottom-width: 2px !important;
+}
+
+.custom-navbar-btn:hover {
+    color: black !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+    border-top-width: 0 !important;
+    border-bottom-color: black !important;
+    border-bottom-width: 2px !important;
+}
+
+.custom-navbar-btn:active {
+    color: black !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+    border-top-width: 0 !important;
+    border-bottom-color: black !important;
+    border-bottom-width: 2px !important;
+}
