@@ -52,7 +52,7 @@ export const SolutionCard = ({solData}) => {
                         </Row>
                         <Row>
                             <Col>
-                            <Image height="40" width="55" src={require("../placeholderProfilePicture.png")}  roundedCircle fluid></Image>
+                            <Image height="55" width="55" src={require("../placeholderProfilePicture.png")}  roundedCircle></Image>
                             </Col>
                             <Col >
                             <body>{orgName}</body>
