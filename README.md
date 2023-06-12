@@ -10,6 +10,7 @@ Project created by intern team for the BoP Hub website
 * organizing backend code into different files (MVC architecture)
 * phone number validation
 * file upload works but there is a limit to the size and type of file, also no security checking on this file
+* I think creating a flexbox row to render the cards on the page would be simpler and have the browser do most of the math -B
 * enable users to upload several files when creating a campaign
 * when uploading a file, if you click "cancel" when there's already a file there, it throws a runtime error
 

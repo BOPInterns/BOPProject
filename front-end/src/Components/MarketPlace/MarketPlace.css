@@ -29,3 +29,24 @@
     background-color: gray !important;
     color: white !important;
 }
+
+.search-btn {
+    color: gray !important;
+    background-color: transparent !important;
+    border-color: gray !important;
+}
+
+.search-btn:hover {
+    background-color: gray !important;
+    color: white !important;
+}
+
+.clear-filters-btn {
+    color: gray !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.clear-filters-btn:hover {
+    color: #fa6e13 !important;
+}
