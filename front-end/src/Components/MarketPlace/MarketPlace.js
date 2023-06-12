@@ -15,6 +15,7 @@ import { SolutionCard } from "./SolutionCard";
 import { ServiceCard } from './ServiceCard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { useNavigate } from 'react-router-dom';
 
 
 export const MarketPlace = () => {
@@ -22,7 +23,6 @@ export const MarketPlace = () => {
     const [ campaignData, setCampaignData ] = useState([]);
     const [ solutionData, setSolutionData ] = useState([]);
     const [ serviceData, setServiceData ] = useState([]);
-    
     
     useEffect(() => {
         //for campaigns
@@ -63,17 +63,17 @@ export const MarketPlace = () => {
         for(let i = 0; i < fulls; i++){
             rows.push(
                 <Row>
-                    <Col><CampaignCard campData={loadData(num)}/></Col>
-                    <Col><CampaignCard campData={loadData(num+1)}/></Col>
-                    <Col><CampaignCard campData={loadData(num+2)}/></Col>
-                    <Col><CampaignCard campData={loadData(num+3)}/></Col>
+                    <Col sm={3}><CampaignCard campData={loadData(num)}/></Col>
+                    <Col sm={3}><CampaignCard campData={loadData(num+1)}/></Col>
+                    <Col sm={3}><CampaignCard campData={loadData(num+2)}/></Col>
+                    <Col sm={3}><CampaignCard campData={loadData(num+3)}/></Col>
                 </Row>
             );
             num += 4;
         }
         if(remains == 3){
             rows.push(
-                <Row className="mt-5">
+                <Row className="mt-3">
                     <Col><CampaignCard campData={loadData(num)}/></Col>
                     <Col><CampaignCard campData={loadData(num+1)}/></Col>
                     <Col><CampaignCard campData={loadData(num+2)}/></Col>
@@ -83,7 +83,7 @@ export const MarketPlace = () => {
         }
         else if(remains == 2){
             rows.push(
-                <Row className="mt-5">
+                <Row className="mt-3">
                     <Col><CampaignCard campData={loadData(num)}/></Col>
                     <Col><CampaignCard campData={loadData(num+1)}/></Col>
                     <Col></Col>
@@ -215,7 +215,7 @@ export const MarketPlace = () => {
     return (
         <div>
             <NavigationBar/>
-            <Container>
+            <Container fluid>
                 <Row className="mt-5 text-center">
                     <h4>You are currently browsing the market place as:</h4>
                 </Row>
@@ -254,20 +254,28 @@ export const MarketPlace = () => {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
+                <Row>
+                </Row>
                 <Row className="mt-3">
                     <Col sm={2}></Col>
                     <Col lg={8}>
-                        <Form>
+                        <InputGroup>
+                        <Button
+                            className='search-btn'
+                        >
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </Button>
                             <Form.Control
                                 type="text"
                                 placeholder="Search Bar"
                             />
-                        </Form>
+                        </InputGroup>
                     </Col>
                     <Col sm={2}>
                         <Button
                             className="filters-btn"
                             text-align="center"
+                            href='/market-place/filters'
                         >
                             Filters <i class="fa-solid fa-filter"></i>
                         </Button>
@@ -291,12 +299,14 @@ export const MarketPlace = () => {
                 <Row className="mt-3">
                     {loadCards()}
                 </Row>
-                <Row className="mt-3">
+                <Row className="mt-3 text-center">
+                    <Col text-center>
                     <Button
                         variant="secondary"
                     >
                         Load more campaigns
                     </Button>
+                    </Col>
                 </Row>
                 <Row className="mt-5">
                     <Col lg={2}>
@@ -316,12 +326,14 @@ export const MarketPlace = () => {
                 <Row className="mt-3">
                     {loadSolutionCards()}
                 </Row>
-                <Row className="mt-3">
+                <Row className="mt-3 text-center">
+                    <Col text-center>
                     <Button
                         variant="secondary"
                     >
                         Load more solutions
                     </Button>
+                    </Col>
                 </Row>
                 <Row className="mt-5">
                     <Col lg={3}>
@@ -341,12 +353,14 @@ export const MarketPlace = () => {
                 <Row className="mt-3">
                     {loadServiceCards()}
                 </Row>
-                <Row className="mt-3">
+                <Row className="mt-3 text-center">
+                    <Col text-center>
                     <Button
                         variant="secondary"
                     >
                         Load more services
                     </Button>
+                    </Col>
                 </Row>
             </Container>
         </div>

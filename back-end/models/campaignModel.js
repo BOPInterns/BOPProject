@@ -59,7 +59,11 @@ const campaignSchema = new mongoose.Schema({
     //*** STEP 4
     // TODO: use manual document references for this?
     //       make a separate model to store all files
-    otherFiles: [String]
+    otherFiles: [String],
+    createdAt: {
+        type: Date,
+        default: Date.now(),
+      }
 })
 
 const Campaign = mongoose.model("Campaign", campaignSchema);
