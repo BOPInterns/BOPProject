@@ -39,7 +39,7 @@ export const CampaignCard = ({campData}) => {
 
     return (
         <div>
-            <Card style={{width: '275px', height: '490px'}}>
+            <Card style={{display: 'flex'}}>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <hr></hr>
