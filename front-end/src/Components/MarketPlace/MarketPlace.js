@@ -22,10 +22,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 export const MarketPlace = () => {
     // initialize localStorage filter variables
-    if (localStorage.getItem('orgFilter') === null)
+    if (localStorage.getItem('orgFilter') === 'null')
         localStorage.setItem('orgFilter', '');
-    // if (localStorage.getItem('campaignFilter') === null)
-    //     localStorage.setItem('campaignFilter', '');
+    if (localStorage.getItem('campaignFilter') === 'null')
+        localStorage.setItem('campaignFilter', '');
     // if (localStorage.getItem('roleFilter') === null)
     //     localStorage.setItem('roleFilter', '');
     // if (localStorage.getItem('statusFilter') === null)
@@ -48,7 +48,7 @@ export const MarketPlace = () => {
     useEffect(() => {
         //for campaigns
         console.log(`orgFilter${localStorage.getItem('orgFilter')}orgFilter`);
-        fetch("http://localhost:9000/market-place", {
+        fetch("http://localhost:9000/get-campaign-data", {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -58,7 +58,7 @@ export const MarketPlace = () => {
             },
             body: JSON.stringify({
                 orgFilter: localStorage.getItem('orgFilter'),
-                // campaignFilter: localStorage.getItem('campaignFilter'),
+                campaignFilter: localStorage.getItem('campaignFilter'),
                 // roleFilter: localStorage.getItem('roleFilter'),
                 // statusFilter: localStorage.getItem('statusFilter'),
                 // regDateFilter: localStorage.getItem('regDateFilter'),

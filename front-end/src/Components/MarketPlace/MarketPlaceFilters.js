@@ -29,7 +29,7 @@ import { Card } from 'react-bootstrap';
 export const MarketPlaceFilters = () => {
     // note: localStorage filter variables are initialized in MarketPlace.js
     const [orgFilter, setOrgFilter] = useState(localStorage.getItem('orgFilter'));
-    // const [campaignFilter, setCampaignFilter] = useState(localStorage.getItem('campaignFilter'));
+    const [campaignFilter, setCampaignFilter] = useState(localStorage.getItem('campaignFilter'));
     // const [roleFilter, setRoleFilter] = useState(localStorage.getItem('roleFilter'));
     // const [statusFilter, setStatusFilter] = useState(localStorage.getItem('statusFilter'));
     // const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem('regDateFilter'));
@@ -42,7 +42,7 @@ export const MarketPlaceFilters = () => {
         
         // update localStorage variables
         localStorage.setItem('orgFilter', orgFilter);
-        // localStorage.setItem('campaignFilter', campaignFilter);
+        localStorage.setItem('campaignFilter', campaignFilter);
         // localStorage.setItem('roleFilter', roleFilter);
         // localStorage.setItem('statusFilter', statusFilter);
         // localStorage.setItem('regDateFilter', regDateFilter);
@@ -54,7 +54,7 @@ export const MarketPlaceFilters = () => {
     function clearFilters() {
         // Reset local storage filter variables
         localStorage.setItem('orgFilter', '');
-        // localStorage.setItem('campaignFilter', '');
+        localStorage.setItem('campaignFilter', '');
         // localStorage.setItem('roleFilter', '');
         // localStorage.setItem('statusFilter', '');
         // localStorage.setItem('regDateFilter', '');
@@ -62,7 +62,7 @@ export const MarketPlaceFilters = () => {
 
         // Reset state filter variables
         setOrgFilter('');
-        // setCampaignFilter('');
+        setCampaignFilter('');
         // setRoleFilter('');
         // setStatusFilter('');
         // setRegDateFilter('');
@@ -173,6 +173,7 @@ export const MarketPlaceFilters = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="Filter campaign names containing..."
+                                value={campaignFilter}
                                 onChange={(e)=>setCampaignFilter(e.target.value)}
                             />
                         </InputGroup>
@@ -188,6 +189,7 @@ export const MarketPlaceFilters = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="Filter organization names containing..."
+                                value={orgFilter}
                                 onChange={(e)=>setOrgFilter(e.target.value)}
                             />
                         </InputGroup>
