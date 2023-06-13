@@ -17,17 +17,49 @@ import { useNavigate } from 'react-router-dom';
 
 
 export const MarketPlace = () => {
+    // initialize localStorage filter variables
+    if (localStorage.getItem('orgFilter') === null)
+        localStorage.setItem('orgFilter', '');
+    // if (localStorage.getItem('campaignFilter') === null)
+    //     localStorage.setItem('campaignFilter', '');
+    // if (localStorage.getItem('roleFilter') === null)
+    //     localStorage.setItem('roleFilter', '');
+    // if (localStorage.getItem('statusFilter') === null)
+    //     localStorage.setItem('statusFilter', '');
+    // if (localStorage.getItem('regDateFilter') === null)
+    //     localStorage.setItem('regDateFilter', '');
+    // if (localStorage.getItem('tagsFilter') === null)
+    //     localStorage.setItem('tagsFilter', '[]');
     
     const [ campaignData, setCampaignData ] = useState([]);
     
     useEffect(() => {
-        fetch("http://localhost:9000/get-campaign-data", {
-            method: "GET",
+        console.log(`orgFilter${localStorage.getItem('orgFilter')}orgFilter`);
+        fetch("http://localhost:9000/market-place", {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body: JSON.stringify({
+                orgFilter: localStorage.getItem('orgFilter'),
+                // campaignFilter: localStorage.getItem('campaignFilter'),
+                // roleFilter: localStorage.getItem('roleFilter'),
+                // statusFilter: localStorage.getItem('statusFilter'),
+                // regDateFilter: localStorage.getItem('regDateFilter'),
+                // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
+            })
         })
-            .then((res) => res.json())
-            .then((data) => {
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            if (data.data)
                 setCampaignData(data.data);
-            });
+            else 
+                setCampaignData([]);
+        });
     }, []);
 
     const loadData = (i) => {
