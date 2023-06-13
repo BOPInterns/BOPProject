@@ -291,6 +291,7 @@ export const MarketPlace = () => {
                         </Row>
                     </Card.Title>
                 </Card>
+                <hr className="mt-5"></hr>
                 </Row>
                 <Navbar className="market-place-navbar">
                     <Navbar.Collapse>

@@ -19,6 +19,7 @@ import { KYCVerificationSubmit } from './Components/KYCVerification/KYCVerificat
 import { RegisterSuccess  } from './Components/RegisterSuccess.js';
 import { MarketPlace } from './Components/MarketPlace/MarketPlace.js';
 import { MarketPlaceFilters } from './Components/MarketPlace/MarketPlaceFilters.js';
+import { OrgPage } from './Components/OrganizationCenter/OrgPage.js';
 import Private from './Components/Private.js';
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
            <Route path="/kyc-verification-submitted" element={<KYCVerificationSubmit />} />
            <Route path="/market-place/filters" element={<MarketPlaceFilters />} />
          </Route>
+           <Route path="/org-page" element={<OrgPage />} />
            <Route path="/market-place" element={<MarketPlace />} />
            <Route path="/campaign-center" element={<CampaignCenter />} />
            <Route path="/login" element={<Login />} />
