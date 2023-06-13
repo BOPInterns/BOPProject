@@ -45,7 +45,7 @@ const App = () => {
            <Route path="/login" element={<Login />} />
            <Route path="/register" element={<Register />} />
            <Route path="/register-success" element={<RegisterSuccess />} />
-           <Route path="/forgotpassword" element={<ForgotPassword />} />
+           <Route path="/forgot-password" element={<ForgotPassword />} />
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
         </Routes>
      </>

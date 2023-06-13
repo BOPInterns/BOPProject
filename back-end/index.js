@@ -319,3 +319,21 @@ app.post('/kyc-verification-form', async (req, res) => {
         res.status(201).json({kycUser});
     } catch (err) { res.status(401).json({err: err.message}); }
 });
+
+// TODO: GET or POST request?
+    // getting data from DB would usually be GET
+    // but GET requests aren't supposed to have a body
+app.post('/market-place', async (req, res) => {
+    try {
+        //const {orgFilter, campaignFilter, roleFilter, statusFilter, regDateFilter, tagsFilter} = req.body;
+        const {orgFilter} = req.body;
+        console.log('orgFilter = ' + orgFilter);
+        // .lean() returns a regular JS object
+        const data = await Campaign.find({
+            organization: orgFilter
+        }).lean();
+        console.log('data found');
+        res.status(200).json({data});
+        console.log('response sent');
+    } catch (err) { res.status(401).json({error: err.message}); }
+});

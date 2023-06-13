@@ -8,38 +8,67 @@ import Form from 'react-bootstrap/Form';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate }  from 'react-router-dom';
+import { useState } from 'react';
 
 import { Card } from 'react-bootstrap';
 
 /*
-    Filter by: 
-    campaign name -
+    Filters:
     organization -
-    tags -
-    description -
-    goal -
-    location -
-    reach -
-    stakeholder lang
-    volunteer lang
-    
+    role -
+    status -
+    registration date -
+
+    Search functionality:
+    organization -
+    campaign name -
+    tag name -
 */
 
 
 export const MarketPlaceFilters = () => {
-    
-    // Eventually should have local storage variables here just like campaign creation
+    // note: localStorage filter variables are initialized in MarketPlace.js
+    const [orgFilter, setOrgFilter] = useState(localStorage.getItem('orgFilter'));
+    // const [campaignFilter, setCampaignFilter] = useState(localStorage.getItem('campaignFilter'));
+    // const [roleFilter, setRoleFilter] = useState(localStorage.getItem('roleFilter'));
+    // const [statusFilter, setStatusFilter] = useState(localStorage.getItem('statusFilter'));
+    // const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem('regDateFilter'));
+    // const [tagsFilter, setTagsFilter] = useState(JSON.parse(localStorage.getItem('tagsFilter')));
     const navigate = useNavigate();
     
     
     function applyFilters() {
         // Place holder function for now, eventually should return you to the marketplace page and apply filters selected from this page
-        navigate('/market-place')
+        
+        // update localStorage variables
+        localStorage.setItem('orgFilter', orgFilter);
+        // localStorage.setItem('campaignFilter', campaignFilter);
+        // localStorage.setItem('roleFilter', roleFilter);
+        // localStorage.setItem('statusFilter', statusFilter);
+        // localStorage.setItem('regDateFilter', regDateFilter);
+        // localStorage.setItem('tagsFilter', tagsFilter);
+
+        navigate('/market-place');
     }
     
     function clearFilters() {
-        // Place holder function for now, eventually should clear all filters from local storage and reinitialize them
-        console.log('Clearing filters')
+        // Reset local storage filter variables
+        localStorage.setItem('orgFilter', '');
+        // localStorage.setItem('campaignFilter', '');
+        // localStorage.setItem('roleFilter', '');
+        // localStorage.setItem('statusFilter', '');
+        // localStorage.setItem('regDateFilter', '');
+        // localStorage.setItem('tagsFilter', '[]');
+
+        // Reset state filter variables
+        setOrgFilter('');
+        // setCampaignFilter('');
+        // setRoleFilter('');
+        // setStatusFilter('');
+        // setRegDateFilter('');
+        // setTagsFilter([]);
+
+        console.log('Filters cleared');
     }
     
     return (
@@ -54,7 +83,7 @@ export const MarketPlaceFilters = () => {
                             onClick={()=>navigate('/market-place')}
                             className="search-btn"
                         >
-                            <i class="fa-solid fa-xmark"></i>
+                            <i className="fa-solid fa-xmark"></i>
                         </Button>
                     </Col>
                 </Row>
@@ -119,6 +148,7 @@ export const MarketPlaceFilters = () => {
                     <Col xs={3} className="text-end">
                         <Button
                             className="clear-filters-btn"
+                            onClick={clearFilters}
                         >
                             Clear filters
                         </Button>
@@ -138,11 +168,12 @@ export const MarketPlaceFilters = () => {
                         <Button
                             className='search-btn'
                         >
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
                         </Button>
                             <Form.Control
                                 type="text"
                                 placeholder="Filter campaign names containing..."
+                                onChange={(e)=>setCampaignFilter(e.target.value)}
                             />
                         </InputGroup>
                         <InputGroup
@@ -152,11 +183,12 @@ export const MarketPlaceFilters = () => {
                         <Button
                             className='search-btn'
                         >
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
                         </Button>
                             <Form.Control
                                 type="text"
                                 placeholder="Filter organization names containing..."
+                                onChange={(e)=>setOrgFilter(e.target.value)}
                             />
                         </InputGroup>
                         <InputGroup
@@ -166,7 +198,7 @@ export const MarketPlaceFilters = () => {
                         <Button
                             className='search-btn'
                         >
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
                         </Button>
                             <Form.Control
                                 type="text"
@@ -195,7 +227,7 @@ export const MarketPlaceFilters = () => {
                                 <Button
                                     className='search-btn'
                                 >
-                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
                                 </Button>
                                     <Form.Control
                                         type="text"
