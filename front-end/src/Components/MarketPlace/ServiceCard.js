@@ -43,13 +43,13 @@ export const ServiceCard = ({servData}) => {
                 <Card.Text style={{color: "green"}}>[no.%] match</Card.Text>
                     
                     {loadTags()}
-                    {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> : <footer style={{marginBottom:16}}></footer>}
+                    {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> :<div style={{ height: '19px' }} />}
                     
                     <hr></hr>
                     <Image height="5" width="40" src={require("../placeholderProfilePicture.png")} alt="" roundedCircle fluid></Image>
                     <Card.Text> 
                         <Row>
-                            <body><strong>Price: </strong><em>{price}</em></body>
+                            <body><strong style={{fontSize: 14}}>Price: </strong><em style={{fontSize: 14}}>{price}</em></body>
                         </Row>
                     </Card.Text>
                     <Row>

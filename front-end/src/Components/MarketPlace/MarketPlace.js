@@ -308,6 +308,7 @@ export const MarketPlace = () => {
                         </Button>
                     </Col>
                 </Row>
+                <div style={{marginLeft: 100, marginRight: 100}}>
                 <Row className="mt-5">
                     <Col lg={2}>
                         <strong><h4>Campaigns</h4></strong>
@@ -389,6 +390,7 @@ export const MarketPlace = () => {
                     </Button>
                     </Col>
                 </Row>
+                </div>
             </Container>
         </div>
     )
