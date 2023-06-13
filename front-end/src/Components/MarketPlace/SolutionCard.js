@@ -36,14 +36,14 @@ export const SolutionCard = ({solData}) => {
 
     return (
         <div>
-            <Card style={{display: 'flex'}}>
+            <Card style={{width: 320, display: 'flex'}}>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <hr></hr>
                 <Card.Text style={{color: "green"}}>[no.%] match</Card.Text>
                     
                     {loadTags()}
-                    {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> : <footer style={{marginBottom:16}}></footer>}
+                    {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> :<div style={{ height: '19px' }} />}
                     
                     <hr></hr>
                     <Card.Text> 
