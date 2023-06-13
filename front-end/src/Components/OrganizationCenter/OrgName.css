@@ -1,0 +1,67 @@
+.endorse-btn {
+    background-color: lightgray !important;
+    color: black !important;
+    border-color: transparent !important;
+    text-align:center !important;
+    width: 240px !important;
+    height: 35px !important;
+}
+
+.contact-org-btn {
+    color: white !important;
+    background-color: black !important;
+    border-color: transparent !important;
+    width: 400px !important;
+    height: 40px !important;
+}
+
+.org-tag {
+    color: white !important;
+    background-color: black !important;
+    width: 125px !important;
+}
+
+.overview-offer-btn {
+    background-color: black !important;
+    border: 0 !important;
+    width: 450px !important;
+}
+
+.reach-us-btn {
+    background-color: white !important;
+    color: black !important;
+    border-color: black !important;
+    width: 450px !important;
+}
+
+.reach-us-btn:hover {
+    background-color: black !important;
+    color: white !important;
+}
+
+.custom-pagination .page-link {
+    background-color: white !important;
+    color: black !important;
+    border-radius: 0 !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 2px solid lightgray !important;
+}
+
+.custom-pagination .page-link:hover {
+    border-bottom: 2px solid black !important;
+}
+
+.custom-pagination .page-link.active {
+    border-bottom: 2px solid black !important;
+}
+
+.org-name-card {
+    border-width: 0 !important;
+    background-color: #f9f9f9 !important;
+}
+
+.org-details-container {
+    background-color: #f9f9f9!important;
+}
