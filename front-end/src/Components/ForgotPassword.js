@@ -13,19 +13,25 @@ import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card';
 import { NavigationBar } from './NavigationBar';
+import { useNavigate } from 'react-router-dom';
 import './Account.css'
 import Col from 'react-bootstrap/Col';
 
 export const ForgotPassword = () => {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [sent, setSent ] = useState(false);
     const [ errorShow, setErrorShow ] = useState(false);
     const [ succShow, setSuccShow ] = useState(false);
-    const [temp, setTemp ] = useState('')
+    const [ temp, setTemp ] = useState('')
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const OTP = Math.floor(Math.random() * 9000 + 1000);
+
         fetch("http://localhost:9000/forgot-password", {
             method:"POST",
             crossDomain:true,
@@ -36,6 +42,7 @@ export const ForgotPassword = () => {
             },
             body:JSON.stringify({
                 email,
+                OTP, //add this to backend request still
             }),
         }).then((res) => res.json())
         .then((data) => {
@@ -49,6 +56,8 @@ export const ForgotPassword = () => {
                 setErrorShow(false);
                 setSuccShow(true);
                 window.scrollTo(0, 0);
+                //navigate to reset password page
+                navigate(`/resetpassword/${data.token}`, {state: {email, OTP}})
             }
         });
     }

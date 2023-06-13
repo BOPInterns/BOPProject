@@ -1,9 +1,10 @@
-import React from 'react';
+import { React } from 'react';
 import { Login } from './Components/Login.js';
 import { Register } from './Components/Register.js';
 import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './Components/LandingPage.js';
 import { ForgotPassword } from './Components/ForgotPassword.js';
+import { ResetPassword } from './Components/ResetPassword.js'
 import { CampaignCenter } from './Components/CampaignCenter/CampaignCenter.js';
 import { MyAccount } from './Components/MyAccount.js';
 import { CreateCampaignS0 } from './Components/CreateCampaign/CreateCampaignS0.js';
@@ -20,6 +21,7 @@ import { RegisterSuccess  } from './Components/RegisterSuccess.js';
 import { MarketPlace } from './Components/MarketPlace/MarketPlace.js';
 import { MarketPlaceFilters } from './Components/MarketPlace/MarketPlaceFilters.js';
 import Private from './Components/Private.js';
+
 
 const App = () => {
    const loginState = window.localStorage.getItem('loginState');
@@ -45,7 +47,8 @@ const App = () => {
            <Route path="/login" element={<Login />} />
            <Route path="/register" element={<Register />} />
            <Route path="/register-success" element={<RegisterSuccess />} />
-           <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/resetpassword/:token" element={<ResetPassword />} />
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
         </Routes>
      </>
