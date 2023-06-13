@@ -24,9 +24,6 @@ export const ForgotPassword = () => {
     const [temp, setTemp ] = useState('')
 
 
-    
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch("http://localhost:9000/forgot-password", {

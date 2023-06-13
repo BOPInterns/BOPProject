@@ -20,13 +20,17 @@ export const Step4MandatoryFields = () => {
 
     const convertBase64 = (e) => {
         var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = () => {
-            setFiles(reader.result);
-        };
-        reader.onerror = () => {
-            console.log("Error: ", error);
-        };
+        try{
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = () => {
+                setFiles(reader.result);
+            };
+            reader.onerror = () => {
+                console.log("Error: ", error);
+            };
+        } catch(error){
+            console.log(error);
+        }
     }
     
     return (

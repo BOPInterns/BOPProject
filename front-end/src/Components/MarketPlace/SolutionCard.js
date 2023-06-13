@@ -2,23 +2,20 @@ import Card from 'react-bootstrap/Card';
 import Badge from'react-bootstrap/Badge';
 import Image from'react-bootstrap/Image';
 import Row from'react-bootstrap/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Button from'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 
-export const CampaignCard = ({campData}) => {
+export const SolutionCard = ({solData}) => {
     const [name, setName] = useState('');
     const [tags, setTags] = useState([]);
-    const [challenge, setChallenge] = useState('');
-    const [status, setStatus] = useState('');
     const [orgName, setOrgName] = useState('');
 
     useEffect(() => {
-        if(campData){
-            setName(campData['name']);
-            setTags(campData['tags']);
-            setChallenge(campData['challenge']);
-            setStatus(campData['status']);
-            setOrgName(campData['organization']);
+        if(solData){
+            setName(solData['name']);
+            setTags(solData['tags']);
+            setOrgName(solData['organization']);
         }
     });
 
@@ -48,17 +45,23 @@ export const CampaignCard = ({campData}) => {
                     {loadTags()}
                     {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> :<div style={{ height: '19px' }} />}
                     
-                    <Card.Text>Campaign status: <Badge bg="warning">{status}</Badge></Card.Text>
                     <hr></hr>
-                    <Card.Text className='text-muted' style={{height: 70}}>Campaign Challenge: {challenge}</Card.Text>
-                    <Card.Text>Owner
-                        <hr></hr>
-                        <Image height="5" width="40" src={require("../placeholderProfilePicture.png")} alt="" roundedCircle fluid>
-                        </Image>
-                        <footer>{orgName}</footer>
+                    <Card.Text> 
+                        <Row style={{marginBottom: 10}}>
+                        <strong>Owner:</strong>
+                        </Row>
+                        <Row>
+                            <Col>
+                            <Image height="55" width="55" src={require("../placeholderProfilePicture.png")}  roundedCircle></Image>
+                            </Col>
+                            <Col >
+                            <body>{orgName}</body>
+                            </Col>
+                            <Col></Col>
+                        </Row>
                     </Card.Text>
                     <Row>
-                        <Button variant="secondary" size="sm">Show campaign details</Button>
+                        <Button variant="secondary" size="sm">Show solution details</Button>
                     </Row>
                 </Card.Body>
             </Card>

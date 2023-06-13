@@ -11,9 +11,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import { CampaignCard } from '../CampaignCenter/CampaignCard';
+import { SolutionCard } from "./SolutionCard";
+import { ServiceCard } from './ServiceCard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useNavigate } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
 
 
 export const MarketPlace = () => {
@@ -31,9 +35,18 @@ export const MarketPlace = () => {
     // if (localStorage.getItem('tagsFilter') === null)
     //     localStorage.setItem('tagsFilter', '[]');
     
+    const [ allToggle, setAllToggle ] = useState(null);
+    const [ campaignToggle, setCampaignToggle ] = useState(false);
+    const [ solutionsToggle, setSolutionsToggle ] = useState(false);
+    const [ servicesToggle, setServicesToggle ] = useState(false);
+    
+    
     const [ campaignData, setCampaignData ] = useState([]);
+    const [ solutionData, setSolutionData ] = useState([]);
+    const [ serviceData, setServiceData ] = useState([]);
     
     useEffect(() => {
+        //for campaigns
         console.log(`orgFilter${localStorage.getItem('orgFilter')}orgFilter`);
         fetch("http://localhost:9000/market-place", {
             method: "POST",
@@ -59,6 +72,22 @@ export const MarketPlace = () => {
                 setCampaignData(data.data);
             else 
                 setCampaignData([]);
+        });
+
+        //for solutions
+        fetch("http://localhost:9000/get-solution-data", {
+            method: "GET",
+        }).then((res) => res.json())
+        .then((data) => {
+            setSolutionData(data.data);
+        });
+
+        //for services
+        fetch("http://localhost:9000/get-service-data", {
+            method: "GET",
+        }).then((res) => res.json())
+        .then((data) => {
+            setServiceData(data.data);
         });
     }, []);
 
@@ -116,6 +145,114 @@ export const MarketPlace = () => {
         return rows;   
     }
     
+    const loadSolutionData = (i) => {
+        return solutionData[i];
+    }
+
+    const loadSolutionCards = () => {
+        var rows = [];
+        var fulls = Math.floor(solutionData.length / 4); 
+        var remains = solutionData.length % 4;
+
+        var num = 0;
+        for(let i = 0; i < fulls; i++){
+            rows.push(
+                <Row>
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+3)}/></Col>
+                </Row>
+            );
+            num += 4;
+        }
+        if(remains == 3){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 2){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 1){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        return rows;   
+    }
+
+    const loadServiceData = (i) => {
+        return serviceData[i];
+    }
+
+    const loadServiceCards = () => {
+        var rows = [];
+        var fulls = Math.floor(serviceData.length / 4); 
+        var remains = serviceData.length % 4;
+
+        var num = 0;
+        for(let i = 0; i < fulls; i++){
+            rows.push(
+                <Row>
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+3)}/></Col>
+                </Row>
+            );
+            num += 4;
+        }
+        if(remains == 3){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 2){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        else if(remains == 1){
+            rows.push(
+                <Row className="mt-5">
+                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                </Row>
+            );
+        }
+        return rows;   
+    }
+
     return (
         <div>
             <NavigationBar/>
@@ -125,13 +262,13 @@ export const MarketPlace = () => {
                 </Row>
                 <Row className="justify-content-center">
                 <Card
-                    style={{height: '75px', width: '500px'}}
+                    style={{height: '85px', width: '500px'}}
                 >
                     <Card.Title
                         className=""
                     >
                         <Row>
-                            <Col xs={2} className="mt-1">
+                            <Col xs={2} className="mt-2">
                             <Image
                             roundedCircle
                             src={require("../placeholderProfilePicture.png")}
@@ -139,22 +276,41 @@ export const MarketPlace = () => {
                             
                             />
                             </Col>
-                            <Col className="mt-2">
+                            <Col lg={8} className="mt-3">
                                 <strong>Name of Organization</strong>
                                 <br></br>
                                 <p>Name of Campaign</p>
+                            </Col>
+                            <Col className="text-end mt-3">
+                            <DropdownButton
+                                variant="outline-secondary"
+                            >
+                                <Dropdown.Item>I show functionality :D</Dropdown.Item>
+                            </DropdownButton>
                             </Col>
                         </Row>
                     </Card.Title>
                 </Card>
                 </Row>
-                <Navbar className="marketPlaceNav">
+                <Navbar className="market-place-navbar">
                     <Navbar.Collapse>
                         <Nav className="mx-auto">
-                            <Nav.Link>All</Nav.Link>
-                            <Nav.Link>Campaigns</Nav.Link>
-                            <Nav.Link>Solutions</Nav.Link>
-                            <Nav.Link>Services</Nav.Link>
+                            <Button
+                                className="custom-navbar-btn"
+                            >
+                                All</Button>
+                                <Button
+                                className="custom-navbar-btn"
+                            >
+                                Campaigns</Button>
+                                <Button
+                                className="custom-navbar-btn"
+                            >
+                                Solutions</Button>
+                                <Button
+                                className="custom-navbar-btn"
+                            >
+                                Services</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -185,6 +341,7 @@ export const MarketPlace = () => {
                         </Button>
                     </Col>
                 </Row>
+                <div style={{marginLeft: 100, marginRight: 100}}>
                 <Row className="mt-5">
                     <Col lg={2}>
                         <strong><h4>Campaigns</h4></strong>
@@ -228,7 +385,7 @@ export const MarketPlace = () => {
                     </Col>
                 </Row>
                 <Row className="mt-3">
-                    {loadCards()}
+                    {loadSolutionCards()}
                 </Row>
                 <Row className="mt-3 text-center">
                     <Col text-center>
@@ -255,7 +412,7 @@ export const MarketPlace = () => {
                     </Col>
                 </Row>
                 <Row className="mt-3">
-                    {loadCards()}
+                    {loadServiceCards()}
                 </Row>
                 <Row className="mt-3 text-center">
                     <Col text-center>
@@ -266,6 +423,7 @@ export const MarketPlace = () => {
                     </Button>
                     </Col>
                 </Row>
+                </div>
             </Container>
         </div>
     )
