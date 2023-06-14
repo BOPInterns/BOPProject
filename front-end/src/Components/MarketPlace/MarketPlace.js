@@ -10,9 +10,6 @@ import './MarketPlace.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
-import { CampaignCard } from '../CampaignCenter/CampaignCard';
-import { SolutionCard } from "./SolutionCard";
-import { ServiceCard } from './ServiceCard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -20,6 +17,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { CampaignComp } from './CampaignComp';
 import { SolutionComp } from './SolutionComp';
 import { ServiceComp } from './ServicesComp';
+import { AllPages } from './AllPages';
+import { MarketPlaceFilters } from './MarketPlaceFilters'
 import Pagination from 'react-bootstrap/Pagination';
 
 
@@ -43,12 +42,7 @@ export const MarketPlace = () => {
     const [ campaignToggle, setCampaignToggle ] = useState(false);
     const [ solutionsToggle, setSolutionsToggle ] = useState(false);
     const [ servicesToggle, setServicesToggle ] = useState(false);
-    
-    
-    const [ campaignData, setCampaignData ] = useState([]);
-    const [ solutionData, setSolutionData ] = useState([]);
-    const [ serviceData, setServiceData ] = useState([]);
-    
+        
     const [ activePage, setActivePage ] = useState(1);
     const totalPages = 4;
     
@@ -59,7 +53,7 @@ export const MarketPlace = () => {
     const renderActivePage = () => {
         switch (activePage) {
             case 1:
-                return (<CampaignComp/>);
+                return <AllPages/>;
             case 2:
                 return <CampaignComp/>;
             case 3:
@@ -67,216 +61,12 @@ export const MarketPlace = () => {
             case 4:
                 return <ServiceComp/>;
             default:
-                return <CampaignCard/>;
+                return <AllPages/>;
         }
     };
     
-    useEffect(() => {
-        //for campaigns
-        console.log(`orgFilter${localStorage.getItem('orgFilter')}orgFilter`);
-        fetch("http://localhost:9000/get-campaign-data", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-                "Content-Type":"application/json",
-                Accept:"application/json",
-                "Access-Control-Allow-Origin":"*",
-            },
-            body: JSON.stringify({
-                orgFilter: localStorage.getItem('orgFilter'),
-                campaignFilter: localStorage.getItem('campaignFilter'),
-                // roleFilter: localStorage.getItem('roleFilter'),
-                // statusFilter: localStorage.getItem('statusFilter'),
-                // regDateFilter: localStorage.getItem('regDateFilter'),
-                // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
-            })
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            if (data.data)
-                setCampaignData(data.data);
-            else 
-                setCampaignData([]);
-        });
-
-        //for solutions
-        fetch("http://localhost:9000/get-solution-data", {
-            method: "GET",
-        }).then((res) => res.json())
-        .then((data) => {
-            setSolutionData(data.data);
-        });
-
-        //for services
-        fetch("http://localhost:9000/get-service-data", {
-            method: "GET",
-        }).then((res) => res.json())
-        .then((data) => {
-            setServiceData(data.data);
-        });
-    }, []);
-
-    const loadData = (i) => {
-        return campaignData[i];
-    }
-
-    const loadCards = () => {
-        var rows = [];
-        var fulls = Math.floor(campaignData.length / 4); 
-        var remains = campaignData.length % 4;
-
-        var num = 0;
-        for(let i = 0; i < fulls; i++){
-            rows.push(
-                <Row>
-                    <Col sm={3}><CampaignCard campData={loadData(num)}/></Col>
-                    <Col sm={3}><CampaignCard campData={loadData(num+1)}/></Col>
-                    <Col sm={3}><CampaignCard campData={loadData(num+2)}/></Col>
-                    <Col sm={3}><CampaignCard campData={loadData(num+3)}/></Col>
-                </Row>
-            );
-            num += 4;
-        }
-        if(remains == 3){
-            rows.push(
-                <Row className="mt-3">
-                    <Col><CampaignCard campData={loadData(num)}/></Col>
-                    <Col><CampaignCard campData={loadData(num+1)}/></Col>
-                    <Col><CampaignCard campData={loadData(num+2)}/></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 2){
-            rows.push(
-                <Row className="mt-3">
-                    <Col><CampaignCard campData={loadData(num)}/></Col>
-                    <Col><CampaignCard campData={loadData(num+1)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 1){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><CampaignCard campData={loadData(num)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        return rows;   
-    }
-    
-    const loadSolutionData = (i) => {
-        return solutionData[i];
-    }
-
-    const loadSolutionCards = () => {
-        var rows = [];
-        var fulls = Math.floor(solutionData.length / 4); 
-        var remains = solutionData.length % 4;
-
-        var num = 0;
-        for(let i = 0; i < fulls; i++){
-            rows.push(
-                <Row>
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+3)}/></Col>
-                </Row>
-            );
-            num += 4;
-        }
-        if(remains == 3){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 2){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 1){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        return rows;   
-    }
-
-    const loadServiceData = (i) => {
-        return serviceData[i];
-    }
-
-    const loadServiceCards = () => {
-        var rows = [];
-        var fulls = Math.floor(serviceData.length / 4); 
-        var remains = serviceData.length % 4;
-
-        var num = 0;
-        for(let i = 0; i < fulls; i++){
-            rows.push(
-                <Row>
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+3)}/></Col>
-                </Row>
-            );
-            num += 4;
-        }
-        if(remains == 3){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 2){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 1){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        return rows;   
+    const handleFilters = () => {
+        return <MarketPlaceFilters/>;
     }
 
     return (
@@ -338,11 +128,6 @@ export const MarketPlace = () => {
                 <Pagination.Item active={activePage === 4} onClick={() => handlePageChange(4)}>
                     Services
                 </Pagination.Item>
-                </Pagination>
-                {renderActivePage()}
-            </Container>
-                <Row>
-                </Row>
                 <Row className="mt-3">
                     <Col sm={2}></Col>
                     <Col lg={8}>
@@ -362,94 +147,19 @@ export const MarketPlace = () => {
                         <Button
                             className="filters-btn"
                             text-align="center"
-                            href='/market-place/filters'
+                            href="/market-place/filters"
                         >
                             Filters <i class="fa-solid fa-filter"></i>
                         </Button>
                     </Col>
                 </Row>
+                </Pagination>
+                {renderActivePage()}
+            </Container>
+                <Row>
+                </Row>
+                
                 <div style={{marginLeft: 100, marginRight: 100}}>
-                <Row className="mt-5">
-                    <Col lg={2}>
-                        <strong><h4>Campaigns</h4></strong>
-                    </Col>
-                    <Col md={8}>
-                        <hr></hr>
-                    </Col>
-                    <Col sm={2}>
-                    <Button
-                        className="browse-more-btn"
-                    >
-                        Browse more
-                    </Button>
-                    </Col>
-                </Row>
-                <Row className="mt-3">
-                    {loadCards()}
-                </Row>
-                <Row className="mt-3 text-center">
-                    <Col text-center>
-                    <Button
-                        variant="secondary"
-                    >
-                        Load more campaigns
-                    </Button>
-                    </Col>
-            </Row>
-                <Row className="mt-5">
-                    <Col lg={2}>
-                        <strong><h4>Solutions</h4></strong>
-                    </Col>
-                    <Col md={8}>
-                        <hr></hr>
-                    </Col>
-                    <Col sm={2}>
-                    <Button
-                        className='browse-more-btn'
-                    >
-                        Browse more
-                    </Button>
-                    </Col>
-                </Row>
-                <Row className="mt-3">
-                    {loadSolutionCards()}
-                </Row>
-                <Row className="mt-3 text-center">
-                    <Col text-center>
-                    <Button
-                        variant="secondary"
-                    >
-                        Load more solutions
-                    </Button>
-                    </Col>
-                </Row>
-                <Row className="mt-5">
-                    <Col lg={3}>
-                        <strong><h4>Transformation Services</h4></strong>
-                    </Col>
-                    <Col md={7}>
-                        <hr></hr>
-                    </Col>
-                    <Col sm={2}>
-                    <Button
-                        className='browse-more-btn'
-                    >
-                        Browse more
-                    </Button>
-                    </Col>
-                </Row>
-                <Row className="mt-3">
-                    {loadServiceCards()}
-                </Row>
-                <Row className="mt-3 text-center">
-                    <Col text-center>
-                    <Button
-                        variant="secondary"
-                    >
-                        Load more services
-                    </Button>
-                    </Col>
-                </Row>
                 </div>
             </Container>
         </div>
