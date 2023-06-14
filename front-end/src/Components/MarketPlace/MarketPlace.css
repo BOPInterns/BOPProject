@@ -88,3 +88,21 @@
     border-bottom-color: black !important;
     border-bottom-width: 2px !important;
 }
+
+.org-dropdown-btn {
+    color: black !important;
+    background-color: lightgray !important;
+    border-color: lightgray !important;
+    width: 500px !important;
+    height: 75px !important;
+    text-align: left !important;
+}
+
+.org-dropdown-btn::after {
+    display: none !important;
+}
+
+.org-dropdown-btn-menu {
+    background-color: lightgray !important;
+    width: 500px !important;
+}
