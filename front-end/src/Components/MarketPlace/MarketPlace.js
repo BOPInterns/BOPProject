@@ -21,6 +21,19 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 export const MarketPlace = () => {
+    // initialize localStorage filter variables
+    if (localStorage.getItem('orgFilter') === 'null')
+        localStorage.setItem('orgFilter', '');
+    if (localStorage.getItem('campaignFilter') === 'null')
+        localStorage.setItem('campaignFilter', '');
+    // if (localStorage.getItem('roleFilter') === null)
+    //     localStorage.setItem('roleFilter', '');
+    // if (localStorage.getItem('statusFilter') === null)
+    //     localStorage.setItem('statusFilter', '');
+    // if (localStorage.getItem('regDateFilter') === null)
+    //     localStorage.setItem('regDateFilter', '');
+    // if (localStorage.getItem('tagsFilter') === null)
+    //     localStorage.setItem('tagsFilter', '[]');
     
     const [ allToggle, setAllToggle ] = useState(null);
     const [ campaignToggle, setCampaignToggle ] = useState(false);
@@ -34,11 +47,31 @@ export const MarketPlace = () => {
     
     useEffect(() => {
         //for campaigns
+        console.log(`orgFilter${localStorage.getItem('orgFilter')}orgFilter`);
         fetch("http://localhost:9000/get-campaign-data", {
-            method: "GET",
-        }).then((res) => res.json())
+            method: "POST",
+            crossDomain: true,
+            headers: {
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body: JSON.stringify({
+                orgFilter: localStorage.getItem('orgFilter'),
+                campaignFilter: localStorage.getItem('campaignFilter'),
+                // roleFilter: localStorage.getItem('roleFilter'),
+                // statusFilter: localStorage.getItem('statusFilter'),
+                // regDateFilter: localStorage.getItem('regDateFilter'),
+                // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
+            })
+        })
+        .then((res) => res.json())
         .then((data) => {
-            setCampaignData(data.data);
+            console.log(data);
+            if (data.data)
+                setCampaignData(data.data);
+            else 
+                setCampaignData([]);
         });
 
         //for solutions
@@ -258,6 +291,7 @@ export const MarketPlace = () => {
                         </Row>
                     </Card.Title>
                 </Card>
+                <hr className="mt-5"></hr>
                 </Row>
                 <Navbar className="market-place-navbar">
                     <Navbar.Collapse>
