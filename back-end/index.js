@@ -148,7 +148,7 @@ app.get('/', (req, res) => {
 })
 
 app.post("/forgot-password", async(req, res) => {
-    const {email} = req.body;
+    const {email, OTP} = req.body;
     try{
         if (!validator.isEmail(email)) {return res.json({error: "This is not a valid email"})};
 
@@ -161,7 +161,7 @@ app.post("/forgot-password", async(req, res) => {
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id}, secret, {
             expiresIn: "10m",
         });
-        const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
+        //const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
 
         //copied code to sent email ///////
         var transporter = nodemailer.createTransport({
@@ -176,7 +176,7 @@ app.post("/forgot-password", async(req, res) => {
             from: 'bop.hub.interns@gmail.com',
             to: email,
             subject: 'BOP Hub Password Reset',
-            text: "Please use the following code to reset your password   " + link,
+            text: "Please use the following one time code to reset your password   \n" + OTP,
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -189,7 +189,7 @@ app.post("/forgot-password", async(req, res) => {
           ////////////////////////////////////
         
         console.log(link);
-        return res.json({status: 'ok'});
+        return res.json({status: 'ok', token: token});
     }catch (error) {
         console.log(error);
         res.send(error);
