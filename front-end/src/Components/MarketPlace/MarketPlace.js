@@ -26,14 +26,12 @@ export const MarketPlace = () => {
         localStorage.setItem('orgFilter', '');
     if (localStorage.getItem('campaignFilter') === 'null')
         localStorage.setItem('campaignFilter', '');
-    // if (localStorage.getItem('roleFilter') === null)
-    //     localStorage.setItem('roleFilter', '');
-    // if (localStorage.getItem('statusFilter') === null)
-    //     localStorage.setItem('statusFilter', '');
-    // if (localStorage.getItem('regDateFilter') === null)
-    //     localStorage.setItem('regDateFilter', '');
-    // if (localStorage.getItem('tagsFilter') === null)
-    //     localStorage.setItem('tagsFilter', '[]');
+    if (localStorage.getItem('statusFilter') === null)
+        localStorage.setItem('statusFilter', '');
+    if (localStorage.getItem('regDateFilter') === null)
+        localStorage.setItem('regDateFilter', '');
+    if (localStorage.getItem('tagsFilter') === null)
+        localStorage.setItem('tagsFilter', '[]');
     
     const [ allToggle, setAllToggle ] = useState(null);
     const [ campaignToggle, setCampaignToggle ] = useState(false);
@@ -49,6 +47,7 @@ export const MarketPlace = () => {
         //for campaigns
         console.log(`orgFilter${localStorage.getItem('orgFilter')}orgFilter`);
         fetch("http://localhost:9000/get-campaign-data", {
+        //fetch("http://localhost:9000/market-place", {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -59,10 +58,9 @@ export const MarketPlace = () => {
             body: JSON.stringify({
                 orgFilter: localStorage.getItem('orgFilter'),
                 campaignFilter: localStorage.getItem('campaignFilter'),
-                // roleFilter: localStorage.getItem('roleFilter'),
-                // statusFilter: localStorage.getItem('statusFilter'),
-                // regDateFilter: localStorage.getItem('regDateFilter'),
-                // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
+                statusFilter: localStorage.getItem('statusFilter'),
+                regDateFilter: localStorage.getItem('regDateFilter'),
+                tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
             })
         })
         .then((res) => res.json())
@@ -291,7 +289,6 @@ export const MarketPlace = () => {
                         </Row>
                     </Card.Title>
                 </Card>
-                <hr className="mt-5"></hr>
                 </Row>
                 <Navbar className="market-place-navbar">
                     <Navbar.Collapse>

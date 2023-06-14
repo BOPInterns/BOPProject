@@ -62,7 +62,7 @@ const campaignSchema = new mongoose.Schema({
     otherFiles: [String],
     createdAt: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
       }
 })
 

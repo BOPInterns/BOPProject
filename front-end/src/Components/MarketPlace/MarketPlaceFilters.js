@@ -19,10 +19,10 @@ import { Card } from 'react-bootstrap';
     status -
     registration date -
 
-    Search functionality:
+    Searching:
     organization -
     campaign name -
-    tag name -
+    tag name (dropdown) -
 */
 
 
@@ -30,10 +30,9 @@ export const MarketPlaceFilters = () => {
     // note: localStorage filter variables are initialized in MarketPlace.js
     const [orgFilter, setOrgFilter] = useState(localStorage.getItem('orgFilter'));
     const [campaignFilter, setCampaignFilter] = useState(localStorage.getItem('campaignFilter'));
-    // const [roleFilter, setRoleFilter] = useState(localStorage.getItem('roleFilter'));
-    // const [statusFilter, setStatusFilter] = useState(localStorage.getItem('statusFilter'));
-    // const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem('regDateFilter'));
-    // const [tagsFilter, setTagsFilter] = useState(JSON.parse(localStorage.getItem('tagsFilter')));
+    const [statusFilter, setStatusFilter] = useState(localStorage.getItem('statusFilter'));
+    const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem('regDateFilter'));
+    const [tagsFilter, setTagsFilter] = useState(JSON.parse(localStorage.getItem('tagsFilter')));
     const navigate = useNavigate();
     
     
@@ -43,10 +42,9 @@ export const MarketPlaceFilters = () => {
         // update localStorage variables
         localStorage.setItem('orgFilter', orgFilter);
         localStorage.setItem('campaignFilter', campaignFilter);
-        // localStorage.setItem('roleFilter', roleFilter);
-        // localStorage.setItem('statusFilter', statusFilter);
-        // localStorage.setItem('regDateFilter', regDateFilter);
-        // localStorage.setItem('tagsFilter', tagsFilter);
+        localStorage.setItem('statusFilter', statusFilter);
+        localStorage.setItem('regDateFilter', regDateFilter);
+        localStorage.setItem('tagsFilter', JSON.stringify(tagsFilter));
 
         navigate('/market-place');
     }
@@ -55,18 +53,16 @@ export const MarketPlaceFilters = () => {
         // Reset local storage filter variables
         localStorage.setItem('orgFilter', '');
         localStorage.setItem('campaignFilter', '');
-        // localStorage.setItem('roleFilter', '');
-        // localStorage.setItem('statusFilter', '');
-        // localStorage.setItem('regDateFilter', '');
-        // localStorage.setItem('tagsFilter', '[]');
+        localStorage.setItem('statusFilter', '');
+        localStorage.setItem('regDateFilter', '');
+        localStorage.setItem('tagsFilter', '[]');
 
         // Reset state filter variables
         setOrgFilter('');
         setCampaignFilter('');
-        // setRoleFilter('');
-        // setStatusFilter('');
-        // setRegDateFilter('');
-        // setTagsFilter([]);
+        setStatusFilter('');
+        setRegDateFilter('');
+        setTagsFilter([]);
 
         console.log('Filters cleared');
     }
