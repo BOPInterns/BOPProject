@@ -126,10 +126,6 @@ export const ResetPassword = () => {
         .then((data) => {console.log("OTP SENT: ", data.code)});
     }
 
-    const printCode = () => {
-        console.log(OTP);
-    }
-
     const codeChecker = () => {
         return(
             <Card.Body>
@@ -185,8 +181,6 @@ export const ResetPassword = () => {
                 <Card.Text>Didn't receive email? Click <Link to="#" onClick={resend}> 
                         <span className="highlighted">here</span>
                     </Link> to resend email.</Card.Text>
-
-                <Button onClick={printCode}>Console the state code</Button>
                 
             </Card.Body>
         );
