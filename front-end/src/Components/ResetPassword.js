@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { NavigationBar } from './NavigationBar';
@@ -8,8 +8,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
 import BOPLogo from './BOPHub.MainLogo.png'
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
@@ -20,7 +18,7 @@ export const ResetPassword = () => {
     const [valid, setValid] = useState(false);
     const [password, setPassword] = useState('');
     const [confirmation, setConfirmation] = useState('');
-    const [OTP, setOTP] = useState();
+    const [OTP, setOTP] = useState([]);
     const [ errorShow, setErrorShow ] = useState(false);
     const [input1, setInput1] = useState(0);
     const [input2, setInput2] = useState(0);
@@ -28,16 +26,17 @@ export const ResetPassword = () => {
     const [input4, setInput4] = useState(0);
 
     const location = useLocation();
+    const navigate = useNavigate();
     const email = location.state.email;
+
+
     useEffect(() => {
-        if(OTP == undefined){
-            setOTP(String(location.state.OTP).split('').map((digit) => parseInt(digit)));
+        if (OTP.length == 0){
+            var toInsert = String(location.state.OTP).split('').map((digit) => parseInt(digit))
+            toInsert = toInsert.filter((item) => typeof item === "number" && !isNaN(item));
+            setOTP(toInsert);
         }
-
-      
-    }, []);
-
-    console.log("OTP: ", OTP)
+    }, [location.state.OTP]);
 
     const in1 = useRef(null);
     const in2 = useRef(null);
@@ -83,10 +82,16 @@ export const ResetPassword = () => {
         // });
     }
 
-    const resend = (e) => {
+    const resend = () => {
         e.preventDefault();
-        setOTP(String(Math.floor(Math.random() * 9000 + 1000)).split('').map((digit) => parseInt(digit)));
-        console.log(OTP)
+        const newOTP = String(Math.floor(Math.random() * 9000 + 1000)).split('').map((digit) => parseInt(digit));
+        console.log("new OTP: ", newOTP);
+        setOTP(newOTP);
+
+        const updatedState = { ...location.state, email: location.state.email, OTP: newOTP };
+        navigate(location.pathname, { state: updatedState });
+
+
         fetch("http://localhost:9000/forgot-password", {
             method:"POST",
             crossDomain:true,
@@ -101,7 +106,11 @@ export const ResetPassword = () => {
             }),
         })
         .then((res) => res.json())
-        .then((data) => {console.log(data)});
+        .then((data) => {console.log("OTP SENT: ", data.code)});
+    }
+
+    const printCode = () => {
+        console.log(OTP);
     }
 
     const codeChecker = () => {
@@ -156,9 +165,11 @@ export const ResetPassword = () => {
                     Verify
                 </Button>
 
-                <Card.Text>Didn't receive email? Click <Link to="#" onClick={(e) => resend(e)}> 
+                <Card.Text>Didn't receive email? Click <Link to="#" onClick={resend}> 
                         <span className="highlighted">here</span>
                     </Link> to resend email.</Card.Text>
+
+                <Button onClick={printCode}>Console the state code</Button>
                 
             </Card.Body>
         );

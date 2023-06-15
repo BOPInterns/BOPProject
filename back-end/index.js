@@ -149,6 +149,7 @@ app.get('/', (req, res) => {
 
 app.post("/forgot-password", async(req, res) => {
     const {email, OTP} = req.body;
+    console.log(OTP)
     try{
         if (!validator.isEmail(email)) {return res.json({error: "This is not a valid email"})};
 
@@ -176,7 +177,7 @@ app.post("/forgot-password", async(req, res) => {
             from: 'bop.hub.interns@gmail.com',
             to: email,
             subject: 'BOP Hub Password Reset',
-            text: "Please use the following one time code to reset your password   \n" + OTP,
+            text: "Please use the following one time code to reset your password   \n" + OTP[0]+OTP[1]+OTP[2]+OTP[3],
           };
           
           transporter.sendMail(mailOptions, function(error, info){
@@ -188,8 +189,8 @@ app.post("/forgot-password", async(req, res) => {
           });
           ////////////////////////////////////
         
-        console.log(link);
-        return res.json({status: 'ok', token: token});
+        // console.log(link);
+        res.send({status: 'ok', code: OTP});
     }catch (error) {
         console.log(error);
         res.send(error);
