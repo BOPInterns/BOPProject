@@ -239,97 +239,56 @@ app.post("/forgot-password", async(req, res) => {
 //     } catch (error) {
 //         res.send("Not Verified");
 //     }
-// });
+// }); 
 
-app.post("/reset-password", async (req, res) => {
-  const { email, password, confirmation } = req.body;
+app.post('/reset-password', async(req, res) => {
+    const {email, password, confirmation} = req.body;
 
-  if (password != confirmation) {
-    return res.json({
-      error: "Please enter the same password in both fields.",
-    });
-  }
-  if (!validator.isStrongPassword(password)) {
-    return res.json({ error: "Password is not strong enough" });
-  }
+    if(password != confirmation){return res.json({error: "Please enter the same password in both fields."})}
+    if (!(validator.isStrongPassword(password))) {return res.json({error: "Password is not strong enough"})}
 
-  const existingUser = await User.findOne({ email: email });
-  if (!existingUser) {
-    return res.json({
-      status: "No account with this email address has been registered.",
-    });
-  }
-  try {
-    const encryptedPassword = await bcrypt.hash(password, 10);
-    await User.updateOne(
-      {
-        email: email,
-      },
-      {
-        $set: {
-          password: encryptedPassword,
-        },
-      }
-    );
+    const existingUser = await User.findOne({email:email});
+    if(!existingUser){
+        return res.json({status:"No account with this email address has been registered."});
+    }
+    try {
+        const encryptedPassword = await bcrypt.hash(password, 10);
+        await User.updateOne({
+            email: email
+        },{
+            $set: {
+                password: encryptedPassword,
+            }
+        });
 
-    return res.json({ status: "password changed" });
-    //res.render("index", {email: verify.email, status: "Verified"});
-  } catch (error) {
-    res.json({ status: "Error Updating Password." });
-  }
+        return res.json({status: "password changed"});
+        //res.render("index", {email: verify.email, status: "Verified"});
+    } catch (error) {
+        res.json({status: "Error Updating Password."})
+    }
 });
 
-app.post("/create-campaign-step-5", async (req, res) => {
-  try {
-    const {
-      organization,
-      status,
-      numActors,
-      deadline,
-      caseStudy,
-      solutions,
-      name,
-      tags,
-      videoLink, // STEP 1
-      description,
-      challenge,
-      mission,
-      milestones,
-      goals, // STEP 2
-      location,
-      reach,
-      stakeholderLangs,
-      volunteerLangs, // STEP 3
-    } = req.body;
+app.post('/create-campaign-step-5', async (req, res) => {
+    try {
+        const {
+            organization, status, numActors, deadline, caseStudy, solutions,
+            name, tags, videoLink, // STEP 1
+            description, challenge, mission, milestones, goals, // STEP 2
+            location, reach, stakeholderLangs, volunteerLangs, // STEP 3
+        } = req.body;
+    
+        var newCampaign = await Campaign.create({
+            organization, status, numActors, deadline, caseStudy, solutions,
+            name, tags, videoLink, // STEP 1
+            description, challenge, mission, milestones, goals, // STEP 2
+            location, reach, stakeholderLangs, volunteerLangs, // STEP 3
+        });
 
-    var newCampaign = await Campaign.create({
-      organization,
-      status,
-      numActors,
-      deadline,
-      caseStudy,
-      solutions,
-      name,
-      tags,
-      videoLink, // STEP 1
-      description,
-      challenge,
-      mission,
-      milestones,
-      goals, // STEP 2
-      location,
-      reach,
-      stakeholderLangs,
-      volunteerLangs, // STEP 3
-    });
-
-    res.status(201).json({
-      status: "success",
-      data: newCampaign,
-    });
-  } catch (err) {
-    res.status(401).json({ error: err.message });
-  }
+        res.status(201).json({
+            status: "success",
+            data: newCampaign
+        });
+    } catch (err) { res.status(401).json({error: err.message}); }
 });
 
 // update the user's info in the DB
