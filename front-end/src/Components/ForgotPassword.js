@@ -7,8 +7,6 @@ import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
 import { Alert } from 'react-bootstrap';
 import BOPLogo from './BOPHub.MainLogo.png'
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card';
@@ -30,7 +28,7 @@ export const ForgotPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const OTP = Math.floor(Math.random() * 9000 + 1000);
+        const OTP = String(Math.floor(Math.random() * 9000 + 1000)).split('').map((digit) => parseInt(digit));
 
         fetch("http://localhost:9000/forgot-password", {
             method:"POST",
@@ -42,7 +40,7 @@ export const ForgotPassword = () => {
             },
             body:JSON.stringify({
                 email,
-                OTP, //add this to backend request still
+                OTP, 
             }),
         }).then((res) => res.json())
         .then((data) => {
