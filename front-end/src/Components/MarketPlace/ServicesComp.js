@@ -7,7 +7,15 @@ import { ServiceCard } from './ServiceCard';
 
 export const ServiceComp = () => {
     
+    const [ currLoadedCards, setCurrLoadedCards ] = useState(8);
     const [ serviceData, setServiceData ] = useState([]);
+    
+    // useEffect(() => {
+    //     if (currLoadedCards >= serviceData.length) {
+    //         const loadMoreBtn = document.getElementById('load-more-btn');
+    //         loadMoreBtn.disabled = true;
+    //     };
+    // }, [currLoadedCards]);
 
     useEffect(() => {
         //for services
@@ -19,60 +27,26 @@ export const ServiceComp = () => {
         });
     }, []);
     
+    const handleMoreCards = () => {
+        if(currLoadedCards < serviceData.length) {
+            setCurrLoadedCards(currLoadedCards + 8);
+        }   else {
+            const button = document.getElementById('load-more-btn');
+            button.disabled = true;
+        }
+    }
+    
     const loadServiceData = (i) => {
         return serviceData[i];
     }
-
+    
     const loadServiceCards = () => {
-        var rows = [];
-        var fulls = Math.floor(serviceData.length / 4); 
-        var remains = serviceData.length % 4;
-
-        var num = 0;
-        for(let i = 0; i < fulls; i++){
-            rows.push(
-                <Row>
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+3)}/></Col>
-                </Row>
-            );
-            num += 4;
-        }
-        if(remains == 3){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+2)}/></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 2){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col><ServiceCard servData={loadServiceData(num+1)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 1){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><ServiceCard servData={loadServiceData(num)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        return rows;   
-    }
-
+        return serviceData.slice(0, currLoadedCards).map((data, index) => (
+            <Col key={index} xs={6} sm={4} md={3} lg={3}>
+                <ServiceCard servData={loadServiceData(index)}></ServiceCard>
+            </Col>
+        ));
+    };
     
     return (
         <div>
@@ -91,13 +65,22 @@ export const ServiceComp = () => {
                     </Button>
                     </Col>
                 </Row>
-                <Row className="mt-3">
+                <Row
+                    style={{
+                        paddingTop: '20px',
+                        paddingBottom: '40px',
+                        flexWrap: 'wrap',
+                        display: 'flex'
+                    }}
+                >
                     {loadServiceCards()}
                 </Row>
                 <Row className="mt-3 text-center">
                     <Col text-center>
                     <Button
+                        id="load-more-btn"
                         variant="secondary"
+                        onClick={() => handleMoreCards()}
                     >
                         Load more services
                     </Button>
