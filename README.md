@@ -17,6 +17,7 @@ Project created by Intern team for the BoP Hub website
 - when uploading a file, if you click "cancel" when there's already a file there, it throws a runtime error
 - when user creates campaign, it adds their organization as the organization that owns the campaign
 - When you click "load more" on the marketplace the button only disables after there are no more campaigns to load, ideally it should disable the second there are no more campaigns to load. Thinking it could be done with a useEffect hook but it keeps disabling the button on page render -B
+- password reset code exists indefinitely instead of expiring after a certian amt of time
 
 ## Successful can kicks:
 

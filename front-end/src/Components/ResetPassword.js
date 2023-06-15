@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { NavigationBar } from './NavigationBar';
@@ -8,8 +8,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
 import BOPLogo from './BOPHub.MainLogo.png'
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Card from 'react-bootstrap/Card'
@@ -20,24 +18,31 @@ export const ResetPassword = () => {
     const [valid, setValid] = useState(false);
     const [password, setPassword] = useState('');
     const [confirmation, setConfirmation] = useState('');
-    const [OTP, setOTP] = useState();
-    const [ errorShow, setErrorShow ] = useState(false);
+    const [OTP, setOTP] = useState([]);
+    const [email, setEmail] = useState('');
+    const [errorShow, setErrorShow] = useState(false);
+    const [passErrorShow, setPassErrorShow] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
     const [input1, setInput1] = useState(0);
     const [input2, setInput2] = useState(0);
     const [input3, setInput3] = useState(0);
     const [input4, setInput4] = useState(0);
 
     const location = useLocation();
-    const email = location.state.email;
+    const navigate = useNavigate();
+
+    if(email == ''){
+        setEmail(location.state.email);
+    }
+    
+
     useEffect(() => {
-        if(OTP == undefined){
-            setOTP(String(location.state.OTP).split('').map((digit) => parseInt(digit)));
+        if (OTP.length == 0){
+            var toInsert = String(location.state.OTP).split('').map((digit) => parseInt(digit))
+            toInsert = toInsert.filter((item) => typeof item === "number" && !isNaN(item));
+            setOTP(toInsert);
         }
-
-      
     }, []);
-
-    console.log("OTP: ", OTP)
 
     const in1 = useRef(null);
     const in2 = useRef(null);
@@ -52,7 +57,7 @@ export const ResetPassword = () => {
         }
       };
 
-    const handleSubmit = (e) => {
+    const handleVerify = (e) => {
         e.preventDefault();
 
         if(OTP[0] != input1 || OTP[1] != input2 || OTP[2] != input3 || OTP[3] != input4){
@@ -63,30 +68,47 @@ export const ResetPassword = () => {
             setErrorShow(false);
             setValid(true);
         }
-
-        
-        // fetch("http://localhost:9000/forgot-password", {
-        //     method:"POST",
-        //     crossDomain:true,
-        //     headers:{
-        //         "Content-Type":"application/json",
-        //         Accept:"application/json",
-        //         "Access-Control-Allow-Origin":"*",
-        //     },
-        //     body:JSON.stringify({
-        //         email,
-        //     }),
-        // }).then((res) => res.json())
-        // .then((data) => {
-        //     console.log(data, "userRegister");
-        //     alert(data.status);
-        // });
     }
 
-    const resend = (e) => {
-        e.preventDefault();
-        setOTP(String(Math.floor(Math.random() * 9000 + 1000)).split('').map((digit) => parseInt(digit)));
-        console.log(OTP)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        fetch("http://localhost:9000/reset-password", {
+            method:"POST",
+            crossDomain:true,
+            headers:{
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body:JSON.stringify({
+                email: email,
+                password: password,
+                confirmation: confirmation, 
+            }),
+        }).then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+            if(data.error){
+                setErrorMsg(data.error);
+                setPassErrorShow(true);
+                window.scrollTo(0, 0);
+            } else {
+                console.log("successful reset");
+                alert("Password reset successful, routing back to login page.")
+                navigate('/login');
+            }
+        });
+    }
+
+    const resend = () => {
+        const newOTP = String(Math.floor(Math.random() * 9000 + 1000)).split('').map((digit) => parseInt(digit));
+        console.log("new OTP: ", newOTP);
+        setOTP(newOTP);
+
+        const updatedState = { ...location.state, email: email, OTP: newOTP };
+        navigate(location.pathname, { state: updatedState });
+
+
         fetch("http://localhost:9000/forgot-password", {
             method:"POST",
             crossDomain:true,
@@ -97,11 +119,11 @@ export const ResetPassword = () => {
             },
             body:JSON.stringify({
                 email,
-                OTP, 
+                OTP: newOTP, 
             }),
         })
         .then((res) => res.json())
-        .then((data) => {console.log(data)});
+        .then((data) => {console.log("OTP SENT: ", data.code)});
     }
 
     const codeChecker = () => {
@@ -152,11 +174,11 @@ export const ResetPassword = () => {
                 </Form>
                 
 
-                <Button onClick={handleSubmit} type="submit" variant="primary" className='button' ref={but}>
+                <Button onClick={handleVerify} type="submit" variant="primary" className='button' ref={but}>
                     Verify
                 </Button>
 
-                <Card.Text>Didn't receive email? Click <Link to="#" onClick={(e) => resend(e)}> 
+                <Card.Text>Didn't receive email? Click <Link to="#" onClick={resend}> 
                         <span className="highlighted">here</span>
                     </Link> to resend email.</Card.Text>
                 
@@ -221,12 +243,21 @@ export const ResetPassword = () => {
                 <Alert.Heading>Error!</Alert.Heading>
                 <p>Invalid OTP!</p>
             </Alert>
+            <Alert
+                show={passErrorShow}
+                variant="danger"
+                dismissible
+                onClose={() => setPassErrorShow(false)}
+            >
+                <Alert.Heading>Error!</Alert.Heading>
+                <p>{errorMsg}</p>
+            </Alert>
             <Container>
             <Row>
             <Column md={6}>
                 <Image src={BOPLogo} className="img-fluid" height="10000" width="10000"></Image>
             </Column>
-            <Card style={{width: '24rem', height: '26rem',marginTop: 70}}>
+            <Card style={{width: '24rem', display:'flex', marginTop: 70}}>
                 {valid ? resetFields() : codeChecker()}
             </Card>
             </Row>
