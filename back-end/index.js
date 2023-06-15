@@ -171,59 +171,70 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
-    
-})
+app.get("/", (req, res) => {});
 
-app.post("/forgot-password", async(req, res) => {
-    const {email, OTP} = req.body;
-    console.log(OTP)
-    try{
-        if (!validator.isEmail(email)) {return res.json({error: "This is not a valid email"})};
+app.post("/forgot-password", async (req, res) => {
+  const { email, OTP } = req.body;
+  console.log(OTP);
+  try {
+    if (!validator.isEmail(email)) {
+      return res.json({ error: "This is not a valid email" });
+    }
 
-        const existingUser = await User.findOne({ email });
-        if(!existingUser){
-            return res.json({status:"No account with this email address has been registered."});
-        }
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      return res.json({
+        status: "No account with this email address has been registered.",
+      });
+    }
 
-        const secret = process.env.JWT_SECRET + existingUser.password;
-        const token = jwt.sign({ email: existingUser.email, id: existingUser._id}, secret, {
-            expiresIn: "10m",
-        });
-        //const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
+    const secret = process.env.JWT_SECRET + existingUser.password;
+    const token = jwt.sign(
+      { email: existingUser.email, id: existingUser._id },
+      secret,
+      {
+        expiresIn: "10m",
+      }
+    );
+    //const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
 
-        //copied code to sent email ///////
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'bop.hub.interns@gmail.com',
-              pass: 'qskgqeunggcrjwbr'
-            }
-          });
-          
-          var mailOptions = {
-            from: 'bop.hub.interns@gmail.com',
-            to: email,
-            subject: 'BOP Hub Password Reset',
-            text: "Please use the following one time code to reset your password   \n" + OTP[0]+OTP[1]+OTP[2]+OTP[3],
-          };
-          
-          transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
-          ////////////////////////////////////
-        
-        // console.log(link);
-        res.send({status: 'ok', code: OTP});
-    }catch (error) {
+    //copied code to sent email ///////
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "bop.hub.interns@gmail.com",
+        pass: "qskgqeunggcrjwbr",
+      },
+    });
+
+    var mailOptions = {
+      from: "bop.hub.interns@gmail.com",
+      to: email,
+      subject: "BOP Hub Password Reset",
+      text:
+        "Please use the following one time code to reset your password   \n" +
+        OTP[0] +
+        OTP[1] +
+        OTP[2] +
+        OTP[3],
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
         console.log(error);
-        res.send(error);
+      } else {
+        console.log("Email sent: " + info.response);
       }
     });
+    ////////////////////////////////////
+
+    // console.log(link);
+    res.send({ status: "ok", code: OTP });
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 
 // app.get('/reset-password/:id/:token', async(req, res) => {
 //     const {id, token} = req.params;
@@ -239,56 +250,138 @@ app.post("/forgot-password", async(req, res) => {
 //     } catch (error) {
 //         res.send("Not Verified");
 //     }
-// }); 
+// });
 
-app.post('/reset-password', async(req, res) => {
-    const {email, password, confirmation} = req.body;
+app.post("/reset-password", async (req, res) => {
+  const { email, password, confirmation } = req.body;
 
-    if(password != confirmation){return res.json({error: "Please enter the same password in both fields."})}
-    if (!(validator.isStrongPassword(password))) {return res.json({error: "Password is not strong enough"})}
+  if (password != confirmation) {
+    return res.json({
+      error: "Please enter the same password in both fields.",
+    });
+  }
+  if (!validator.isStrongPassword(password)) {
+    return res.json({ error: "Password is not strong enough" });
+  }
 
-    const existingUser = await User.findOne({email:email});
-    if(!existingUser){
-        return res.json({status:"No account with this email address has been registered."});
-    }
-    try {
-        const encryptedPassword = await bcrypt.hash(password, 10);
-        await User.updateOne({
-            email: email
-        },{
-            $set: {
-                password: encryptedPassword,
-            }
-        });
+  const existingUser = await User.findOne({ email: email });
+  if (!existingUser) {
+    return res.json({
+      status: "No account with this email address has been registered.",
+    });
+  }
+  try {
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    await User.updateOne(
+      {
+        email: email,
+      },
+      {
+        $set: {
+          password: encryptedPassword,
+        },
+      }
+    );
 
-        return res.json({status: "password changed"});
-        //res.render("index", {email: verify.email, status: "Verified"});
-    } catch (error) {
-        res.json({status: "Error Updating Password."})
-    }
+    return res.json({ status: "password changed" });
+    //res.render("index", {email: verify.email, status: "Verified"});
+  } catch (error) {
+    res.json({ status: "Error Updating Password." });
+  }
 });
 
-app.post('/create-campaign-step-5', async (req, res) => {
-    try {
-        const {
-            organization, status, numActors, deadline, caseStudy, solutions,
-            name, tags, videoLink, // STEP 1
-            description, challenge, mission, milestones, goals, // STEP 2
-            location, reach, stakeholderLangs, volunteerLangs, // STEP 3
-        } = req.body;
-    
-        var newCampaign = await Campaign.create({
-            organization, status, numActors, deadline, caseStudy, solutions,
-            name, tags, videoLink, // STEP 1
-            description, challenge, mission, milestones, goals, // STEP 2
-            location, reach, stakeholderLangs, volunteerLangs, // STEP 3
-        });
+app.post("/reset-password/:id/:token", async (req, res) => {
+  const { id, token } = req.params;
+  const password = req.body.password;
+  const confirmation = req.body.confirmation;
 
-        res.status(201).json({
-            status: "success",
-            data: newCampaign
-        });
-    } catch (err) { res.status(401).json({error: err.message}); }
+  if (password != confirmation) {
+    return res.json({
+      error: "Please enter the same password in both fields.",
+    });
+  }
+  if (!validator.isStrongPassword(password)) {
+    return res.json("Password is not strong enough");
+  }
+
+  const existingUser = await User.findOne({ _id: id });
+  if (!existingUser) {
+    return res.json({
+      status: "No account with this email address has been registered.",
+    });
+  }
+  const secret = process.env.JWT_SECRET + existingUser.password;
+  try {
+    const verify = jwt.verify(token, secret);
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    await User.updateOne(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          password: encryptedPassword,
+        },
+      }
+    );
+
+    res.render("index", { email: verify.email, status: "Verified" });
+  } catch (error) {
+    res.json({ status: "Error Updating Password." });
+  }
+});
+
+app.post("/create-campaign-step-5", async (req, res) => {
+  try {
+    const {
+      organization,
+      status,
+      numActors,
+      deadline,
+      caseStudy,
+      solutions,
+      name,
+      tags,
+      videoLink, // STEP 1
+      description,
+      challenge,
+      mission,
+      milestones,
+      goals, // STEP 2
+      location,
+      reach,
+      stakeholderLangs,
+      volunteerLangs, // STEP 3
+    } = req.body;
+
+    var newCampaign = await Campaign.create({
+      organization,
+      status,
+      numActors,
+      deadline,
+      caseStudy,
+      solutions,
+      name,
+      tags,
+      videoLink, // STEP 1
+      description,
+      challenge,
+      mission,
+      milestones,
+      goals, // STEP 2
+      location,
+      reach,
+      stakeholderLangs,
+      volunteerLangs, // STEP 3
+    });
+
+    res.status(201).json({
+      status: "success",
+      data: newCampaign,
+    });
+  } catch (err) {
+    res.status(401).json({ error: err.message });
+  }
 });
 
 // update the user's info in the DB
