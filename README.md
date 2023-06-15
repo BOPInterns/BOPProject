@@ -17,6 +17,7 @@ Project created by Intern team for the BoP Hub website
 - enable users to upload several files when creating a campaign
 - when uploading a file, if you click "cancel" when there's already a file there, it throws a runtime error
 - when user creates campaign, it adds their organization as the organization that owns the campaign
+- password reset code exists indefinitely instead of expiring after a certian amt of time
 
 ## Successful can kicks:
 
