@@ -1,14 +1,13 @@
-import { CampaignComp } from './CampaignComp';
-import { SolutionComp } from './SolutionComp';
-import { ServiceComp } from './ServicesComp';
-
+import { CampaignComp } from "./CampaignComp";
+import { SolutionComp } from "./SolutionComp";
+import { ServiceComp } from "./ServiceComp";
 
 export const AllPages = () => {
-    return (
-        <div>
-            <CampaignComp/>
-            <SolutionComp/>
-            <ServiceComp/>
-        </div>
-    )
-}
+  return (
+    <div>
+      <CampaignComp />
+      <SolutionComp />
+      <ServiceComp />
+    </div>
+  );
+};
