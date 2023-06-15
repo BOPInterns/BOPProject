@@ -171,68 +171,59 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/forgot-password", async (req, res) => {
-  const { email, OTP } = req.body;
-  console.log(OTP);
-  try {
-    if (!validator.isEmail(email)) {
-      return res.json({ error: "This is not a valid email" });
-    }
+app.get('/', (req, res) => {
+    
+})
 
-    const existingUser = await User.findOne({ email });
-    if (!existingUser) {
-      return res.json({
-        status: "No account with this email address has been registered.",
-      });
-    }
+app.post("/forgot-password", async(req, res) => {
+    const {email, OTP} = req.body;
+    console.log(OTP)
+    try{
+        if (!validator.isEmail(email)) {return res.json({error: "This is not a valid email"})};
 
-    const secret = process.env.JWT_SECRET + existingUser.password;
-    const token = jwt.sign(
-      { email: existingUser.email, id: existingUser._id },
-      secret,
-      {
-        expiresIn: "10m",
-      }
-    );
-    //const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
+        const existingUser = await User.findOne({ email });
+        if(!existingUser){
+            return res.json({status:"No account with this email address has been registered."});
+        }
 
-    //copied code to sent email ///////
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "bop.hub.interns@gmail.com",
-        pass: "qskgqeunggcrjwbr",
-      },
-    });
+        const secret = process.env.JWT_SECRET + existingUser.password;
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id}, secret, {
+            expiresIn: "10m",
+        });
+        //const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
 
-    var mailOptions = {
-      from: "bop.hub.interns@gmail.com",
-      to: email,
-      subject: "BOP Hub Password Reset",
-      text:
-        "Please use the following one time code to reset your password   \n" +
-        OTP[0] +
-        OTP[1] +
-        OTP[2] +
-        OTP[3],
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
+        //copied code to sent email ///////
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'bop.hub.interns@gmail.com',
+              pass: 'qskgqeunggcrjwbr'
+            }
+          });
+          
+          var mailOptions = {
+            from: 'bop.hub.interns@gmail.com',
+            to: email,
+            subject: 'BOP Hub Password Reset',
+            text: "Please use the following one time code to reset your password   \n" + OTP[0]+OTP[1]+OTP[2]+OTP[3],
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+          ////////////////////////////////////
+        
+        // console.log(link);
+        res.send({status: 'ok', code: OTP});
+    }catch (error) {
         console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
+        res.send(error);
       }
     });
-    ////////////////////////////////////
-
-    // console.log(link);
-    res.send({ status: "ok", code: OTP });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-});
 
 // app.get('/reset-password/:id/:token', async(req, res) => {
 //     const {id, token} = req.params;
