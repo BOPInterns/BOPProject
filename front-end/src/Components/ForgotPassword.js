@@ -40,7 +40,7 @@ export const ForgotPassword = () => {
             },
             body:JSON.stringify({
                 email,
-                OTP, //add this to backend request still
+                OTP, 
             }),
         }).then((res) => res.json())
         .then((data) => {
