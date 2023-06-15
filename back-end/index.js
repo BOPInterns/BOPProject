@@ -250,44 +250,33 @@ app.post("/forgot-password", async (req, res) => {
 //     } catch (error) {
 //         res.send("Not Verified");
 //     }
-// });
+// }); 
 
-app.post("/reset-password", async (req, res) => {
-  const { email, password, confirmation } = req.body;
+app.post('/reset-password', async(req, res) => {
+    const {email, password, confirmation} = req.body;
 
-  if (password != confirmation) {
-    return res.json({
-      error: "Please enter the same password in both fields.",
-    });
-  }
-  if (!validator.isStrongPassword(password)) {
-    return res.json({ error: "Password is not strong enough" });
-  }
+    if(password != confirmation){return res.json({error: "Please enter the same password in both fields."})}
+    if (!(validator.isStrongPassword(password))) {return res.json({error: "Password is not strong enough"})}
 
-  const existingUser = await User.findOne({ email: email });
-  if (!existingUser) {
-    return res.json({
-      status: "No account with this email address has been registered.",
-    });
-  }
-  try {
-    const encryptedPassword = await bcrypt.hash(password, 10);
-    await User.updateOne(
-      {
-        email: email,
-      },
-      {
-        $set: {
-          password: encryptedPassword,
-        },
-      }
-    );
+    const existingUser = await User.findOne({email:email});
+    if(!existingUser){
+        return res.json({status:"No account with this email address has been registered."});
+    }
+    try {
+        const encryptedPassword = await bcrypt.hash(password, 10);
+        await User.updateOne({
+            email: email
+        },{
+            $set: {
+                password: encryptedPassword,
+            }
+        });
 
-    return res.json({ status: "password changed" });
-    //res.render("index", {email: verify.email, status: "Verified"});
-  } catch (error) {
-    res.json({ status: "Error Updating Password." });
-  }
+        return res.json({status: "password changed"});
+        //res.render("index", {email: verify.email, status: "Verified"});
+    } catch (error) {
+        res.json({status: "Error Updating Password."})
+    }
 });
 
 app.post("/reset-password/:id/:token", async (req, res) => {
