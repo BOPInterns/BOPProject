@@ -9,7 +9,7 @@ export const ServiceComp = () => {
   const [serviceData, setServiceData] = useState([]);
 
   // useEffect(() => {
-  //     if (currLoadedCards >= serviceData.length) {
+  //     if (currL{oadedCards >= serviceData.length) {
   //         const loadMoreBtn = document.getElementById('load-more-btn');
   //         loadMoreBtn.disabled = true;
   //     };

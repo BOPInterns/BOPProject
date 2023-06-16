@@ -1,15 +1,15 @@
+import { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { CampaignCard } from "../CampaignCenter/CampaignCard";
-import { useState, useEffect } from "react";
 
 export const CampaignComp = () => {
+  const [currLoadedCards, setCurrLoadedCards] = useState(8);
   const [campaignData, setCampaignData] = useState([]);
 
   useEffect(() => {
     //for campaigns
-    console.log(`orgFilter${localStorage.getItem("orgFilter")}orgFilter`);
     fetch("http://localhost:9000/get-campaign-data", {
       method: "POST",
       crossDomain: true,
@@ -22,7 +22,7 @@ export const CampaignComp = () => {
         orgFilter: localStorage.getItem("orgFilter"),
         campaignFilter: localStorage.getItem("campaignFilter"),
         statusFilter: localStorage.getItem("statusFilter"),
-        // regDateFilter: localStorage.getItem('regDateFilter'),
+        regDateFilter: localStorage.getItem("regDateFilter"),
         // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
       }),
     })
@@ -34,7 +34,16 @@ export const CampaignComp = () => {
       });
   }, []);
 
-  const loadData = (i) => {
+  const handleMoreCards = () => {
+    if (currLoadedCards < campaignData.length) {
+      setCurrLoadedCards(currLoadedCards + 8);
+    } else {
+      const button = document.getElementById("load-more-btn");
+      button.disabled = true;
+    }
+  };
+
+  const loadCampaignData = (i) => {
     return campaignData[i];
   };
 
@@ -48,16 +57,16 @@ export const CampaignComp = () => {
       rows.push(
         <Row>
           <Col sm={3}>
-            <CampaignCard campData={loadData(num)} />
+            <CampaignCard campData={loadCampaignData(num)} />
           </Col>
           <Col sm={3}>
-            <CampaignCard campData={loadData(num + 1)} />
+            <CampaignCard campData={loadCampaignData(num + 1)} />
           </Col>
           <Col sm={3}>
-            <CampaignCard campData={loadData(num + 2)} />
+            <CampaignCard campData={loadCampaignData(num + 2)} />
           </Col>
           <Col sm={3}>
-            <CampaignCard campData={loadData(num + 3)} />
+            <CampaignCard campData={loadCampaignData(num + 3)} />
           </Col>
         </Row>
       );
@@ -67,13 +76,13 @@ export const CampaignComp = () => {
       rows.push(
         <Row className="mt-3">
           <Col>
-            <CampaignCard campData={loadData(num)} />
+            <CampaignCard campData={loadCampaignData(num)} />
           </Col>
           <Col>
-            <CampaignCard campData={loadData(num + 1)} />
+            <CampaignCard campData={loadCampaignData(num + 1)} />
           </Col>
           <Col>
-            <CampaignCard campData={loadData(num + 2)} />
+            <CampaignCard campData={loadCampaignData(num + 2)} />
           </Col>
           <Col></Col>
         </Row>
@@ -82,10 +91,10 @@ export const CampaignComp = () => {
       rows.push(
         <Row className="mt-3">
           <Col>
-            <CampaignCard campData={loadData(num)} />
+            <CampaignCard campData={loadCampaignData(num)} />
           </Col>
           <Col>
-            <CampaignCard campData={loadData(num + 1)} />
+            <CampaignCard campData={loadCampaignData(num + 1)} />
           </Col>
           <Col></Col>
           <Col></Col>
@@ -95,7 +104,7 @@ export const CampaignComp = () => {
       rows.push(
         <Row className="mt-5">
           <Col>
-            <CampaignCard campData={loadData(num)} />
+            <CampaignCard campData={loadCampaignData(num)} />
           </Col>
           <Col></Col>
           <Col></Col>

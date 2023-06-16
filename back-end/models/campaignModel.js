@@ -58,12 +58,11 @@ const campaignSchema = new mongoose.Schema({
     volunteerLangs: [String],
     //*** STEP 4
     // TODO: use manual document references for this?
-    //       make a separate model to store all files
     otherFiles: [String],
     createdAt: {
-        type: Date,
-        default: Date.now(),
-      }
+        type: String,
+        required: [true, "This campaign doesn't have a createdAt field :("]
+    }
 })
 
 const Campaign = mongoose.model("Campaign", campaignSchema);

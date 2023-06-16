@@ -171,8 +171,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {});
-
 app.post("/forgot-password", async (req, res) => {
   const { email, OTP } = req.body;
   console.log(OTP);
@@ -322,6 +320,7 @@ app.post("/reset-password/:id/:token", async (req, res) => {
 
 app.post("/create-campaign-step-5", async (req, res) => {
   try {
+    const today = new Date().toJSON().slice(0, 10);
     const {
       organization,
       status,
@@ -352,6 +351,7 @@ app.post("/create-campaign-step-5", async (req, res) => {
       solutions,
       name,
       tags,
+      createdAt: today,
       videoLink, // STEP 1
       description,
       challenge,
@@ -454,18 +454,46 @@ app.post("/kyc-verification-form", async (req, res) => {
 app.post("/get-campaign-data", async (req, res) => {
   try {
     //const {orgFilter, campaignFilter, statusFilter, regDateFilter, tagsFilter} = req.body;
-    const { orgFilter, campaignFilter, statusFilter } = req.body;
-    console.log("orgFilter = " + orgFilter);
+    const { orgFilter, campaignFilter, statusFilter, regDateFilter } = req.body;
     // .lean() returns a regular JS object
     const data = await Campaign.find({
       organization: new RegExp(orgFilter, "i"),
       name: new RegExp(campaignFilter, "i"),
       status: new RegExp(statusFilter, "i"),
+      createdAt: new RegExp(regDateFilter, "i")
     }).lean();
-    console.log("data found");
+    console.log("campaign data found");
     res.status(200).json({ data });
-    console.log("response sent");
+    console.log("campaign response sent");
   } catch (err) {
     res.status(401).json({ error: err.message });
+  }
+});
+
+app.post("/get-service-data", async (req, res) => {
+  try {
+    const {orgFilter} = req.body;
+    const data = await Service.find({organization: new RegExp(orgFilter, "i")}).lean();
+    console.log("service data found");
+    res.status(200).json({data});
+    console.log("service response sent");
+  } catch (err) {
+    res.status(401).json({error: err.message});
+  }
+});
+
+app.post("/get-solution-data", async (req, res) => {
+  try {
+    const {orgFilter, campaignFilter, regDateFilter} = req.body;
+    const data = await Solution.find({
+      organization: new RegExp(orgFilter, "i"),
+      name: new RegExp(campaignFilter, "i"),
+      createdAt: new RegExp(regDateFilter, "i")
+    });
+    console.log("solution data found");
+    res.status(200).json({data});
+    console.log("solution response sent");
+  } catch (err) {
+    res.status(401).json({error: err.message});
   }
 });

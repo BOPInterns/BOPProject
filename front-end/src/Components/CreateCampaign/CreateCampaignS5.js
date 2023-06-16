@@ -42,6 +42,8 @@ export const CreateCampaignS5 = () => {
 
 
     const handleSubmit = () => {
+        const today = new Date().toJSON().slice(0, 10);
+        console.log("date:", today);
         //post request for the campaign
         fetch("http://localhost:9000/create-campaign-step-5", {
             method: "POST",
@@ -63,7 +65,8 @@ export const CreateCampaignS5 = () => {
                 location,
                 reach,
                 stakeholderLangs,
-                volunteerLangs
+                volunteerLangs,
+                createdAt: today
             }),
         })
         .then((res) => res.json())

@@ -16,6 +16,7 @@ const serviceSchema = new mongoose.Schema({
     required: [true, "Must choose at least 1 tag"],
   },
   price: String,
+  createdAt: String
 });
 
 const Service = mongoose.model("Service", serviceSchema);

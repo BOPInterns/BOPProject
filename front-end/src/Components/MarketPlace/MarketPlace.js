@@ -29,8 +29,8 @@ export const MarketPlace = () => {
     localStorage.setItem("campaignFilter", "");
   if (localStorage.getItem("statusFilter") === null)
     localStorage.setItem("statusFilter", "");
-  // if (localStorage.getItem('regDateFilter') === null)
-  //     localStorage.setItem('regDateFilter', '');
+  if (localStorage.getItem("regDateFilter") === null)
+      localStorage.setItem("regDateFilter", "");
   // if (localStorage.getItem('tagsFilter') === null)
   //     localStorage.setItem('tagsFilter', '[]');
 
