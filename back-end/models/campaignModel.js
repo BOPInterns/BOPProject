@@ -5,7 +5,7 @@ const campaignSchema = new mongoose.Schema({
         type: String,
         default: "Basic Organization"
     },
-    status: {
+    phase: {
         type: String,
         enum: ["Challenge"],
         default: "Challenge"

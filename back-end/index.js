@@ -453,13 +453,14 @@ app.post("/kyc-verification-form", async (req, res) => {
 
 app.post("/get-campaign-data", async (req, res) => {
   try {
-    //const {orgFilter, nameFilter, statusFilter, regDateFilter, tagsFilter} = req.body;
-    const { orgFilter, nameFilter, statusFilter, regDateFilter } = req.body;
+    //const {orgFilter, nameFilter, phaseFilter, regDateFilter, tagsFilter} = req.body;
+    const { orgFilter, nameFilter, tagsFilter, phaseFilter, regDateFilter } = req.body;
     // .lean() returns a regular JS object
     const data = await Campaign.find({
       organization: new RegExp(orgFilter, "i"),
       name: new RegExp(nameFilter, "i"),
-      status: new RegExp(statusFilter, "i"),
+      tags: new RegExp(tagsFilter, "i"),
+      phase: new RegExp(phaseFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
     }).lean();
     console.log("campaign data found");
@@ -472,10 +473,11 @@ app.post("/get-campaign-data", async (req, res) => {
 
 app.post("/get-solution-data", async (req, res) => {
   try {
-    const {orgFilter, nameFilter, regDateFilter} = req.body;
+    const {orgFilter, nameFilter, tagsFilter, regDateFilter} = req.body;
     const data = await Solution.find({
       organization: new RegExp(orgFilter, "i"),
       name: new RegExp(nameFilter, "i"),
+      tags: new RegExp(tagsFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
     }).lean();
     console.log("solution data found");
@@ -488,10 +490,11 @@ app.post("/get-solution-data", async (req, res) => {
 
 app.post("/get-service-data", async (req, res) => {
   try {
-    const { orgFilter, nameFilter, regDateFilter } = req.body;
+    const { orgFilter, nameFilter, tagsFilter, regDateFilter } = req.body;
     const data = await Service.find({
       organization: new RegExp(orgFilter, "i"),
       name: new RegExp(nameFilter, "i"),
+      tags: new RegExp(tagsFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
     }).lean();
     console.log("service data found");
