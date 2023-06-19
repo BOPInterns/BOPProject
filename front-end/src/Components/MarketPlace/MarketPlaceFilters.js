@@ -29,8 +29,9 @@ export const MarketPlaceFilters = () => {
   // note: localStorage filter variables are initialized in MarketPlace.js
   const [orgFilter, setOrgFilter] = useState(localStorage.getItem("orgFilter"));
   const [nameFilter, setNameFilter] = useState(localStorage.getItem("nameFilter"));
-  const [statusFilter, setStatusFilter] = useState(localStorage.getItem("statusFilter"));
+  const [phaseFilter, setPhaseFilter] = useState(localStorage.getItem("phaseFilter"));
   const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem("regDateFilter"));
+  const [tagsFilter, setTagsFilter] = useState(localStorage.getItem("tagsFilter"));
   // const [tagsFilter, setTagsFilter] = useState(JSON.parse(localStorage.getItem('tagsFilter')));
   const navigate = useNavigate();
 
@@ -40,9 +41,9 @@ export const MarketPlaceFilters = () => {
     // update localStorage variables
     localStorage.setItem("orgFilter", orgFilter);
     localStorage.setItem("nameFilter", nameFilter);
-    localStorage.setItem("statusFilter", statusFilter);
+    localStorage.setItem("phaseFilter", phaseFilter);
     localStorage.setItem("regDateFilter", regDateFilter);
-    // localStorage.setItem('tagsFilter', tagsFilter);
+    localStorage.setItem("tagsFilter", tagsFilter);
 
     navigate("/market-place");
   }
@@ -51,15 +52,17 @@ export const MarketPlaceFilters = () => {
     // Reset local storage filter variables
     localStorage.setItem("orgFilter", "");
     localStorage.setItem("nameFilter", "");
-    localStorage.setItem("statusFilter", "");
+    localStorage.setItem("phaseFilter", "");
     localStorage.setItem("regDateFilter", "");
+    localStorage.setItem("tagsFilter", "");
     // localStorage.setItem('tagsFilter', '[]');
 
     // Reset state filter variables
     setOrgFilter("");
     setNameFilter("");
-    setStatusFilter("");
+    setPhaseFilter("");
     setRegDateFilter("");
+    setTagsFilter("");
     // setTagsFilter([]);
 
     console.log("Filters cleared");
@@ -110,12 +113,14 @@ export const MarketPlaceFilters = () => {
           <Col>
             <Form.Select
               size="sm"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              value={phaseFilter}
+              onChange={(e) => setPhaseFilter(e.target.value)}
             >
-              <option value="">Select status</option>
+              <option value="">Select phase</option>
+              <option value="New">New</option>
               <option value="Challenge">Challenge</option>
-              <option value="Under validation">Under validation</option>
+              <option value="Project">Project</option>
+              <option value="Showcase">Showcase</option>
             </Form.Select>
           </Col>
           <Col>
@@ -186,9 +191,20 @@ export const MarketPlaceFilters = () => {
                     placeholder="Filter campaign descriptions containing..."
                   />
                 </InputGroup>
-                <Form.Select size="sm">
+                <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Filter tags"
+                    value={tagsFilter}
+                    onChange={(e) => setTagsFilter(e.target.value)}
+                  />
+                </InputGroup>
+                {/* <Form.Select size="sm">
                   <option>Filter tags</option>
-                </Form.Select>
+                </Form.Select> */}
               </Card.Body>
             </Card>
           </Col>

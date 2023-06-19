@@ -27,12 +27,12 @@ export const MarketPlace = () => {
     localStorage.setItem("orgFilter", "");
   if (localStorage.getItem("nameFilter") === null)
     localStorage.setItem("nameFilter", "");
-  if (localStorage.getItem("statusFilter") === null)
-    localStorage.setItem("statusFilter", "");
+  if (localStorage.getItem("phaseFilter") === null)
+    localStorage.setItem("phaseFilter", "");
   if (localStorage.getItem("regDateFilter") === null)
       localStorage.setItem("regDateFilter", "");
-  // if (localStorage.getItem('tagsFilter') === null)
-  //     localStorage.setItem('tagsFilter', '[]');
+  if (localStorage.getItem("tagsFilter") === null)
+      localStorage.setItem("tagsFilter", "");
 
   const [allToggle, setAllToggle] = useState(null);
   const [campaignToggle, setCampaignToggle] = useState(false);

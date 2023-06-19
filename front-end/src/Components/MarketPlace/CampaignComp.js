@@ -21,9 +21,10 @@ export const CampaignComp = () => {
       body: JSON.stringify({
         orgFilter: localStorage.getItem("orgFilter"),
         nameFilter: localStorage.getItem("nameFilter"),
-        statusFilter: localStorage.getItem("statusFilter"),
-        regDateFilter: localStorage.getItem("regDateFilter"),
-        // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
+        tagsFilter: localStorage.getItem("tagsFilter"),
+        phaseFilter: localStorage.getItem("phaseFilter"),
+        regDateFilter: localStorage.getItem("regDateFilter")
+        // tagsFilter: JSON.parse(localStorage.getItem("tagsFilter"))
       }),
     })
       .then((res) => res.json())

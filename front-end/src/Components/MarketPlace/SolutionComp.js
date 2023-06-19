@@ -24,6 +24,7 @@ export const SolutionComp = () => {
             body: JSON.stringify({
               orgFilter: localStorage.getItem("orgFilter"),
               nameFilter: localStorage.getItem("nameFilter"),
+              tagsFilter: localStorage.getItem("tagsFilter"),
               regDateFilter: localStorage.getItem("regDateFilter"),
               // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
             }),
