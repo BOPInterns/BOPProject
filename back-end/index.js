@@ -40,7 +40,7 @@ app.listen(9000, () => {
   console.log("Server started on port 9000");
 });
 
-//gets campaign data for campiagn center page / marketplace
+//gets campaign data for campaign center page
 app.get("/get-campaign-data", async (req, res) => {
   try {
     const allCampaigns = await Campaign.find({ data: req.data });
@@ -51,24 +51,24 @@ app.get("/get-campaign-data", async (req, res) => {
 });
 
 //gets solution data for the marketplace
-app.get("/get-solution-data", async (req, res) => {
-  try {
-    const allSolutions = await Solution.find({ data: req.data });
-    res.send({ status: "ok", data: allSolutions });
-  } catch (err) {
-    console.log("error retrieving solution data");
-  }
-});
+// app.get("/get-solution-data", async (req, res) => {
+//   try {
+//     const allSolutions = await Solution.find({ data: req.data });
+//     res.send({ status: "ok", data: allSolutions });
+//   } catch (err) {
+//     console.log("error retrieving solution data");
+//   }
+// });
 
 //gets service for marketplace
-app.get("/get-service-data", async (req, res) => {
-  try {
-    const allServices = await Service.find({ data: req.data });
-    res.send({ status: "ok", data: allServices });
-  } catch (err) {
-    console.log("error retrieving service data");
-  }
-});
+// app.get("/get-service-data", async (req, res) => {
+//   try {
+//     const allServices = await Service.find({ data: req.data });
+//     res.send({ status: "ok", data: allServices });
+//   } catch (err) {
+//     console.log("error retrieving service data");
+//   }
+// });
 
 //adds file to db from creat campaign process
 app.post("/upload-file", async (req, res) => {
@@ -453,12 +453,12 @@ app.post("/kyc-verification-form", async (req, res) => {
 
 app.post("/get-campaign-data", async (req, res) => {
   try {
-    //const {orgFilter, campaignFilter, statusFilter, regDateFilter, tagsFilter} = req.body;
-    const { orgFilter, campaignFilter, statusFilter, regDateFilter } = req.body;
+    //const {orgFilter, nameFilter, statusFilter, regDateFilter, tagsFilter} = req.body;
+    const { orgFilter, nameFilter, statusFilter, regDateFilter } = req.body;
     // .lean() returns a regular JS object
     const data = await Campaign.find({
       organization: new RegExp(orgFilter, "i"),
-      name: new RegExp(campaignFilter, "i"),
+      name: new RegExp(nameFilter, "i"),
       status: new RegExp(statusFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
     }).lean();
@@ -470,29 +470,33 @@ app.post("/get-campaign-data", async (req, res) => {
   }
 });
 
-app.post("/get-service-data", async (req, res) => {
+app.post("/get-solution-data", async (req, res) => {
   try {
-    const {orgFilter} = req.body;
-    const data = await Service.find({organization: new RegExp(orgFilter, "i")}).lean();
-    console.log("service data found");
+    const {orgFilter, nameFilter, regDateFilter} = req.body;
+    const data = await Solution.find({
+      organization: new RegExp(orgFilter, "i"),
+      name: new RegExp(nameFilter, "i"),
+      createdAt: new RegExp(regDateFilter, "i")
+    }).lean();
+    console.log("solution data found");
     res.status(200).json({data});
-    console.log("service response sent");
+    console.log("solution response sent");
   } catch (err) {
     res.status(401).json({error: err.message});
   }
 });
 
-app.post("/get-solution-data", async (req, res) => {
+app.post("/get-service-data", async (req, res) => {
   try {
-    const {orgFilter, campaignFilter, regDateFilter} = req.body;
-    const data = await Solution.find({
+    const { orgFilter, nameFilter, regDateFilter } = req.body;
+    const data = await Service.find({
       organization: new RegExp(orgFilter, "i"),
-      name: new RegExp(campaignFilter, "i"),
+      name: new RegExp(nameFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
-    });
-    console.log("solution data found");
+    }).lean();
+    console.log("service data found");
     res.status(200).json({data});
-    console.log("solution response sent");
+    console.log("service response sent");
   } catch (err) {
     res.status(401).json({error: err.message});
   }

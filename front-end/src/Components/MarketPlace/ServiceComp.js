@@ -27,6 +27,8 @@ export const ServiceComp = () => {
       },
       body: JSON.stringify({
         orgFilter: localStorage.getItem("orgFilter"),
+        nameFilter: localStorage.getItem("nameFilter"),
+        regDateFilter: localStorage.getItem("regDateFilter")
       }),
     })
       .then((res) => res.json())

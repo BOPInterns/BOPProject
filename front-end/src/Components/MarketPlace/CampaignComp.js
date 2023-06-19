@@ -20,7 +20,7 @@ export const CampaignComp = () => {
       },
       body: JSON.stringify({
         orgFilter: localStorage.getItem("orgFilter"),
-        campaignFilter: localStorage.getItem("campaignFilter"),
+        nameFilter: localStorage.getItem("nameFilter"),
         statusFilter: localStorage.getItem("statusFilter"),
         regDateFilter: localStorage.getItem("regDateFilter"),
         // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))

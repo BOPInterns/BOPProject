@@ -25,8 +25,8 @@ export const MarketPlace = () => {
   // initialize localStorage filter variables
   if (localStorage.getItem("orgFilter") === null)
     localStorage.setItem("orgFilter", "");
-  if (localStorage.getItem("campaignFilter") === null)
-    localStorage.setItem("campaignFilter", "");
+  if (localStorage.getItem("nameFilter") === null)
+    localStorage.setItem("nameFilter", "");
   if (localStorage.getItem("statusFilter") === null)
     localStorage.setItem("statusFilter", "");
   if (localStorage.getItem("regDateFilter") === null)

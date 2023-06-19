@@ -28,7 +28,7 @@ import { Card } from "react-bootstrap";
 export const MarketPlaceFilters = () => {
   // note: localStorage filter variables are initialized in MarketPlace.js
   const [orgFilter, setOrgFilter] = useState(localStorage.getItem("orgFilter"));
-  const [campaignFilter, setCampaignFilter] = useState(localStorage.getItem("campaignFilter"));
+  const [nameFilter, setNameFilter] = useState(localStorage.getItem("nameFilter"));
   const [statusFilter, setStatusFilter] = useState(localStorage.getItem("statusFilter"));
   const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem("regDateFilter"));
   // const [tagsFilter, setTagsFilter] = useState(JSON.parse(localStorage.getItem('tagsFilter')));
@@ -39,7 +39,7 @@ export const MarketPlaceFilters = () => {
 
     // update localStorage variables
     localStorage.setItem("orgFilter", orgFilter);
-    localStorage.setItem("campaignFilter", campaignFilter);
+    localStorage.setItem("nameFilter", nameFilter);
     localStorage.setItem("statusFilter", statusFilter);
     localStorage.setItem("regDateFilter", regDateFilter);
     // localStorage.setItem('tagsFilter', tagsFilter);
@@ -50,14 +50,14 @@ export const MarketPlaceFilters = () => {
   function clearFilters() {
     // Reset local storage filter variables
     localStorage.setItem("orgFilter", "");
-    localStorage.setItem("campaignFilter", "");
+    localStorage.setItem("nameFilter", "");
     localStorage.setItem("statusFilter", "");
     localStorage.setItem("regDateFilter", "");
     // localStorage.setItem('tagsFilter', '[]');
 
     // Reset state filter variables
     setOrgFilter("");
-    setCampaignFilter("");
+    setNameFilter("");
     setStatusFilter("");
     setRegDateFilter("");
     // setTagsFilter([]);
@@ -162,8 +162,8 @@ export const MarketPlaceFilters = () => {
                   <Form.Control
                     type="text"
                     placeholder="Filter campaign names containing..."
-                    value={campaignFilter}
-                    onChange={(e) => setCampaignFilter(e.target.value)}
+                    value={nameFilter}
+                    onChange={(e) => setNameFilter(e.target.value)}
                   />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3">
