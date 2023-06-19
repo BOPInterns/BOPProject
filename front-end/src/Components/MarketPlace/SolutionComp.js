@@ -14,10 +14,24 @@ export const SolutionComp = () => {
     useEffect(() => {
         //for solutions
         fetch("http://localhost:9000/get-solution-data", {
-            method: "GET",
+            method: "POST",
+            crossDomain: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              orgFilter: localStorage.getItem("orgFilter"),
+              nameFilter: localStorage.getItem("nameFilter"),
+              regDateFilter: localStorage.getItem("regDateFilter"),
+              // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
+            }),
         }).then((res) => res.json())
         .then((data) => {
-            setSolutionData(data.data);
+            console.log(data);
+            if (data.data) setSolutionData(data.data);
+            else setSolutionData([]);
         });
     }, []);
     

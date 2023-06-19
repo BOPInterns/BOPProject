@@ -28,13 +28,9 @@ import { Card } from "react-bootstrap";
 export const MarketPlaceFilters = () => {
   // note: localStorage filter variables are initialized in MarketPlace.js
   const [orgFilter, setOrgFilter] = useState(localStorage.getItem("orgFilter"));
-  const [campaignFilter, setCampaignFilter] = useState(
-    localStorage.getItem("campaignFilter")
-  );
-  const [statusFilter, setStatusFilter] = useState(
-    localStorage.getItem("statusFilter")
-  );
-  // const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem('regDateFilter'));
+  const [nameFilter, setNameFilter] = useState(localStorage.getItem("nameFilter"));
+  const [statusFilter, setStatusFilter] = useState(localStorage.getItem("statusFilter"));
+  const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem("regDateFilter"));
   // const [tagsFilter, setTagsFilter] = useState(JSON.parse(localStorage.getItem('tagsFilter')));
   const navigate = useNavigate();
 
@@ -43,9 +39,9 @@ export const MarketPlaceFilters = () => {
 
     // update localStorage variables
     localStorage.setItem("orgFilter", orgFilter);
-    localStorage.setItem("campaignFilter", campaignFilter);
+    localStorage.setItem("nameFilter", nameFilter);
     localStorage.setItem("statusFilter", statusFilter);
-    // localStorage.setItem('regDateFilter', regDateFilter);
+    localStorage.setItem("regDateFilter", regDateFilter);
     // localStorage.setItem('tagsFilter', tagsFilter);
 
     navigate("/market-place");
@@ -54,19 +50,23 @@ export const MarketPlaceFilters = () => {
   function clearFilters() {
     // Reset local storage filter variables
     localStorage.setItem("orgFilter", "");
-    localStorage.setItem("campaignFilter", "");
+    localStorage.setItem("nameFilter", "");
     localStorage.setItem("statusFilter", "");
-    // localStorage.setItem('regDateFilter', '');
+    localStorage.setItem("regDateFilter", "");
     // localStorage.setItem('tagsFilter', '[]');
 
     // Reset state filter variables
     setOrgFilter("");
-    setCampaignFilter("");
+    setNameFilter("");
     setStatusFilter("");
-    // setRegDateFilter('');
+    setRegDateFilter("");
     // setTagsFilter([]);
 
     console.log("Filters cleared");
+  }
+
+  function formatDate(el) {
+    return el.replace(/^([\d]{4})([\d]{2})([\d]{2})$/,"$1-$2-$3");
   }
 
   return (
@@ -119,9 +119,22 @@ export const MarketPlaceFilters = () => {
             </Form.Select>
           </Col>
           <Col>
-            <Form.Select size="sm">
+            {/* <Form.Select size="sm">
               <option>Select register date</option>
-            </Form.Select>
+            </Form.Select> */}
+            <InputGroup size="sm" className="mb-3">
+              <Form.Control 
+                type="text"
+                placeholder="Register date (YYYYMMDD)"
+                value={regDateFilter}
+                onChange={(e)=>{
+                  if (e.target.value.length > 10)
+                    e.target.value = e.target.value.slice(0,10);
+                  e.target.value=formatDate(e.target.value);
+                  setRegDateFilter(e.target.value);
+                }}
+              />
+            </InputGroup>
           </Col>
         </Row>
         <Row>
@@ -149,8 +162,8 @@ export const MarketPlaceFilters = () => {
                   <Form.Control
                     type="text"
                     placeholder="Filter campaign names containing..."
-                    value={campaignFilter}
-                    onChange={(e) => setCampaignFilter(e.target.value)}
+                    value={nameFilter}
+                    onChange={(e) => setNameFilter(e.target.value)}
                   />
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3">

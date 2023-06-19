@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const solutionSchema = new mongoose.Schema({
     organization: String,
-
     name: {
         type: String,
         required: [true, "Please provide a name for your solution."],
@@ -25,6 +24,10 @@ const solutionSchema = new mongoose.Schema({
     focusAreas: [String],
     needs: [String],
     technologies: [String],
+    createdAt: {
+        type: String,
+        required: [true, "When was this solution created?"]
+    }
 })
 
 const Solution = mongoose.model("Solution", solutionSchema);
