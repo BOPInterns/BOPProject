@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const serviceSchema = new mongoose.Schema({
-  organization: String,
+  organization: {
+    type: String,
+    default: "Basic Organization"
+  },
   name: {
     type: String,
     required: [true, "Please provide a name for your solution."],
@@ -16,7 +19,10 @@ const serviceSchema = new mongoose.Schema({
     required: [true, "Must choose at least 1 tag"],
   },
   price: String,
-  createdAt: String
+  createdAt: {
+    type: String,
+    required: [true, "This campaign doesn't have a createdAt field :("]
+  }
 });
 
 const Service = mongoose.model("Service", serviceSchema);

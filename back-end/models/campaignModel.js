@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const campaignSchema = new mongoose.Schema({
-    organization: String,
+    organization: {
+        type: String,
+        default: "Basic Organization"
+    },
     status: {
         type: String,
         enum: ["Challenge"],
@@ -13,7 +16,7 @@ const campaignSchema = new mongoose.Schema({
     },
     // TODO: where will they enter the due date?
     //       I missed it in the Figma prototype
-    deadline: Date,
+    deadline: String,
     caseStudy: {
         type: Boolean,
         default: false
