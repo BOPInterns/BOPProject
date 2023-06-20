@@ -3,6 +3,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { CampaignCard } from "../CampaignCenter/CampaignCard";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from 'react-bootstrap/Form';
+
 
 export const CampaignComp = () => {
   const [currLoadedCards, setCurrLoadedCards] = useState(8);
@@ -47,75 +50,15 @@ export const CampaignComp = () => {
   const loadCampaignData = (i) => {
     return campaignData[i];
   };
-
-  const loadCards = () => {
-    var rows = [];
-    var fulls = Math.floor(campaignData.length / 4);
-    var remains = campaignData.length % 4;
-
-    var num = 0;
-    for (let i = 0; i < fulls; i++) {
-      rows.push(
-        <Row>
-          <Col sm={3}>
-            <CampaignCard campData={loadCampaignData(num)} />
-          </Col>
-          <Col sm={3}>
-            <CampaignCard campData={loadCampaignData(num + 1)} />
-          </Col>
-          <Col sm={3}>
-            <CampaignCard campData={loadCampaignData(num + 2)} />
-          </Col>
-          <Col sm={3}>
-            <CampaignCard campData={loadCampaignData(num + 3)} />
-          </Col>
-        </Row>
-      );
-      num += 4;
-    }
-    if (remains == 3) {
-      rows.push(
-        <Row className="mt-3">
-          <Col>
-            <CampaignCard campData={loadCampaignData(num)} />
-          </Col>
-          <Col>
-            <CampaignCard campData={loadCampaignData(num + 1)} />
-          </Col>
-          <Col>
-            <CampaignCard campData={loadCampaignData(num + 2)} />
-          </Col>
-          <Col></Col>
-        </Row>
-      );
-    } else if (remains == 2) {
-      rows.push(
-        <Row className="mt-3">
-          <Col>
-            <CampaignCard campData={loadCampaignData(num)} />
-          </Col>
-          <Col>
-            <CampaignCard campData={loadCampaignData(num + 1)} />
-          </Col>
-          <Col></Col>
-          <Col></Col>
-        </Row>
-      );
-    } else if (remains == 1) {
-      rows.push(
-        <Row className="mt-5">
-          <Col>
-            <CampaignCard campData={loadCampaignData(num)} />
-          </Col>
-          <Col></Col>
-          <Col></Col>
-          <Col></Col>
-        </Row>
-      );
-    }
-    return rows;
+  
+  const loadCampaignCards = () => {
+    return campaignData.slice(0, currLoadedCards).map((data, index) => (
+      <Col key={index} xs={6} sm={4} md={3} lg={3}>
+        <CampaignCard campData={loadCampaignData(index)}></CampaignCard>
+      </Col>
+    ));
   };
-
+  
   return (
     <div>
       <Row className="mt-5">
@@ -131,7 +74,16 @@ export const CampaignComp = () => {
           <Button className="browse-more-btn">Browse more</Button>
         </Col>
       </Row>
-      <Row className="mt-3">{loadCards()}</Row>
+      <Row
+        style={{
+          paddingTop: "20px",
+          paddingBottom: "40px",
+          flexWrap: "wrap",
+          display: "flex",
+        }}
+      >
+        {loadCampaignCards()}
+      </Row>
       <Row className="mt-3 text-center">
         <Col text-center>
           <Button variant="secondary">Load more campaigns</Button>

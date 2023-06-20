@@ -19,6 +19,7 @@ import { SolutionComp } from "./SolutionComp";
 import { ServiceComp } from "./ServiceComp";
 import { AllPages } from "./AllPages";
 import { MarketPlaceFilters } from "./MarketPlaceFilters";
+import { MarketPlaceSearchBar } from "./MarketPlaceSearchBar";
 import Pagination from "react-bootstrap/Pagination";
 
 export const MarketPlace = () => {
@@ -49,15 +50,30 @@ export const MarketPlace = () => {
   const renderActivePage = () => {
     switch (activePage) {
       case 1:
-        return <AllPages />;
+        return <div>
+            <MarketPlaceSearchBar/>
+            <AllPages />
+        </div>
       case 2:
-        return <CampaignComp />;
+        return <div>
+            <MarketPlaceSearchBar/>
+            <CampaignComp />
+        </div>;
       case 3:
-        return <SolutionComp />;
+        return <div>
+            <MarketPlaceSearchBar/>
+            <SolutionComp />
+        </div>
       case 4:
-        return <ServiceComp />;
+        return <div>
+            <MarketPlaceSearchBar/>
+            <ServiceComp />
+        </div>
       default:
-        return <AllPages />;
+        return <div>
+            <MarketPlaceSearchBar/>
+            <AllPages />
+        </div>
     }
   };
 
@@ -140,26 +156,7 @@ export const MarketPlace = () => {
             >
               Services
             </Pagination.Item>
-            <Row className="mt-3">
-              <Col sm={2}></Col>
-              <Col lg={8}>
-                <InputGroup>
-                  <Button className="search-btn">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </Button>
-                  <Form.Control type="text" placeholder="Search Bar" />
-                </InputGroup>
-              </Col>
-              <Col sm={2}>
-                <Button
-                  className="filters-btn"
-                  text-align="center"
-                  href="/market-place/filters"
-                >
-                  Filters <i class="fa-solid fa-filter"></i>
-                </Button>
-              </Col>
-            </Row>
+            
           </Pagination>
           {renderActivePage()}
         </Container>
