@@ -3,6 +3,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { ServiceCard } from "./ServiceCard";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from 'react-bootstrap/Form';
 
 export const ServiceComp = () => {
   const [currLoadedCards, setCurrLoadedCards] = useState(8);

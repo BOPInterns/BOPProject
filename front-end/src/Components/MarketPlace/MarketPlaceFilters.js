@@ -92,7 +92,7 @@ export const MarketPlaceFilters = () => {
           <hr className="mt-3"></hr>
         </Row>
         <Row>
-          <h4>Quick filters</h4>
+          <h4>All filters</h4>
         </Row>
         <Row>
           <Col>
@@ -147,7 +147,7 @@ export const MarketPlaceFilters = () => {
         </Row>
         <Row>
           <Col>
-            <h4>In-Depth filters</h4>
+            <h4>Campaign filters</h4>
           </Col>
           <Col xs={3} className="text-end">
             <Button className="clear-filters-btn" onClick={clearFilters}>
@@ -155,11 +155,12 @@ export const MarketPlaceFilters = () => {
             </Button>
           </Col>
         </Row>
-        <Row className=" mt-2 justify-content-center">
+        <Row className="mt-2 justify-content-center">
           <Col md={8}>
             <Card>
               <Card.Header>Basic Information</Card.Header>
               <Card.Body>
+                <Row>
                 <InputGroup size="sm" className="mb-3">
                   <Button className="search-btn">
                     <i className="fa-solid fa-magnifying-glass"></i>
@@ -171,6 +172,8 @@ export const MarketPlaceFilters = () => {
                     onChange={(e) => setNameFilter(e.target.value)}
                   />
                 </InputGroup>
+                </Row>
+                <Row>
                 <InputGroup size="sm" className="mb-3">
                   <Button className="search-btn">
                     <i className="fa-solid fa-magnifying-glass"></i>
@@ -182,15 +185,8 @@ export const MarketPlaceFilters = () => {
                     onChange={(e) => setOrgFilter(e.target.value)}
                   />
                 </InputGroup>
-                <InputGroup size="sm" className="mb-3">
-                  <Button className="search-btn">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </Button>
-                  <Form.Control
-                    type="text"
-                    placeholder="Filter campaign descriptions containing..."
-                  />
-                </InputGroup>
+                </Row>
+                <Row>
                 <InputGroup size="sm" className="mb-3">
                   <Button className="search-btn">
                     <i className="fa-solid fa-magnifying-glass"></i>
@@ -202,6 +198,65 @@ export const MarketPlaceFilters = () => {
                     onChange={(e) => setTagsFilter(e.target.value)}
                   />
                 </InputGroup>
+                </Row>
+                <Row>
+                <Col md={4}>
+                <Form.Select
+                  size="sm"
+                  value={phaseFilter}
+                  onChange={(e) => setPhaseFilter(e.target.value)}
+                >
+                  <option value="">Select phase</option>
+                  <option value="New">New</option>
+                  <option value="Challenge">Challenge</option>
+                  <option value="Project">Project</option>
+                  <option value="Showcase">Showcase</option>
+                </Form.Select>
+                </Col>
+                <Col md={4}>
+                <Form.Select
+                  size="sm"
+                  // value={phaseFilter}
+                  // onChange={(e) => setPhaseFilter(e.target.value)}
+                >
+                  <option value="">Case study?</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </Form.Select>
+                </Col>
+                <Col>
+                <InputGroup size="sm" className="mb-3">
+              <Form.Control 
+                type="text"
+                placeholder="Register date (YYYYMMDD)"
+                value={regDateFilter}
+                onChange={(e)=>{
+                  if (e.target.value.length > 10)
+                    e.target.value = e.target.value.slice(0,10);
+                  e.target.value=formatDate(e.target.value);
+                  setRegDateFilter(e.target.value);
+                }}
+              />
+            </InputGroup>
+                </Col>
+                </Row>
+                <Row>
+                  <Col md={4}>
+                  <InputGroup size="sm" className="mb-3">
+              <Form.Control 
+                type="text"
+                placeholder="Campaign deadline (YYYYMMDD)"
+                // value={regDateFilter}
+                // onChange={(e)=>{
+                //   if (e.target.value.length > 10)
+                //     e.target.value = e.target.value.slice(0,10);
+                //   e.target.value=formatDate(e.target.value);
+                //   setRegDateFilter(e.target.value);
+                // }}
+              />
+            </InputGroup>
+                  </Col>
+                </Row>
                 {/* <Form.Select size="sm">
                   <option>Filter tags</option>
                 </Form.Select> */}
@@ -279,6 +334,246 @@ export const MarketPlaceFilters = () => {
             </Card>
           </Col>
         </Row>
+        <Row className="mt-3">
+          <Col className="text-end">
+            <Button className="browse-more-btn" onClick={applyFilters}>
+              Apply
+            </Button>
+          </Col>
+        </Row>
+        <Row
+          style={{
+            padding: '40px',
+          }}
+        >
+          <hr></hr>
+        </Row>
+        <Row>
+          <Col>
+            <h4>Solution filters</h4>
+          </Col>
+          <Col xs={3} className="text-end">
+            <Button className="clear-filters-btn" onClick={clearFilters}>
+              Clear filters
+            </Button>
+          </Col>
+        </Row>
+        <Row className=" mt-2 justify-content-center">
+          <Col md={8}>
+            <Card>
+              <Card.Header>Basic Information</Card.Header>
+              <Card.Body>
+                <Row>
+                <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Filter solution names containing..."
+                    value={nameFilter}
+                    onChange={(e) => setNameFilter(e.target.value)}
+                  />
+                </InputGroup>
+                </Row>
+                <Row>
+                <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Filter organization names containing..."
+                    value={orgFilter}
+                    onChange={(e) => setOrgFilter(e.target.value)}
+                  />
+                </InputGroup>
+                </Row>
+                <Row>
+                <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Filter tags"
+                    value={tagsFilter}
+                    onChange={(e) => setTagsFilter(e.target.value)}
+                  />
+                </InputGroup>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row className="mt-2 justify-content-center">
+          <Col md={8}>
+            <Card>
+              <Card.Header>Secondary Information</Card.Header>
+              <Card.Body>
+                <Row>
+                <InputGroup size="sm" className="mb-3">
+              <Form.Control 
+                type="text"
+                placeholder="Register date (YYYYMMDD)"
+                // value={regDateFilter}
+                // onChange={(e)=>{
+                //   if (e.target.value.length > 10)
+                //     e.target.value = e.target.value.slice(0,10);
+                //   e.target.value=formatDate(e.target.value);
+                //   setRegDateFilter(e.target.value);
+                // }}
+              />
+            </InputGroup>
+                </Row>
+                <Row>
+                  <Col>
+                  <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Focus area"
+                    // value={nameFilter}
+                    // onChange={(e) => setNameFilter(e.target.value)}
+                  />
+                </InputGroup>
+                  </Col>
+                  <Col>
+                  <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Needs"
+                    // value={nameFilter}
+                    // onChange={(e) => setNameFilter(e.target.value)}
+                  />
+                </InputGroup>
+                  </Col>
+                  <Col>
+                  <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Technologies"
+                    // value={nameFilter}
+                    // onChange={(e) => setNameFilter(e.target.value)}
+                  />
+                </InputGroup>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col className="text-end">
+            <Button className="browse-more-btn" onClick={applyFilters}>
+              Apply
+            </Button>
+          </Col>
+        </Row>
+        <Row
+          style={{
+            padding: '40px',
+          }}
+        >
+          <hr></hr>
+        </Row>
+        <Row>
+          <Col>
+            <h4>Service filters</h4>
+          </Col>
+          <Col xs={3} className="text-end">
+            <Button className="clear-filters-btn" onClick={clearFilters}>
+              Clear filters
+            </Button>
+          </Col>
+        </Row>
+        <Row className=" mt-2 justify-content-center">
+          <Col md={8}>
+            <Card>
+              <Card.Header>Basic Information</Card.Header>
+              <Card.Body>
+                <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Filter transformation service names containing..."
+                    // value={nameFilter}
+                    // onChange={(e) => setNameFilter(e.target.value)}
+                  />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Filter organization names containing..."
+                    value={orgFilter}
+                    onChange={(e) => setOrgFilter(e.target.value)}
+                  />
+                </InputGroup>
+                <InputGroup size="sm" className="mb-3">
+                  <Button className="search-btn">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </Button>
+                  <Form.Control
+                    type="text"
+                    placeholder="Filter tags"
+                    value={tagsFilter}
+                    onChange={(e) => setTagsFilter(e.target.value)}
+                  />
+                </InputGroup>
+                <Row>
+                <Col>
+                <InputGroup size="sm" className="mb-3">
+              <Form.Control 
+                type="text"
+                placeholder="Register date (YYYYMMDD)"
+                value={regDateFilter}
+                onChange={(e)=>{
+                  if (e.target.value.length > 10)
+                    e.target.value = e.target.value.slice(0,10);
+                  e.target.value=formatDate(e.target.value);
+                  setRegDateFilter(e.target.value);
+                }}
+              />
+            </InputGroup>
+                </Col>
+                <Col>
+                <InputGroup size="sm">
+                      <Form.Control placeholder="Filter prices" />
+                      <DropdownButton
+                        variant="outline-secondary"
+                        title=""
+                        align="end"
+                      >
+                        <Dropdown.Item eventKey="1">
+                          Greater than...
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Less than...</Dropdown.Item>
+                        <Dropdown.Item eventKey="3">Equal to...</Dropdown.Item>
+                      </DropdownButton>
+                    </InputGroup>
+                </Col>
+                </Row>
+                {/* <Form.Select size="sm">
+                  <option>Filter tags</option>
+                </Form.Select> */}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        
         <Row className="mt-3">
           <Col className="text-end">
             <Button className="browse-more-btn" onClick={applyFilters}>
