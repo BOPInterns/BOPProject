@@ -80,13 +80,7 @@ export const Step1MandatoryFields = () => {
                                     /><Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>
                                 </FormGroup>
                                 
-                                <TagInput 
-                                    header="Enter Campaign Tags:"
-                                    placeholder="Enter a Tag"
-                                    data="Tag"
-                                    value={campaignTags}
-                                    func={setCampaignTags}
-                                />
+                                
 
                             </Form>
                     </Card.Body>

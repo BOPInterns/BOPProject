@@ -9,7 +9,7 @@ import { OrgName } from './OrgName';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import { OrgOverviewPage } from './OrgOverviewPage';
 import { OrgCampaignPage } from './OrgCampaignsPage';
@@ -17,10 +17,54 @@ import { OrgOwnedSolutionsPage } from './OrgOwnedSolutionsPage';
 import { OrgOfferedServicesPage } from './OrgOfferedServicesPage';
 import { OrgTeamPage } from './OrgTeamPage';
 import { OrgCaseStudiesPage } from './OrgCaseStudiesPage';
+//import internal from 'stream';
 
 export const OrgPage = () => {
     
     const [ activePage, setActivePage ] = useState(1);
+
+    ///////////////////////////////////////////
+    // backend connection
+    const [ orgData, setOrgData] = useState(
+        {
+            name:"", 
+            endorsements:-1, 
+            statement:"", 
+            interests:[], 
+            type:"", 
+            hq:"", 
+            webLink:"", 
+            numEmployees:-1, 
+            dateJoined:"",
+            presentation:"",
+            focus: "",
+            opRegions:"",
+            vidLink:""
+        }
+    );
+
+    const orgName = "Interns For Higher Pay";
+
+    useEffect(() => {
+        //for orgs
+        fetch("http://localhost:9000/get-org-data", {
+            method: "POST",
+            crossDomain:true,
+            headers:{
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body:JSON.stringify({name: orgName}) //change this back to name passed in at top when done w tesitng
+        }).then((res) => res.json()) 
+        .then((data) => {
+            setOrgData(data.data);
+            console.log(data.data.name);
+        });
+    }, [])
+    ////////////////////////////////
+
+
     const totalPages = 6;
     
     const handlePageChange = (page) => {
@@ -30,7 +74,13 @@ export const OrgPage = () => {
     const renderActivePage = () => {
         switch (activePage) {
             case 1:
-                return <OrgOverviewPage/>;
+                return <OrgOverviewPage 
+                            presentation={orgData.presentation} 
+                            focus={orgData.focus} 
+                            interests={orgData.interests} 
+                            opRegions={orgData.opRegions}
+                            vidLink={orgData.vidLink}
+                        ></OrgOverviewPage>;
             case 2:
                 return <OrgCampaignPage/>;
             case 3:
@@ -42,7 +92,13 @@ export const OrgPage = () => {
             case 6:
                 return <OrgCaseStudiesPage/>;
             default:
-                return <OrgOverviewPage/>;
+                return <OrgOverviewPage
+                            presentation={orgData.presentation} 
+                            focus={orgData.focus} 
+                            interests={orgData.interests} 
+                            opRegions={orgData.opRegions}
+                            vidLink={orgData.vidLink}
+                        ></OrgOverviewPage>;
         }
     };
     
@@ -62,10 +118,21 @@ export const OrgPage = () => {
                         />
                     </Col>
                     <Col lg={6} className="text-left">
-                        <OrgName></OrgName>
+                        <OrgName 
+                            name={orgData.name} 
+                            endorsements={orgData.endorsements}
+                            statement={orgData.statement}
+                            interests={orgData.interests}
+                        ></OrgName>
                     </Col>
                     <Col md={3}>
-                        <OrgGenInfo/>
+                        <OrgGenInfo
+                            type={orgData.type}
+                            hq={orgData.hq}
+                            webLink={orgData.webLink}
+                            numEmployees={orgData.numEmployees}
+                            dateJoined={orgData.dateJoined}
+                        ></OrgGenInfo>
                     </Col>
                 </Row>
             </Container>

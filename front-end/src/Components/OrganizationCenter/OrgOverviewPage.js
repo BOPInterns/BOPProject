@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 
-export const OrgOverviewPage = () => {
+export const OrgOverviewPage = ({presentation, focus, interests, opRegions, vidLink}) => {
     return (
         <div>
             <Container>
@@ -22,13 +22,7 @@ export const OrgOverviewPage = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
+                    {presentation}
                 </Row>
                 <Row>
                     <Image
@@ -45,13 +39,7 @@ export const OrgOverviewPage = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
+                    {focus}
                 </Row>
                 <Row className="mt-5">
                     <Col>
@@ -149,10 +137,7 @@ export const OrgOverviewPage = () => {
                 <Row className="mt-5">
                     <strong>Operating regions</strong>
                     <br/>
-                    <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
+                    {opRegions}
                 </Row>
                 <Image
                     src={require('./OrgOverviewMap.png')}
@@ -164,10 +149,7 @@ export const OrgOverviewPage = () => {
                 <Row>
                     <strong>Recently worked on:</strong>
                     <br/>
-                    <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
+                    <body>Below are some of the projects that this organization has reccently worked on.</body>
                 </Row>
                 <Row className="mt-3 mb-3">
                     <Card className="flex-row">
@@ -275,10 +257,7 @@ export const OrgOverviewPage = () => {
                     <Col>
                         <strong>Reach us!</strong>
                         <br/>
-                        <Placeholder as="text" animation="glow">
-                            <Placeholder xs={12}></Placeholder>
-                            <Placeholder xs={12}></Placeholder>
-                        </Placeholder>
+                        <body>Feel free to use the Button below for any feedback that you might want to give!</body>
                         <div class="text-center mt-2">
                         <Button
                             className="reach-us-btn"

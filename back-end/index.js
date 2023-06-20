@@ -11,6 +11,8 @@ const Campaign = require("./models/campaignModel");
 const Solution = require("./models/solutionModel");
 const Service = require("./models/serviceModel");
 const File = require("./models/fileModel");
+const Organization = require("./models/organizationModel");
+const Offer = require("./models/offerModel");
 
 const app = express();
 
@@ -69,6 +71,17 @@ app.get("/get-service-data", async(req, res) => {
         console.log("error retrieving service data")
     }
 });
+
+//gets org data for the landing page
+app.post("/get-org-data", async(req, res) => {
+    try{
+        const org = await Organization.findOne({name: req.body.name});
+        res.send({status: "ok", data: org});
+    }catch (err){
+        console.log("error retrieving organization data")
+    }
+});
+
 
 //adds file to db from creat campaign process
 app.post("/upload-file", async(req, res) => {
@@ -143,9 +156,6 @@ app.post("/login", async(req,res) => {
     } catch (err) { res.status(401).json({error: err.message}); }
 });
 
-app.get('/', (req, res) => {
-    
-})
 
 app.post("/forgot-password", async(req, res) => {
     const {email, OTP} = req.body;
