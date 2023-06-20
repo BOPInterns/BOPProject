@@ -2,78 +2,63 @@ import React, { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { SolutionCard } from "./SolutionCard";
+import { SolutionCard } from './SolutionCard';
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from 'react-bootstrap/Form';
 
 
 
 export const SolutionComp = () => {
     
+    const [ currLoadedCards, setCurrLoadedCards ] = useState(8);
     const [ solutionData, setSolutionData ] = useState([]);
     
     useEffect(() => {
         //for solutions
         fetch("http://localhost:9000/get-solution-data", {
-            method: "GET",
+            method: "POST",
+            crossDomain: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              orgFilter: localStorage.getItem("orgFilter"),
+              nameFilter: localStorage.getItem("nameFilter"),
+              tagsFilter: localStorage.getItem("tagsFilter"),
+              regDateFilter: localStorage.getItem("regDateFilter"),
+              // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
+            }),
         }).then((res) => res.json())
         .then((data) => {
-            setSolutionData(data.data);
+            console.log(data);
+            if (data.data) setSolutionData(data.data);
+            else setSolutionData([]);
         });
     }, []);
+    
+    const handleMoreCards = () => {
+        if(currLoadedCards < solutionData.length) {
+            setCurrLoadedCards(currLoadedCards + 8);
+        }   else {
+            const button = document.getElementById('load-more-btn');
+            button.disabled = true;
+        }
+    }
     
     const loadSolutionData = (i) => {
         return solutionData[i];
     }
-
-    const loadSolutionCards = () => {
-        var rows = [];
-        var fulls = Math.floor(solutionData.length / 4); 
-        var remains = solutionData.length % 4;
-
-        var num = 0;
-        for(let i = 0; i < fulls; i++){
-            rows.push(
-                <Row>
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+3)}/></Col>
-                </Row>
-            );
-            num += 4;
-        }
-        if(remains == 3){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+2)}/></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 2){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col><SolutionCard solData={loadSolutionData(num+1)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        else if(remains == 1){
-            rows.push(
-                <Row className="mt-5">
-                    <Col><SolutionCard solData={loadSolutionData(num)}/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-            );
-        }
-        return rows;   
-    }
     
+    const loadSolutionCards = () => {
+        return solutionData.slice(0, currLoadedCards).map((data, index) => (
+            <Col key={index} xs={6} sm={4} md={3} lg={3}>
+                <SolutionCard solData={loadSolutionData(index)}></SolutionCard>
+            </Col>
+        ));
+    };
+
     return (
         <div>
             <Row className="mt-5">
@@ -91,13 +76,15 @@ export const SolutionComp = () => {
                     </Button>
                     </Col>
                 </Row>
-                <Row className="mt-3">
+                <Row className="d-flex flex-wrap">
                     {loadSolutionCards()}
                 </Row>
                 <Row className="mt-3 text-center">
                     <Col text-center>
                     <Button
                         variant="secondary"
+                        id="load-more-btn"
+                        onClick={() => handleMoreCards()}
                     >
                         Load more solutions
                     </Button>

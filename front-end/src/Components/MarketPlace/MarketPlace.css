@@ -1,9 +1,3 @@
-.marketPlaceNav{
-    align-items: baseline !important;
-    border-bottom-width: 2px !important;
-    border-bottom-color: red !important;
-}
-
 .browse-more-btn {
     height: 45px !important;
     width: 200px !important;
@@ -78,7 +72,7 @@
     border-bottom-width: 2px !important;
 }
 
-.custom-navbar-btn:active {
+.custom-pagination .page-item.active .page-link {
     color: black !important;
     background: transparent !important;
     border-radius: 0 !important;

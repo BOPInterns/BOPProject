@@ -1,19 +1,25 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { CampaignCard } from "../CampaignCenter/CampaignCard";
+import { ServiceCard } from "./ServiceCard";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from 'react-bootstrap/Form';
 
-
-export const CampaignComp = () => {
+export const ServiceComp = () => {
   const [currLoadedCards, setCurrLoadedCards] = useState(8);
-  const [campaignData, setCampaignData] = useState([]);
+  const [serviceData, setServiceData] = useState([]);
+
+  // useEffect(() => {
+  //     if (currL{oadedCards >= serviceData.length) {
+  //         const loadMoreBtn = document.getElementById('load-more-btn');
+  //         loadMoreBtn.disabled = true;
+  //     };
+  // }, [currLoadedCards]);
 
   useEffect(() => {
-    //for campaigns
-    fetch("http://localhost:9000/get-campaign-data", {
+    //for services
+    fetch("http://localhost:9000/get-service-data", {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -25,21 +31,19 @@ export const CampaignComp = () => {
         orgFilter: localStorage.getItem("orgFilter"),
         nameFilter: localStorage.getItem("nameFilter"),
         tagsFilter: localStorage.getItem("tagsFilter"),
-        phaseFilter: localStorage.getItem("phaseFilter"),
         regDateFilter: localStorage.getItem("regDateFilter")
-        // tagsFilter: JSON.parse(localStorage.getItem("tagsFilter"))
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.data) setCampaignData(data.data);
-        else setCampaignData([]);
+        if (data.data) setServiceData(data.data);
+        else setServiceData([]);
       });
   }, []);
 
   const handleMoreCards = () => {
-    if (currLoadedCards < campaignData.length) {
+    if (currLoadedCards < serviceData.length) {
       setCurrLoadedCards(currLoadedCards + 8);
     } else {
       const button = document.getElementById("load-more-btn");
@@ -47,27 +51,27 @@ export const CampaignComp = () => {
     }
   };
 
-  const loadCampaignData = (i) => {
-    return campaignData[i];
+  const loadServiceData = (i) => {
+    return serviceData[i];
   };
-  
-  const loadCampaignCards = () => {
-    return campaignData.slice(0, currLoadedCards).map((data, index) => (
+
+  const loadServiceCards = () => {
+    return serviceData.slice(0, currLoadedCards).map((data, index) => (
       <Col key={index} xs={6} sm={4} md={3} lg={3}>
-        <CampaignCard campData={loadCampaignData(index)}></CampaignCard>
+        <ServiceCard servData={loadServiceData(index)}></ServiceCard>
       </Col>
     ));
   };
-  
+
   return (
     <div>
       <Row className="mt-5">
-        <Col lg={2}>
+        <Col lg={3}>
           <strong>
-            <h4>Campaigns</h4>
+            <h4>Transformation Services</h4>
           </strong>
         </Col>
-        <Col md={8}>
+        <Col md={7}>
           <hr></hr>
         </Col>
         <Col sm={2}>
@@ -82,11 +86,17 @@ export const CampaignComp = () => {
           display: "flex",
         }}
       >
-        {loadCampaignCards()}
+        {loadServiceCards()}
       </Row>
       <Row className="mt-3 text-center">
         <Col text-center>
-          <Button variant="secondary">Load more campaigns</Button>
+          <Button
+            id="load-more-btn"
+            variant="secondary"
+            onClick={() => handleMoreCards()}
+          >
+            Load more services
+          </Button>
         </Col>
       </Row>
     </div>

@@ -22,6 +22,7 @@ import { MarketPlace } from './Components/MarketPlace/MarketPlace.js';
 import { MarketPlaceFilters } from './Components/MarketPlace/MarketPlaceFilters.js';
 import { OrgPage } from './Components/OrganizationCenter/OrgPage.js';
 import { SolutionPage } from './Components/SolutionCenter/SolutionPage.js';
+import { CampaignPage } from './Components/CampaignCenter/CampaignPage.js';
 import Private from './Components/Private.js';
 
 
@@ -44,6 +45,7 @@ const App = () => {
            <Route path="/kyc-verification-submitted" element={<KYCVerificationSubmit />} />
            <Route path="/market-place/filters" element={<MarketPlaceFilters />} />
          </Route>
+           <Route path="/campaign-page" element={<CampaignPage />} />
            <Route path="/org-page" element={<OrgPage />} />
            <Route path="/solution-page" element={<SolutionPage />} />
            <Route path="/market-place" element={<MarketPlace />} />
@@ -51,7 +53,7 @@ const App = () => {
            <Route path="/login" element={<Login />} />
            <Route path="/register" element={<Register />} />
            <Route path="/register-success" element={<RegisterSuccess />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
            <Route path="/create-campaign-introduction" element={<CreateCampaignS0 />} />
         </Routes>

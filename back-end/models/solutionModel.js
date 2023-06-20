@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 const solutionSchema = new mongoose.Schema({
-    organization: String,
-
+    organization: {
+        type: String,
+        default: "Basic Organization"
+    },
     name: {
         type: String,
         required: [true, "Please provide a name for your solution."],
@@ -25,6 +27,10 @@ const solutionSchema = new mongoose.Schema({
     focusAreas: [String],
     needs: [String],
     technologies: [String],
+    createdAt: {
+        type: String,
+        required: [true, "This campaign doesn't have a createdAt field :("]
+    }
 })
 
 const Solution = mongoose.model("Solution", solutionSchema);
