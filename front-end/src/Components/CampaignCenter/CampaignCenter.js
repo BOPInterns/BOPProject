@@ -20,7 +20,7 @@ export const CampaignCenter = () => {
     const [ campaignData, setCampaignData ] = useState([]);
     if (localStorage.getItem("dateFilter") === null)
         localStorage.setItem("dateFilter", "");
-    const [dateFilter, setDateFilter] = useState(localStorage.getItem("dateFilter"));
+    const [dateFilter, setDateFilter] = useState(new Date());
     
     
     useEffect(() => {
@@ -90,11 +90,11 @@ export const CampaignCenter = () => {
     return (
         <>
             <NavigationBar></NavigationBar>
-            <DatePicker selected={dateFilter} onChange={(date) => {
+            <DatePicker selected={dateFilter} onChange={(e) => {
                 // date is in MMDDYYYY format
-                setDateFilter(date);
-                localStorage.setItem("dateFilter", date);
-                console.log("date: " + date);
+                setDateFilter(e);
+                localStorage.setItem("dateFilter", e);
+                console.log("date: " + e);
                 }} />
             
             <Container>

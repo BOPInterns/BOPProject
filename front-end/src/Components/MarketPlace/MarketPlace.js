@@ -23,17 +23,67 @@ import { MarketPlaceSearchBar } from "./MarketPlaceSearchBar";
 import Pagination from "react-bootstrap/Pagination";
 
 export const MarketPlace = () => {
-  // initialize localStorage filter variables
+  // initialize localStorage filter variables:
+    // ALL
   if (localStorage.getItem("orgFilter") === null)
     localStorage.setItem("orgFilter", "");
   if (localStorage.getItem("nameFilter") === null)
     localStorage.setItem("nameFilter", "");
-  if (localStorage.getItem("phaseFilter") === null)
-    localStorage.setItem("phaseFilter", "");
   if (localStorage.getItem("regDateFilter") === null)
       localStorage.setItem("regDateFilter", "");
   if (localStorage.getItem("tagsFilter") === null)
       localStorage.setItem("tagsFilter", "");
+    // CAMPAIGN
+  if (localStorage.getItem("campNameFilter") === null)
+    localStorage.setItem("campNameFilter", "");
+  if (localStorage.getItem("campOrgFilter") === null)
+    localStorage.setItem("campOrgFilter", "");
+  if (localStorage.getItem("campPhaseFilter") === null)
+    localStorage.setItem("campPhaseFilter", "");
+  if (localStorage.getItem("campRegDateFilter") === null)
+      localStorage.setItem("campRegDateFilter", "");
+  if (localStorage.getItem("campTagsFilter") === null)
+      localStorage.setItem("campTagsFilter", "");
+  if (localStorage.getItem("campCSFilter") === null)
+    localStorage.setItem("campCSFilter", "");
+  if (localStorage.getItem("campMissionFilter") === null)
+    localStorage.setItem("campMissionFilter", "");
+  if (localStorage.getItem("campNumActorsFilter") === null)
+    localStorage.setItem("campNumActorsFilter", "");
+  if (localStorage.getItem("campLocationFilter") === null)
+    localStorage.setItem("campLocationFilter", "");
+  if (localStorage.getItem("campReachFilter") === null)
+    localStorage.setItem("campReachFilter", "");
+  if (localStorage.getItem("campStakeholderLangFilter") === null)
+    localStorage.setItem("campStakeholderLangFilter", "");
+  if (localStorage.getItem("campVolunteerLangFilter") === null)
+    localStorage.setItem("campVolunteerLangFilter", "");
+    // SOLUTION
+  if (localStorage.getItem("solNameFilter") === null)
+    localStorage.setItem("solNameFilter", "");
+  if (localStorage.getItem("solOrgFilter") === null)
+    localStorage.setItem("solOrgFilter", "");
+  if (localStorage.getItem("solRegDateFilter") === null)
+    localStorage.setItem("solRegDateFilter", "");
+  if (localStorage.getItem("solTagsFilter") === null)
+    localStorage.setItem("solTagsFilter", "");
+  if (localStorage.getItem("solFocusFilter") === null)
+    localStorage.setItem("solFocusFilter", "");
+  if (localStorage.getItem("solNeedsFilter") === null)
+    localStorage.setItem("solNeedsFilter", "");
+  if (localStorage.getItem("solTechFilter") === null)
+    localStorage.setItem("solTechFilter", "");
+    // SERVICE
+  if (localStorage.getItem("servNameFilter") === null)
+    localStorage.setItem("servNameFilter", "");
+  if (localStorage.getItem("servOrgFilter") === null)
+    localStorage.setItem("servOrgFilter", "");
+  if (localStorage.getItem("servRegDateFilter") === null)
+    localStorage.setItem("servRegDateFilter", "");
+  if (localStorage.getItem("servTagsFilter") === null)
+    localStorage.setItem("servTagsFilter", "");
+  if (localStorage.getItem("servPriceFilter") === null)
+    localStorage.setItem("servPriceFilter", "");
 
   const [allToggle, setAllToggle] = useState(null);
   const [campaignToggle, setCampaignToggle] = useState(false);
