@@ -1,8 +1,8 @@
 .browse-more-btn {
     height: 45px !important;
     width: 200px !important;
-    color: #fa6e13 !important;
-    background-color: transparent !important;
+    color: white !important;
+    background-color: #ffc79c !important;
     border-color: #fa6e13 !important;
 }
 
@@ -49,18 +49,6 @@
     border: 2px black !important;
 }
 
-.custom-navbar-btn {
-    width: 150px !important;
-    color: gray !important;
-    background: transparent !important;
-    border-radius: 0 !important;
-    border-left-width: 0 !important;
-    border-right-width: 0 !important;
-    border-top-width: 0 !important;
-    border-bottom-color: transparent !important;
-    border-bottom-width: 2px !important;
-}
-
 .custom-navbar-btn:hover {
     color: black !important;
     background: transparent !important;
@@ -83,13 +71,28 @@
     border-bottom-width: 2px !important;
 }
 
+.custom-pagination .page-item {
+    width: 175px !important;
+    text-align: center !important;
+}
+
+.custom-pagination {
+    padding: 0px !important;
+    padding-bottom: 20px !important;
+}
+
 .org-dropdown-btn {
-    color: black !important;
-    background-color: lightgray !important;
-    border-color: lightgray !important;
+    color: white !important;
+    background-color: #ffc79c !important;
+    border-color: #fa6e13 !important;
+    border-width: 1.5px !important;
     width: 500px !important;
     height: 75px !important;
     text-align: left !important;
+}
+
+.org-dropdown-btn:hover {
+    background-color: #fa6e13 !important;
 }
 
 .org-dropdown-btn::after {
@@ -97,6 +100,6 @@
 }
 
 .org-dropdown-btn-menu {
-    background-color: lightgray !important;
+    background-color: white !important;
     width: 500px !important;
 }
