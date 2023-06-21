@@ -82,6 +82,16 @@ app.post("/get-org-data", async(req, res) => {
     }
 });
 
+// gets offer data for org landing page
+app.post("/get-offer-data", async(req, res) => {
+  try{
+    const  offers = await Offer.find({org: req.body.org});
+    res.send({status: "ok", data: offers});
+  }catch (err){
+    console.log(err);
+  }
+});
+
 
 //adds file to db from creat campaign process
 app.post("/upload-file", async (req, res) => {

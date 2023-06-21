@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const offerSchema = new mongoose.Schema({
-    owningOrg: {
+    org: {
         type: String,
         required: [true, "Offer needs to belong to an organization."]
     },
