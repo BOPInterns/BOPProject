@@ -5,6 +5,8 @@ import Row from'react-bootstrap/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Button from'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
+import '../Account.css';
+import '../CampaignCenter/CampaignCard.css';
 
 export const ServiceCard = ({servData}) => {
     const [name, setName] = useState('');
@@ -38,14 +40,12 @@ export const ServiceCard = ({servData}) => {
         <div>
             <Card style={{width: 320, display: 'flex'}}>
                 <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <hr></hr>
-                <Card.Text style={{color: "green"}}>[no.%] match</Card.Text>
+                <Card.Title style={{fontWeight: "bold"}}>{name}</Card.Title>
+                <Card.Text><span style={{color: "green", fontWeight: "bold"}}>[no.%]</span> match</Card.Text>
                     
                     {loadTags()}
                     {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> :<div style={{ height: '19px' }} />}
                     
-                    <hr></hr>
                     <Image height="5" width="40" src={require("../placeholderProfilePicture.png")} alt="" roundedCircle fluid></Image>
                     <Card.Text> 
                         <Row>
@@ -53,7 +53,7 @@ export const ServiceCard = ({servData}) => {
                         </Row>
                     </Card.Text>
                     <Row>
-                        <Button variant="secondary" size="sm">Show service details</Button>
+                        <Button className="details-button btn-custom-class" variant="secondary" size="sm">Show service details</Button>
                     </Row>
                 </Card.Body>
             </Card>
