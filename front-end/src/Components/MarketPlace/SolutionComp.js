@@ -76,7 +76,13 @@ export const SolutionComp = () => {
                     </Button>
                     </Col>
                 </Row>
-                <Row className="d-flex flex-wrap">
+                <Row style={{
+                    paddingTop: "20px",
+                    paddingBottom: "40px",
+                    flexWrap: "wrap",
+                    display: "flex",
+                    }}
+                >
                     {loadSolutionCards()}
                 </Row>
                 <Row className="mt-3 text-center">

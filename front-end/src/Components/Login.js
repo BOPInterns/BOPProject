@@ -182,7 +182,7 @@ export const Login = () => {
                   ></Form.Check>
                 </Col>
                 <Col className="text-end">
-                  <Button href="/forgotpassword" variant="link">
+                  <Button href="/forgot-password" variant="link">
                     Forgot password?
                   </Button>
                 </Col>
