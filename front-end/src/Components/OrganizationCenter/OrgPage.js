@@ -38,7 +38,7 @@ export const OrgPage = () => {
             dateJoined:"",
             presentation:"",
             focus: "",
-            opRegions:"",
+            opRegions:[],
             vidLink:""
         }
     );
@@ -59,7 +59,6 @@ export const OrgPage = () => {
         }).then((res) => res.json()) 
         .then((data) => {
             setOrgData(data.data);
-            console.log(data.data.name);
         });
     }, [])
     ////////////////////////////////
@@ -75,9 +74,9 @@ export const OrgPage = () => {
         switch (activePage) {
             case 1:
                 return <OrgOverviewPage 
+                            orgName={orgData.name}
                             presentation={orgData.presentation} 
                             focus={orgData.focus} 
-                            interests={orgData.interests} 
                             opRegions={orgData.opRegions}
                             vidLink={orgData.vidLink}
                         ></OrgOverviewPage>;
@@ -93,9 +92,9 @@ export const OrgPage = () => {
                 return <OrgCaseStudiesPage/>;
             default:
                 return <OrgOverviewPage
+                            orgName={orgData.name}
                             presentation={orgData.presentation} 
                             focus={orgData.focus} 
-                            interests={orgData.interests} 
                             opRegions={orgData.opRegions}
                             vidLink={orgData.vidLink}
                         ></OrgOverviewPage>;

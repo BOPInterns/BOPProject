@@ -7,8 +7,50 @@ import './OrgName.css';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
+import { useState, useEffect } from 'react';
+import { VectorMap } from "react-jvectormap";
 
-export const OrgOverviewPage = ({presentation, focus, interests, opRegions, vidLink}) => {
+export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink}) => {
+    const { getCode, getName, getData } = require("country-list");
+    const [ offerData, setOfferData] = useState([]);
+    const [ color, setColor ] = useState(1);
+    
+
+    const orgName = "Interns For Higher Pay";
+    useEffect(() => {
+        //for offers
+        fetch("http://localhost:9000/get-offer-data", {
+            method: "POST",
+            crossDomain:true,
+            headers:{
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body:JSON.stringify({org: orgName}) //change this back to name passed in at top when done w tesitng
+        }).then((res) => res.json()) 
+        .then((data) => {
+            setOfferData(data.data);
+        });
+    }, [])
+
+    const getMapData = () => {
+        var res  = {};
+        for(let i = 0; i < opRegions.length; i++){
+            const code = getCode(opRegions[i])
+            res[code] = Math.floor(Math.random() * 25000);
+        }
+        return res;
+    }
+    
+    const getList = () => {
+        var res = "";
+        res = opRegions.join(', ');
+        return res;
+    }
+  
+
+
     return (
         <div>
             <Container>
@@ -25,9 +67,9 @@ export const OrgOverviewPage = ({presentation, focus, interests, opRegions, vidL
                     {presentation}
                 </Row>
                 <Row>
-                    <Image
-                        src={require('../videoPlaceHolder.png')}
-                    />
+                    <div className='ratio ratio-16x9'>
+                        <iframe src={vidLink.replace("watch?v=", "embed/")} title="Presentation Video" allowFullScreen></iframe>
+                    </div>
                 </Row>
                 <Row className="mt-5">
                     <Col>
@@ -42,24 +84,6 @@ export const OrgOverviewPage = ({presentation, focus, interests, opRegions, vidL
                     {focus}
                 </Row>
                 <Row className="mt-5">
-                    <Col>
-                        <strong>Fields of interest</strong>
-                    </Col>
-                    <Col className="text-end">
-                        <strong>Translate: </strong>
-                        Original
-                    </Col>
-                </Row>
-                <Row>
-                <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
-                </Row>
-                <Row className="mt-5">
                 <Col>
                         <strong>Offer</strong>
                     </Col>
@@ -67,49 +91,24 @@ export const OrgOverviewPage = ({presentation, focus, interests, opRegions, vidL
                         <strong>Translate: </strong>
                         Original
                     </Col>
-                </Row>
-                <Row className="mx-4 mt-3">
-                    <strong>Mentoring</strong>
-                    <br/>
-                    <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
-                </Row>
-                <Row className="justify-content-center mt-2">
-                <Button
-                        className="overview-offer-btn"
-                    >
-                        Ask for funding</Button>
-                </Row>
-                <Row className="mx-4 mt-3">
-                    <strong>AI support</strong>
-                    <br/>
-                    <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
-                </Row>
-                <Row className="justify-content-center mt-2">
-                <Button
-                        className="overview-offer-btn"
-                    >
-                        Ask for AI support</Button>
-                </Row>
-                <Row className="mx-4 mt-3">
-                    <strong>Scaling guidance</strong>
-                    <br/>
-                    <Placeholder as="text" animation="glow">
-                        <Placeholder xs={12}></Placeholder>
-                        <Placeholder xs={12}></Placeholder>
-                    </Placeholder>
-                </Row>
-                <Row className="justify-content-center mt-2">
-                <Button
-                        className="overview-offer-btn"
-                    >
-                        Ask for scaling guidance</Button>
-                </Row>
+                </Row>                
+                {offerData.map((offer) => (
+                    <div>
+                    <Row className="mx-4 mt-3">
+                        <strong>{offer.name}</strong>
+                        <br/>
+                        {offer.description}
+                    </Row>
+                    <Row className="justify-content-center mt-2">
+                        <Button
+                            className="overview-offer-btn"
+                        >Ask for {offer.name}</Button>
+                    </Row>
+                    </div>
+                ))}
+
+
+
                 <Row className="mt-5 mb-5">
                     <Card>
                         <Row>
@@ -121,10 +120,8 @@ export const OrgOverviewPage = ({presentation, focus, interests, opRegions, vidL
                             </Col>
                             <Col lg={9}>
                                 <strong><h3>Interested in a full offer?</h3></strong>
-                                <Placeholder as="text" animation="glow">
-                                    <Placeholder xs={12}></Placeholder>
-                                    <Placeholder xs={12}></Placeholder>
-                                </Placeholder>
+                                Click below to view the full list of offers that "{orgName}" is currently providing 
+                                and the details in which that offer is provided .
                                 <div className="text-center mt-2">
                                 <Button
                                     className="overview-offer-btn"
@@ -137,15 +134,49 @@ export const OrgOverviewPage = ({presentation, focus, interests, opRegions, vidL
                 <Row className="mt-5">
                     <strong>Operating regions</strong>
                     <br/>
-                    {opRegions}
+                    {getList()} 
+                    <footer className='form-subtext'>Select other countries to see their borders.</footer>
                 </Row>
-                <Image
-                    src={require('./OrgOverviewMap.png')}
-                    style={{
-                        height: 500,
-                        width: 900
+                
+
+                <div>
+                <VectorMap
+                    map={"world_mill"}
+                    backgroundColor="transparent" //change it to ocean blue: #0077be
+                    zoomOnScroll={false}
+                    containerStyle={{
+                    width: "100%",
+                    height: "520px"
+                    }}
+                    containerClassName="map"
+                    regionStyle={{
+                    initial: {
+                        fill: "#e4e4e4",
+                        "fill-opacity": 0.9,
+                        stroke: "none",
+                        "stroke-width": 0,
+                        "stroke-opacity": 0
+                    },
+                    hover: {
+                        "fill-opacity": 0.8,
+                        cursor: "pointer"
+                    },
+                    selectedHover: {}
+                    }}
+                    regionsSelectable={true}
+                    series={{
+                    regions: [
+                        {
+                        values: getMapData(), //this is your data
+                        scale: ["#146804", "#ff0000"], //your color game's here
+                        normalizeFunction: "polynomial"
+                        }
+                    ]
                     }}
                 />
+                </div>
+
+
                 <Row>
                     <strong>Recently worked on:</strong>
                     <br/>
