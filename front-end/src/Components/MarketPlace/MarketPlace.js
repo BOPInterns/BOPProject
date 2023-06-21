@@ -134,9 +134,15 @@ export const MarketPlace = () => {
   return (
     <div>
       <NavigationBar />
-      <Container fluid>
-        <Row className="mt-5 text-center">
-          <h4>You are currently browsing the market place as:</h4>
+      <Container fluid
+        style={{
+        }}
+      >
+        <Row className="mt-5 text-center"
+            style={{
+            }}
+        >
+          <h4 style={{fontWeight: 'bold', color: '#fa6e13'}}>You are currently browsing the market place as:</h4>
         </Row>
         <Row>
           <div class="d-flex justify-content-center">
