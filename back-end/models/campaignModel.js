@@ -14,9 +14,6 @@ const campaignSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    // TODO: where will they enter the due date?
-    //       I missed it in the Figma prototype
-    deadline: String,
     caseStudy: {
         type: Boolean,
         default: false

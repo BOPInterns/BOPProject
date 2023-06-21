@@ -11,11 +11,16 @@ import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from 'react';
 import { buttonStyle, hoverStyle } from '../styles'
 import '../Account.css'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 export const CampaignCenter = () => {
     const auth = window.localStorage.getItem('loginState');
     const [ campaignData, setCampaignData ] = useState([]);
+    if (localStorage.getItem("dateFilter") === null)
+        localStorage.setItem("dateFilter", "");
+    const [dateFilter, setDateFilter] = useState(new Date());
     
     
     useEffect(() => {
@@ -85,6 +90,12 @@ export const CampaignCenter = () => {
     return (
         <>
             <NavigationBar></NavigationBar>
+            <DatePicker selected={dateFilter} onChange={(e) => {
+                // date is in MMDDYYYY format
+                setDateFilter(e);
+                localStorage.setItem("dateFilter", e);
+                console.log("date: " + e);
+                }} />
             
             <Container>
                 <hr></hr>
