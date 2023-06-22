@@ -9,7 +9,7 @@ export const CampaignCard = ({campData}) => {
     const [name, setName] = useState('');
     const [tags, setTags] = useState([]);
     const [challenge, setChallenge] = useState('');
-    const [status, setStatus] = useState('');
+    const [phase, setPhase] = useState('');
     const [orgName, setOrgName] = useState('');
 
     useEffect(() => {
@@ -17,7 +17,7 @@ export const CampaignCard = ({campData}) => {
             setName(campData['name']);
             setTags(campData['tags']);
             setChallenge(campData['challenge']);
-            setStatus(campData['status']);
+            setPhase(campData['phase']);
             setOrgName(campData['organization']);
         }
     });
@@ -48,7 +48,7 @@ export const CampaignCard = ({campData}) => {
                     {loadTags()}
                     {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> :<div style={{ height: '19px' }} />}
                     
-                    <Card.Text>Campaign status: <Badge bg="warning">{status}</Badge></Card.Text>
+                    <Card.Text>Campaign phase: <Badge bg="warning">{phase}</Badge></Card.Text>
                     <hr></hr>
                     <Card.Text className='text-muted' style={{height: 70}}>Campaign Challenge: {challenge}</Card.Text>
                     <Card.Text>Owner

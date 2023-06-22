@@ -30,9 +30,9 @@ export const MarketPlace = () => {
   if (localStorage.getItem("nameFilter") === null)
     localStorage.setItem("nameFilter", "");
   if (localStorage.getItem("regDateFilter") === null)
-      localStorage.setItem("regDateFilter", "");
+    localStorage.setItem("regDateFilter", "");
   if (localStorage.getItem("tagsFilter") === null)
-      localStorage.setItem("tagsFilter", "");
+    localStorage.setItem("tagsFilter", "");
     // CAMPAIGN
   if (localStorage.getItem("campNameFilter") === null)
     localStorage.setItem("campNameFilter", "");
@@ -40,8 +40,8 @@ export const MarketPlace = () => {
     localStorage.setItem("campOrgFilter", "");
   if (localStorage.getItem("campPhaseFilter") === null)
     localStorage.setItem("campPhaseFilter", "");
-  if (localStorage.getItem("campRegDateFilter") === null)
-      localStorage.setItem("campRegDateFilter", "");
+  // if (localStorage.getItem("campRegDateFilter") === null)
+  //     localStorage.setItem("campRegDateFilter", "");
   if (localStorage.getItem("campTagsFilter") === null)
       localStorage.setItem("campTagsFilter", "");
   if (localStorage.getItem("campCSFilter") === null)
@@ -63,8 +63,8 @@ export const MarketPlace = () => {
     localStorage.setItem("solNameFilter", "");
   if (localStorage.getItem("solOrgFilter") === null)
     localStorage.setItem("solOrgFilter", "");
-  if (localStorage.getItem("solRegDateFilter") === null)
-    localStorage.setItem("solRegDateFilter", "");
+  // if (localStorage.getItem("solRegDateFilter") === null)
+  //   localStorage.setItem("solRegDateFilter", "");
   if (localStorage.getItem("solTagsFilter") === null)
     localStorage.setItem("solTagsFilter", "");
   if (localStorage.getItem("solFocusFilter") === null)
@@ -78,8 +78,8 @@ export const MarketPlace = () => {
     localStorage.setItem("servNameFilter", "");
   if (localStorage.getItem("servOrgFilter") === null)
     localStorage.setItem("servOrgFilter", "");
-  if (localStorage.getItem("servRegDateFilter") === null)
-    localStorage.setItem("servRegDateFilter", "");
+  // if (localStorage.getItem("servRegDateFilter") === null)
+  //   localStorage.setItem("servRegDateFilter", "");
   if (localStorage.getItem("servTagsFilter") === null)
     localStorage.setItem("servTagsFilter", "");
   if (localStorage.getItem("servPriceFilter") === null)

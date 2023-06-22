@@ -7,16 +7,17 @@ const campaignSchema = new mongoose.Schema({
     },
     phase: {
         type: String,
-        enum: ["Challenge"],
-        default: "Challenge"
+        enum: ["New", "Challenge", "Project", "Showcase"],
+        default: "New"
     },
     numActors: {
-        type: Number,
-        default: 0
+        type: String,
+        default: ""
     },
     caseStudy: {
-        type: Boolean,
-        default: false
+        type: String,
+        enum: ["true", "false"],
+        default: "false"
     },
     // TODO: manual references to solution documents
     solutions: [String],
@@ -42,7 +43,10 @@ const campaignSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a challenge."]
     },
-    mission: String,
+    mission: {
+        type: String,
+        default: ""
+    },
     milestones: [String],
     goals: [String],
     //*** STEP 3
@@ -54,8 +58,14 @@ const campaignSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide your reach."]
     },
-    stakeholderLangs: [String],
-    volunteerLangs: [String],
+    stakeholderLangs: {
+        type: [String],
+        default: [""]
+    },
+    volunteerLangs: {
+        type: [String],
+        default: [""]
+    },
     //*** STEP 4
     // TODO: use manual document references for this?
     otherFiles: [String],
