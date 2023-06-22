@@ -1,8 +1,8 @@
 .browse-more-btn {
     height: 45px !important;
     width: 200px !important;
-    color: white !important;
-    background-color: #ffc79c !important;
+    color: #fa6e13 !important;
+    background-color: white !important;
     border-color: #fa6e13 !important;
 }
 
@@ -36,13 +36,14 @@
 }
 
 .clear-filters-btn {
-    color: gray !important;
+    color: black !important;
     background-color: transparent !important;
-    border-color: transparent !important;
+    border: 1.5px solid black !important;
 }
 
 .clear-filters-btn:hover {
-    color: #fa6e13 !important;
+    color: white !important;
+    background-color: black !important;
 }
 
 .market-place-navbar {
@@ -82,17 +83,19 @@
 }
 
 .org-dropdown-btn {
-    color: white !important;
-    background-color: #ffc79c !important;
+    color: #fa6e13 !important;
+    background-color: white !important;
     border-color: #fa6e13 !important;
     border-width: 1.5px !important;
     width: 500px !important;
-    height: 75px !important;
+    height: 80px !important;
     text-align: left !important;
 }
 
 .org-dropdown-btn:hover {
     background-color: #fa6e13 !important;
+    color: white !important;
+    
 }
 
 .org-dropdown-btn::after {
@@ -102,4 +105,34 @@
 .org-dropdown-btn-menu {
     background-color: white !important;
     width: 500px !important;
+}
+
+.create-campaign-btn {
+    height: 50px !important;
+    width: 50px !important;
+    padding-top: 12px !important;
+    padding-left: 9px !important;
+    background-color: transparent !important;
+    color: #fa6e13 !important;
+    border: 2px solid #fa6e13 !important;
+}
+
+.create-campaign-btn:hover{
+    background-color: #fa6e13 !important;
+    color: white !important;
+}
+
+.filters-card {
+    background: white !important;
+    border: 1.5px solid black !important;
+}
+
+.filters-card .card-header {
+    color: white !important;
+    background-color: #fa6e13 !important;
+    border-bottom: 1.5px solid black !important;
+}
+
+.filters-hr {
+    color: black !important;
 }

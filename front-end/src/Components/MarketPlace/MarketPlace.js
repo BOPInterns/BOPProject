@@ -149,7 +149,11 @@ export const MarketPlace = () => {
             <Dropdown>
               <Dropdown.Toggle className="org-dropdown-btn">
                 <Row>
-                  <Col xs={2}>
+                  <Col xs={2}
+                    style={{
+                      paddingTop: '4px',
+                    }}
+                  >
                     <Image
                       roundedCircle
                       src={require("../placeholderProfilePicture.png")}
