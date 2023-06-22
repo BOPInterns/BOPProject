@@ -92,6 +92,15 @@ app.post("/get-offer-data", async(req, res) => {
   }
 });
 
+//gets campaign data by owning org name
+app.post("/get-campaign-by-org", async (req, res) => {
+  try {
+    const selected = await Campaign.find({ organization: req.body.org });
+    res.send({ status: "ok", data: selected });
+  } catch (err) {
+    console.log("error retrieving campaign data");
+  }
+});
 
 //adds file to db from creat campaign process
 app.post("/upload-file", async (req, res) => {
@@ -243,22 +252,6 @@ app.post("/forgot-password", async(req, res) => {
         console.log(error);
     }
 });
-
-// app.get('/reset-password/:id/:token', async(req, res) => {
-//     const {id, token} = req.params;
-//     console.log(req.params);
-//     const existingUser = await User.findOne({_id:id});
-//     if(!existingUser){
-//         return res.json({status:"No account with this email address has been registered."});
-//     }
-//     const secret = process.env.JWT_SECRET + existingUser.password;
-//     try {
-//         const verify = jwt.verify(token, secret);
-//         res.render("index", {email:verify.email, status: "Not Verified"});
-//     } catch (error) {
-//         res.send("Not Verified");
-//     }
-// }); 
 
 app.post('/reset-password', async(req, res) => {
     const {email, password, confirmation} = req.body;
@@ -461,7 +454,7 @@ app.post("/kyc-verification-form", async (req, res) => {
 
 app.post("/get-campaign-data", async (req, res) => {
   try {
-    //const {orgFilter, nameFilter, phaseFilter, regDateFilter, tagsFilter} = req.body;
+    // const {orgFilter, nameFilter, phaseFilter, regDateFilter, tagsFilter} = req.body;
     const { orgFilter, nameFilter, tagsFilter, phaseFilter, regDateFilter } = req.body;
     // .lean() returns a regular JS object
     const data = await Campaign.find({

@@ -81,7 +81,9 @@ export const OrgPage = () => {
                             vidLink={orgData.vidLink}
                         ></OrgOverviewPage>;
             case 2:
-                return <OrgCampaignPage/>;
+                return <OrgCampaignPage
+                        orgName={orgData.name}
+                        ></OrgCampaignPage>;
             case 3:
                 return <OrgOwnedSolutionsPage/>;
             case 4:

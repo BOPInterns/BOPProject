@@ -5,7 +5,7 @@ import { OrgCampaignParticipant } from './OrgCampaignParticipant';
 import Pagination from 'react-bootstrap/Pagination';
 import React, { useState } from 'react';
 
-export const OrgCampaignPage = () => {
+export const OrgCampaignPage = ({orgName}) => {
     
     const [ activePage, setActivePage ] = useState(1);
     const totalPages = 2;
@@ -28,7 +28,7 @@ export const OrgCampaignPage = () => {
     return(
         <div>
             <Container>
-                <strong><h4>[name of the organization] campaigns:</h4></strong>
+                <strong><h4>{orgName}'s campaigns:</h4></strong>
                 <Row className="text-center">
                     <p>Browse campaigns associated with organization.</p>
                 </Row>

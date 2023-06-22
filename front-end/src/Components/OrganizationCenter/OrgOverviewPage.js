@@ -12,9 +12,7 @@ import { VectorMap } from "react-jvectormap";
 
 export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink}) => {
     const { getCode, getName, getData } = require("country-list");
-    const [ offerData, setOfferData] = useState([]);
-    const [ color, setColor ] = useState(1);
-    
+    const [ offerData, setOfferData] = useState([]);    
 
     const orgName = "Interns For Higher Pay";
     useEffect(() => {
@@ -38,7 +36,7 @@ export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink}) => {
         var res  = {};
         for(let i = 0; i < opRegions.length; i++){
             const code = getCode(opRegions[i])
-            res[code] = Math.floor(Math.random() * 25000);
+            res[code] = Math.floor(Math.random() * 1048575);
         }
         return res;
     }
