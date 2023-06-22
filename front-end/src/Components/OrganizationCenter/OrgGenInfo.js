@@ -1,33 +1,36 @@
 import Card from 'react-bootstrap/Card';
 
-export const OrgGenInfo = () => {
+export const OrgGenInfo = ({type, hq, webLink, numEmployees, dateJoined}) => {
+
     return (
         <Card>
             <Card.Title className="mt-3 mx-3">General Information</Card.Title>
             <Card.Body>
                 Organization Type
                 <br/>
-                <strong>Startup</strong>
+                <strong>{type}</strong>
             </Card.Body>
             <Card.Body>
                 Headquarters
                 <br/>
-                <strong>Wroclaw, Poland</strong>
+                <strong>{hq}</strong>
             </Card.Body>
             <Card.Body>
                 Website
                 <br/>
-                <strong>www.organization.com</strong>
+                <strong>{webLink}</strong>
             </Card.Body>
             <Card.Body>
                 Number of Employees
                 <br/>
-                <strong>42</strong>
+                <strong>{numEmployees}</strong>
             </Card.Body>
             <Card.Body>
                 On platform since
                 <br/>
-                <strong>2022</strong>
+                <strong>
+                    {dateJoined}
+                </strong>
             </Card.Body>
         </Card>
     )
