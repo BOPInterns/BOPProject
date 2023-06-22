@@ -78,8 +78,14 @@ export const CampaignComp = () => {
         <Col md={8}>
           <hr></hr>
         </Col>
-        <Col sm={2}>
-          <Button href='/create-campaign-introduction' className="browse-more-btn">Create</Button>
+        <Col sm={2}
+          style={{
+            textAlign: 'center',
+          }}
+        >
+          <Button href='/create-campaign-introduction'
+          className="create-campaign-btn"
+          ><i class="fa-regular fa-square-plus fa-2xl"></i></Button>
         </Col>
       </Row>
       <Row

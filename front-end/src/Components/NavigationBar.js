@@ -38,13 +38,15 @@ export const NavigationBar = () => {
                             <img height="65" width="115" src="https://images.squarespace-cdn.com/content/v1/60e57a13579c8f0509ce7237/03227bce-9951-411b-9f7d-42875ddb8933/New+header+logo.png?format=1500w" alt=""/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse>
+                    <Navbar.Collapse
+                        style={{color: 'white'}}
+                    >
                     <Nav 
                         style={{
                             color: 'white',
                         }}
                     >
-                        <Nav.Link href='/market-place'>Market Place</Nav.Link>
+                        <Nav.Link style={{color: 'white'}}href='/market-place'>Market Place</Nav.Link>
                         <Nav.Link href="/campaign-center">Campaign Center</Nav.Link>
                         <Nav.Link href="/">Explore</Nav.Link>
                         <Nav.Link href="/">Learn</Nav.Link>

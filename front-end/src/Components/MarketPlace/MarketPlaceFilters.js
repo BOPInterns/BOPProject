@@ -189,7 +189,7 @@ export const MarketPlaceFilters = () => {
           </Col>
         </Row>
         <Row>
-          <hr className="mt-3"></hr>
+          <hr className="filters-hr"></hr>
         </Row>
         <Row>
 {/* ********** ALL FILTERS ********** */}
@@ -304,15 +304,9 @@ export const MarketPlaceFilters = () => {
         <Row className="mt-2 justify-content-center">
           <Col md={8}>
             <Card
-              style={{
-                background: 'linear-gradient(to bottom, orange, white)',
-                border: '0px',
-              }}
+              className="filters-card"
             >
               <Card.Header
-                style={{
-                  backgroundColor: 'orange',
-                }}
               >Basic Information</Card.Header>
               <Card.Body>
                 <Row>
@@ -397,7 +391,9 @@ export const MarketPlaceFilters = () => {
         </Row>
         <Row className="mt-2 justify-content-center">
           <Col md={8}>
-            <Card>
+            <Card
+              className='filters-card'
+            >
               <Card.Header>Secondary Information</Card.Header>
               <Card.Body>
                 <Row>
@@ -443,7 +439,9 @@ export const MarketPlaceFilters = () => {
         </Row>
         <Row className="mt-2 justify-content-center">
           <Col md={8}>
-            <Card>
+            <Card
+              className='filters-card'
+            >
               <Card.Header>Location and Language</Card.Header>
               <Card.Body>
                 <Row>
@@ -533,7 +531,9 @@ export const MarketPlaceFilters = () => {
         </Row>
         <Row className=" mt-2 justify-content-center">
           <Col md={8}>
-            <Card>
+            <Card
+            className='filters-card'
+            >
               <Card.Header>Basic Information</Card.Header>
               <Card.Body>
                 <Row>
@@ -597,7 +597,9 @@ export const MarketPlaceFilters = () => {
         </Row>
         <Row className="mt-2 justify-content-center">
           <Col md={8}>
-            <Card>
+            <Card
+              className='filters-card'
+            >
               <Card.Header>Secondary Information</Card.Header>
               <Card.Body>
                 <Row>
@@ -660,7 +662,9 @@ export const MarketPlaceFilters = () => {
         </Row>
         <Row className=" mt-2 justify-content-center">
           <Col md={8}>
-            <Card>
+            <Card
+              className='filters-card'
+            >
               <Card.Header>Basic Information</Card.Header>
               <Card.Body>
                 <InputGroup size="sm" className="mb-3">
@@ -744,11 +748,20 @@ export const MarketPlaceFilters = () => {
         
         <Row className="mt-3">
           <Col className="text-end">
-            <Button className="browse-more-btn" onClick={applyFilters}>
-              Apply
+          <Button className="clear-filters-btn" onClick={clearFilters}>
+              Clear filters <i class="fa-regular fa-circle-xmark"></i>
             </Button>
-            <Button className="clear-filters-btn" onClick={clearFilters}>
-              Clear filters
+          </Col>
+        </Row>
+        <Row>
+          <Col
+            style={{
+              paddingTop: '20px',
+              textAlign: 'end',
+            }}
+          >
+              <Button className="browse-more-btn" onClick={applyFilters}>
+              Apply
             </Button>
           </Col>
         </Row>
