@@ -19,10 +19,19 @@ export const OrgName = ({name, endorsements, statement, interests}) => {
                     <Col sm={5}>
                         <strong>Endorsements</strong>
                         <br/>
-                        <i class="fa-regular fa-heart"></i>
-                        <strong> {endorsements}</strong> endorsements
+                        <strong
+                            style={{
+                                color: '#f54547',
+                            }}
+                        >
+                        <i class="fa-regular fa-heart"></i> { }
+                        997</strong> {endorsements}
                     </Col>
-                    <Col className="mt-2">
+                    <Col className="mt-2"
+                        style={{
+                            textAlign: 'end',
+                        }}
+                    >
                         <Button
                             className="endorse-btn"
                         >

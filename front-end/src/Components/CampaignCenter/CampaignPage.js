@@ -7,9 +7,48 @@ import Card from 'react-bootstrap/Card';
 import '../videoPlaceHolder.png';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-import './CampaignPage.css'
+import './CampaignPage.css';
+import { CampaignOverview } from './CampaignOverview';
+import { CampaignParticipants } from './CampaignParticipants';
+import { CampaignUpdates } from './CampaignUpdates';
+import { CampaignDiscussion } from './CampaignDiscussion';
+import Pagination from 'react-bootstrap/Pagination';
+import { useState } from 'react';
 
 export const CampaignPage = () => {
+    
+    const [activePage, setActivePage] = useState(1);
+    const totalPages = 4;
+  
+    const handlePageChange = (page) => {
+        setActivePage(page);
+      };
+    
+    const renderActivePage = () => {
+        switch (activePage) {
+          case 1:
+            return <div>
+                <CampaignOverview/>
+            </div>
+          case 2:
+            return <div>
+                <CampaignParticipants/>
+            </div>;
+          case 3:
+            return <div>
+                <CampaignUpdates/>
+            </div>
+          case 4:
+            return <div>
+                <CampaignDiscussion/>
+            </div>
+          default:
+            return <div>
+                <CampaignOverview/>
+            </div>
+        }
+      };
+    
     return (
         <div>
             <NavigationBar/>
@@ -248,6 +287,37 @@ export const CampaignPage = () => {
                     </Card>
                 </Col>
                 </Row>
+                <Container className="mt-3">
+          <Pagination className="custom-pagination justify-content-center">
+            <Pagination.Item
+              active={activePage === 1}
+              onClick={() => handlePageChange(1)}
+              className="org-navbar-btn"
+            >
+              Campaign Overview
+            </Pagination.Item>
+            <Pagination.Item
+              active={activePage === 2}
+              onClick={() => handlePageChange(2)}
+            >
+              Participants
+            </Pagination.Item>
+            <Pagination.Item
+              active={activePage === 3}
+              onClick={() => handlePageChange(3)}
+            >
+                Campaign Updates
+            </Pagination.Item>
+            <Pagination.Item
+              active={activePage === 4}
+              onClick={() => handlePageChange(4)}
+            >
+                Discussion
+            </Pagination.Item>
+            
+          </Pagination>
+          {renderActivePage()}
+        </Container>
             </Container>
         </div>
     )

@@ -106,7 +106,11 @@ export const OrgPage = () => {
     return (
         <div>
             <NavigationBar/>
-            <Container fluid className="org-details-container">
+            <Container fluid className="org-details-container"
+                style={{
+                    padding: '60px',
+                }}
+            >
                 <Row className="">
                     <Col sm={3} className="mt-3">
                         <Image

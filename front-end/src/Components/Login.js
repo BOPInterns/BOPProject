@@ -77,7 +77,7 @@ export const Login = () => {
           window.scrollTo(0, 0);
         } else {
           localStorage.setItem("loginState", true);
-          navigate("/campaign-center");
+          navigate("/market-place");
           localStorage.setItem("userObj", JSON.stringify(data.user));
         }
       });

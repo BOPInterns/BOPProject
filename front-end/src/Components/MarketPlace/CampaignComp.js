@@ -79,7 +79,7 @@ export const CampaignComp = () => {
           <hr></hr>
         </Col>
         <Col sm={2}>
-          <Button className="browse-more-btn">Browse more</Button>
+          <Button href='/create-campaign-introduction' className="browse-more-btn">Create</Button>
         </Col>
       </Row>
       <Row
