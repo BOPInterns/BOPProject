@@ -15,14 +15,35 @@ export const NavigationBar = () => {
         window.location.href='/login';
     }
     return(
-        <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+        <Container
+            fluid
+            style={{
+                paddingTop: '10px',
+                position: 'sticky',
+                top: 0,
+                zIndex: 9999,
+            }}
+        >
+        <Navbar expand="lg" sticky="top"
+            style={{
+                backgroundColor: '#fa6e13',
+                borderTopRightRadius: '40px',
+                borderBottomLeftRadius: '40px',
+                boxShadow: '-2px 2px 15px black',
+                
+            }}
+        >
                 <Container>
                     <Navbar.Brand href="/" >
                             <img height="65" width="115" src="https://images.squarespace-cdn.com/content/v1/60e57a13579c8f0509ce7237/03227bce-9951-411b-9f7d-42875ddb8933/New+header+logo.png?format=1500w" alt=""/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav >
+                    <Navbar.Collapse>
+                    <Nav 
+                        style={{
+                            color: 'white',
+                        }}
+                    >
                         <Nav.Link href='/market-place'>Market Place</Nav.Link>
                         <Nav.Link href="/campaign-center">Campaign Center</Nav.Link>
                         <Nav.Link href="/">Explore</Nav.Link>
@@ -46,5 +67,6 @@ export const NavigationBar = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+            </Container>
     )
 }

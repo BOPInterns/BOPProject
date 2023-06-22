@@ -41,6 +41,10 @@ export const SolutionPage = () => {
             <NavigationBar/>
             <Container fluid style={{
                     backgroundColor: '#f9f9f9',
+                    paddingTop: '40px',
+                    paddingLeft: '50px',
+                    paddingRight: '50px',
+                    
                 }}>
                 <Row
                     style={{
