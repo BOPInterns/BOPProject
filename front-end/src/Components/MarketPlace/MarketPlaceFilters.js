@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import { parseISO, format } from 'date-fns';
 
 import { Card } from "react-bootstrap";
 
@@ -32,15 +34,14 @@ export const MarketPlaceFilters = () => {
     // ALL
   const [orgFilter, setOrgFilter] = useState(localStorage.getItem("orgFilter"));
   const [nameFilter, setNameFilter] = useState(localStorage.getItem("nameFilter"));
-  const [regDateFilter, setRegDateFilter] = useState(new Date());
+  const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem("regDateFilter"));
   // const [regDateFilter, setRegDateFilter] = useState(localStorage.getItem("regDateFilter"));
   const [tagsFilter, setTagsFilter] = useState(localStorage.getItem("tagsFilter"));
-  // const [tagsFilter, setTagsFilter] = useState(JSON.parse(localStorage.getItem('tagsFilter')));
-    // CAMPAIGN
+  // CAMPAIGN
   const [campNameFilter, setCampNameFilter] = useState(localStorage.getItem("campNameFilter"));
   const [campOrgFilter, setCampOrgFilter] = useState(localStorage.getItem("campOrgFilter"));
   const [campPhaseFilter, setCampPhaseFilter] = useState(localStorage.getItem("campPhaseFilter"));
-  const [campRegDateFilter, setCampRegDateFilter] = useState(localStorage.getItem("campRegDateFilter"));
+  // const [campRegDateFilter, setCampRegDateFilter] = useState(new Date());
   const [campTagsFilter, setCampTagsFilter] = useState(localStorage.getItem("campTagsFilter"));
   const [campCSFilter, setCampCSFilter] = useState(localStorage.getItem("campCSFilter"));
   const [campMissionFilter, setCampMissionFilter] = useState(localStorage.getItem("campMissionFilter"));
@@ -52,7 +53,7 @@ export const MarketPlaceFilters = () => {
     // SOLUTION
   const [solNameFilter, setSolNameFilter] = useState(localStorage.getItem("solNameFilter"));
   const [solOrgFilter, setSolOrgFilter] = useState(localStorage.getItem("solOrgFilter"));
-  const [solRegDateFilter, setSolRegDateFilter] = useState(localStorage.getItem("solRegDateFilter"));
+  // const [solRegDateFilter, setSolRegDateFilter] = useState(new Date());
   const [solTagsFilter, setSolTagsFilter] = useState(localStorage.getItem("solTagsFilter"));
   const [solFocusFilter, setSolFocusFilter] = useState(localStorage.getItem("solFocusFilter"));
   const [solNeedsFilter, setSolNeedsFilter] = useState(localStorage.getItem("solNeedsFilter"));
@@ -60,27 +61,22 @@ export const MarketPlaceFilters = () => {
     // SERVICE
   const [servNameFilter, setServNameFilter] = useState(localStorage.getItem("servNameFilter"));
   const [servOrgFilter, setServOrgFilter] = useState(localStorage.getItem("servOrgFilter"));
-  const [servRegDateFilter, setServRegDateFilter] = useState(localStorage.getItem("servRegDateFilter"));
+  // const [servRegDateFilter, setServRegDateFilter] = useState(new Date());
   const [servTagsFilter, setServTagsFilter] = useState(localStorage.getItem("servTagsFilter"));
   const [servPriceFilter, setServPriceFilter] = useState(localStorage.getItem("servPriceFilter"));
-    
-  
+
   const navigate = useNavigate();
 
   function applyFilters() {
-    // Place holder function for now, eventually should return you to the marketplace page and apply filters selected from this page
-
-    // update localStorage variables
-      // ALL
+    // ALL
     localStorage.setItem("orgFilter", orgFilter);
     localStorage.setItem("nameFilter", nameFilter);
     localStorage.setItem("regDateFilter", regDateFilter);
     localStorage.setItem("tagsFilter", tagsFilter);
-      // CAMPAIGN
+    // CAMPAIGN
     localStorage.setItem("campNameFilter", campNameFilter);
     localStorage.setItem("campOrgFilter", campOrgFilter);
     localStorage.setItem("campPhaseFilter", campPhaseFilter);
-    localStorage.setItem("campRegDateFilter", campRegDateFilter);
     localStorage.setItem("campTagsFilter", campTagsFilter);
     localStorage.setItem("campCSFilter", campCSFilter);
     localStorage.setItem("campMissionFilter", campMissionFilter);
@@ -89,37 +85,33 @@ export const MarketPlaceFilters = () => {
     localStorage.setItem("campReachFilter", campReachFilter);
     localStorage.setItem("campStakeholderLangFilter", campStakeholderLangFilter);
     localStorage.setItem("campVolunteerLangFilter", campVolunteerLangFilter);
-      // SOLUTION
+    // SOLUTION
     localStorage.setItem("solNameFilter", solNameFilter);
     localStorage.setItem("solOrgFilter", solOrgFilter);
-    localStorage.setItem("solRegDateFilter", solRegDateFilter);
     localStorage.setItem("solTagsFilter", solTagsFilter);
     localStorage.setItem("solFocusFilter", solFocusFilter);
     localStorage.setItem("solNeedsFilter", solNeedsFilter);
     localStorage.setItem("solTechFilter", solTechFilter);
-      // SERVICE
+    // SERVICE
     localStorage.setItem("servNameFilter", servNameFilter);
     localStorage.setItem("servOrgFilter", servOrgFilter);
-    localStorage.setItem("servRegDateFilter", servRegDateFilter);
     localStorage.setItem("servTagsFilter", servTagsFilter);
     localStorage.setItem("servPriceFilter", servPriceFilter);
-      
+
     navigate("/market-place");
   }
 
   function clearFilters() {
-    // Reset local storage filter variables
-      // ALL
+    // ALL
     localStorage.setItem("orgFilter", "");
     localStorage.setItem("nameFilter", "");
     localStorage.setItem("regDateFilter", "");
     localStorage.setItem("tagsFilter", "");
     // localStorage.setItem('tagsFilter', '[]');
-      // CAMPAIGN
+    // CAMPAIGN
     localStorage.setItem("campNameFilter", "");
     localStorage.setItem("campOrgFilter", "");
     localStorage.setItem("campPhaseFilter", "");
-    localStorage.setItem("campRegDateFilter", "");
     localStorage.setItem("campTagsFilter", "");
     localStorage.setItem("campCSFilter", "");
     localStorage.setItem("campMissionFilter", "");
@@ -128,35 +120,30 @@ export const MarketPlaceFilters = () => {
     localStorage.setItem("campReachFilter", "");
     localStorage.setItem("campStakeholderLangFilter", "");
     localStorage.setItem("campVolunteerLangFilter", "");
-      // SOLUTION
+    // SOLUTION
     localStorage.setItem("solNameFilter", "");
     localStorage.setItem("solOrgFilter", "");
-    localStorage.setItem("solRegDateFilter", "");
     localStorage.setItem("solTagsFilter", "");
     localStorage.setItem("solFocusFilter", "");
     localStorage.setItem("solNeedsFilter", "");
     localStorage.setItem("solTechFilter", "");
-      // SERVICE
+    // SERVICE
     localStorage.setItem("servNameFilter", "");
     localStorage.setItem("servOrgFilter", "");
-    localStorage.setItem("servRegDateFilter", "");
     localStorage.setItem("servTagsFilter", "");
     localStorage.setItem("servPriceFilter", "");
   
-
-    // Reset state filter variables
-      // ALL
+    // ALL
     setOrgFilter("");
     setNameFilter("");
     setRegDateFilter("");
     setTagsFilter("");
     // setTagsFilter([]);
-      // CAMPAIGN
+    // CAMPAIGN
     setCampNameFilter("");
     setCampOrgFilter("");
     setCampTagsFilter("");
     setCampPhaseFilter("");
-    setCampRegDateFilter("");
     setCampCSFilter("");
     setCampMissionFilter("");
     setCampNumActorsFilter("");
@@ -164,18 +151,16 @@ export const MarketPlaceFilters = () => {
     setCampReachFilter("");
     setCampStakeholderLangFilter("");
     setCampVolunteerLangFilter("");
-      // SOLUTION
+    // SOLUTION
     setSolNameFilter("");
     setSolOrgFilter("");
-    setSolRegDateFilter("");
     setSolTagsFilter("");
     setSolFocusFilter("");
     setSolNeedsFilter("");
     setSolTechFilter("");
-      // SERVICE
+    // SERVICE
     setServNameFilter("");
     setServOrgFilter("");
-    setServRegDateFilter("");
     setServTagsFilter("");
     setServPriceFilter("");
 
@@ -183,7 +168,8 @@ export const MarketPlaceFilters = () => {
   }
 
   function formatDate(el) {
-    return el.replace(/^([\d]{4})([\d]{2})([\d]{2})$/,"$1-$2-$3");
+    return el.replace(/^([\d]{2})([\d]{2})([\d]{4})$/,"$1/$2/$3");
+    // return el.replace(/^([\d]{4})([\d]{2})([\d]{2})$/,"$1-$2-$3");
   }
 
   return (
@@ -234,7 +220,12 @@ export const MarketPlaceFilters = () => {
                 type="text"
                 placeholder="Search organizations"
                 value={orgFilter}
-                onChange={(e) => setOrgFilter(e.target.value)}
+                onChange={(e) => {
+                  setOrgFilter(e.target.value);
+                  setCampOrgFilter(e.target.value);
+                  setSolOrgFilter(e.target.value);
+                  setServOrgFilter(e.target.value);
+                }}
               />
             </InputGroup>
           </Col>
@@ -245,9 +236,14 @@ export const MarketPlaceFilters = () => {
               </Button>
               <Form.Control
                 type="text"
-                placeholder="Campaign/solution/service name"
+                placeholder="Search by name"
                 value={nameFilter}
-                onChange={(e) => setNameFilter(e.target.value)}
+                onChange={(e) => {
+                  setNameFilter(e.target.value);
+                  setCampNameFilter(e.target.value);
+                  setSolNameFilter(e.target.value);
+                  setServNameFilter(e.target.value);
+                }}
               />
             </InputGroup>
           </Col>
@@ -260,34 +256,49 @@ export const MarketPlaceFilters = () => {
                 type="text"
                 placeholder="Filter tags"
                 value={tagsFilter}
-                onChange={(e) => setTagsFilter(e.target.value)}
+                onChange={(e) => {
+                  setTagsFilter(e.target.value);
+                  setCampTagsFilter(e.target.value);
+                  setSolTagsFilter(e.target.value);
+                  setServTagsFilter(e.target.value);
+                }}
               />
             </InputGroup>
           </Col>
           <Col>
+          <InputGroup>
+              <Form.Control
+                type="text"
+                placeholder="Register date (MMDDYYYY)"
+                value={regDateFilter}
+                onChange={(e) => {
+                  const today = new Date().toJSON().slice(0, 10);
+                  console.log(today);
+                  if (e.target.value.length > 10)
+                    e.target.value = e.target.value.slice(0,10);
+                  e.target.value = formatDate(e.target.value);
+                  setRegDateFilter(e.target.value);
+                }}
+              />
+          </InputGroup>
+          </Col>
+          {/* <Col>
             <DatePicker 
               placeholderText="Register date (MM/DD/YYYY)"
-              selected={regDateFilter}
-              onChange={(date) => {
+              selected={new Date(regDateFilter)}
+              onChange={(date) =>
                   // date is in MMDDYYYY format
-                  setRegDateFilter(date);
-                  localStorage.setItem("regDateFilter", date);
-                  console.log("register date: " + date);
-                  }} />
-          </Col>
+                  setRegDateFilter(date.toDateString())
+               } />
+          </Col> */}
         </Row>
         <Row>
           <hr className="mt-4"></hr>
         </Row>
+{/* ********** CAMPAIGN FILTERS ********** */}
         <Row>
           <Col>
-{/* ********** CAMPAIGN FILTERS ********** */}
             <h4>Campaign filters</h4>
-          </Col>
-          <Col xs={3} className="text-end">
-            <Button className="clear-filters-btn" onClick={clearFilters}>
-              Clear filters
-            </Button>
           </Col>
         </Row>
         <Row className="mt-2 justify-content-center">
@@ -313,7 +324,7 @@ export const MarketPlaceFilters = () => {
                     type="text"
                     placeholder="Filter campaign names containing..."
                     value={campNameFilter}
-                    onChange={(e) => setcampNameFilter(e.target.value)}
+                    onChange={(e) => setCampNameFilter(e.target.value)}
                   />
                 </InputGroup>
                 </Row>
@@ -364,27 +375,28 @@ export const MarketPlaceFilters = () => {
                   onChange={(e) => setCampCSFilter(e.target.value)}
                 >
                   <option value="">Case study?</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
+                  <option value="true">True</option>
+                  <option value="false">False</option>
                 </Form.Select>
                 </Col>
-                <Col md={4}>
+                {/* <Col md={4}>
                   <DatePicker 
                     placeholderText="Register date (MM/DD/YYYY)"
-                    selected={campRegDateFilter}
+                    selected={parseISO(campRegDateFilter)}
                     onChange={(date) => {
                     // date is in MMDDYYYY format
                     setCampRegDateFilter(date);
-                    localStorage.setItem("campRegDateFilter", date);
+                    console.log("date: " + campRegDateFilter);
+                    localStorage.setItem("campRegDateFilter", campRegDateFilter);
                   }} />
-                </Col>
+                </Col> */}
                 </Row>
               </Card.Body>
             </Card>
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Col>
+        <Row className="mt-2 justify-content-center">
+          <Col md={8}>
             <Card>
               <Card.Header>Secondary Information</Card.Header>
               <Card.Body>
@@ -428,7 +440,9 @@ export const MarketPlaceFilters = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col>
+        </Row>
+        <Row className="mt-2 justify-content-center">
+          <Col md={8}>
             <Card>
               <Card.Header>Location and Language</Card.Header>
               <Card.Body>
@@ -466,7 +480,7 @@ export const MarketPlaceFilters = () => {
                     </Form.Select> */}
                   </Col>
                 </Row>
-                <Row className="mt-3">
+                <Row>
                   <Col>
                     <InputGroup size="sm" className="mb-3">
                         <Button className="search-btn">
@@ -504,13 +518,6 @@ export const MarketPlaceFilters = () => {
             </Card>
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Col className="text-end">
-            <Button className="browse-more-btn" onClick={applyFilters}>
-              Apply
-            </Button>
-          </Col>
-        </Row>
         <Row
           style={{
             padding: '40px',
@@ -522,11 +529,6 @@ export const MarketPlaceFilters = () => {
           <Col>
 {/* ********** SOLUTION FILTERS ********** */}
             <h4>Solution filters</h4>
-          </Col>
-          <Col xs={3} className="text-end">
-            <Button className="clear-filters-btn" onClick={clearFilters}>
-              Clear filters
-            </Button>
           </Col>
         </Row>
         <Row className=" mt-2 justify-content-center">
@@ -578,14 +580,16 @@ export const MarketPlaceFilters = () => {
                     textAlign: 'end',
                   }}
                 >
+                  {/* <Col>
                   <DatePicker 
                   placeholderText="Register date (MM/DD/YYYY)"
-                  selected={solRegDateFilter}
+                  selected={parseISO(solRegDateFilter)}
                   onChange={(date) => {
                   // date is in MMDDYYYY format
                   setSolRegDateFilter(date);
                   localStorage.setItem("solRegDateFilter", date);
                   }} />
+                  </Col> */}
                 </Row>
               </Card.Body>
             </Card>
@@ -641,13 +645,6 @@ export const MarketPlaceFilters = () => {
             </Card>
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Col className="text-end">
-            <Button className="browse-more-btn" onClick={applyFilters}>
-              Apply
-            </Button>
-          </Col>
-        </Row>
         <Row
           style={{
             padding: '40px',
@@ -659,11 +656,6 @@ export const MarketPlaceFilters = () => {
           <Col>
 {/* ********** SERVICE FILTERS ********** */}
             <h4>Service filters</h4>
-          </Col>
-          <Col xs={3} className="text-end">
-            <Button className="clear-filters-btn" onClick={clearFilters}>
-              Clear filters
-            </Button>
           </Col>
         </Row>
         <Row className=" mt-2 justify-content-center">
@@ -727,20 +719,20 @@ export const MarketPlaceFilters = () => {
                       </DropdownButton>
                     </InputGroup>
                 </Col>
-                <Col
+                {/* <Col
                   style={{
                     textAlign: 'end'
                   }}
                 >
                 <DatePicker
                   placeholderText="Register date (MM/DD/YYYY)"
-                  selected={servRegDateFilter}
+                  selected={parseISO(servRegDateFilter)}
                   onChange={(date) => {
                   // date is in MMDDYYYY format
                   setServRegDateFilter(date);
                   localStorage.setItem("servRegDateFilter", date);
                   }} />
-                </Col>
+                </Col> */}
                 </Row>
                 {/* <Form.Select size="sm">
                   <option>Filter tags</option>
@@ -754,6 +746,9 @@ export const MarketPlaceFilters = () => {
           <Col className="text-end">
             <Button className="browse-more-btn" onClick={applyFilters}>
               Apply
+            </Button>
+            <Button className="clear-filters-btn" onClick={clearFilters}>
+              Clear filters
             </Button>
           </Col>
         </Row>

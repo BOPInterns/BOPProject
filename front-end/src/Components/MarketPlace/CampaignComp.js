@@ -12,6 +12,7 @@ export const CampaignComp = () => {
   const [campaignData, setCampaignData] = useState([]);
 
   useEffect(() => {
+    console.log("phase: " + localStorage.getItem("campPhaseFilter"));
     //for campaigns
     fetch("http://localhost:9000/get-campaign-data", {
       method: "POST",
@@ -22,12 +23,19 @@ export const CampaignComp = () => {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        orgFilter: localStorage.getItem("orgFilter"),
-        nameFilter: localStorage.getItem("nameFilter"),
-        tagsFilter: localStorage.getItem("tagsFilter"),
-        phaseFilter: localStorage.getItem("phaseFilter"),
-        regDateFilter: localStorage.getItem("regDateFilter")
-        // tagsFilter: JSON.parse(localStorage.getItem("tagsFilter"))
+        campNameFilter: localStorage.getItem("campNameFilter"),
+        campOrgFilter: localStorage.getItem("campOrgFilter"),
+        campPhaseFilter: localStorage.getItem("campPhaseFilter"),
+        regDateFilter: localStorage.getItem("regDateFilter"),
+        // campRegDateFilter: localStorage.getItem("campRegDateFilter"),
+        campCSFilter: localStorage.getItem("campCSFilter"),
+        campMissionFilter: localStorage.getItem("campMissionFilter"),
+        campNumActorsFilter: localStorage.getItem("campNumActorsFilter"),
+        campLocationFilter: localStorage.getItem("campLocationFilter"),
+        campReachFilter: localStorage.getItem("campReachFilter"),
+        campTagsFilter: localStorage.getItem("campTagsFilter"),
+        campStakeholderLangFilter: localStorage.getItem("campStakeholderLangFilter"),
+        campVolunteerLangFilter: localStorage.getItem("campVolunteerLangFilter")
       }),
     })
       .then((res) => res.json())

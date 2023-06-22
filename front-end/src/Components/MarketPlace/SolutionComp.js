@@ -24,11 +24,14 @@ export const SolutionComp = () => {
               "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
-              orgFilter: localStorage.getItem("orgFilter"),
-              nameFilter: localStorage.getItem("nameFilter"),
-              tagsFilter: localStorage.getItem("tagsFilter"),
-              regDateFilter: localStorage.getItem("regDateFilter"),
-              // tagsFilter: JSON.parse(localStorage.getItem('tagsFilter'))
+                regDateFilter: localStorage.getItem("regDateFilter"),
+                solNameFilter: localStorage.getItem("solNameFilter"),
+                solOrgFilter: localStorage.getItem("solOrgFilter"),
+                //solRegDateFilter: localStorage.getItem("solRegDateFilter"),
+                solTagsFilter: localStorage.getItem("solTagsFilter"),
+                solFocusFilter: localStorage.getItem("solFocusFilter"),
+                solNeedsFilter: localStorage.getItem("solNeedsFilter"),
+                solTechFilter: localStorage.getItem("solTechFilter")
             }),
         }).then((res) => res.json())
         .then((data) => {

@@ -4,15 +4,16 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import './OrgName.css';
 import Badge from 'react-bootstrap/Badge';
+import TagInput from '../TagInput';
 
-export const OrgName = () => {
+export const OrgName = ({name, endorsements, statement, interests}) => {
     return (
         <Card
             className="org-name-card"
             style={{ height: 500
             }}
         >
-            <Card.Title className="mt-3 mx-3"><strong><h3>Name of the Organization</h3></strong></Card.Title>
+            <Card.Title className="mt-3 mx-3"><strong><h3>{name}</h3></strong></Card.Title>
             <Card.Subtitle className="mx-3">
                 <Row className="mt-3">
                     <Col sm={5}>
@@ -24,7 +25,7 @@ export const OrgName = () => {
                             }}
                         >
                         <i class="fa-regular fa-heart"></i> { }
-                        997</strong> endorsements
+                        997</strong> {endorsements}
                     </Col>
                     <Col className="mt-2"
                         style={{
@@ -42,7 +43,7 @@ export const OrgName = () => {
             <Card.Body className="mt-5 mb-3">
                 <strong>Organization statement</strong>
                 <br/>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt molestie tortor. Phasellus ut metus sed orci blandit gravida.
+                {statement}
                 <br/>
                 <Button
                     className="contact-org-btn"
@@ -53,22 +54,14 @@ export const OrgName = () => {
                 <Card.Body className="mt-5">
                     <strong>Interested in:</strong>
                     <br/>
+                    {interests.map((interest, index) => (
                     <Badge
-                        bg="secondary"
-                    >tagname
-                    </Badge>
-                    <Badge
-                        bg="secondary"
-                    >tagname
-                    </Badge>
-                    <Badge
-                        bg="secondary"
-                    >tagname
-                    </Badge>
-                    <Badge
-                        bg="secondary"
-                    >tagname
-                    </Badge>
+                        key={index}
+                        variant="secondary"
+                        className="mr-2 mb-2 bg-secondary"
+                        style={{marginRight: 2}}
+                    >{interest}</Badge>
+                    ))}
                 </Card.Body>
         </Card>
     )
