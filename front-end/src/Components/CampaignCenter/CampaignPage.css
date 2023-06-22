@@ -1,3 +1,21 @@
 .campaign-page-background {
     background-image: '../videoPlaceHolder.png' !important;
 }
+.custom-links-btn {
+    background-color: transparent !important;
+    border: 0px !important;
+    color: #fa6d12 !important;
+}
+
+.custom-btn {
+    height: 45px !important;
+    width: 300px !important;
+    color: #fa6e13 !important;
+    background-color: white !important;
+    border-color: #fa6e13 !important;
+}
+
+.custom-btn:hover {
+    background-color: #fa6e13 !important;
+    color: white !important;
+}

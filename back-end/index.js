@@ -11,6 +11,8 @@ const Campaign = require("./models/campaignModel");
 const Solution = require("./models/solutionModel");
 const Service = require("./models/serviceModel");
 const File = require("./models/fileModel");
+const Organization = require("./models/organizationModel");
+const Offer = require("./models/offerModel");
 
 const app = express();
 
@@ -69,6 +71,36 @@ app.get("/get-campaign-data", async (req, res) => {
 //     console.log("error retrieving service data");
 //   }
 // });
+
+//gets org data for the landing page
+app.post("/get-org-data", async(req, res) => {
+    try{
+        const org = await Organization.findOne({name: req.body.name});
+        res.send({status: "ok", data: org});
+    }catch (err){
+        console.log("error retrieving organization data")
+    }
+});
+
+// gets offer data for org landing page
+app.post("/get-offer-data", async(req, res) => {
+  try{
+    const  offers = await Offer.find({org: req.body.org});
+    res.send({status: "ok", data: offers});
+  }catch (err){
+    console.log(err);
+  }
+});
+
+//gets campaign data by owning org name
+app.post("/get-campaign-by-org", async (req, res) => {
+  try {
+    const selected = await Campaign.find({ organization: req.body.org });
+    res.send({ status: "ok", data: selected });
+  } catch (err) {
+    console.log("error retrieving campaign data");
+  }
+});
 
 //adds file to db from creat campaign process
 app.post("/upload-file", async (req, res) => {
@@ -171,84 +203,55 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/forgot-password", async (req, res) => {
-  const { email, OTP } = req.body;
-  console.log(OTP);
-  try {
-    if (!validator.isEmail(email)) {
-      return res.json({ error: "This is not a valid email" });
-    }
 
-    const existingUser = await User.findOne({ email });
-    if (!existingUser) {
-      return res.json({
-        status: "No account with this email address has been registered.",
-      });
-    }
+app.post("/forgot-password", async(req, res) => {
+    const {email, OTP} = req.body;
+    console.log(OTP)
+    try{
+        if (!validator.isEmail(email)) {return res.json({error: "This is not a valid email"})};
 
-    const secret = process.env.JWT_SECRET + existingUser.password;
-    const token = jwt.sign(
-      { email: existingUser.email, id: existingUser._id },
-      secret,
-      {
-        expiresIn: "10m",
-      }
-    );
-    //const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
+        const existingUser = await User.findOne({ email });
+        if(!existingUser){
+            return res.json({status:"No account with this email address has been registered."});
+        }
 
-    //copied code to sent email ///////
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "bop.hub.interns@gmail.com",
-        pass: "qskgqeunggcrjwbr",
-      },
-    });
+        const secret = process.env.JWT_SECRET + existingUser.password;
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id}, secret, {
+            expiresIn: "10m",
+        });
+        //const link = `http://localhost:9000/reset-password/${existingUser._id}/${token}`;
 
-    var mailOptions = {
-      from: "bop.hub.interns@gmail.com",
-      to: email,
-      subject: "BOP Hub Password Reset",
-      text:
-        "Please use the following one time code to reset your password   \n" +
-        OTP[0] +
-        OTP[1] +
-        OTP[2] +
-        OTP[3],
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
+        //copied code to sent email ///////
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'bop.hub.interns@gmail.com',
+              pass: 'qskgqeunggcrjwbr'
+            }
+          });
+          
+          var mailOptions = {
+            from: 'bop.hub.interns@gmail.com',
+            to: email,
+            subject: 'BOP Hub Password Reset',
+            text: "Please use the following one time code to reset your password   \n" + OTP[0]+OTP[1]+OTP[2]+OTP[3],
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+          ////////////////////////////////////
+        
+        // console.log(link);
+        res.send({status: 'ok', code: OTP});
+    }catch (error) {
         console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
-    ////////////////////////////////////
-
-    // console.log(link);
-    res.send({ status: "ok", code: OTP });
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
+    }
 });
-
-// app.get('/reset-password/:id/:token', async(req, res) => {
-//     const {id, token} = req.params;
-//     console.log(req.params);
-//     const existingUser = await User.findOne({_id:id});
-//     if(!existingUser){
-//         return res.json({status:"No account with this email address has been registered."});
-//     }
-//     const secret = process.env.JWT_SECRET + existingUser.password;
-//     try {
-//         const verify = jwt.verify(token, secret);
-//         res.render("index", {email:verify.email, status: "Not Verified"});
-//     } catch (error) {
-//         res.send("Not Verified");
-//     }
-// }); 
 
 app.post('/reset-password', async(req, res) => {
     const {email, password, confirmation} = req.body;

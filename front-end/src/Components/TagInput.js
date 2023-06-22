@@ -8,6 +8,8 @@ const TagInput = (props) => {
     const [tags, setTags] = useState([]);
     const [currentTag, setCurrentTag] = useState('');
 
+    
+
     useEffect(() => {
         setTags(props.value)
     }, [])

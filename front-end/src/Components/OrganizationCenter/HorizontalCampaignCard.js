@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 
 
-export const OrgCampaignOwner = () => {
+export const HorizontalCampaignCard = ({name, tags, description, actors, status}) => {
     return (
         <div>
             <Container>
@@ -63,7 +63,7 @@ export const OrgCampaignOwner = () => {
                                             paddingLeft: '45px',
                                         }}
                                     >
-                                        <p><strong>Name of the campaign</strong></p>
+                                        <p><strong>{name}</strong></p>
                                     </Col>
                                     <Col
                                         style={{
