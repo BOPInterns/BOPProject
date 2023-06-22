@@ -454,14 +454,26 @@ app.post("/kyc-verification-form", async (req, res) => {
 
 app.post("/get-campaign-data", async (req, res) => {
   try {
-    // const {orgFilter, nameFilter, phaseFilter, regDateFilter, tagsFilter} = req.body;
-    const { orgFilter, nameFilter, tagsFilter, phaseFilter, regDateFilter } = req.body;
+    const { 
+      regDateFilter, campNameFilter, campOrgFilter, campTagsFilter,
+      campPhaseFilter, campCSFilter, campMissionFilter, campNumActorsFilter, 
+      campLocationFilter, campReachFilter, campStakeholderLangFilter, campVolunteerLangFilter 
+    } = req.body;
+    console.log(req.body);
+
     // .lean() returns a regular JS object
     const data = await Campaign.find({
-      organization: new RegExp(orgFilter, "i"),
-      name: new RegExp(nameFilter, "i"),
-      tags: new RegExp(tagsFilter, "i"),
-      phase: new RegExp(phaseFilter, "i"),
+      organization: new RegExp(campOrgFilter, "i"),
+      phase: new RegExp(campPhaseFilter, "i"),
+      numActors: new RegExp(campNumActorsFilter, "i"),
+      caseStudy: new RegExp(campCSFilter, "i"),
+      name: new RegExp(campNameFilter, "i"),
+      mission: new RegExp(campMissionFilter, "i"),
+      location: new RegExp(campLocationFilter, "i"),
+      reach: new RegExp(campReachFilter, "i"),
+      tags: new RegExp(campTagsFilter, "i"),
+      stakeholderLangs: new RegExp(campStakeholderLangFilter, "i"),
+      volunteerLangs: new RegExp(campVolunteerLangFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
     }).lean();
     console.log("campaign data found");
@@ -474,12 +486,16 @@ app.post("/get-campaign-data", async (req, res) => {
 
 app.post("/get-solution-data", async (req, res) => {
   try {
-    const {orgFilter, nameFilter, tagsFilter, regDateFilter} = req.body;
+    const {solOrgFilter, solNameFilter, solTagsFilter, regDateFilter,
+           solFocusFilter, solNeedsFilter, solTechFilter} = req.body;
     const data = await Solution.find({
-      organization: new RegExp(orgFilter, "i"),
-      name: new RegExp(nameFilter, "i"),
-      tags: new RegExp(tagsFilter, "i"),
-      createdAt: new RegExp(regDateFilter, "i")
+      organization: new RegExp(solOrgFilter, "i"),
+      name: new RegExp(solNameFilter, "i"),
+      tags: new RegExp(solTagsFilter, "i"),
+      createdAt: new RegExp(regDateFilter, "i"),
+      focusAreas: new RegExp(solFocusFilter, "i"),
+      needs: new RegExp(solNeedsFilter, "i"),
+      technologies: new RegExp(solTechFilter, "i")
     }).lean();
     console.log("solution data found");
     res.status(200).json({data});
@@ -491,12 +507,13 @@ app.post("/get-solution-data", async (req, res) => {
 
 app.post("/get-service-data", async (req, res) => {
   try {
-    const { orgFilter, nameFilter, tagsFilter, regDateFilter } = req.body;
+    const { regDateFilter, servOrgFilter, servNameFilter, servTagsFilter, servPriceFilter } = req.body;
     const data = await Service.find({
-      organization: new RegExp(orgFilter, "i"),
-      name: new RegExp(nameFilter, "i"),
-      tags: new RegExp(tagsFilter, "i"),
-      createdAt: new RegExp(regDateFilter, "i")
+      organization: new RegExp(servOrgFilter, "i"),
+      name: new RegExp(servNameFilter, "i"),
+      tags: new RegExp(servTagsFilter, "i"),
+      createdAt: new RegExp(regDateFilter, "i"),
+      price: new RegExp(servPriceFilter, "i")
     }).lean();
     console.log("service data found");
     res.status(200).json({data});

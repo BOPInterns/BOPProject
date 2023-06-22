@@ -66,7 +66,7 @@ export const CampaignCard = ({campData}) => {
                     {loadTags()}
                     {tags.length - loadTags().length > 0 ? <footer style={{fontSize:12}}><cite>+{tags.length - loadTags().length} more tags</cite></footer> :<div style={{ height: '19px' }} />}
                     
-                    <Card.Text>Campaign status: <Badge style={{color: "black"}} bg="warning">{phase}</Badge></Card.Text>
+                    <Card.Text>Campaign phase: <Badge style={{color: "black"}} bg="warning">{phase}</Badge></Card.Text>
                     <Card.Text className='text-muted' style={{height: 70}}>Campaign Challenge: { loadChallenge() }{(challenge.length > 47) ? '...' : ''}</Card.Text>
                     <Card.Text><span style={{fontWeight: "bold"}}>Owner</span>
                         <footer>                        

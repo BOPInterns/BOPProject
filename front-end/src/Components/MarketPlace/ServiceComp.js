@@ -28,10 +28,12 @@ export const ServiceComp = () => {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        orgFilter: localStorage.getItem("orgFilter"),
-        nameFilter: localStorage.getItem("nameFilter"),
-        tagsFilter: localStorage.getItem("tagsFilter"),
-        regDateFilter: localStorage.getItem("regDateFilter")
+        regDateFilter: localStorage.getItem("regDateFilter"),
+        servNameFilter: localStorage.getItem("servNameFilter"),
+        servOrgFilter: localStorage.getItem("servOrgFilter"),
+        //servRegDateFilter: localStorage.getItem("servRegDateFilter"),
+        servTagsFilter: localStorage.getItem("servTagsFilter"),
+        servPriceFilter: localStorage.getItem("servPriceFilter")
       }),
     })
       .then((res) => res.json())
