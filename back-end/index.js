@@ -522,3 +522,17 @@ app.post("/get-service-data", async (req, res) => {
     res.status(401).json({error: err.message});
   }
 });
+
+// app.post("/get-search-data", async (req, res) => {
+//   try {
+//     const { name } = req.body;
+//     const data = await Campaign.find({
+//       name: new RegExp(name, "i")
+//     }).lean();
+//     console.log("search data found");
+//     res.status(200).json({data});
+//     console.log("service response sent");
+//   } catch (err) {
+//     res.status(401).json({error: err.message});
+//   }
+// });
