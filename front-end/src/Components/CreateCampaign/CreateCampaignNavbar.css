@@ -1,0 +1,24 @@
+.create-campaign-navbar {
+    background-color: orange !important;
+    border-radius: 40px !important;
+    
+}
+
+.create-campaign-navbar-collapse {
+    justify-content: space-evenly !important;
+}
+
+.create-campaign-navbar-nav-link {
+    padding-right: 40px !important;
+    padding-left: 40px !important;
+}
+
+.create-campaign-navbar-nav-link:hover {
+    color: orange !important;
+    border-radius: 40px !important;
+    background-color: white !important;
+}
+
+.create-campaign-navbar-nav-link:active {
+    color: black !important;
+}
