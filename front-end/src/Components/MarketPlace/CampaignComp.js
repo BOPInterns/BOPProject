@@ -50,7 +50,7 @@ export const CampaignComp = () => {
     if (currLoadedCards < campaignData.length) {
       setCurrLoadedCards(currLoadedCards + 8);
     } else {
-      const button = document.getElementById("load-more-btn");
+      const button = document.getElementById("campaign-load-more-btn");
       button.disabled = true;
     }
   };
@@ -100,7 +100,7 @@ export const CampaignComp = () => {
       </Row>
       <Row className="mt-3 text-center">
         <Col text-center>
-          <Button variant="secondary">Load more campaigns</Button>
+          <Button variant="secondary" id="campaign-load-more-btn" onClick={()=>handleMoreCards()}>Load more campaigns</Button>
         </Col>
       </Row>
     </div>

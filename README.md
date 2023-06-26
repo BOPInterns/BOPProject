@@ -19,6 +19,8 @@ Project created by Intern team for the BoP Hub website
 - forgot password functionality has nothing in place to ensure that new password does not equal old password
 - When you click "load more" on the marketplace the button only disables after there are no more campaigns to load, ideally it should disable the second there are no more campaigns to load. Thinking it could be done with a useEffect hook but it keeps disabling the button on page render -B
 - password reset code exists indefinitely instead of expiring after a certian amt of time
+- Brian needs to go and update navbar for campaign creation
+- For some reason when you create a campaign through the campaign creation form it won't render on the marketplace anymore? I'm guessing because the necessary campaign fields have changed since those pages were created? -B
 
 ## Successful can kicks:
 
