@@ -324,7 +324,7 @@ app.post("/reset-password/:id/:token", async (req, res) => {
 app.post("/create-campaign-step-5", async (req, res) => {
   try {
     const today = new Date().toJSON().slice(0, 10);
-    const {
+    var {
       organization,
       status,
       numActors,
@@ -343,6 +343,11 @@ app.post("/create-campaign-step-5", async (req, res) => {
       stakeholderLangs,
       volunteerLangs, // STEP 3
     } = req.body;
+
+    if (stakeholderLangs.length === 0)
+      stakeholderLangs = [""];
+    if (volunteerLangs.length === 0)
+      volunteerLangs = [""];
 
     var newCampaign = await Campaign.create({
       organization,
