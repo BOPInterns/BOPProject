@@ -5,6 +5,7 @@ import Row from'react-bootstrap/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Button from'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Account.css';
 import '../CampaignCenter/CampaignCard.css';
 
@@ -12,6 +13,7 @@ export const ServiceCard = ({servData}) => {
     const [name, setName] = useState('');
     const [tags, setTags] = useState([]);
     const [price, setPrice] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(servData){
@@ -34,6 +36,11 @@ export const ServiceCard = ({servData}) => {
         }
         return list;
     }
+    
+    function handleDetails() {
+        //navigate(`/${servData['_id']}`);
+        // Logic for this button to work like the rest of the details buttons is here. No service pages yet so whenever that comes along here's the framework for it -B
+    }
 
 
     return (
@@ -54,7 +61,11 @@ export const ServiceCard = ({servData}) => {
                         </Row>
                     </Card.Text>
                     <Row>
-                        <Button className="details-button btn-custom-class" variant="secondary" size="sm">Show service details</Button>
+                        <Button 
+                        className="details-button btn-custom-class" variant="secondary" 
+                        size="sm"
+                        onClick={handleDetails}
+                        >Show service details</Button>
                     </Row>
                 </Card.Body>
             </Card>

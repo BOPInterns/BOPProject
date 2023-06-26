@@ -14,11 +14,13 @@ import { CampaignUpdates } from './CampaignUpdates';
 import { CampaignDiscussion } from './CampaignDiscussion';
 import Pagination from 'react-bootstrap/Pagination';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export const CampaignPage = () => {
     
     const [activePage, setActivePage] = useState(1);
     const totalPages = 4;
+    const { id } = useParams();
   
     const handlePageChange = (page) => {
         setActivePage(page);
@@ -85,7 +87,7 @@ export const CampaignPage = () => {
                             paddingBottom: '0px',
                         }}
                     >
-                        <h3>Migrant Construction Labour in Bangladesh</h3>
+                        <h3>Campaign Name</h3>
                     </Card.Title>
                     <Card.Body>
                         <Row
@@ -94,40 +96,6 @@ export const CampaignPage = () => {
                             }}
                         >
                             <p>Campaign contributes to these SDG challenges:</p>
-                        </Row>
-                        <Row
-                            style={{
-                                paddingTop: '0px'
-                            }}
-                        >
-                            <Col>
-                                <Badge
-                                    bg='secondary'
-                                >
-                                    tagname
-                                </Badge>
-                            </Col>
-                            <Col>
-                                <Badge
-                                    bg='secondary'
-                                >
-                                    tagname
-                                </Badge>
-                            </Col>
-                            <Col>
-                                <Badge
-                                    bg='secondary'
-                                >
-                                    tagname
-                                </Badge>
-                            </Col>
-                            <Col>
-                                <Badge
-                                    bg='secondary'
-                                >
-                                    tagname
-                                </Badge>
-                            </Col>
                         </Row>
                         <Row>
                             <p><strong>Campaign Status:</strong></p>
@@ -278,6 +246,7 @@ export const CampaignPage = () => {
                                 <Col>
                                     <Button
                                         className="custom-btn"
+                                        onClick={console.log(id)}
                                     >
                                         Follow campaign
                                     </Button>
