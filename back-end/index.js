@@ -93,9 +93,9 @@ app.post("/get-offer-data", async(req, res) => {
 });
 
 //gets campaign data by owning org name
-app.post("/get-campaign-by-org", async (req, res) => {
+app.post("/get-camp-by-org", async (req, res) => {
   try {
-    const selected = await Campaign.find({ organization: req.body.org });
+    const selected = await Campaign.find({ organization: req.body.name });
     res.send({ status: "ok", data: selected });
   } catch (err) {
     console.log("error retrieving campaign data");
