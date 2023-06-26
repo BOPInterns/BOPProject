@@ -11,11 +11,13 @@ import { SolutionOverview } from './SolutionOverview';
 import { SolutionWorks } from './SolutionWorks';
 import { SolutionNeeds } from './SolutionNeeds';
 import { SolutionDiscussion } from './SolutionDiscussion';
+import { useParams } from 'react-router-dom';
 
 export const SolutionPage = () => {
     
     const [ activePage, setActivePage ] = useState(1);
     const totalPages = 4;
+    const { id } = useParams();
     
     const handlePageChange = (page) => {
         setActivePage(page);
