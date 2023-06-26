@@ -24,9 +24,18 @@ const solutionSchema = new mongoose.Schema({
         required: [true, "Please provide a solution explanation."]
     },
     mission: String,
-    focusAreas: [String],
-    needs: [String],
-    technologies: [String],
+    focusAreas: {
+        type: [String],
+        default: [""]
+    },
+    needs: {
+        type: [String],
+        default: [""]
+    },
+    technologies: {
+        type: [String],
+        default: [""]
+    },
     createdAt: {
         type: String,
         required: [true, "This campaign doesn't have a createdAt field :("]
