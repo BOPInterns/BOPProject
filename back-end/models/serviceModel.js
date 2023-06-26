@@ -18,7 +18,10 @@ const serviceSchema = new mongoose.Schema({
     type: [String],
     required: [true, "Must choose at least 1 tag"],
   },
-  price: String,
+  price: {
+    type: String,
+    default: ""
+},
   createdAt: {
     type: String,
     required: [true, "This campaign doesn't have a createdAt field :("]

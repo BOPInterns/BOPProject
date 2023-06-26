@@ -36,7 +36,7 @@ export const CreateCampaignS6 = () => {
                     <h2>Congratulations!</h2>
                 </Row>
                 <Row>
-                    <h3>You have successfully submitted your campaign application</h3>
+                    <h3>You have successfully submitted your campaign application.</h3>
                 </Row>
                 <Row>
                     <h4>Now our staff will take a look and validate your form. Expect a reply pretty soon!</h4>

@@ -168,8 +168,7 @@ export const MarketPlaceFilters = () => {
   }
 
   function formatDate(el) {
-    return el.replace(/^([\d]{2})([\d]{2})([\d]{4})$/,"$1/$2/$3");
-    // return el.replace(/^([\d]{4})([\d]{2})([\d]{2})$/,"$1-$2-$3");
+    return el.replace(/^([\d]{4})([\d]{2})([\d]{2})$/,"$1-$2-$3");
   }
 
   return (
