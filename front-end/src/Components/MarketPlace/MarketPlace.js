@@ -99,7 +99,7 @@ export const MarketPlace = () => {
   };
   
   const handleSearch = (query) => {
-    localStorage.setItem("nameFilter", query)
+    localStorage.setItem("nameFilter", query);
   };
 
   const renderActivePage = () => {

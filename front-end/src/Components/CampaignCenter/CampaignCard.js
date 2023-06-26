@@ -6,6 +6,7 @@ import Button from'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 import '../Account.css';
 import './CampaignCard.css';
+import { useNavigate } from 'react-router-dom';
 
 export const CampaignCard = ({campData}) => {
     const [name, setName] = useState('');
@@ -13,6 +14,7 @@ export const CampaignCard = ({campData}) => {
     const [challenge, setChallenge] = useState('');
     const [phase, setPhase] = useState('');
     const [orgName, setOrgName] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(campData){
@@ -51,6 +53,10 @@ export const CampaignCard = ({campData}) => {
         }
         return list;
     }
+    
+    function handleDetails() {
+        navigate(`/campaign-page/${campData['_id']}`);
+    }
 
 
     return (
@@ -74,7 +80,11 @@ export const CampaignCard = ({campData}) => {
                         </Image> {orgName}</footer>
                     </Card.Text>
                     <Row>
-                        <Button className="details-button btn-custom-class" variant="secondary" size="sm">
+                        <Button 
+                        className="details-button btn-custom-class" variant="secondary" 
+                        size="sm"
+                        onClick={handleDetails}
+                        >
                             Show campaign details
                         </Button>
                     </Row>

@@ -45,9 +45,9 @@ const App = () => {
            <Route path="/kyc-verification-submitted" element={<KYCVerificationSubmit />} />
            <Route path="/market-place/filters" element={<MarketPlaceFilters />} />
          </Route>
-           <Route path="/campaign-page" element={<CampaignPage />} />
+           <Route path="/campaign-page/:id" element={<CampaignPage />} />
            <Route path="/org-page" element={<OrgPage />} />
-           <Route path="/solution-page" element={<SolutionPage />} />
+           <Route path="/solution-page/:id" element={<SolutionPage />} />
            <Route path="/market-place" element={<MarketPlace />} />
            <Route path="/campaign-center" element={<CampaignCenter />} />
            <Route path="/login" element={<Login />} />

@@ -7,11 +7,13 @@ import Button from'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 import '../Account.css';
 import '../CampaignCenter/CampaignCard.css';
+import { useNavigate } from 'react-router-dom';
 
 export const SolutionCard = ({solData}) => {
     const [name, setName] = useState('');
     const [tags, setTags] = useState([]);
     const [orgName, setOrgName] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(solData){
@@ -33,6 +35,10 @@ export const SolutionCard = ({solData}) => {
             i++;
         }
         return list;
+    }
+    
+    function handleDetails() {
+        navigate(`/solution-page/${solData['_id']}`);
     }
 
 
@@ -61,7 +67,13 @@ export const SolutionCard = ({solData}) => {
                         </Row>
                     </Card.Text>
                     <Row>
-                        <Button className="details-button btn-custom-class" variant="secondary" size="sm">Show solution details
+                        <Button 
+                        className="details-button btn-custom-class" 
+                        variant="secondary" 
+                        size="sm"
+                        onClick={handleDetails}
+                        >
+                            Show solution details
                         </Button>
                     </Row>
                 </Card.Body>
