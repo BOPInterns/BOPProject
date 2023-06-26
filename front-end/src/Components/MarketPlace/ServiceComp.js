@@ -48,7 +48,7 @@ export const ServiceComp = () => {
     if (currLoadedCards < serviceData.length) {
       setCurrLoadedCards(currLoadedCards + 8);
     } else {
-      const button = document.getElementById("load-more-btn");
+      const button = document.getElementById("service-load-more-btn");
       button.disabled = true;
     }
   };
@@ -93,7 +93,7 @@ export const ServiceComp = () => {
       <Row className="mt-3 text-center">
         <Col text-center>
           <Button
-            id="load-more-btn"
+            id="service-load-more-btn"
             variant="secondary"
             onClick={() => handleMoreCards()}
           >

@@ -173,10 +173,25 @@ export const ResetPassword = () => {
                     </Row>
                 </Form>
                 
-
-                <Button onClick={handleVerify} type="submit" variant="primary" className='button' ref={but}>
+                <Row>
+                    <Column
+                        style={{
+                            padding: '10px',
+                            textAlign: 'end',
+                        }}
+                    >
+                    <Button 
+                style={{
+                    backgroundColor: '#fa6e13',
+                    border: 0,
+                }}
+                
+                onClick={handleVerify} type="submit" variant="primary" ref={but}>
                     Verify
                 </Button>
+                    </Column>
+                </Row>
+                
 
                 <Card.Text>Didn't receive email? Click <Link to="#" onClick={resend}> 
                         <span className="highlighted">here</span>
@@ -222,7 +237,12 @@ export const ResetPassword = () => {
 
                 <Card.Text className='form-subtext'>Please ensure the same password is entered into both fields</Card.Text>
 
-                <Button onClick={handleSubmit} type="submit" variant="primary" className='button'>
+                <Button 
+                    style={{
+                        backgroundColor: '#fa6e13',
+                        border: 0,
+                    }}
+                onClick={handleSubmit} type="submit" variant="primary" className='button'>
                     Submit
                 </Button>
                 
@@ -257,9 +277,11 @@ export const ResetPassword = () => {
             <Column md={6}>
                 <Image src={BOPLogo} className="img-fluid" height="10000" width="10000"></Image>
             </Column>
-            <Card style={{width: '24rem', display:'flex', marginTop: 70}}>
+            <Column>
+            <Card style={{width: '24rem', display:'flex', height: '480px', marginTop: 70}}>
                 {valid ? resetFields() : codeChecker()}
             </Card>
+            </Column>
             </Row>
             </Container>
     </div>

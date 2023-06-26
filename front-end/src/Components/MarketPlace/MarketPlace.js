@@ -21,6 +21,7 @@ import { AllPages } from "./AllPages";
 import { MarketPlaceFilters } from "./MarketPlaceFilters";
 import { MarketPlaceSearchBar } from "./MarketPlaceSearchBar";
 import Pagination from "react-bootstrap/Pagination";
+import React from 'react';
 
 export const MarketPlace = () => {
   // initialize localStorage filter variables:
@@ -96,32 +97,36 @@ export const MarketPlace = () => {
   const handlePageChange = (page) => {
     setActivePage(page);
   };
+  
+  const handleSearch = (query) => {
+    localStorage.setItem("nameFilter", query)
+  };
 
   const renderActivePage = () => {
     switch (activePage) {
       case 1:
         return <div>
-            <MarketPlaceSearchBar/>
+            <MarketPlaceSearchBar onSearch={handleSearch}/>
             <AllPages />
         </div>
       case 2:
         return <div>
-            <MarketPlaceSearchBar/>
+            <MarketPlaceSearchBar onSearch={handleSearch}/>
             <CampaignComp />
         </div>;
       case 3:
         return <div>
-            <MarketPlaceSearchBar/>
+            <MarketPlaceSearchBar onSearch={handleSearch}/>
             <SolutionComp />
         </div>
       case 4:
         return <div>
-            <MarketPlaceSearchBar/>
+            <MarketPlaceSearchBar onSearch={handleSearch}/>
             <ServiceComp />
         </div>
       default:
         return <div>
-            <MarketPlaceSearchBar/>
+            <MarketPlaceSearchBar onSearch={handleSearch}/>
             <AllPages />
         </div>
     }

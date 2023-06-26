@@ -45,7 +45,7 @@ export const SolutionComp = () => {
         if(currLoadedCards < solutionData.length) {
             setCurrLoadedCards(currLoadedCards + 8);
         }   else {
-            const button = document.getElementById('load-more-btn');
+            const button = document.getElementById('solution-load-more-btn');
             button.disabled = true;
         }
     }
@@ -92,7 +92,7 @@ export const SolutionComp = () => {
                     <Col text-center>
                     <Button
                         variant="secondary"
-                        id="load-more-btn"
+                        id="solution-load-more-btn"
                         onClick={() => handleMoreCards()}
                     >
                         Load more solutions

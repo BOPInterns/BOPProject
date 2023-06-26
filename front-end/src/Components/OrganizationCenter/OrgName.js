@@ -25,7 +25,7 @@ export const OrgName = ({name, endorsements, statement, interests}) => {
                             }}
                         >
                         <i class="fa-regular fa-heart"></i> { }
-                        997</strong> {endorsements}
+                        {endorsements}</strong>
                     </Col>
                     <Col className="mt-2"
                         style={{
