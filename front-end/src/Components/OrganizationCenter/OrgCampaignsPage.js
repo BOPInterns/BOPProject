@@ -5,7 +5,7 @@ import { OrgCampaignParticipant } from './OrgCampaignParticipant';
 import Pagination from 'react-bootstrap/Pagination';
 import React, { useState } from 'react';
 
-export const OrgCampaignPage = ({orgName}) => {
+export const OrgCampaignPage = ({orgName, campData}) => {
     
     const [ activePage, setActivePage ] = useState(1);
     const totalPages = 2;
@@ -17,7 +17,7 @@ export const OrgCampaignPage = ({orgName}) => {
     const renderActivePage = () => {
         switch (activePage) {
             case 1:
-                return <OrgCampaignOwner/>;
+                return <OrgCampaignOwner campData={campData}/>;
             case 2:
                 return <OrgCampaignParticipant/>;
             default:

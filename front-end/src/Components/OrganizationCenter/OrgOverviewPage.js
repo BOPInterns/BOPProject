@@ -9,8 +9,9 @@ import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import { useState, useEffect } from 'react';
 import { VectorMap } from "react-jvectormap";
+import { OrgCampaignOwner } from './OrgCampaignOwner';
 
-export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink}) => {
+export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink, campData}) => {
     const { getCode, getName, getData } = require("country-list");
     const [ offerData, setOfferData] = useState([]);    
 
@@ -180,92 +181,10 @@ export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink}) => {
                     <br/>
                     <body>Below are some of the projects that this organization has reccently worked on.</body>
                 </Row>
-                <Row className="mt-3 mb-3">
-                    <Card className="flex-row">
-                        <Card.Img
-                        src={require('./lightbulb.png')}   
-                        style={{
-                            height:200,
-                            width:325
-                        }}                     
-                        />
-                        <Card.Body>
-                            <Row>
-                                <Col>
-                                    <strong>Name of the campaign</strong>
-                                    <br/>
-                                    <Badge
-                                        bg="secondary"
-                                    >
-                                        tagname
-                                    </Badge>
-                                    <Badge
-                                        bg="secondary"
-                                    >
-                                        tagname
-                                    </Badge>
-                                    <Badge
-                                        bg="secondary"
-                                    >
-                                        tagname
-                                    </Badge>
-                                    <br/>
-                                    <p>Number of actors involved: <strong>10</strong></p>
-                                </Col>
-                                <Col sm={4} className="text-end">
-                                <p class="text-muted">Status: 
-                                    <Badge>
-                                        Project
-                                    </Badge>
-                                    </p>
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Row>
-                <Row className="mt-3 mb-3">
-                    <Card className="flex-row">
-                        <Card.Img
-                        src={require('./lightbulb.png')}   
-                        style={{
-                            height:200,
-                            width:325
-                        }}                     
-                        />
-                        <Card.Body>
-                            <Row>
-                                <Col>
-                                    <strong>Name of the campaign</strong>
-                                    <br/>
-                                    <Badge
-                                        bg="secondary"
-                                    >
-                                        tagname
-                                    </Badge>
-                                    <Badge
-                                        bg="secondary"
-                                    >
-                                        tagname
-                                    </Badge>
-                                    <Badge
-                                        bg="secondary"
-                                    >
-                                        tagname
-                                    </Badge>
-                                    <br/>
-                                    <p>Number of actors involved: <strong>10</strong></p>
-                                </Col>
-                                <Col sm={4} className="text-end">
-                                <p class="text-muted">Status: 
-                                    <Badge>
-                                        Project
-                                    </Badge>
-                                    </p>
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Row>
+                
+                <OrgCampaignOwner campData={campData}/>
+
+
                 <Row className="justify-content-center mt-2">
                     <Button
                         className="overview-offer-btn"
