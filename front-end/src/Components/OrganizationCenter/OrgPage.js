@@ -23,8 +23,6 @@ export const OrgPage = () => {
     
     const [ activePage, setActivePage ] = useState(1);
 
-    ///////////////////////////////////////////
-    // backend connection
     const [ orgData, setOrgData] = useState(
         {
             name:"", 
@@ -42,6 +40,12 @@ export const OrgPage = () => {
             vidLink:""
         }
     );
+    const [ campData, setCampData ] = useState({
+        name:"",
+        phase:"",
+        tags:[],
+        description:""
+    });
 
     const orgName = "Interns For Higher Pay";
 
@@ -60,8 +64,24 @@ export const OrgPage = () => {
         .then((data) => {
             setOrgData(data.data);
         });
+
+        // for campaign data
+        fetch("http://localhost:9000/get-camp-by-org", {
+            method: "POST",
+            crossDomain:true,
+            headers:{
+                "Content-Type":"application/json",
+                Accept:"application/json",
+                "Access-Control-Allow-Origin":"*",
+            },
+            body:JSON.stringify({name: orgName}) //change this back to name passed in at top when done w tesitng
+        }).then((res) => res.json()) 
+        .then((data) => {
+            setCampData(data.data);
+            console.log(data.data)
+        });
+
     }, [])
-    ////////////////////////////////
 
 
     const totalPages = 6;
@@ -79,10 +99,12 @@ export const OrgPage = () => {
                             focus={orgData.focus} 
                             opRegions={orgData.opRegions}
                             vidLink={orgData.vidLink}
+                            campData={campData}
                         ></OrgOverviewPage>;
             case 2:
                 return <OrgCampaignPage
-                        orgName={orgData.name}
+                            orgName={orgName}
+                            campData={campData}
                         ></OrgCampaignPage>;
             case 3:
                 return <OrgOwnedSolutionsPage/>;
@@ -99,6 +121,7 @@ export const OrgPage = () => {
                             focus={orgData.focus} 
                             opRegions={orgData.opRegions}
                             vidLink={orgData.vidLink}
+                            campData={campData}
                         ></OrgOverviewPage>;
         }
     };

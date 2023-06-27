@@ -6,10 +6,10 @@ import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 
 
-export const HorizontalCampaignCard = ({name, tags, description, actors, status}) => {
+export const HorizontalCampaignCard = ({name, phase, tags, description}) => {
     return (
         <div>
-            <Container>
+            <Container style={{marginTop:10, marginBottom:10}}>
                 <Row>
                     <Col sm={3}
                         style={{
@@ -72,12 +72,12 @@ export const HorizontalCampaignCard = ({name, tags, description, actors, status}
                                         }}
                                     >
                                         <h6>
-                                            status:
+                                            Phase:
                                             <Badge
                                                 pill
                                                 bg="warning"
                                             >
-                                                Challenge
+                                                {phase}
                                             </Badge>
                                         </h6>
                                     </Col>
@@ -90,7 +90,14 @@ export const HorizontalCampaignCard = ({name, tags, description, actors, status}
                             >
                                 <Row>
                                     <Col>
-                                        tags go here
+                                    {tags.map((tag, index) => (
+                                    <Badge
+                                        key={index}
+                                        variant="secondary"
+                                        className="mr-2 mb-2 bg-secondary"
+                                        style={{marginRight: 2}}
+                                    >{tag}</Badge>
+                                    ))}
                                     </Col>
                                 </Row>
                                 <Row
@@ -98,14 +105,7 @@ export const HorizontalCampaignCard = ({name, tags, description, actors, status}
                                         paddingTop: '30px',
                                     }}
                                 >
-                                    <p>Campaign description here</p>
-                                </Row>
-                                <Row
-                                    style={{
-                                        paddingTop: '30px',
-                                    }}
-                                >
-                                    <p>number of actors</p>
+                                    <p>{description}</p>
                                 </Row>
                             </Card.Body>
                         </Card>
