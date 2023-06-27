@@ -83,7 +83,7 @@ export const CreateCampaignNavbar = () => {
                         className='create-campaign-navbar-nav-link'
                         href='/create-campaign-step-4'
                     >
-                        Step 5
+                        Step 4
                     </Nav.Link>
                     <Nav.Link
                         className='create-campaign-navbar-nav-link'

@@ -12,9 +12,6 @@ Project created by Intern team for the BoP Hub website
 - security with backend in general
 - organizing backend code into different files (MVC architecture)
 - phone number validation
-- file upload works but there is a limit to the size and type of file, also no security checking on this file
-- enable users to upload several files when creating a campaign
-- when uploading a file, if you click "cancel" when there's already a file there, it throws a runtime error
 - when user creates campaign, it adds their organization as the organization that owns the campaign
 - forgot password functionality has nothing in place to ensure that new password does not equal old password
 - When you click "load more" on the marketplace the button only disables after there are no more campaigns to load, ideally it should disable the second there are no more campaigns to load. Thinking it could be done with a useEffect hook but it keeps disabling the button on page render -B
@@ -35,3 +32,6 @@ Project created by Intern team for the BoP Hub website
 - find a less jank way to display errors on login page -B
 - I think creating a flexbox row to render the cards on the page would be simpler and have the browser do most of the math -B
 - For some reason when you create a campaign through the campaign creation form it won't render on the marketplace anymore? I'm guessing because the necessary campaign fields have changed since those pages were created? -B
+- file upload works but there is a limit to the size and type of file, also no security checking on this file
+- enable users to upload several files when creating a campaign
+- when uploading a file, if you click "cancel" when there's already a file there, it throws a runtime error
