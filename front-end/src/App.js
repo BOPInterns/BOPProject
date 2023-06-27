@@ -5,7 +5,6 @@ import { Routes, Route } from 'react-router-dom';
 import { LandingPage } from './Components/LandingPage.js';
 import { ForgotPassword } from './Components/ForgotPassword.js';
 import { ResetPassword } from './Components/ResetPassword.js'
-import { CampaignCenter } from './Components/CampaignCenter/CampaignCenter.js';
 import { MyAccount } from './Components/MyAccount.js';
 import { CreateCampaignS0 } from './Components/CreateCampaign/CreateCampaignS0.js';
 import { CreateCampaignS1 } from './Components/CreateCampaign/CreateCampaignS1.js';
@@ -49,7 +48,6 @@ const App = () => {
            <Route path="/org-page" element={<OrgPage />} />
            <Route path="/solution-page/:id" element={<SolutionPage />} />
            <Route path="/market-place" element={<MarketPlace />} />
-           <Route path="/campaign-center" element={<CampaignCenter />} />
            <Route path="/login" element={<Login />} />
            <Route path="/register" element={<Register />} />
            <Route path="/register-success" element={<RegisterSuccess />} />
