@@ -21,6 +21,7 @@ Project created by Intern team for the BoP Hub website
 - password reset code exists indefinitely instead of expiring after a certian amt of time
 - Brian needs to go and update navbar for campaign creation
 - For some reason when you create a campaign through the campaign creation form it won't render on the marketplace anymore? I'm guessing because the necessary campaign fields have changed since those pages were created? -B
+- Load more recent projects on org page does not do anything
 
 ## Successful can kicks:
 

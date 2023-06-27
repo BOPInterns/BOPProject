@@ -10,18 +10,19 @@ export const HorizontalCampaignCard = ({name, phase, tags, description}) => {
     return (
         <div>
             <Container style={{marginTop:10, marginBottom:10}}>
-                <Row>
-                    <Col sm={3}
-                        style={{
-                            paddingRight: '0px',
-                        }}
-                    >
-                        <Card
+                <Card
+                    style={{
+                        borderRadius: 5,
+                        borderLeft: '0px',
+                        border: '1.5px solid black',
+                        height: '253px',
+                    }}
+                >
+                    <Row>
+                        <Col sm={3}
                             style={{
-                                borderTopRightRadius: '0',
-                                borderBottomRightRadius: '0',
-                                border: '1.5px solid black',
-                                borderRight: '0px',
+                                paddingRight: '0px',
+                                width: '265px'
                             }}
                         >
                             <Image
@@ -32,85 +33,70 @@ export const HorizontalCampaignCard = ({name, phase, tags, description}) => {
                                     borderBottomLeftRadius: '3px',
                                 }}
                             />
-                        </Card>
-                    </Col>
-                    <Col
-                        style={{
-                            paddingLeft: '0px',
-                        }}
-                    >
-                        <Card
-                            style={{
-                                borderTopLeftRadius: '0',
-                                borderBottomLeftRadius: '0',
-                                borderLeft: '0px',
-                                border: '1.5px solid black',
-                                height: '253px',
-                            }}
-                        >
-                            <Card.Title
-                                style={{
-                                    paddingBottom: '0px',
-                                }}
-                            >
-                                <Row
+                        </Col>
+                        <Col>
+                            <Row>
+                                <Col
                                     style={{
-                                        paddingTop: '30px',
+                                        marginTop: '30px'
                                     }}
                                 >
-                                    <Col
+                                    <Card.Title
                                         style={{
-                                            paddingLeft: '45px',
+                                            paddingBottom: '0px',
+                                            width: 210
                                         }}
                                     >
-                                        <p><strong>{name}</strong></p>
-                                    </Col>
-                                    <Col
+                                        <p><strong style={{fontSize:30}}>{name}</strong></p>
+                                    </Card.Title>
+                                </Col>
+                                <Col>
+                                    <Card.Body
                                         style={{
-                                            textAlign: 'end',
-                                            paddingRight: '40px',
+                                            paddingTop: '0px',
+                                            width: '240px',
+                                            marginTop: '30px'
                                         }}
                                     >
-                                        <h6>
-                                            Phase:
-                                            <Badge
-                                                pill
-                                                bg="warning"
-                                            >
-                                                {phase}
-                                            </Badge>
-                                        </h6>
-                                    </Col>
-                                </Row>
-                            </Card.Title>
-                            <Card.Body
-                                style={{
-                                    paddingTop: '0px',
-                                }}
-                            >
-                                <Row>
-                                    <Col>
-                                    {tags.map((tag, index) => (
+                                        <Row>
+                                            <Col>
+                                            {tags.map((tag, index) => (
+                                                <Badge
+                                                    key={index}
+                                                    variant="secondary"
+                                                    className="mr-2 mb-2 bg-secondary"
+                                                    style={{marginRight: 2}}
+                                                >{tag}</Badge>
+                                            ))}
+                                            </Col>
+                                        </Row>
+                                        
+                                    </Card.Body>
+                                </Col>  
+                                <Col
+                                    style={{
+                                        textAlign: 'end',
+                                        paddingRight: '40px',
+                                        marginTop: '30px',
+                                    }}
+                                >
+                                <h6 width={40}>
+                                    Phase:
                                     <Badge
-                                        key={index}
-                                        variant="secondary"
-                                        className="mr-2 mb-2 bg-secondary"
-                                        style={{marginRight: 2}}
-                                    >{tag}</Badge>
-                                    ))}
-                                    </Col>
-                                </Row>
-                                <Row
-                                    style={{
-                                        paddingTop: '30px',
-                                    }}
-                                >
-                                    <p>{description}</p>
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                                        pill
+                                        bg="warning"
+                                    >
+                                        {phase}
+                                    </Badge>
+                                </h6>
+                            </Col>
+                            </Row>
+                            <Row>
+                                <p style={{fontSize: 20}}>{description}</p>
+                            </Row> 
+                        </Col>                             
+                    </Row>
+                </Card>  
             </Container>
         </div>
     )
