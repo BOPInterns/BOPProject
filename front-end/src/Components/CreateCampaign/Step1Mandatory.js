@@ -36,16 +36,16 @@ export const Step1MandatoryFields = () => {
         localStorage.setItem('step1', true);
     }, [campaignName, campaignTags]);
 
-    const displayTags = () => {
-        var list = "Tags: ";
-        for (let i = 0; i < campaignTags.length; i++) {
-            list += campaignTags[i];
-            if (i != campaignTags.length - 1) {
-                list += ", ";
-            }
-        }
-        return list;
-    }
+    // const displayTags = () => {
+    //     var list = "Tags: ";
+    //     for (let i = 0; i < campaignTags.length; i++) {
+    //         list += campaignTags[i];
+    //         if (i != campaignTags.length - 1) {
+    //             list += ", ";
+    //         }
+    //     }
+    //     return list;
+    // }
 
     function validateYouTubeUrl(url){
         if (url != '') {
@@ -79,9 +79,13 @@ export const Step1MandatoryFields = () => {
                                         onChange={(e) => setCampaignName(e.target.value)}
                                     /><Form.Text className="text-muted">Explainer text about the role of the campaign name. Do's and Dont's</Form.Text>
                                 </FormGroup>
-                                
-                                
-
+                                <TagInput 
+                                    header="Enter Campaign Tags:"
+                                    placeholder="Enter a Tag"
+                                    data="Tag"
+                                    value={campaignTags}
+                                    func={setCampaignTags}
+                                />
                             </Form>
                     </Card.Body>
             </Card>

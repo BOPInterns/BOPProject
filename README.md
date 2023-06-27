@@ -34,3 +34,4 @@ Project created by Intern team for the BoP Hub website
 - email validation to check for fake emails that have correct email format
 - find a less jank way to display errors on login page -B
 - I think creating a flexbox row to render the cards on the page would be simpler and have the browser do most of the math -B
+- For some reason when you create a campaign through the campaign creation form it won't render on the marketplace anymore? I'm guessing because the necessary campaign fields have changed since those pages were created? -B

@@ -1,6 +1,7 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import './NavigationBar.css'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 
@@ -46,19 +47,18 @@ export const NavigationBar = () => {
                             color: 'white',
                         }}
                     >
-                        <Nav.Link style={{color: 'white'}}href='/market-place'>Market Place</Nav.Link>
-                        <Nav.Link href="/campaign-center">Campaign Center</Nav.Link>
-                        <Nav.Link href="/">Explore</Nav.Link>
-                        <Nav.Link href="/">Learn</Nav.Link>
-                        <Nav.Link href="/">Become</Nav.Link>
-                        <Nav.Link href="/">About us</Nav.Link>
+                        <Nav.Link className="top-navbar-text" href='/market-place'>Market Place</Nav.Link>
+                        <Nav.Link className="top-navbar-text" href="/">Explore</Nav.Link>
+                        <Nav.Link className="top-navbar-text" href="/">Learn</Nav.Link>
+                        <Nav.Link className="top-navbar-text" href="/">Become</Nav.Link>
+                        <Nav.Link className="top-navbar-text" href="/">About us</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className=""> 
                     { auth ? <>                        
                         <Nav className='ms-auto'>
-                            <Nav.Link href="/my-account">Welcome: { user.firstName + " " + user.lastName }</Nav.Link>
-                            <Nav.Link onClick={handleSignout}>Logout</Nav.Link>
+                            <Nav.Link className="top-navbar-text" href="/my-account">Welcome: { user.firstName + " " + user.lastName }</Nav.Link>
+                            <Nav.Link className="top-navbar-text" onClick={handleSignout}>Logout</Nav.Link>
                         </Nav>
                         </> : 
                         <Nav className='ms-auto'>
