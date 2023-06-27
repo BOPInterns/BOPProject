@@ -13,14 +13,38 @@ import { CampaignParticipants } from './CampaignParticipants';
 import { CampaignUpdates } from './CampaignUpdates';
 import { CampaignDiscussion } from './CampaignDiscussion';
 import Pagination from 'react-bootstrap/Pagination';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export const CampaignPage = () => {
+    const [campData, setCampData] = useState([]);
     
     const [activePage, setActivePage] = useState(1);
     const totalPages = 4;
     const { id } = useParams();
+
+    useEffect(() => {
+        console.log("id: " + id);
+        fetch("http://localhost:9000/campaign-page", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({id: id})
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.data) {
+                    setCampData(data.data);
+                }
+                else {
+                    setCampData([]);
+                    console.log("campData is empty");
+                }
+            });
+    }, []);
   
     const handlePageChange = (page) => {
         setActivePage(page);
@@ -30,23 +54,23 @@ export const CampaignPage = () => {
         switch (activePage) {
           case 1:
             return <div>
-                <CampaignOverview/>
+                <CampaignOverview campData={campData}/>
             </div>
           case 2:
             return <div>
-                <CampaignParticipants/>
+                <CampaignParticipants campData={campData}/>
             </div>;
           case 3:
             return <div>
-                <CampaignUpdates/>
+                <CampaignUpdates campData={campData}/>
             </div>
           case 4:
             return <div>
-                <CampaignDiscussion/>
+                <CampaignDiscussion campData={campData}/>
             </div>
           default:
             return <div>
-                <CampaignOverview/>
+                <CampaignOverview campData={campData}/>
             </div>
         }
       };
@@ -62,11 +86,12 @@ export const CampaignPage = () => {
             >
                 <Row
                     style={{
-                        justifyContent: 'center',
+                        //justifyContent: 'center',
                         paddingTop: '80px',
                     }}
                 >
                     <Col
+                    md={7}
                         style={{
                             paddingRight: '0px',
                             paddingLeft: '200px'
@@ -75,7 +100,7 @@ export const CampaignPage = () => {
                 <Card
                     style={{
                         height: '400px',
-                        width: '',
+                        width: '600px',
                         borderTopRightRadius: '0px',
                         borderBottomRightRadius: '0px',
                         
@@ -87,7 +112,7 @@ export const CampaignPage = () => {
                             paddingBottom: '0px',
                         }}
                     >
-                        <h3>Campaign Name</h3>
+                        <h3>{campData.name}</h3>
                     </Card.Title>
                     <Card.Body>
                         <Row
@@ -95,17 +120,17 @@ export const CampaignPage = () => {
                                 paddingBottom: '0px',
                             }}
                         >
-                            <p>Campaign contributes to these SDG challenges:</p>
+                            <p>Campaign contributes to these SDG challenges: {campData.challenge}</p>
                         </Row>
                         <Row>
-                            <p><strong>Campaign Status:</strong></p>
+                            <p><strong>Campaign Phase:</strong></p>
                         </Row>
                         <Row>
                             <Col>
                                 <Badge
                                     bg='warning'
                                 >
-                                    Challenge
+                                    {campData.phase}
                                 </Badge>
                             </Col>
                             <Col>
@@ -136,6 +161,7 @@ export const CampaignPage = () => {
                     <Card
                         style={{
                             height: '400px',
+                            width: '400px',
                             paddingLeft: '0px',
                             background: 'linear-gradient(to bottom, lightgray, white)',
                             borderTopLeftRadius: '0px',
