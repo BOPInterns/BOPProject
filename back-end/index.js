@@ -541,3 +541,19 @@ app.post("/get-service-data", async (req, res) => {
 //     res.status(401).json({error: err.message});
 //   }
 // });
+
+app.post("/campaign-page", async (req, res) => {
+  try {
+    console.log("req.body");
+    console.log(req.body);
+    const {id} = req.body;
+    const data = await Campaign.findById(id);
+    if (!data)
+      throw Error("data does not exist :(");
+    console.log(data);
+    res.status(200).json({data});
+    console.log("campaign obj sent by ID");
+  } catch (err) {
+    res.status(401).json({error: err.message});
+  }
+});
