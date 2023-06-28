@@ -5,8 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
 
-export const MarketPlaceSearchBar = ({ onSearch }) => {
+export const MarketPlaceSearchBar = ({onSearch}) => {
   const [ query, setQuery ] = useState('');
+
     // if (localStorage.getItem("searchText") === null)
     //   localStorage.setItem("searchText", "");
 
@@ -37,21 +38,24 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
     //   onSearch(searchQuery);
     //   setSearchQuery('');
     // }
-    const handleSearch = async () => {
+
+    const handleSearch = async (e) => {
+      e.preventDefault();
+      //here is ideally where we would come up with all the search terms 
+      //for now we'll use these instead
+      onSearch(query)
+      const terms = ["mushroom", "fungus", "pizza", "vegetation", "plant", "spore"];
       try {
-        const response = await fetch('/search', {
+        fetch('http://localhost:9000/search', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ query }),
+          body: JSON.stringify({ terms }),
+        }).then((res) => res.json())
+        .then((data) => {
+          console.log(data);
         });
-  
-        if (response.ok) {
-          const searchResults = await response.json();
-          // Process the search results
-          console.log(searchResults);
-        }
       } catch (error) {
         console.error('Error searching:', error);
       }
@@ -67,7 +71,7 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </Button>
                   <Form
-                    inline onSubmit={handleSearch}
+                    onSubmit={handleSearch}
                     style={{
                       width: '800px'
                     }}
