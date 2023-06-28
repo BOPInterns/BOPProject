@@ -62,32 +62,42 @@ export const CreateCampaignNavbar = () => {
                     className='create-campaign-navbar-collapse'
                 >
                     <Nav.Link
+                        as={NavLink}
+                        activeClassName="active"
                         className='create-campaign-navbar-nav-link'
-                        href='/create-campaign-step-1'
+                        to='/create-campaign-step-1'
                     >
                         Step 1
                     </Nav.Link>
                     <Nav.Link
+                        as={NavLink}
+                        activeClassName="active"
                         className='create-campaign-navbar-nav-link'
-                        href='/create-campaign-step-2'
+                        to='/create-campaign-step-2'
                     >
                         Step 2
                     </Nav.Link>
                     <Nav.Link
+                        as={NavLink}
+                        activeClassName="active"
                         className='create-campaign-navbar-nav-link'
-                        href='/create-campaign-step-3'
+                        to='/create-campaign-step-3'
                     >
                         Step 3
                     </Nav.Link>
                     <Nav.Link
+                        as={NavLink}
+                        activeClassName="active"
                         className='create-campaign-navbar-nav-link'
-                        href='/create-campaign-step-4'
+                        to='/create-campaign-step-4'
                     >
                         Step 4
                     </Nav.Link>
                     <Nav.Link
+                        as={NavLink}
+                        activeClassName="active"
                         className='create-campaign-navbar-nav-link'
-                        href='/create-campaign-step-5'
+                        to='/create-campaign-step-5'
                     >
                         Step 5
                     </Nav.Link>

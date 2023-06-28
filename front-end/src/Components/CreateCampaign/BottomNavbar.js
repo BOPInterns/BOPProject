@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './CreateCampaignNavbar.css'
 
 
 const BottomNavbar = ({ currentPage }) => {
@@ -9,11 +10,14 @@ const BottomNavbar = ({ currentPage }) => {
 
   return (
     <Navbar fixed="bottom">
-      <Nav className="">
+      <Nav className="bottom-campaign-create-navbar">
         <Nav.Item>
           {prevPage > 0 &&(
-            <Nav.Link as={Link} to={`/create-campaign-step-${prevPage}`}>
-                Back
+            <Nav.Link
+            className="bottom-nav-btn" 
+            as={Link} 
+            to={`/create-campaign-step-${prevPage}`}>
+                <i class="fa-solid fa-arrow-left-long fa-2xl"></i>
             </Nav.Link>
           )}
         </Nav.Item>
@@ -21,10 +25,11 @@ const BottomNavbar = ({ currentPage }) => {
         <Nav className="ms-auto">
         <Nav.Item>
             {nextPage < 6 && (
-          <Nav.Link 
+          <Nav.Link
+          className="bottom-nav-btn"
           as={Link} 
           to={`/create-campaign-step-${nextPage}`}>
-            <p>Forward</p>
+            <i class="fa-solid fa-arrow-right-long fa-2xl"></i>
           </Nav.Link>
             )}
         </Nav.Item>
