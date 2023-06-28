@@ -4,9 +4,16 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
+import { Configuration, OpenAIApi } from "openai";
+
 
 export const MarketPlaceSearchBar = ({onSearch}) => {
   const [ query, setQuery ] = useState('');
+  const [ result, setResult ] = useState('');
+  const configuration = new Configuration({
+    apiKey: "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",
+  });
+  const openai = new OpenAIApi(configuration);
 
     // if (localStorage.getItem("searchText") === null)
     //   localStorage.setItem("searchText", "");
@@ -38,17 +45,45 @@ export const MarketPlaceSearchBar = ({onSearch}) => {
     //   onSearch(searchQuery);
     //   setSearchQuery('');
     // }
+    
+    function generatePrompt(query) {
+      const capitalizedSearchQuery =
+        query[0].toUpperCase() + query.slice(1).toLowerCase();
+      return `Suggest five additional related search keywords.
+    
+    Query: Toilet
+    Additional: Sanitation, Plumbing, Water Conservation,
+    Query: Jobs
+    Additional: Poverty, Work Needed, Unemployment
+    Query: Chinese immigration
+    Additional: Immigration Reform, Chinese Exclusion Act, Immigration Policies, Naturalization, Chinese
+    Query: Education reform
+    Additional: School Funding, Teacher Training, Curriculum Development, Student Achievement, School Choice
+    Query: Global Overpopulation
+    Additional: Population Growth, Population Control, Sustainability, Food Security, Resource Management
+    Query: Finances
+    Additional: Budgeting, Investing, Debt Management, Credit Score, Financial Planning
+    Query: ${capitalizedSearchQuery}
+    Additional:
+    `;
+    }
 
     const handleSearch = async (e) => {
       e.preventDefault();
       //here is ideally where we would come up with all the search terms 
-
-      
-
-
+      const completion = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: generatePrompt(query),
+        temperature: 0.4,
+        max_tokens: 3000,
+      });
       //for now we'll use these instead
       onSearch(query)
-      const terms = ["mushroom", "toilet", "pizza", "vegetation", "plant", "spore"];
+      const terms = [query];
+      let wordsArray = completion.data.choices[0].text.split(",");
+      wordsArray.forEach((word) => {
+        terms.push(word.trim());
+      });
       try {
         fetch('http://localhost:9000/search', {
           method: 'POST',
