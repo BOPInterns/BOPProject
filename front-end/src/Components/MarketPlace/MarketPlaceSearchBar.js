@@ -42,9 +42,13 @@ export const MarketPlaceSearchBar = ({onSearch}) => {
     const handleSearch = async (e) => {
       e.preventDefault();
       //here is ideally where we would come up with all the search terms 
+
+      
+
+
       //for now we'll use these instead
       onSearch(query)
-      const terms = ["mushroom", "fungus", "pizza", "vegetation", "plant", "spore"];
+      const terms = ["mushroom", "toilet", "pizza", "vegetation", "plant", "spore"];
       try {
         fetch('http://localhost:9000/search', {
           method: 'POST',
