@@ -21,6 +21,7 @@
     "mapbox-gl": "^2.15.0",
     "mdb-react-ui-kit": "^6.0.0",
     "npm": "^9.6.7",
+    "openai": "^3.3.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-bootstrap-tagsinput": "^0.7.6",
