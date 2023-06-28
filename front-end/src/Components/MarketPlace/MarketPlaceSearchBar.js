@@ -50,21 +50,20 @@ export const MarketPlaceSearchBar = ({onSearch}) => {
       const capitalizedSearchQuery =
         query[0].toUpperCase() + query.slice(1).toLowerCase();
       return `Suggest five additional related search keywords.
-    
-    Query: Toilet
-    Additional: Sanitation, Plumbing, Water Conservation,
-    Query: Jobs
-    Additional: Poverty, Work Needed, Unemployment
-    Query: Chinese immigration
-    Additional: Immigration Reform, Chinese Exclusion Act, Immigration Policies, Naturalization, Chinese
-    Query: Education reform
-    Additional: School Funding, Teacher Training, Curriculum Development, Student Achievement, School Choice
-    Query: Global Overpopulation
-    Additional: Population Growth, Population Control, Sustainability, Food Security, Resource Management
-    Query: Finances
-    Additional: Budgeting, Investing, Debt Management, Credit Score, Financial Planning
-    Query: ${capitalizedSearchQuery}
-    Additional:
+      Query: Toilet
+      Additional: Sanitation, Plumbing, Water Conservation,
+      Query: Jobs
+      Additional: Poverty, Work Needed, Unemployment
+      Query: Chinese immigration
+      Additional: Immigration Reform, Chinese Exclusion Act, Immigration Policies, Naturalization, Chinese
+      Query: Education reform
+      Additional: School Funding, Teacher Training, Curriculum Development, Student Achievement, School Choice
+      Query: Global Overpopulation
+      Additional: Population Growth, Population Control, Sustainability, Food Security, Resource Management
+      Query: Finances
+      Additional: Budgeting, Investing, Debt Management, Credit Score, Financial Planning
+      Query: ${capitalizedSearchQuery}
+      Additional:
     `;
     }
 
