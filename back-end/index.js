@@ -541,3 +541,31 @@ app.post("/get-service-data", async (req, res) => {
 //     res.status(401).json({error: err.message});
 //   }
 // });
+
+app.post("/search", async (req, res) => {
+  try {
+    const { term1, term2, term3, term4, term5, term6 } = req.body;
+
+    //search campaigns
+    const campData = await Campaign.find({
+      name: new RegExp(name, "i")
+    }).lean();
+
+    //search solutions
+    const solData = await Campaign.find({
+      name: new RegExp(name, "i")
+    }).lean();
+
+    //search services
+    const servData = await Campaign.find({
+      name: new RegExp(name, "i")
+    }).lean();
+
+
+    console.log("search data found");
+    res.status(200).json({campData: campData, solData: solData, servData: servData});
+    console.log("all data response sent");
+  } catch (err) {
+    res.status(401).json({error: err.message});
+  }
+});

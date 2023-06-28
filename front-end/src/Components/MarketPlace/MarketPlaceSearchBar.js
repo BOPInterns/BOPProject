@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
 
 export const MarketPlaceSearchBar = ({ onSearch }) => {
-  const [ searchQuery, setSearchQuery ] = useState('');
+  const [ query, setQuery ] = useState('');
     // if (localStorage.getItem("searchText") === null)
     //   localStorage.setItem("searchText", "");
 
@@ -32,11 +32,30 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
     //     });
     // }, []);
     
-    const handleSearch = (e) => {
-      e.preventDefault();
-      onSearch(searchQuery);
-      setSearchQuery('');
-    }
+    // const handleSearch = (e) => {
+    //   e.preventDefault();
+    //   onSearch(searchQuery);
+    //   setSearchQuery('');
+    // }
+    const handleSearch = async () => {
+      try {
+        const response = await fetch('/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query }),
+        });
+  
+        if (response.ok) {
+          const searchResults = await response.json();
+          // Process the search results
+          console.log(searchResults);
+        }
+      } catch (error) {
+        console.error('Error searching:', error);
+      }
+    };
 
     return (
         <div>
@@ -60,8 +79,8 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
                     }}
                     type="text" 
                     placeholder="Search Bar"
-                    value={searchQuery}
-                    onChange={(e)=> setSearchQuery(e.target.value)}
+                    value={query}
+                    onChange={(e)=> setQuery(e.target.value)}
                   />
                   </Form>
                 </InputGroup>
