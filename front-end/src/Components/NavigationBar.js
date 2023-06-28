@@ -48,7 +48,6 @@ export const NavigationBar = () => {
                         }}
                     >
                         <Nav.Link className="top-navbar-text" href='/market-place'>Market Place</Nav.Link>
-                        <Nav.Link className="top-navbar-text" href="/campaign-center">Campaign Center</Nav.Link>
                         <Nav.Link className="top-navbar-text" href="/">Explore</Nav.Link>
                         <Nav.Link className="top-navbar-text" href="/">Learn</Nav.Link>
                         <Nav.Link className="top-navbar-text" href="/">Become</Nav.Link>

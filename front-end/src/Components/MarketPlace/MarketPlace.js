@@ -99,8 +99,8 @@ export const MarketPlace = () => {
   };
   
   const handleSearch = (query) => {
-    console.log(query);
-    };
+    console.log("searching for ", query)
+  };
 
   const renderActivePage = () => {
     switch (activePage) {

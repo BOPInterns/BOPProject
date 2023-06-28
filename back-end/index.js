@@ -93,9 +93,9 @@ app.post("/get-offer-data", async(req, res) => {
 });
 
 //gets campaign data by owning org name
-app.post("/get-campaign-by-org", async (req, res) => {
+app.post("/get-camp-by-org", async (req, res) => {
   try {
-    const selected = await Campaign.find({ organization: req.body.org });
+    const selected = await Campaign.find({ organization: req.body.name });
     res.send({ status: "ok", data: selected });
   } catch (err) {
     console.log("error retrieving campaign data");
@@ -541,3 +541,62 @@ app.post("/get-service-data", async (req, res) => {
 //     res.status(401).json({error: err.message});
 //   }
 // });
+
+app.post("/search", async (req, res) => {
+  console.log("searching...")
+  try {
+    const searchTerms = req.body.terms;
+    const regexTerms = searchTerms.map(term => new RegExp(`.*${term}.*`, 'i'));
+    console.log(searchTerms);
+    console.log(regexTerms)
+
+    //search campaigns
+    const campData = await Campaign.find({
+      $or: [
+        {name: { $in: regexTerms }}, 
+        {organization: { $in: regexTerms }},
+        {challenge: { $in: regexTerms }},
+        {tags: { $elemMatch: { $in: regexTerms } }}
+      ]
+    }).lean();
+
+    //search solutions
+    const solData = await Solution.find({
+      $or: [
+        {name: { $in: regexTerms }}, 
+        {organization: { $in: regexTerms }},
+        {tags: { $elemMatch: { $in: regexTerms } }}
+      ]
+    }).lean();
+
+    //search services
+    const servData = await Service.find({
+      $or: [
+        {name: { $in: regexTerms }}, 
+        {organization: { $in: regexTerms }},
+        {tags: { $elemMatch: { $in: regexTerms } }}
+      ]
+    }).lean();
+
+    res.send({campData: campData, solData: solData, servData: servData});
+    console.log("all data response sent");
+  } catch (err) {
+    res.status(401).json({error: err.message});
+  }
+});
+
+app.post("/campaign-page", async (req, res) => {
+  try {
+    console.log("req.body");
+    console.log(req.body);
+    const {id} = req.body;
+    const data = await Campaign.findById(id);
+    if (!data)
+      throw Error("data does not exist :(");
+    console.log(data);
+    res.status(200).json({data});
+    console.log("campaign obj sent by ID");
+  } catch (err) {
+    res.status(401).json({error: err.message});
+  }
+});
