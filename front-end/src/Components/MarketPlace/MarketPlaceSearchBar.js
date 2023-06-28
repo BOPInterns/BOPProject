@@ -5,8 +5,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
 
-export const MarketPlaceSearchBar = ({ onSearch }) => {
-  const [ searchQuery, setSearchQuery ] = useState('');
+export const MarketPlaceSearchBar = ({onSearch}) => {
+  const [ query, setQuery ] = useState('');
+
     // if (localStorage.getItem("searchText") === null)
     //   localStorage.setItem("searchText", "");
 
@@ -32,11 +33,37 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
     //     });
     // }, []);
     
-    const handleSearch = (e) => {
+    // const handleSearch = (e) => {
+    //   e.preventDefault();
+    //   onSearch(searchQuery);
+    //   setSearchQuery('');
+    // }
+
+    const handleSearch = async (e) => {
       e.preventDefault();
-      onSearch(searchQuery);
-      setSearchQuery('');
-    }
+      //here is ideally where we would come up with all the search terms 
+
+      
+
+
+      //for now we'll use these instead
+      onSearch(query)
+      const terms = ["mushroom", "toilet", "pizza", "vegetation", "plant", "spore"];
+      try {
+        fetch('http://localhost:9000/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ terms }),
+        }).then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+      } catch (error) {
+        console.error('Error searching:', error);
+      }
+    };
 
     return (
         <div>
@@ -48,7 +75,7 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </Button>
                   <Form
-                    inline onSubmit={handleSearch}
+                    onSubmit={handleSearch}
                     style={{
                       width: '800px'
                     }}
@@ -60,8 +87,8 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
                     }}
                     type="text" 
                     placeholder="Search Bar"
-                    value={searchQuery}
-                    onChange={(e)=> setSearchQuery(e.target.value)}
+                    value={query}
+                    onChange={(e)=> setQuery(e.target.value)}
                   />
                   </Form>
                 </InputGroup>
