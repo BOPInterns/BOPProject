@@ -542,6 +542,49 @@ app.post("/get-service-data", async (req, res) => {
 //   }
 // });
 
+app.post("/search", async (req, res) => {
+  console.log("searching...")
+  try {
+    const searchTerms = req.body.terms;
+    const regexTerms = searchTerms.map(term => new RegExp(`.*${term}.*`, 'i'));
+    console.log(searchTerms);
+    console.log(regexTerms)
+
+    //search campaigns
+    const campData = await Campaign.find({
+      $or: [
+        {name: { $in: regexTerms }}, 
+        {organization: { $in: regexTerms }},
+        {challenge: { $in: regexTerms }},
+        {tags: { $elemMatch: { $in: regexTerms } }}
+      ]
+    }).lean();
+
+    //search solutions
+    const solData = await Solution.find({
+      $or: [
+        {name: { $in: regexTerms }}, 
+        {organization: { $in: regexTerms }},
+        {tags: { $elemMatch: { $in: regexTerms } }}
+      ]
+    }).lean();
+
+    //search services
+    const servData = await Service.find({
+      $or: [
+        {name: { $in: regexTerms }}, 
+        {organization: { $in: regexTerms }},
+        {tags: { $elemMatch: { $in: regexTerms } }}
+      ]
+    }).lean();
+
+    res.send({campData: campData, solData: solData, servData: servData});
+    console.log("all data response sent");
+  } catch (err) {
+    res.status(401).json({error: err.message});
+  }
+});
+
 app.post("/campaign-page", async (req, res) => {
   try {
     console.log("req.body");
@@ -555,5 +598,13 @@ app.post("/campaign-page", async (req, res) => {
     console.log("campaign obj sent by ID");
   } catch (err) {
     res.status(401).json({error: err.message});
+  }
+});
+
+app.get("/get-openai-api-key", async (req, res) => {
+  try{
+    res.send({data: process.env.OPENAI_API_KEY});
+  }catch (err) {
+    res.send(err)
   }
 });

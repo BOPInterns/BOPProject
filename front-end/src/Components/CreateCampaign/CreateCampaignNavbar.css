@@ -1,5 +1,5 @@
 .create-campaign-navbar {
-    background-color: orange !important;
+    background-color: #fa6e13 !important;
     border-radius: 40px !important;
     
 }
@@ -11,14 +11,31 @@
 .create-campaign-navbar-nav-link {
     padding-right: 40px !important;
     padding-left: 40px !important;
+    border-radius: 40px !important;
+    color: white !important;
 }
 
 .create-campaign-navbar-nav-link:hover {
-    color: orange !important;
+    color: #fa6e13 !important;
     border-radius: 40px !important;
     background-color: white !important;
 }
 
-.create-campaign-navbar-nav-link:active {
-    color: black !important;
+.create-campaign-navbar-nav-link.active {
+    background-color: white !important;
+    color: #fa6e13 !important;
+    border-radius: 40px !important;
+}
+
+.bottom-nav-btn {
+    border: 2px solid black !important;
+    border-radius: 40px !important;
+    background-color: #fa6e13 !important;
+    color: white !important;
+    width: 75px !important;
+    text-align: center !important;
+}
+
+.bottom-nav-btn:hover {
+    width: 90px !important;
 }

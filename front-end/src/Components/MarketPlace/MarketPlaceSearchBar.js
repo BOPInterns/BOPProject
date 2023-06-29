@@ -4,39 +4,99 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
+import { Configuration, OpenAIApi } from "openai";
 
-export const MarketPlaceSearchBar = ({ onSearch }) => {
-  const [ searchQuery, setSearchQuery ] = useState('');
-    // if (localStorage.getItem("searchText") === null)
-    //   localStorage.setItem("searchText", "");
 
-    // const [searchText, setSearchText] = useState(localStorage.getItem("searchText"));
-    // const [searchData, setSearchData] = useState([]);
 
-    // useEffect(() => {
-    //   fetch("http://localhost:9000/get-search-data", {
-    //     method: "POST",
-    //     crossDomain: true,
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //     body: JSON.stringify({ name: localStorage.getItem("nameFilter") }),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       if (data.data) setSearchData(data.data);
-    //       else setSearchData([]);
-    //     });
-    // }, []);
+
+export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, setCampList, setSolList, setServList}) => {
+  const [ query, setQuery ] = useState('');
+  const [ result, setResult ] = useState('');
+  const [ apiKey, setApiKey ] = useState('');
+
+
+  useEffect(() => {
+    fetch("http://localhost:9000/get-openai-api-key", {
+      method: "GET"
+    }).then(res => res.json())
+    .then((data) => {setApiKey(data.data)});
+  }, []);
+
+  const configuration = new Configuration({
+    apiKey: apiKey,
+  });
+  const openai = new OpenAIApi(configuration);
     
-    const handleSearch = (e) => {
-      e.preventDefault();
-      onSearch(searchQuery);
-      setSearchQuery('');
+    function generatePrompt(query) {
+      const capitalizedSearchQuery =
+        query[0].toUpperCase() + query.slice(1).toLowerCase();
+      return `Suggest five additional related search keywords.
+      Query: Toilet
+      Additional: Sanitation, Plumbing, Water Conservation,
+      Query: Jobs
+      Additional: Poverty, Work Needed, Unemployment
+      Query: Chinese immigration
+      Additional: Immigration Reform, Chinese Exclusion Act, Immigration Policies, Naturalization, Chinese
+      Query: Education reform
+      Additional: School Funding, Teacher Training, Curriculum Development, Student Achievement, School Choice
+      Query: Global Overpopulation
+      Additional: Population Growth, Population Control, Sustainability, Food Security, Resource Management
+      Query: Finances
+      Additional: Budgeting, Investing, Debt Management, Credit Score, Financial Planning
+      Query: ${capitalizedSearchQuery}
+      Additional:
+    `;
     }
+
+    const handleSearch = async (e) => {
+      e.preventDefault();
+      //here is ideally where we would come up with all the search terms 
+      const completion = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: generatePrompt(query),
+        temperature: 0.4,
+        max_tokens: 3000,
+      });
+
+      onSearch(query);
+      const terms = [query];
+      let wordsArray = completion.data.choices[0].text.split(",");
+      wordsArray.forEach((word) => {
+        terms.push(word.trim());
+      });
+      console.log(terms);
+
+      //applying search to campaigns
+      const queriedCamps = campList.filter(camp => 
+        terms.some(term => 
+          Object.values(camp).some(value => 
+            value.toString().toLowerCase().includes(term.toLowerCase())
+          )
+        )
+      );
+
+      //applying search to solutions
+      const queriedSols = solList.filter(sol => 
+        terms.some(term => 
+          Object.values(sol).some(value => 
+            value.toString().toLowerCase().includes(term.toLowerCase())
+          )
+        )
+      );
+      
+      //applying search to services
+      const queriedServs = servList.filter(serv => 
+        terms.some(term => 
+          Object.values(serv).some(value => 
+            value.toString().toLowerCase().includes(term.toLowerCase())
+          )
+        )
+      );
+
+      setCampList(queriedCamps);
+      setSolList(queriedSols);
+      setServList(queriedServs);
+    };
 
     return (
         <div>
@@ -48,7 +108,7 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </Button>
                   <Form
-                    inline onSubmit={handleSearch}
+                    onSubmit={handleSearch}
                     style={{
                       width: '800px'
                     }}
@@ -60,8 +120,8 @@ export const MarketPlaceSearchBar = ({ onSearch }) => {
                     }}
                     type="text" 
                     placeholder="Search Bar"
-                    value={searchQuery}
-                    onChange={(e)=> setSearchQuery(e.target.value)}
+                    value={query}
+                    onChange={(e)=> setQuery(e.target.value)}
                   />
                   </Form>
                 </InputGroup>

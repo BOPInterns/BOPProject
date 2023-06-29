@@ -202,7 +202,7 @@ export const MarketPlace = () => {
   };
   
   const handleSearch = (query) => {
-    localStorage.setItem("nameFilter", query);
+    console.log("searching for ", query)
   };
 
   const renderActivePage = () => {
