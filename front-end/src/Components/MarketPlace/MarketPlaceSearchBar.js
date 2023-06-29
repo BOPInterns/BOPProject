@@ -7,11 +7,23 @@ import { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from "openai";
 
 
+
+
 export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, setCampList, setSolList, setServList}) => {
   const [ query, setQuery ] = useState('');
   const [ result, setResult ] = useState('');
+  const [ apiKey, setApiKey ] = useState('');
+
+
+  useEffect(() => {
+    fetch("http://localhost:9000/get-openai-api-key", {
+      method: "GET"
+    }).then(res => res.json())
+    .then((data) => {setApiKey(data)});
+  }, []);
+
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: apiKey,
   });
   const openai = new OpenAIApi(configuration);
     

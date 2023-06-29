@@ -13,6 +13,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap5-tags": "^1.5.22",
     "country-list": "^2.3.0",
+    "dotenv": "^16.3.1",
     "events": "^3.3.0",
     "fsevents": "^2.3.2",
     "googleapis": "^118.0.0",
