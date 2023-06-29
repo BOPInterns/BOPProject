@@ -19,6 +19,7 @@ Project created by Intern team for the BoP Hub website
 - Brian needs to go and update navbar for campaign creation
 - For some reason when you create a campaign through the campaign creation form it won't render on the marketplace anymore? I'm guessing because the necessary campaign fields have changed since those pages were created? -B
 - Load more recent projects on org page does not do anything
+- ensure all api keys for openai are put into git ignore
 
 ## Successful can kicks:
 

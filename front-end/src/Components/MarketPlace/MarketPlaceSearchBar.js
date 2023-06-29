@@ -7,44 +7,13 @@ import { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from "openai";
 
 
-export const MarketPlaceSearchBar = ({onSearch}) => {
+export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, setCampList, setSolList, setServList}) => {
   const [ query, setQuery ] = useState('');
   const [ result, setResult ] = useState('');
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
-
-    // if (localStorage.getItem("searchText") === null)
-    //   localStorage.setItem("searchText", "");
-
-    // const [searchText, setSearchText] = useState(localStorage.getItem("searchText"));
-    // const [searchData, setSearchData] = useState([]);
-
-    // useEffect(() => {
-    //   fetch("http://localhost:9000/get-search-data", {
-    //     method: "POST",
-    //     crossDomain: true,
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //     body: JSON.stringify({ name: localStorage.getItem("nameFilter") }),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       if (data.data) setSearchData(data.data);
-    //       else setSearchData([]);
-    //     });
-    // }, []);
-    
-    // const handleSearch = (e) => {
-    //   e.preventDefault();
-    //   onSearch(searchQuery);
-    //   setSearchQuery('');
-    // }
     
     function generatePrompt(query) {
       const capitalizedSearchQuery =
@@ -76,27 +45,45 @@ export const MarketPlaceSearchBar = ({onSearch}) => {
         temperature: 0.4,
         max_tokens: 3000,
       });
-      //for now we'll use these instead
-      onSearch(query)
+
+      onSearch(query);
       const terms = [query];
       let wordsArray = completion.data.choices[0].text.split(",");
       wordsArray.forEach((word) => {
         terms.push(word.trim());
       });
-      try {
-        fetch('http://localhost:9000/search', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ terms }),
-        }).then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-      } catch (error) {
-        console.error('Error searching:', error);
-      }
+      console.log(terms);
+
+      //applying search to campaigns
+      const queriedCamps = campList.filter(camp => 
+        terms.some(term => 
+          Object.values(camp).some(value => 
+            value.toString().toLowerCase().includes(term.toLowerCase())
+          )
+        )
+      );
+
+      //applying search to solutions
+      const queriedSols = solList.filter(sol => 
+        terms.some(term => 
+          Object.values(sol).some(value => 
+            value.toString().toLowerCase().includes(term.toLowerCase())
+          )
+        )
+      );
+      
+      //applying search to services
+      const queriedServs = servList.filter(serv => 
+        terms.some(term => 
+          Object.values(serv).some(value => 
+            value.toString().toLowerCase().includes(term.toLowerCase())
+          )
+        )
+      );
+
+      setCampList(queriedCamps);
+      setSolList(queriedSols);
+      setServList(queriedServs);
     };
 
     return (
