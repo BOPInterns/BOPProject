@@ -9,7 +9,7 @@ import { Configuration, OpenAIApi } from "openai";
 
 
 
-export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, setCampList, setSolList, setServList}) => {
+export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, setCampaigns, setSolutions, setServices}) => {
   const [ query, setQuery ] = useState('');
   const [ result, setResult ] = useState('');
   const [ apiKey, setApiKey ] = useState('');
@@ -67,7 +67,7 @@ export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, set
       console.log(terms);
 
       //applying search to campaigns
-      const queriedCamps = campList.filter(camp => 
+      const queriedCamps = campaigns.filter(camp => 
         terms.some(term => 
           Object.values(camp).some(value => 
             value.toString().toLowerCase().includes(term.toLowerCase())
@@ -76,7 +76,7 @@ export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, set
       );
 
       //applying search to solutions
-      const queriedSols = solList.filter(sol => 
+      const queriedSols = solutions.filter(sol => 
         terms.some(term => 
           Object.values(sol).some(value => 
             value.toString().toLowerCase().includes(term.toLowerCase())
@@ -85,7 +85,7 @@ export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, set
       );
       
       //applying search to services
-      const queriedServs = servList.filter(serv => 
+      const queriedServs = services.filter(serv => 
         terms.some(term => 
           Object.values(serv).some(value => 
             value.toString().toLowerCase().includes(term.toLowerCase())
@@ -93,9 +93,9 @@ export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, set
         )
       );
 
-      setCampList(queriedCamps);
-      setSolList(queriedSols);
-      setServList(queriedServs);
+      setCampaigns(queriedCamps);
+      setSolutions(queriedSols);
+      setServices(queriedServs);
     };
 
     return (
