@@ -6,9 +6,9 @@ import { ServiceCard } from "./ServiceCard";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from 'react-bootstrap/Form';
 
-export const ServiceComp = () => {
+export const ServiceComp = ({filteredServices}) => {
   const [currLoadedCards, setCurrLoadedCards] = useState(8);
-  const [serviceData, setServiceData] = useState([]);
+  // const [serviceData, setServiceData] = useState([]);
 
   // useEffect(() => {
   //     if (currL{oadedCards >= serviceData.length) {
@@ -17,52 +17,53 @@ export const ServiceComp = () => {
   //     };
   // }, [currLoadedCards]);
 
-  useEffect(() => {
-    //for services
-    fetch("http://localhost:9000/get-service-data", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        regDateFilter: localStorage.getItem("regDateFilter"),
-        servNameFilter: localStorage.getItem("servNameFilter"),
-        servOrgFilter: localStorage.getItem("servOrgFilter"),
-        //servRegDateFilter: localStorage.getItem("servRegDateFilter"),
-        servTagsFilter: localStorage.getItem("servTagsFilter"),
-        servPriceFilter: localStorage.getItem("servPriceFilter")
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.data) setServiceData(data.data);
-        else setServiceData([]);
-      });
-  }, []);
+  // useEffect(() => {
+  //   //for services
+  //   fetch("http://localhost:9000/get-service-data", {
+  //     method: "POST",
+  //     crossDomain: true,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //     body: JSON.stringify({
+  //       regDateFilter: localStorage.getItem("regDateFilter"),
+  //       servNameFilter: localStorage.getItem("servNameFilter"),
+  //       servOrgFilter: localStorage.getItem("servOrgFilter"),
+  //       //servRegDateFilter: localStorage.getItem("servRegDateFilter"),
+  //       servTagsFilter: localStorage.getItem("servTagsFilter"),
+  //       servPriceFilter: localStorage.getItem("servPriceFilter")
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       if (data.data) setServiceData(data.data);
+  //       else setServiceData([]);
+  //     });
+  // }, []);
 
   const handleMoreCards = () => {
-    if (currLoadedCards < serviceData.length) {
-      setCurrLoadedCards(currLoadedCards + 8);
-    } else {
-      const button = document.getElementById("service-load-more-btn");
-      button.disabled = true;
-    }
-  };
+    if (filteredServices.length) {
+      if (currLoadedCards < filteredServices.length) {
+        setCurrLoadedCards(currLoadedCards + 8);
+      } else {
+        const button = document.getElementById("service-load-more-btn");
+        button.disabled = true;
+  }}};
 
-  const loadServiceData = (i) => {
-    return serviceData[i];
+  const loadFilteredServices = (i) => {
+    return filteredServices[i];
   };
 
   const loadServiceCards = () => {
-    return serviceData.slice(0, currLoadedCards).map((data, index) => (
+    if (filteredServices.length) return filteredServices.slice(0, currLoadedCards).map((data, index) => (
       <Col key={index} xs={6} sm={4} md={3} lg={3}>
-        <ServiceCard servData={loadServiceData(index)}></ServiceCard>
+        <ServiceCard servData={loadFilteredServices(index)}></ServiceCard>
       </Col>
     ));
+    else return "Loading services...";
   };
 
   return (
