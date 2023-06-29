@@ -1,12 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-export const OrgOfferedServicesPage = () => {
+export const OrgOfferedServicesPage = ({orgName}) => {
     return (
         <div>
             <Container>
                 <Row>
-                    <strong><h4>[name of the organization] offered services:</h4></strong>
+                    <strong><h4>{orgName}'s offered services:</h4></strong>
                 </Row>
             </Container>
         </div>

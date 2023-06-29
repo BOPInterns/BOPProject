@@ -46,6 +46,16 @@ export const OrgPage = () => {
         tags:[],
         description:""
     });
+    const [ solData, setSolData ] = useState({
+        name:"",
+        tags:[],
+    });
+    const [ servData, setServData ] = useState({
+        name:"",
+        price:"",
+        tags:[],
+        description:""
+    });
 
     const orgName = "Interns For Higher Pay";
 
@@ -107,9 +117,13 @@ export const OrgPage = () => {
                             campData={campData}
                         ></OrgCampaignPage>;
             case 3:
-                return <OrgOwnedSolutionsPage/>;
+                return <OrgOwnedSolutionsPage
+                            orgName={orgName}
+                        />;
             case 4:
-                return <OrgOfferedServicesPage/>;
+                return <OrgOfferedServicesPage
+                        orgName={orgName}
+                        />;
             case 5:
                 return <OrgTeamPage/>;
             case 6:
