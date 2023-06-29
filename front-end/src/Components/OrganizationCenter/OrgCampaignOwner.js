@@ -2,7 +2,6 @@ import { HorizontalCampaignCard } from './HorizontalCampaignCard';
 
 
 export const OrgCampaignOwner = ({campData}) => {
-    console.log(campData);
     return (
         <div>
         {campData.name == '' ? <body>No campaign data</body> : campData.map((camp, index) => (
