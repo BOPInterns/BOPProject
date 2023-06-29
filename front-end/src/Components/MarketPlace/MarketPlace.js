@@ -209,7 +209,15 @@ export const MarketPlace = () => {
     switch (activePage) {
       case 1:
         return <div>
-            <MarketPlaceSearchBar onSearch={handleSearch}/>
+            <MarketPlaceSearchBar 
+              onSearch={handleSearch}
+              campaigns={filteredCampaigns}
+              solutions={filteredSolutions}
+              services={filteredServices}
+              setCampaigns={setFilteredCampaigns}
+              setSolutions={setFilteredSolutions}
+              setServices={setFilteredServices}
+            />
             <AllPages 
               filteredCampaigns={filteredCampaigns}
               filteredSolutions={filteredSolutions}
@@ -218,22 +226,54 @@ export const MarketPlace = () => {
         </div>
       case 2:
         return <div>
-            <MarketPlaceSearchBar onSearch={handleSearch}/>
+            <MarketPlaceSearchBar 
+              onSearch={handleSearch}
+              campaigns={filteredCampaigns}
+              solutions={filteredSolutions}
+              services={filteredServices}
+              setCampaigns={setFilteredCampaigns}
+              setSolutions={setFilteredSolutions}
+              setServices={setFilteredServices}
+            />
             <CampaignComp filteredCampaigns={filteredCampaigns}/>
         </div>;
       case 3:
         return <div>
-            <MarketPlaceSearchBar onSearch={handleSearch}/>
+            <MarketPlaceSearchBar 
+              onSearch={handleSearch}
+              campaigns={filteredCampaigns}
+              solutions={filteredSolutions}
+              services={filteredServices}
+              setCampaigns={setFilteredCampaigns}
+              setSolutions={setFilteredSolutions}
+              setServices={setFilteredServices}
+            />
             <SolutionComp filteredSolutions={filteredSolutions}/>
         </div>
       case 4:
         return <div>
-            <MarketPlaceSearchBar onSearch={handleSearch}/>
+            <MarketPlaceSearchBar 
+              onSearch={handleSearch}
+              campaigns={filteredCampaigns}
+              solutions={filteredSolutions}
+              services={filteredServices}
+              setCampaigns={setFilteredCampaigns}
+              setSolutions={setFilteredSolutions}
+              setServices={setFilteredServices}
+            />
             <ServiceComp filteredServices={filteredServices}/>
         </div>
       default:
         return <div>
-            <MarketPlaceSearchBar onSearch={handleSearch}/>
+            <MarketPlaceSearchBar 
+              onSearch={handleSearch}
+              campaigns={filteredCampaigns}
+              solutions={filteredSolutions}
+              services={filteredServices}
+              setCampaigns={setFilteredCampaigns}
+              setSolutions={setFilteredSolutions}
+              setServices={setFilteredServices}
+            />
             <AllPages 
               filteredCampaigns={filteredCampaigns}
               filteredSolutions={filteredSolutions}
