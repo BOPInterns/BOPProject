@@ -11,7 +11,7 @@ export const MarketPlaceSearchBar = ({onSearch}) => {
   const [ query, setQuery ] = useState('');
   const [ result, setResult ] = useState('');
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
 
@@ -84,6 +84,7 @@ export const MarketPlaceSearchBar = ({onSearch}) => {
       wordsArray.forEach((word) => {
         terms.push(word.trim());
       });
+      console.log(terms);
       try {
         fetch('http://localhost:9000/search', {
           method: 'POST',

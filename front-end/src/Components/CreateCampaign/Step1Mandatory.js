@@ -4,8 +4,17 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import TagInput from '../TagInput';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';
+import { Configuration, OpenAIApi } from "openai";
+import './createCampaignCards.css';
+
 
 export const Step1MandatoryFields = () => {
+    const configuration = new Configuration({
+        apiKey: "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",
+      });
+      const openai = new OpenAIApi(configuration);
     // if (localStorage.getItem('campaignName') === null) 
     // localStorage.setItem('campaignName', '');
     // if (localStorage.getItem('campaignTags') === null)
@@ -18,9 +27,19 @@ export const Step1MandatoryFields = () => {
     const [campaignName, setCampaignName] = useState(localStorage.getItem('campaignName'));
     const [campaignTags, setCampaignTags] = useState(JSON.parse(localStorage.getItem('campaignTags')));
     //const [videoLink, setVideoLink] = useState(localStorage.getItem('videoLink'));
-
+    const [ result, setResult ] = useState('');
+    const [ show, setShow ] = useState(false);
     useEffect(() => {
         localStorage.setItem('campaignName', campaignName);
+        const delaySuggestFn = setTimeout(() =>{
+            if(campaignName.length > 0) {
+                setShow(true);
+                cgptSuggest(campaignName);
+            }
+        }, 480);
+        return () => {
+            clearTimeout(delaySuggestFn);
+        };
     }, [campaignName]);
 
     useEffect(() => {
@@ -57,15 +76,59 @@ export const Step1MandatoryFields = () => {
         }
         return true;
     }
+    
+    function generatePrompt(prompt) {
+        const capitalizePrompt =
+        prompt[0].toUpperCase() + prompt.slice(1).toLowerCase();
+      return `Introduce yourself as chatGPT and tell me a little about ${capitalizePrompt} as a social entrepenuer offering help with ${capitalizePrompt}. Finish it off with some resources the user can checkout for more information.`;
+    }
+    
+    const cgptSuggest = async (e) => {
+        if(campaignName !== undefined) {
+            const completion = await openai.createCompletion({
+                model: "text-davinci-003",
+                prompt: generatePrompt(campaignName),
+                temperature: 0.4,
+                max_tokens: 3000,
+              });
+              setResult(completion.data.choices[0].text);
+        }
+    }
+    
 
     return (
         <div>
-            <Card className="">
-                        <Card.Title className="mx-3 mt-3">
+            {campaignName ? 
+            <ToastContainer
+                position="top-end"
+                style={{
+                    paddingTop: "250px",
+                    paddingRight: "40px",
+                }}
+            >
+            <Toast
+                style={{
+                    zIndex: 9999,
+                }}
+                show={show}
+                onClose={() => setShow(false)}
+            >
+                <Toast.Header>We see that you're interested in:<strong>{campaignName}</strong></Toast.Header>
+                <Toast.Body>
+                    <strong>Here are our some suggestions from ChatGPT!</strong>
+                    <br/>
+                    {result}
+                </Toast.Body>
+            </Toast> 
+            </ToastContainer>
+            : <></>}
+            <Card className="create-campaign-card">
+                        <Card.Title className="create-campaign-card-title">
                             Mandatory fields
-                            <hr></hr>
                         </Card.Title>
-                        <Card.Body>
+                        <Card.Body
+                            className="create-campaign-card-body"
+                        >
                             <Card.Text className="mb-4">
                                 <strong>Please provide a campaign name and tags you would like associated with your campaign</strong>
                             </Card.Text>
