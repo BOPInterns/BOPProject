@@ -4,6 +4,8 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
+import './createCampaignCards.css';
+
 
 
 
@@ -30,12 +32,13 @@ export const Step2MandatoryFields = () => {
     
     return (
         <Container>
-        <Card className="">
-        <Card.Title className="mx-3 mt-3">
+        <Card className="create-campaign-card">
+        <Card.Title className="create-campaign-card-title">
             Mandatory fields
-            <hr></hr>
         </Card.Title>
-        <Card.Body>
+        <Card.Body
+        className="create-campaign-card-body"
+        >
             <Card.Text>
                 <strong>These two fields below are essential to make your campaign recognizable at our platform. Providing detailed information will also result in better matching with future campaign partners.</strong>
             </Card.Text>

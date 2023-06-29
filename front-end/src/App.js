@@ -22,6 +22,7 @@ import { MarketPlaceFilters } from './Components/MarketPlace/MarketPlaceFilters.
 import { OrgPage } from './Components/OrganizationCenter/OrgPage.js';
 import { SolutionPage } from './Components/SolutionCenter/SolutionPage.js';
 import { CampaignPage } from './Components/CampaignCenter/CampaignPage.js';
+import { AboutUs } from './Components/aboutUs.js'
 import Private from './Components/Private.js';
 
 
@@ -46,6 +47,7 @@ const App = () => {
          </Route>
            <Route path="/campaign-page/:id" element={<CampaignPage />} />
            <Route path="/org-page" element={<OrgPage />} />
+           <Route path="/about-us" element={<AboutUs />} />
            <Route path="/solution-page/:id" element={<SolutionPage />} />
            <Route path="/market-place" element={<MarketPlace />} />
            <Route path="/login" element={<Login />} />

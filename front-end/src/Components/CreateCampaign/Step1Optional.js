@@ -2,6 +2,8 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
 import { useEffect, useState, } from 'react';
+import './createCampaignCards.css'
+
 
 export const Step1OptionalFields = () => {
     // if (localStorage.getItem('videoLink') === null)
@@ -33,12 +35,12 @@ export const Step1OptionalFields = () => {
     }
 
     return(
-        <Card>
-            <Card.Title className="mx-3 mt-3">
+        <Card className="create-campaign-card">
+            <Card.Title className="create-campaign-card-title">
                 Optional Fields
-                <hr></hr>
             </Card.Title>
-            <Card.Body>
+            <Card.Body
+            className="create-campaign-card-body">
                 <Card.Text>
                     <strong>
                         Fields below are not necessary to fill, but they surely improve your campaign's recognition on the platform.
