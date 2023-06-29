@@ -19,7 +19,7 @@ export const MarketPlaceSearchBar = ({onSearch, campList, solList, servList, set
     fetch("http://localhost:9000/get-openai-api-key", {
       method: "GET"
     }).then(res => res.json())
-    .then((data) => {setApiKey(data)});
+    .then((data) => {setApiKey(data.data)});
   }, []);
 
   const configuration = new Configuration({
