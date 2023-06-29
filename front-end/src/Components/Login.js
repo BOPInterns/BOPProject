@@ -34,19 +34,6 @@ export const Login = () => {
     //localStorage.setItem('userObj', JSON.stringify(response.credential));
   }
 
-  //    useEffect(() => {
-  //       /*global google*/
-  //       google.accounts.id.initialize({
-  //          client_id: "818541063177-iqosu6guuons2sjudmsrt8hr010102qq.apps.googleusercontent.com",
-  //          callback: handleCallbackResponse
-  //       });
-
-  //       google.accounts.id.renderButton(
-  //          document.getElementById('signInGoogle'),
-  //          {theme: "outline", size: "small"}
-  //       );
-  //    },[]);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

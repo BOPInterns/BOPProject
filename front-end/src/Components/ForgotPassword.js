@@ -60,6 +60,12 @@ export const ForgotPassword = () => {
         });
     }
 
+    const handleSignout = () => {
+        localStorage.removeItem('loginState');
+        localStorage.removeItem('userObj');
+        window.location.href='/login';
+    }
+
     return (
         <div>
             <NavigationBar/>
@@ -116,7 +122,7 @@ export const ForgotPassword = () => {
                     <Row className="text-end mt-3">
                     <Col>
                     <Button 
-                    href="/login" variant="link">Back to Login</Button>
+                    onClick={handleSignout} variant="link">Back to Login</Button>
                     </Col>
                     </Row>
                 </Card.Body>
