@@ -6,58 +6,61 @@ import { SolutionCard } from './SolutionCard';
 
 
 
-export const SolutionComp = () => {
+export const SolutionComp = ({filteredSolutions}) => {
     
     const [ currLoadedCards, setCurrLoadedCards ] = useState(8);
-    const [ solutionData, setSolutionData ] = useState([]);
+    // const [ solutionData, setSolutionData ] = useState([]);
     
-    useEffect(() => {
-        //for solutions
-        fetch("http://localhost:9000/get-solution-data", {
-            method: "POST",
-            crossDomain: true,
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-            body: JSON.stringify({
-                regDateFilter: localStorage.getItem("regDateFilter"),
-                solNameFilter: localStorage.getItem("solNameFilter"),
-                solOrgFilter: localStorage.getItem("solOrgFilter"),
-                //solRegDateFilter: localStorage.getItem("solRegDateFilter"),
-                solTagsFilter: localStorage.getItem("solTagsFilter"),
-                solFocusFilter: localStorage.getItem("solFocusFilter"),
-                solNeedsFilter: localStorage.getItem("solNeedsFilter"),
-                solTechFilter: localStorage.getItem("solTechFilter")
-            }),
-        }).then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            if (data.data) setSolutionData(data.data);
-            else setSolutionData([]);
-        });
-    }, []);
+    // useEffect(() => {
+    //     //for solutions
+    //     fetch("http://localhost:9000/get-solution-data", {
+    //         method: "POST",
+    //         crossDomain: true,
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           Accept: "application/json",
+    //           "Access-Control-Allow-Origin": "*",
+    //         },
+    //         body: JSON.stringify({
+    //             regDateFilter: localStorage.getItem("regDateFilter"),
+    //             solNameFilter: localStorage.getItem("solNameFilter"),
+    //             solOrgFilter: localStorage.getItem("solOrgFilter"),
+    //             //solRegDateFilter: localStorage.getItem("solRegDateFilter"),
+    //             solTagsFilter: localStorage.getItem("solTagsFilter"),
+    //             solFocusFilter: localStorage.getItem("solFocusFilter"),
+    //             solNeedsFilter: localStorage.getItem("solNeedsFilter"),
+    //             solTechFilter: localStorage.getItem("solTechFilter")
+    //         }),
+    //     }).then((res) => res.json())
+    //     .then((data) => {
+    //         console.log(data);
+    //         if (data.data) setSolutionData(data.data);
+    //         else setSolutionData([]);
+    //     });
+    // }, []);
     
     const handleMoreCards = () => {
-        if(currLoadedCards < solutionData.length) {
-            setCurrLoadedCards(currLoadedCards + 8);
-        }   else {
-            const button = document.getElementById('solution-load-more-btn');
-            button.disabled = true;
+        if (filteredSolutions) {
+            if (currLoadedCards < filteredSolutions.length) {
+                setCurrLoadedCards(currLoadedCards + 8);
+            } else {
+                const button = document.getElementById('solution-load-more-btn');
+                button.disabled = true;
+            }
         }
     }
     
-    const loadSolutionData = (i) => {
-        return solutionData[i];
+    const loadFilteredSolutions = (i) => {
+        return filteredSolutions[i];
     }
     
     const loadSolutionCards = () => {
-        return solutionData.slice(0, currLoadedCards).map((data, index) => (
+        if (filteredSolutions.length) return filteredSolutions.slice(0, currLoadedCards).map((data, index) => (
             <Col key={index} xs={6} sm={4} md={3} lg={3}>
-                <SolutionCard solData={loadSolutionData(index)}></SolutionCard>
+                <SolutionCard solData={loadFilteredSolutions(index)}></SolutionCard>
             </Col>
         ));
+        else return "Loading solutions...";
     };
 
     return (
