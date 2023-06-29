@@ -600,3 +600,11 @@ app.post("/campaign-page", async (req, res) => {
     res.status(401).json({error: err.message});
   }
 });
+
+app.get("/get-openai-api-key", async (req, res) => {
+  try{
+    res.send({data: process.env.OPENAI_API_KEY});
+  }catch (err) {
+    res.send(err)
+  }
+});

@@ -17,14 +17,23 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export const CampaignPage = () => {
-    const [campData, setCampData] = useState([]);
+    const [campData, setCampData] = useState({
+        name: "",
+        challenge: "",
+        phase: "",
+        videoLink: "",
+        description: "",
+        mission: "",
+        goals: [],
+        milestones: [],
+        location: ""
+    });
     
     const [activePage, setActivePage] = useState(1);
     const totalPages = 4;
     const { id } = useParams();
 
     useEffect(() => {
-        console.log("id: " + id);
         fetch("http://localhost:9000/campaign-page", {
             method: "POST",
             headers: {
@@ -38,10 +47,11 @@ export const CampaignPage = () => {
             .then((data) => {
                 if (data.data) {
                     setCampData(data.data);
+                    console.log(data.data);
                 }
                 else {
                     setCampData([]);
-                    console.log("campData is empty");
+                    console.log("CampaignPage.js: campData is empty");
                 }
             });
     }, []);
@@ -54,7 +64,15 @@ export const CampaignPage = () => {
         switch (activePage) {
           case 1:
             return <div>
-                <CampaignOverview campData={campData}/>
+                <CampaignOverview
+                    vidLink={campData.videoLink}
+                    description={campData.description}
+                    mission={campData.mission}
+                    goals={campData.goals}
+                    milestones={campData.milestones}
+                    location={campData.location}
+                />
+                {/* <CampaignOverview campData={campData}/> */}
             </div>
           case 2:
             return <div>
