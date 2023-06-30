@@ -25,7 +25,6 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 //app.use(express.urlencoded({}));
 
-app.set("view engine", "ejs");
 
 // CONNECT TO DB
 mongoose
@@ -102,7 +101,7 @@ app.post("/get-camp-by-org", async (req, res) => {
   }
 });
 
-//adds file to db from creat campaign process
+//adds file to db from create campaign process
 app.post("/upload-file", async (req, res) => {
   const { fileData } = req.body;
   try {
@@ -605,6 +604,6 @@ app.get("/get-openai-api-key", async (req, res) => {
   try{
     res.send({data: process.env.OPENAI_API_KEY});
   }catch (err) {
-    res.send(err)
+    res.send("Error retreiving API key: ",err)
   }
 });
