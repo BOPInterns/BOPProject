@@ -206,6 +206,9 @@ export const MarketPlace = () => {
   };
 
   const renderActivePage = () => {
+    console.log("MarketPlace.js: filteredCampaigns.length = " + filteredCampaigns.length);
+    console.log("MarketPlace.js: filteredSolutions.length = " + filteredSolutions.length);
+    console.log("MarketPlace.js: filteredServices.length = " + filteredServices.length);
     switch (activePage) {
       case 1:
         return <div>
@@ -374,7 +377,7 @@ export const MarketPlace = () => {
             </Pagination.Item>
             
           </Pagination>
-          {(filteredCampaigns.length && filteredSolutions.length && filteredServices.length) ? (
+          {(filteredCampaigns.length>=0 && filteredSolutions.length>=0 && filteredServices.length>=0) ? (
             renderActivePage()
           ) : (
             <p>Loading...</p>
