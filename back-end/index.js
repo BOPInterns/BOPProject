@@ -18,14 +18,11 @@ const app = express();
 
 dotenv.config();
 
-//dotenv.config({ path: "./config.env" });
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
-//app.use(express.urlencoded({}));
 
-app.set("view engine", "ejs");
 
 // CONNECT TO DB
 mongoose
@@ -51,26 +48,6 @@ app.get("/get-campaign-data", async (req, res) => {
     console.log("error retrieving campaign data");
   }
 });
-
-//gets solution data for the marketplace
-// app.get("/get-solution-data", async (req, res) => {
-//   try {
-//     const allSolutions = await Solution.find({ data: req.data });
-//     res.send({ status: "ok", data: allSolutions });
-//   } catch (err) {
-//     console.log("error retrieving solution data");
-//   }
-// });
-
-//gets service for marketplace
-// app.get("/get-service-data", async (req, res) => {
-//   try {
-//     const allServices = await Service.find({ data: req.data });
-//     res.send({ status: "ok", data: allServices });
-//   } catch (err) {
-//     console.log("error retrieving service data");
-//   }
-// });
 
 //gets org data for the landing page
 app.post("/get-org-data", async(req, res) => {
@@ -102,7 +79,7 @@ app.post("/get-camp-by-org", async (req, res) => {
   }
 });
 
-//adds file to db from creat campaign process
+//adds file to db from create campaign process
 app.post("/upload-file", async (req, res) => {
   const { fileData } = req.body;
   try {
@@ -206,7 +183,6 @@ app.post("/login", async (req, res) => {
 
 app.post("/forgot-password", async(req, res) => {
     const {email, OTP} = req.body;
-    console.log(OTP)
     try{
         if (!validator.isEmail(email)) {return res.json({error: "This is not a valid email"})};
 
@@ -246,7 +222,6 @@ app.post("/forgot-password", async(req, res) => {
           });
           ////////////////////////////////////
         
-        // console.log(link);
         res.send({status: 'ok', code: OTP});
     }catch (error) {
         console.log(error);
@@ -278,47 +253,6 @@ app.post('/reset-password', async(req, res) => {
     } catch (error) {
         res.json({status: "Error Updating Password."})
     }
-});
-
-app.post("/reset-password/:id/:token", async (req, res) => {
-  const { id, token } = req.params;
-  const password = req.body.password;
-  const confirmation = req.body.confirmation;
-
-  if (password != confirmation) {
-    return res.json({
-      error: "Please enter the same password in both fields.",
-    });
-  }
-  if (!validator.isStrongPassword(password)) {
-    return res.json("Password is not strong enough");
-  }
-
-  const existingUser = await User.findOne({ _id: id });
-  if (!existingUser) {
-    return res.json({
-      status: "No account with this email address has been registered.",
-    });
-  }
-  const secret = process.env.JWT_SECRET + existingUser.password;
-  try {
-    const verify = jwt.verify(token, secret);
-    const encryptedPassword = await bcrypt.hash(password, 10);
-    await User.updateOne(
-      {
-        _id: id,
-      },
-      {
-        $set: {
-          password: encryptedPassword,
-        },
-      }
-    );
-
-    res.render("index", { email: verify.email, status: "Verified" });
-  } catch (error) {
-    res.json({ status: "Error Updating Password." });
-  }
 });
 
 app.post("/create-campaign-step-5", async (req, res) => {
@@ -401,7 +335,6 @@ app.post("/my-account", async (req, res) => {
     const updatedUser = await User.findOneAndUpdate(filter, update, {
       new: true,
     });
-    console.log(updatedUser.email);
     res.status(201).json({ updatedUser });
   } catch (err) {
     res.status(401).json({ error: err.message });
@@ -464,7 +397,6 @@ app.post("/get-campaign-data", async (req, res) => {
       campPhaseFilter, campCSFilter, campMissionFilter, campNumActorsFilter, 
       campLocationFilter, campReachFilter, campStakeholderLangFilter, campVolunteerLangFilter 
     } = req.body;
-    console.log(req.body);
 
     // .lean() returns a regular JS object
     const data = await Campaign.find({
@@ -481,9 +413,7 @@ app.post("/get-campaign-data", async (req, res) => {
       volunteerLangs: new RegExp(campVolunteerLangFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
     }).lean();
-    console.log("campaign data found");
     res.status(200).json({ data });
-    console.log("campaign response sent");
   } catch (err) {
     res.status(401).json({ error: err.message });
   }
@@ -502,9 +432,7 @@ app.post("/get-solution-data", async (req, res) => {
       needs: new RegExp(solNeedsFilter, "i"),
       technologies: new RegExp(solTechFilter, "i")
     }).lean();
-    console.log("solution data found");
     res.status(200).json({data});
-    console.log("solution response sent");
   } catch (err) {
     res.status(401).json({error: err.message});
   }
@@ -520,30 +448,13 @@ app.post("/get-service-data", async (req, res) => {
       createdAt: new RegExp(regDateFilter, "i"),
       price: new RegExp(servPriceFilter, "i")
     }).lean();
-    console.log("service data found");
     res.status(200).json({data});
-    console.log("service response sent");
   } catch (err) {
     res.status(401).json({error: err.message});
   }
 });
 
-// app.post("/get-search-data", async (req, res) => {
-//   try {
-//     const { name } = req.body;
-//     const data = await Campaign.find({
-//       name: new RegExp(name, "i")
-//     }).lean();
-//     console.log("search data found");
-//     res.status(200).json({data});
-//     console.log("service response sent");
-//   } catch (err) {
-//     res.status(401).json({error: err.message});
-//   }
-// });
-
 app.post("/search", async (req, res) => {
-  console.log("searching...")
   try {
     const searchTerms = req.body.terms;
     const regexTerms = searchTerms.map(term => new RegExp(`.*${term}.*`, 'i'));
@@ -579,7 +490,6 @@ app.post("/search", async (req, res) => {
     }).lean();
 
     res.send({campData: campData, solData: solData, servData: servData});
-    console.log("all data response sent");
   } catch (err) {
     res.status(401).json({error: err.message});
   }
@@ -587,15 +497,11 @@ app.post("/search", async (req, res) => {
 
 app.post("/campaign-page", async (req, res) => {
   try {
-    console.log("req.body");
-    console.log(req.body);
     const {id} = req.body;
     const data = await Campaign.findById(id);
     if (!data)
       throw Error("data does not exist :(");
-    console.log(data);
     res.status(200).json({data});
-    console.log("campaign obj sent by ID");
   } catch (err) {
     res.status(401).json({error: err.message});
   }
@@ -605,6 +511,6 @@ app.get("/get-openai-api-key", async (req, res) => {
   try{
     res.send({data: process.env.OPENAI_API_KEY});
   }catch (err) {
-    res.send(err)
+    res.send("Error retreiving API key: ",err)
   }
 });

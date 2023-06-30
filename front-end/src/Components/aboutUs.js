@@ -31,6 +31,9 @@ export const AboutUs = () => {
                             </Card.Body>
                             <Card.Body>
                                 <p>Jonathan tells us a little about yourself</p>
+                                <p>
+                                    I'm also a 3rd year going into my 4th year CS major at UF and I have a minor in Statistics. Making this website was actually a lot of fun and I'm super proud of us. I hope for whoever is reading this (probably the next team) is able to keep it going and continue developing this website into something incredible and hopefully someday something that is actually used by many. Learning the backend was hard at first but After a while we took to it pretty well. Hopefully the documentation we write for you guys is good enough to get you going fairly smoothly. Anyway, Good Luck!     :D
+                                </p>
                             </Card.Body>
                             <Card.Body>
                                 <p>Rachel tells us a little about yourself</p>
