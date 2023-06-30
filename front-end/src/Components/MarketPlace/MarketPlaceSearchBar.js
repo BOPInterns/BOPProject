@@ -50,6 +50,8 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
 
     const handleSearch = async (e) => {
       e.preventDefault();
+      if (!query.length)
+        return;
       //here is ideally where we would come up with all the search terms 
       const completion = await openai.createCompletion({
         model: "text-davinci-003",
