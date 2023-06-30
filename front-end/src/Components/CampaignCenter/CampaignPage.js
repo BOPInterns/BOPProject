@@ -88,7 +88,14 @@ export const CampaignPage = () => {
             </div>
           default:
             return <div>
-                <CampaignOverview campData={campData}/>
+                <CampaignOverview
+                    vidLink={campData.videoLink}
+                    description={campData.description}
+                    mission={campData.mission}
+                    goals={campData.goals}
+                    milestones={campData.milestones}
+                    location={campData.location}
+                />
             </div>
         }
       };
