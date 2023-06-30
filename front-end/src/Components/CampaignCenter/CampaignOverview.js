@@ -1,15 +1,26 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
 export const CampaignOverview = ({vidLink, description, mission, goals, milestones, location}) => {
+    let goalData = [];
 
     useEffect(() => {
         console.log(goals);
     })
+
+    goals.forEach((goal, index) => {
+        goalData.push(
+            <div>
+                <Row>
+                    Goal {index + 1}: <strong>{goal}</strong>
+                </Row>
+            </div>
+        );
+    });
 
     return (
         <div>
@@ -47,7 +58,7 @@ export const CampaignOverview = ({vidLink, description, mission, goals, mileston
                 <Row>
                     {mission}
                 </Row>
-                {/* <Row className="mt-5">
+                <Row className="mt-5">
                     <Col>
                         <strong>Goals</strong>
                     </Col>
@@ -56,21 +67,7 @@ export const CampaignOverview = ({vidLink, description, mission, goals, mileston
                         Original
                     </Col>
                 </Row>
-                goals.forEach(() {
-                    <div>
-                        <Row className="mx-4 mt-3">
-                            <strong>{element}</strong>
-                        </Row>
-                    </div>
-                })
-                {goals.map((goal) => {
-                    <div>
-                        <Row className="mx-4 mt-3">
-                            Goal {goals.indexOf(goal) + 1}: 
-                            <strong>{goal}</strong>
-                        </Row>
-                    </div>
-                })} */}
+                {goalData.length ? goalData : "None listed"}
             </Container>
         </div>
     )
