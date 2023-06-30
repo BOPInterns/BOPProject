@@ -71,7 +71,7 @@ export const CampaignComp = ({filteredCampaigns}) => {
         <CampaignCard campData={loadFilteredCampaigns(index)}></CampaignCard>
       </Col>
     ));
-    else return "Loading campaigns...";
+    else return "No campaigns match your search.";
   };
 
   return (
