@@ -67,7 +67,6 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
         terms.push(word.trim());
       });
       console.log(terms);
-<<<<<<< HEAD
       try {
         fetch('http://localhost:9000/search', {
           method: 'POST',
@@ -82,7 +81,6 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       } catch (error) {
         console.error('Error searching:', error);
       }
-=======
 
       //applying search to campaigns
       const queriedCamps = campaigns.filter(camp => 
@@ -114,7 +112,6 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       setCampaigns(queriedCamps);
       setSolutions(queriedSols);
       setServices(queriedServs);
->>>>>>> 1439856ac6ca5e857c89b179f53fbd21b97ea229
     };
 
     return (
