@@ -43,7 +43,8 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
 
     const handleSearch = async (e) => {
       e.preventDefault();
-      console.log(apiKey)
+      if (!query.length)
+        return;
       //here is ideally where we would come up with all the search terms 
       const configuration = new Configuration({
         apiKey: apiKey,

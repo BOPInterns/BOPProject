@@ -60,7 +60,7 @@ export const SolutionComp = ({filteredSolutions}) => {
                 <SolutionCard solData={loadFilteredSolutions(index)}></SolutionCard>
             </Col>
         ));
-        else return "Loading solutions...";
+        else return "No solutions match your search.";
     };
 
     return (

@@ -10,10 +10,20 @@ export const Step2Suggestions = () => {
     return (
         <div>
             <Container>
-        <Row className="mt-3">
-                    <hr></hr>
-                    <Button variant="link" href="/create-campaign-step-2">Suggestions for Step 2: Provide basic information about the campaign</Button>
-                    <hr className="mt-3"></hr>
+                    <Row
+                style={{
+                    justifyContent: 'center',
+                    padding: '40px',
+                }}
+            >
+                    <Button 
+                        className="suggestions-btn"
+                        variant="link" 
+                        href="/create-campaign-step-1"
+                    >
+                        Suggestions for Step 2: Provide basic information about the campaign</Button>
+            </Row>
+                <Row className="">
                     <Col>
                         <Step2MandatoryFields/>
                     </Col>

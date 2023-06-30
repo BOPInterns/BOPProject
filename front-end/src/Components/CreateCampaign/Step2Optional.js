@@ -4,6 +4,8 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import TagInput from '../TagInput';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import './createCampaignCards.css';
+
 
 export const Step2OptionalFields = () => {
     
@@ -36,12 +38,15 @@ export const Step2OptionalFields = () => {
     
     return (
         <div>
-            <Card>
-                <Card.Title className="mt-3 mx-3">
+            <Card
+                className="create-campaign-card"
+            >
+                <Card.Title className="create-campaign-card-title">
                     Optional fields
-                    <hr></hr>
                 </Card.Title>
-                <Card.Body>
+                <Card.Body
+                    className="create-campaign-card-body"
+                >
                     <Card.Text>
                         <strong>
                         Fields below are not necessary to fill, but they surely improve your campaigns recognition on the platform.

@@ -63,7 +63,7 @@ export const ServiceComp = ({filteredServices}) => {
         <ServiceCard servData={loadFilteredServices(index)}></ServiceCard>
       </Col>
     ));
-    else return "Loading services...";
+    else return "No services match your search.";
   };
 
   return (

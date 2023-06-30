@@ -17,8 +17,6 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Step2Suggestions } from './Step2Suggestions';
-// import { CreateCampaignS3 } from './CreateCampaignS3';
-// import { CreateCampaignS4 } from './CreateCampaignS4';
 import { Step3Suggestions } from './Step3Suggestions';
 import { Step4Suggestions } from './Step4Suggestions';
 
@@ -227,8 +225,13 @@ export const CreateCampaignS5 = () => {
                 </Container>
                 <Container className="mt-4 mb-5">
                     <Row className="justify-content-md-center">
-                        <hr></hr>
-                        <Button onClick={() => checkSteps()} classId="submit" size="lg" variant="success">Submit!</Button>
+                        <Button onClick={() => checkSteps()} classId="submit"
+                        variant="success"
+                            style={{
+                                borderRadius: 20,
+                                width: '200px',
+                            }}
+                        >Submit!</Button>
                     </Row>
                 </Container>
             </Container>
