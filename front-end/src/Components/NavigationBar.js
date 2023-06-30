@@ -31,7 +31,7 @@ export const NavigationBar = () => {
                 borderTopRightRadius: '40px',
                 borderBottomLeftRadius: '40px',
                 boxShadow: '-2px 2px 15px black',
-                
+                border: '1px solid black',
             }}
         >
                 <Container>
@@ -51,7 +51,7 @@ export const NavigationBar = () => {
                         <Nav.Link className="top-navbar-text" href="/">Explore</Nav.Link>
                         <Nav.Link className="top-navbar-text" href="/">Learn</Nav.Link>
                         <Nav.Link className="top-navbar-text" href="/">Become</Nav.Link>
-                        <Nav.Link className="top-navbar-text" href="/">About us</Nav.Link>
+                        <Nav.Link className="top-navbar-text" href="/about-us">About us</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className=""> 

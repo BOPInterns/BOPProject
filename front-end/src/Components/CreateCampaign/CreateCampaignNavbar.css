@@ -1,7 +1,7 @@
 .create-campaign-navbar {
     background-color: #fa6e13 !important;
     border-radius: 40px !important;
-    
+    border: 1.5px solid black !important;
 }
 
 .create-campaign-navbar-collapse {

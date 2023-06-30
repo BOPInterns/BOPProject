@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from 'react-bootstrap';
+import './createCampaignCards.css';
+
 
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
@@ -64,12 +66,13 @@ export const Step4MandatoryFields = () => {
 
       return (
         <div>
-            <Card className="">
-                <Card.Title className="mx-3 mt-3">
+            <Card className="create-campaign-card">
+                <Card.Title className="create-campaign-card-title">
                     Add attachments
-                    <hr></hr>
                 </Card.Title>
-                <Card.Body>
+                <Card.Body
+                     className="create-campaign-card-body"
+                >
                     <Card.Text>
                         <strong>
                         Share with future stakeholders materials and attachments you find important or useful to broaden the knowledge about the create campaign. You can decide whether particular elements should be visible for all or after joining the campaign's team

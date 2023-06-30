@@ -7,15 +7,26 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import Button from 'react-bootstrap/Button';
 import { Step1MandatoryFields } from './Step1Mandatory';
 import { Step1OptionalFields } from './Step1Optional';
+import './createCampaignCards.css'
 
 export const Step1Suggestions = () => {
     return(
     <div>
         <Container>
-        <Row className="mt-3">
-                    <hr></hr>
-                    <Button variant="link" href="/create-campaign-step-1">Suggestions for Step 1: Provide basic information about the campaign</Button>
-                    <hr className="mt-3"></hr>
+            <Row
+                style={{
+                    justifyContent: 'center',
+                    padding: '40px',
+                }}
+            >
+                    <Button 
+                        className="suggestions-btn"
+                        variant="link" 
+                        href="/create-campaign-step-1"
+                    >
+                        Suggestions for Step 1: Provide basic information about the campaign</Button>
+            </Row>
+                <Row className="">
                     <Col>
                         <Step1MandatoryFields/>
                     </Col>
