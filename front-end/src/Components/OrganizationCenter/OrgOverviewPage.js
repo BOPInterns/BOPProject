@@ -13,7 +13,7 @@ import { OrgCampaignOwner } from './OrgCampaignOwner';
 
 export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink, campData}) => {
     const { getCode, getName, getData } = require("country-list");
-    const [ offerData, setOfferData] = useState([]);    
+    const [offerData, setOfferData] = useState([]);    
 
     const orgName = "Interns For Higher Pay";
     useEffect(() => {
@@ -120,7 +120,7 @@ export const OrgOverviewPage = ({presentation, focus, opRegions, vidLink, campDa
                             <Col lg={9}>
                                 <strong><h3>Interested in a full offer?</h3></strong>
                                 Click below to view the full list of offers that "{orgName}" is currently providing 
-                                and the details in which that offer is provided .
+                                and the details in which that offer is provided.
                                 <div className="text-center mt-2">
                                 <Button
                                     className="overview-offer-btn"

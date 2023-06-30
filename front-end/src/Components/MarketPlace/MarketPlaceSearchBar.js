@@ -65,6 +65,20 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
         terms.push(word.trim());
       });
       console.log(terms);
+      try {
+        fetch('http://localhost:9000/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ terms }),
+        }).then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+      } catch (error) {
+        console.error('Error searching:', error);
+      }
 
       //applying search to campaigns
       const queriedCamps = campaigns.filter(camp => 
