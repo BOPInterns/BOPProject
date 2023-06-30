@@ -6,9 +6,6 @@ import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from "openai";
 
-
-
-
 export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, setCampaigns, setSolutions, setServices}) => {
   const [ query, setQuery ] = useState('');
   const [ result, setResult ] = useState('');
@@ -19,14 +16,10 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
     fetch("http://localhost:9000/get-openai-api-key", {
       method: "GET"
     }).then(res => res.json())
-    .then((data) => {setApiKey(data.data)});
+    .then((data) => {setApiKey(data.data); console.log(data.data)});
   }, []);
 
-  const configuration = new Configuration({
-    apiKey: apiKey,
-  });
-  const openai = new OpenAIApi(configuration);
-    
+ 
     function generatePrompt(query) {
       const capitalizedSearchQuery =
         query[0].toUpperCase() + query.slice(1).toLowerCase();
@@ -50,13 +43,19 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
 
     const handleSearch = async (e) => {
       e.preventDefault();
+      console.log(apiKey)
       //here is ideally where we would come up with all the search terms 
+      const configuration = new Configuration({
+        apiKey: apiKey,
+      });
+      const openai = new OpenAIApi(configuration);
       const completion = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: generatePrompt(query),
         temperature: 0.4,
         max_tokens: 3000,
       });
+      console.log("made it past first thing")
 
       onSearch(query);
       const terms = [query];
