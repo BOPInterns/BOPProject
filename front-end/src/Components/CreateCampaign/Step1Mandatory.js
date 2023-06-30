@@ -11,10 +11,16 @@ import './createCampaignCards.css';
 
 
 export const Step1MandatoryFields = () => {
-    const configuration = new Configuration({
-        apiKey: "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",
-      });
-      const openai = new OpenAIApi(configuration);
+    const [ apiKey, setApiKey ] = useState('');
+
+    useEffect(() => {
+        fetch("http://localhost:9000/get-openai-api-key", {
+          method: "GET"
+        }).then(res => res.json())
+        .then((data) => {setApiKey(data.data)});
+      }, []);
+
+
     // if (localStorage.getItem('campaignName') === null) 
     // localStorage.setItem('campaignName', '');
     // if (localStorage.getItem('campaignTags') === null)
@@ -85,6 +91,10 @@ export const Step1MandatoryFields = () => {
     
     const cgptSuggest = async (e) => {
         if(campaignName !== undefined) {
+            const configuration = new Configuration({
+                apiKey: apiKey
+            });
+            const openai = new OpenAIApi(configuration);
             const completion = await openai.createCompletion({
                 model: "text-davinci-003",
                 prompt: generatePrompt(campaignName),
