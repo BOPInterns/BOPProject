@@ -7,12 +7,12 @@ const serviceSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: [true, "Please provide a name for your solution."],
+    required: [true, "Please provide a name for your service."],
     maxlength: 100,
   },
   description: {
     type: String,
-    required: [true, "Please provide a solution overview."],
+    required: [true, "Please provide a service overview."],
   },
   tags: {
     type: [String],
@@ -24,7 +24,7 @@ const serviceSchema = new mongoose.Schema({
 },
   createdAt: {
     type: String,
-    required: [true, "This campaign doesn't have a createdAt field :("]
+    required: [true, "This service doesn't have a createdAt field :("]
   }
 });
 

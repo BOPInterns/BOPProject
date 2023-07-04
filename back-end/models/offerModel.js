@@ -13,7 +13,7 @@ const offerSchema = new mongoose.Schema({
         type: String,
         required: [true, "Offer needs a description."]
     }
-})
+});
 
 const Offer = mongoose.model("Offer", offerSchema);
 

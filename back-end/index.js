@@ -39,16 +39,6 @@ app.listen(9000, () => {
   console.log("Server started on port 9000");
 });
 
-//gets campaign data for campaign center page
-app.get("/get-campaign-data", async (req, res) => {
-  try {
-    const allCampaigns = await Campaign.find({ data: req.data });
-    res.send({ status: "ok", data: allCampaigns });
-  } catch (err) {
-    console.log("error retrieving campaign data");
-  }
-});
-
 //gets org data for the landing page
 app.post("/get-org-data", async(req, res) => {
     try{
@@ -92,6 +82,7 @@ app.post("/upload-file", async (req, res) => {
   }
 });
 
+// adds user account info into db
 app.post("/register", async (req, res) => {
   try {
     const {
@@ -141,6 +132,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
+// validates email and password, allows or prevents login accordingly
 app.post("/login", async (req, res) => {
   try {
     // validation for empty email or password fields
@@ -156,6 +148,7 @@ app.post("/login", async (req, res) => {
       throw Error("Invalid or Unregistered email");
     }
 
+    // search db for the email address
     const user = await User.findOne({ email });
     if (!user) {
       throw Error("User not found");
@@ -180,7 +173,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-
+// sends email to user's email address to reset password
 app.post("/forgot-password", async(req, res) => {
     const {email, OTP} = req.body;
     try{
@@ -228,6 +221,7 @@ app.post("/forgot-password", async(req, res) => {
     }
 });
 
+// resets the user's password (including encryption)
 app.post('/reset-password', async(req, res) => {
     const {email, password, confirmation} = req.body;
 
@@ -255,6 +249,7 @@ app.post('/reset-password', async(req, res) => {
     }
 });
 
+// loads the new campaign into the db
 app.post("/create-campaign-step-5", async (req, res) => {
   try {
     const today = new Date().toJSON().slice(0, 10);
@@ -317,10 +312,7 @@ app.post("/create-campaign-step-5", async (req, res) => {
 app.post("/my-account", async (req, res) => {
   try {
     //const user = User.findOne(email);
-    const { firstName, lastName, email, phoneNumber, password } = req.body;
-
-    // if (!validator.isStrongPassword(password)) { throw Error("Password is not strong enough"); }
-    // const passwordEncr = await bcrypt.hash(password, 11);
+    const { firstName, lastName, email, phoneNumber } = req.body;
 
     // update user info in the DB
     const filter = { email: email };
@@ -341,6 +333,7 @@ app.post("/my-account", async (req, res) => {
   }
 });
 
+// update the user object in the db with the given KYC info
 app.post("/kyc-verification-form", async (req, res) => {
   try {
     const {
@@ -365,8 +358,7 @@ app.post("/kyc-verification-form", async (req, res) => {
       gender === "" ||
       nationality === "" ||
       selfie === undefined
-    )
-      throw Error("Please fill out all fields");
+    ) throw Error("Please fill out all fields");
 
     const filter = { _id: userId };
     const update = {
@@ -390,6 +382,7 @@ app.post("/kyc-verification-form", async (req, res) => {
   }
 });
 
+// gets campaign data for marketplace based on the applied filters
 app.post("/get-campaign-data", async (req, res) => {
   try {
     const { 
@@ -398,7 +391,6 @@ app.post("/get-campaign-data", async (req, res) => {
       campLocationFilter, campReachFilter, campStakeholderLangFilter, campVolunteerLangFilter 
     } = req.body;
 
-    // .lean() returns a regular JS object
     const data = await Campaign.find({
       organization: new RegExp(campOrgFilter, "i"),
       phase: new RegExp(campPhaseFilter, "i"),
@@ -412,13 +404,14 @@ app.post("/get-campaign-data", async (req, res) => {
       stakeholderLangs: new RegExp(campStakeholderLangFilter, "i"),
       volunteerLangs: new RegExp(campVolunteerLangFilter, "i"),
       createdAt: new RegExp(regDateFilter, "i")
-    }).lean();
+    }).lean(); // .lean() returns a regular JavaScript object
     res.status(200).json({ data });
   } catch (err) {
     res.status(401).json({ error: err.message });
   }
 });
 
+// gets solution data for marketplace based on the applied filters
 app.post("/get-solution-data", async (req, res) => {
   try {
     const {solOrgFilter, solNameFilter, solTagsFilter, regDateFilter,
@@ -438,6 +431,7 @@ app.post("/get-solution-data", async (req, res) => {
   }
 });
 
+// gets service data for marketplace based on the applied filters
 app.post("/get-service-data", async (req, res) => {
   try {
     const { regDateFilter, servOrgFilter, servNameFilter, servTagsFilter, servPriceFilter } = req.body;
@@ -454,6 +448,7 @@ app.post("/get-service-data", async (req, res) => {
   }
 });
 
+// search logic for querying the db
 app.post("/search", async (req, res) => {
   try {
     const searchTerms = req.body.terms;
@@ -495,6 +490,7 @@ app.post("/search", async (req, res) => {
   }
 });
 
+// finds a campaign by its id
 app.post("/campaign-page", async (req, res) => {
   try {
     const {id} = req.body;
@@ -507,10 +503,11 @@ app.post("/campaign-page", async (req, res) => {
   }
 });
 
+// gets the OpenAI API key from the .env file for use in the frontend
 app.get("/get-openai-api-key", async (req, res) => {
   try{
     res.send({data: process.env.OPENAI_API_KEY});
   }catch (err) {
-    res.send("Error retreiving API key: ",err)
+    res.send("Error retreiving API key: ", err);
   }
 });
