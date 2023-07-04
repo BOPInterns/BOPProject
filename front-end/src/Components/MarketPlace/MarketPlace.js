@@ -90,13 +90,13 @@ export const MarketPlace = () => {
   const [filteredSolutions, setFilteredSolutions] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
 
-  const [allToggle, setAllToggle] = useState(null);
-  const [campaignToggle, setCampaignToggle] = useState(false);
-  const [solutionsToggle, setSolutionsToggle] = useState(false);
-  const [servicesToggle, setServicesToggle] = useState(false);
+  // const [allToggle, setAllToggle] = useState(null);
+  // const [campaignToggle, setCampaignToggle] = useState(false);
+  // const [solutionsToggle, setSolutionsToggle] = useState(false);
+  // const [servicesToggle, setServicesToggle] = useState(false);
 
   const [activePage, setActivePage] = useState(1);
-  const totalPages = 4;
+  // const totalPages = 4;
 
     useEffect(() => {
       fetch("http://localhost:9000/get-campaign-data", {

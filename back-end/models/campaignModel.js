@@ -19,22 +19,22 @@ const campaignSchema = new mongoose.Schema({
         enum: ["true", "false"],
         default: "false"
     },
-    // TODO: manual references to solution documents
+    // TODO: add manual references to solution documents
     solutions: [String],
-    //*** STEP 1
+    //*** CREATE-CAMPAIGN STEP 1
     name: {
         type: String,
         required: [true, "Please provide a name for your campaign."],
         maxlength: 100
     },
-    // TODO: owner = reference to organization's _id
+    // TODO: add a field called "owner" that is a reference to the owning org's  _id field
     //       type = ObjectID
     tags: {
         type: [String],
         required: [true, "Must choose at least 1 tag"]
     },
-    videoLink: String, // YT link
-    //*** STEP 2
+    videoLink: String, // YouTube link
+    //*** CREATE-CAMPAIGN STEP 2
     description: {
         type: String,
         required: [true, "Please provide a description."]
@@ -49,7 +49,7 @@ const campaignSchema = new mongoose.Schema({
     },
     milestones: [String],
     goals: [String],
-    //*** STEP 3
+    //*** CREATE-CAMPAIGN STEP 3
     location: {
         type: String,
         required: [true, "Please provide your location."]
@@ -66,8 +66,7 @@ const campaignSchema = new mongoose.Schema({
         type: [String],
         default: [""]
     },
-    //*** STEP 4
-    // TODO: use manual document references for this?
+    //*** CREATE-CAMPAIGN STEP 4
     otherFiles: [String],
     createdAt: {
         type: String,
