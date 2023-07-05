@@ -12,6 +12,10 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
   const [ result, setResult ] = useState('');
   const [ apiKey, setApiKey ] = useState('');
   const [ show, setShow ] = useState(false);
+  
+  const filteredCampaigns = campaigns;
+  const filteredSolutions = solutions;
+  const filteredServices = services;
 
 
   useEffect(() => {
@@ -47,6 +51,7 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       e.preventDefault();
       if (!query.length)
         return;
+      if (query === '') return;
       //here is ideally where we would come up with all the search terms 
       const configuration = new Configuration({
         apiKey: apiKey,
@@ -113,6 +118,16 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       setServices(queriedServs);
       setShow(true);
     };
+    
+    const clearSearch = () => {
+      setQuery('');
+      setResult('');
+      setCampaigns(filteredCampaigns);
+      console.log(filteredCampaigns);
+      setSolutions(filteredSolutions);
+      setServices(filteredServices);
+      setShow(false);
+    };
 
     return (
         <div>
@@ -144,6 +159,7 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
                   </Form>
                   <Button
                     className="search-btn"
+                    onClick={clearSearch}
                     //on click here
                   >
                     <i class="fa-regular fa-circle-xmark fa-md"></i>
