@@ -5,11 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from "openai";
+import Alert from 'react-bootstrap/Alert';
 
 export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, setCampaigns, setSolutions, setServices}) => {
   const [ query, setQuery ] = useState('');
   const [ result, setResult ] = useState('');
   const [ apiKey, setApiKey ] = useState('');
+  const [ show, setShow ] = useState(false);
 
 
   useEffect(() => {
@@ -56,8 +58,6 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
         temperature: 0.4,
         max_tokens: 3000,
       });
-      console.log("made it past first thing")
-
       onSearch(query);
       const terms = [query];
       let wordsArray = completion.data.choices[0].text.split(",");
@@ -65,6 +65,7 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
         terms.push(word.trim());
       });
       console.log(terms);
+      setResult(terms.join(", "));
       try {
         fetch('http://localhost:9000/search', {
           method: 'POST',
@@ -110,6 +111,7 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       setCampaigns(queriedCamps);
       setSolutions(queriedSols);
       setServices(queriedServs);
+      setShow(true);
     };
 
     return (
@@ -124,13 +126,15 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
                   <Form
                     onSubmit={handleSearch}
                     style={{
-                      width: '800px'
+                      width: '750px'
                     }}
                   >
                   <Form.Control 
                     style={{
                       borderTopLeftRadius: '0px',
                       borderBottomLeftRadius: '0px',
+                      borderBottomRightRadius: '0px',
+                      borderTopRightRadius: '0px',
                     }}
                     type="text" 
                     placeholder="Search Bar"
@@ -138,6 +142,12 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
                     onChange={(e)=> setQuery(e.target.value)}
                   />
                   </Form>
+                  <Button
+                    className="search-btn"
+                    //on click here
+                  >
+                    <i class="fa-regular fa-circle-xmark fa-md"></i>
+                  </Button>
                 </InputGroup>
               </Col>
               <Col sm={2}>
@@ -149,6 +159,26 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
                   Filters <i class="fa-solid fa-filter"></i>
                 </Button>
               </Col>
+            </Row>
+            <Row
+              style={{
+                justifyContent: 'center',
+                paddingTop: '10px',
+              }}
+            >
+            <Alert
+              style={{
+                backgroundColor: 'lightgray',
+                borderColor: 'gray',
+                width: '50%',
+                color: 'black'
+              }}
+              dismissible
+              show={show}
+              onClose={() => setShow(false)}
+            >
+              Searching for: {result}
+            </Alert>
             </Row>
         </div>
     )
