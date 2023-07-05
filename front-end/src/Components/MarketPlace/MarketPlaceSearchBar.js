@@ -58,7 +58,6 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
         temperature: 0.4,
         max_tokens: 3000,
       });
-      console.log("made it past first thing")
       onSearch(query);
       const terms = [query];
       let wordsArray = completion.data.choices[0].text.split(",");
