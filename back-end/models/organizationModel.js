@@ -10,7 +10,7 @@ const organizationSchema = new mongoose.Schema({
         required: [true, "Please provide a name for your solution."],
         maxlength: 100
     },
-    satement: {
+    statement: {
         type: String,
         required: [true, "Please provide an organization statement."]
     },
@@ -39,27 +39,14 @@ const organizationSchema = new mongoose.Schema({
         required: [true, "Please provide an organization statement."]
     },
 
-    // stuff that is below the top part and im not exactly sure if this is precisely what they need
-    presentation: {
-        type: String,
-    },
-    vidLink: {
-        type: String,
-    },
-    focus: {
-        type: String,
-    },
-    interests: {
-        type: [String],
-    },
-    offers: {
-        type: [String],
-    },
-    opRegions: {
-        type: [String],
-    }
-    
-})
+    // stuff that is below the top part, unsure if this is precisely what they need
+    presentation: String,
+    vidLink: String,
+    focus: String,
+    interests: [String],
+    offers: [String],
+    opRegions: [String]
+});
 
 const Organization = mongoose.model("Organization", organizationSchema);
 

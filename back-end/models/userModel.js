@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please provide a password."],
         trim: true
     },
-    // TODO: parse phone number to make it only consist of digits, change type to number
+    // TODO: store phoneNumber in the DB with type:Number and make it only consist of digits
+    //       - this may require parsing the user-inputted phone number before storing it in Mongo
     phoneNumber: String,
     textNotifs: Boolean,
     emailNotifs: Boolean,

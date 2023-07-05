@@ -38,7 +38,7 @@ const solutionSchema = new mongoose.Schema({
     },
     createdAt: {
         type: String,
-        required: [true, "This campaign doesn't have a createdAt field :("]
+        required: [true, "This solution doesn't have a createdAt field :("]
     }
 })
 

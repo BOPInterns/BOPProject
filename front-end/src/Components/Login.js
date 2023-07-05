@@ -14,7 +14,6 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import jwt_decode from "jwt-decode";
 //import axios from 'axios';
 import { NavigationBar } from "./NavigationBar";
-import { LoginAlertSuccess } from "./LoginAlertSuccess";
 import { useNavigate, useRouteError } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import "./Account.css";

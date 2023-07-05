@@ -39,8 +39,7 @@ export const MyAccount = () => {
                 firstName,
                 lastName,
                 email,
-                phoneNumber,
-                verificationStatus
+                phoneNumber
             })
         })
         .then((res) => res.json())
