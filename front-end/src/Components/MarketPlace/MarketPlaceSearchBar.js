@@ -13,9 +13,13 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
   const [ apiKey, setApiKey ] = useState('');
   const [ show, setShow ] = useState(false);
   
-  const filteredCampaigns = campaigns;
-  const filteredSolutions = solutions;
-  const filteredServices = services;
+  var filteredCampaigns = [];
+  // const filteredCampaigns = campaigns.map((x) => x);
+  for (let i = 0; i < campaigns.length; i++) {
+    filteredCampaigns.push(campaigns[i]);
+  }
+  // const filteredSolutions = solutions;
+  // const filteredServices = services;
 
 
   useEffect(() => {
@@ -23,6 +27,10 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       method: "GET"
     }).then(res => res.json())
     .then((data) => {setApiKey(data.data); console.log(data.data)});
+
+    filteredCampaigns = campaigns.map((x) => x);
+    // filteredSolutions = solutions.map((x) => x);
+    // filteredServices = services.map((x) => x);
   }, []);
 
  
@@ -51,7 +59,9 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       e.preventDefault();
       if (!query.length)
         return;
-      if (query === '') return;
+      else if (query === '')
+        return;
+      // if (!query.length || query.length === 0) return;
       //here is ideally where we would come up with all the search terms 
       const configuration = new Configuration({
         apiKey: apiKey,
@@ -71,20 +81,20 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       });
       console.log(terms);
       setResult(terms.join(", "));
-      try {
-        fetch('http://localhost:9000/search', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ terms }),
-        }).then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-      } catch (error) {
-        console.error('Error searching:', error);
-      }
+      // try {
+      //   fetch('http://localhost:9000/search', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({ terms }),
+      //   }).then((res) => res.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //   });
+      // } catch (error) {
+      //   console.error('Error searching:', error);
+      // }
 
       //applying search to campaigns
       const queriedCamps = campaigns.filter(camp => 
@@ -117,6 +127,9 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       setSolutions(queriedSols);
       setServices(queriedServs);
       setShow(true);
+
+      console.log("filtered campaigns: " + filteredCampaigns);
+      console.log("queried campaigns: " + queriedCamps);
     };
     
     const clearSearch = () => {
@@ -124,8 +137,8 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       setResult('');
       setCampaigns(filteredCampaigns);
       console.log(filteredCampaigns);
-      setSolutions(filteredSolutions);
-      setServices(filteredServices);
+      // setSolutions(filteredSolutions);
+      // setServices(filteredServices);
       setShow(false);
     };
 
