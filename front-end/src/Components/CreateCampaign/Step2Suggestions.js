@@ -19,7 +19,7 @@ export const Step2Suggestions = () => {
                     <Button 
                         className="suggestions-btn"
                         variant="link" 
-                        href="/create-campaign-step-1"
+                        href="/create-campaign-step-2"
                     >
                         Suggestions for Step 2: Provide basic information about the campaign</Button>
             </Row>
