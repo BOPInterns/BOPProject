@@ -7,30 +7,17 @@ import { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from "openai";
 import Alert from 'react-bootstrap/Alert';
 
-export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, setCampaigns, setSolutions, setServices}) => {
+export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, setCampaigns, setSolutions, setServices, reloadPage}) => {
   const [ query, setQuery ] = useState('');
   const [ result, setResult ] = useState('');
   const [ apiKey, setApiKey ] = useState('');
   const [ show, setShow ] = useState(false);
-  
-  var filteredCampaigns = [];
-  // const filteredCampaigns = campaigns.map((x) => x);
-  for (let i = 0; i < campaigns.length; i++) {
-    filteredCampaigns.push(campaigns[i]);
-  }
-  // const filteredSolutions = solutions;
-  // const filteredServices = services;
-
 
   useEffect(() => {
     fetch("http://localhost:9000/get-openai-api-key", {
       method: "GET"
     }).then(res => res.json())
     .then((data) => {setApiKey(data.data); console.log(data.data)});
-
-    filteredCampaigns = campaigns.map((x) => x);
-    // filteredSolutions = solutions.map((x) => x);
-    // filteredServices = services.map((x) => x);
   }, []);
 
  
@@ -59,10 +46,6 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       e.preventDefault();
       if (!query.length)
         return;
-      else if (query === '')
-        return;
-      // if (!query.length || query.length === 0) return;
-      //here is ideally where we would come up with all the search terms 
       const configuration = new Configuration({
         apiKey: apiKey,
       });
@@ -128,18 +111,8 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
       setServices(queriedServs);
       setShow(true);
 
-      console.log("filtered campaigns: " + filteredCampaigns);
+      // console.log("filtered campaigns: " + filteredCampaigns);
       console.log("queried campaigns: " + queriedCamps);
-    };
-    
-    const clearSearch = () => {
-      setQuery('');
-      setResult('');
-      setCampaigns(filteredCampaigns);
-      console.log(filteredCampaigns);
-      // setSolutions(filteredSolutions);
-      // setServices(filteredServices);
-      setShow(false);
     };
 
     return (
@@ -172,7 +145,7 @@ export const MarketPlaceSearchBar = ({onSearch, campaigns, solutions, services, 
                   </Form>
                   <Button
                     className="search-btn"
-                    onClick={clearSearch}
+                    onClick={reloadPage}
                     //on click here
                   >
                     <i class="fa-regular fa-circle-xmark fa-md"></i>
