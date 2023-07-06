@@ -205,6 +205,10 @@ export const MarketPlace = () => {
     console.log("searching for ", query)
   };
 
+  function reloadPage() {
+    location.reload();
+  }
+
   const renderActivePage = () => {
     console.log("MarketPlace.js: filteredCampaigns.length = " + filteredCampaigns.length);
     console.log("MarketPlace.js: filteredSolutions.length = " + filteredSolutions.length);
@@ -220,6 +224,7 @@ export const MarketPlace = () => {
               setCampaigns={setFilteredCampaigns}
               setSolutions={setFilteredSolutions}
               setServices={setFilteredServices}
+              reloadPage={reloadPage}
             />
             <AllPages 
               filteredCampaigns={filteredCampaigns}
@@ -237,6 +242,7 @@ export const MarketPlace = () => {
               setCampaigns={setFilteredCampaigns}
               setSolutions={setFilteredSolutions}
               setServices={setFilteredServices}
+              reloadPage={reloadPage}
             />
             <CampaignComp filteredCampaigns={filteredCampaigns}/>
         </div>;
@@ -250,6 +256,7 @@ export const MarketPlace = () => {
               setCampaigns={setFilteredCampaigns}
               setSolutions={setFilteredSolutions}
               setServices={setFilteredServices}
+              reloadPage={reloadPage}
             />
             <SolutionComp filteredSolutions={filteredSolutions}/>
         </div>
@@ -263,6 +270,7 @@ export const MarketPlace = () => {
               setCampaigns={setFilteredCampaigns}
               setSolutions={setFilteredSolutions}
               setServices={setFilteredServices}
+              reloadPage={reloadPage}
             />
             <ServiceComp filteredServices={filteredServices}/>
         </div>
@@ -276,6 +284,7 @@ export const MarketPlace = () => {
               setCampaigns={setFilteredCampaigns}
               setSolutions={setFilteredSolutions}
               setServices={setFilteredServices}
+              reloadPage={reloadPage}
             />
             <AllPages 
               filteredCampaigns={filteredCampaigns}
